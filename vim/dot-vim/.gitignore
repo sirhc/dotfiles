@@ -1,0 +1,6 @@
+*~
+*.swp
+.netrwhist
+tags
+bundle/
+spell/
