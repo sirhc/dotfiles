@@ -124,6 +124,7 @@ iabbrev resumee résumé
 iabbrev touchee touché
 iabbrev naiive  naïve
 iabbrev nee     née
+iabbrev fiancee fiancée
 
 " Common typos.
 iabbrev acheive   achieve
