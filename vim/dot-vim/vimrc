@@ -13,6 +13,7 @@ set incsearch
 set laststatus=2
 set listchars=eol:$,tab:..,trail:.,extends:>,precedes:<
 set more
+set number
 set pastetoggle=<F2>
 set report=0
 set ruler
