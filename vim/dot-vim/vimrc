@@ -87,6 +87,9 @@ vmap D y'>p
 "
 nnoremap <Leader><Leader> <C-^>
 
+" http://www.catonmat.net/blog/sudo-vim/
+cnoremap sudow w !sudo tee % >/dev/null
+
 if has("gui_running")
     colorscheme torte
 
