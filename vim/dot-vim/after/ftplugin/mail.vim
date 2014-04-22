@@ -5,6 +5,7 @@ setlocal dictionary+=/usr/share/dict/words
 setlocal formatoptions+=waj
 setlocal notitle
 setlocal textwidth=72
+setlocal keywordprg=dict
 
 map <buffer> <C-J> !G perl -MText::Autoformat -e 'autoformat{mail=>1}'<CR>
 map <buffer> <Leader>s Go-- <Esc>:r! ~/bin/signature<CR>
