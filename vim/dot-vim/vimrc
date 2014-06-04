@@ -123,11 +123,12 @@ if has("gui_running")
 endif
 
 " Handy abbreviations.
-iabbrev resumee résumé
-iabbrev touchee touché
+iabbrev fiancee fiancée
 iabbrev naiive  naïve
 iabbrev nee     née
-iabbrev fiancee fiancée
+iabbrev passee  passé
+iabbrev resumee résumé
+iabbrev touchee touché
 
 " Common typos.
 iabbrev acheive   achieve
@@ -135,6 +136,7 @@ iabbrev acheived  achieved
 iabbrev teh       the
 iabbrev dont'     don't
 iabbrev existance existence
+iabbrev teh       the
 
 " Highlight trailing whitespace.
 match ErrorMsg /\s\+\%#\@!$/    " \s\+  one or more whitespace characters
