@@ -61,3 +61,6 @@
 [submodule "bundle/vim-surround"]
 	path = bundle/vim-surround
 	url = https://github.com/tpope/vim-surround.git
+[submodule "bundle/vim-lsf"]
+	path = bundle/vim-lsf
+	url = https://github.com/sirhc/vim-lsf.git
