@@ -16,7 +16,7 @@ iabbrev <buffer> dbs $DB::single = 1;
 iabbrev <buffer> rov Readonly my => X;<Esc>?my<CR>/X<CR>``la
 iabbrev <buffer> ubm use Benchmark qw( cmpthese );<CR><CR>cmpthese -10, {<CR>};<Esc>O
 iabbrev <buffer> usc use Smart::Comments;<CR><CR>### 
-iabbrev <buffer> UDD use Data::Dumper;<CR>warn Dumper;<Esc>i
+iabbrev <buffer> UDD use Data::Dumper;$Data::Dumper::Sortkeys=1;<CR>warn Dumper;<Esc>i
 iabbrev <buffer> udg use Data::Dumper::GUI;<CR>warn Dumper;<Esc>i
 iabbrev <buffer> udd use Data::Dump;<CR>dd;<Esc>i
 iabbrev <buffer> udc use Data::Dump::Color;<CR>dd;<Esc>i
