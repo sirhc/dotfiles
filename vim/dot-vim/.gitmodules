@@ -64,3 +64,6 @@
 [submodule "bundle/vim-lsf"]
 	path = bundle/vim-lsf
 	url = https://github.com/sirhc/vim-lsf.git
+[submodule "bundle/syntastic"]
+	path = bundle/syntastic
+	url = https://github.com/scrooloose/syntastic.git
