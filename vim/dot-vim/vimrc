@@ -1,5 +1,3 @@
-let mapleader = ','
-
 set autoindent
 set autowriteall
 set backspace=indent,eol,start
@@ -39,6 +37,9 @@ set nostartofline
 if v:version >= 700
     set cursorline
 end
+
+let mapleader = ','
+let g:asciidoc_folding = 1
 
 " http://blog.nixpanic.net/2013/01/changing-vim-settings-depending-on-git.html
 "
