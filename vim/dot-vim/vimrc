@@ -62,6 +62,7 @@ if &t_Co > 2
 endif
 
 nmap <F3>      :set invnumber<CR>
+nmap <F4>      :set invspell<CR>
 nmap <BS>      :nohlsearch<CR>
 nmap <Up>      :bprev<CR>
 nmap <Down>    :bnext<CR>
