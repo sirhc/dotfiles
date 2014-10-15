@@ -133,6 +133,7 @@ iabbrev resumee résumé
 iabbrev touchee touché
 
 " Common typos.
+iabbrev absense   absence
 iabbrev acheive   achieve
 iabbrev acheived  achieved
 iabbrev teh       the
