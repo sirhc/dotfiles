@@ -39,7 +39,6 @@ if v:version >= 700
 end
 
 let mapleader = ','
-let g:asciidoc_folding = 1
 
 " http://blog.nixpanic.net/2013/01/changing-vim-settings-depending-on-git.html
 "
