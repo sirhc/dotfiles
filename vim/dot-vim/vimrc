@@ -138,7 +138,7 @@ iabbrev acheived  achieved
 iabbrev teh       the
 iabbrev dont'     don't
 iabbrev existance existence
-iabbrev teh       the
+iabbrev paramter  parameter
 
 " Highlight trailing whitespace.
 match ErrorMsg /\s\+\%#\@!$/    " \s\+  one or more whitespace characters
