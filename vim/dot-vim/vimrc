@@ -94,7 +94,7 @@ cnoremap sudow w !sudo tee % >/dev/null
 if has("gui_running")
     colorscheme torte
 
-    set columns=80 lines=40
+    set columns=85 lines=45
     set guioptions-=m   " hide menubar
     set guioptions-=T   " hide toolbar
 
