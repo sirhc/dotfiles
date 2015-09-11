@@ -63,6 +63,9 @@ endif
 
 nmap <F3>      :set invnumber<CR>
 nmap <F4>      :set invspell<CR>
+nmap <F5>      :if exists("g:syntax_on") <Bar> syntax off <Bar> else <Bar> syntax enable <Bar> endif <CR>
+nmap <F6>      :SyntasticToggleMode<CR>
+nmap <F7>      :SyntasticCheck<CR>
 nmap <BS>      :nohlsearch<CR>
 nmap <Up>      :bprev<CR>
 nmap <Down>    :bnext<CR>
@@ -206,3 +209,14 @@ if v:version >= 700
         call pathogen#infect()
     endif
 end
+
+" https://github.com/scrooloose/syntastic
+
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
