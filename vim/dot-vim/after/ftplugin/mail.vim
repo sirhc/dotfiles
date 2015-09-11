@@ -1,8 +1,13 @@
+"setlocal noautoindent
 setlocal cinwords=
-setlocal comments-=s1:/*,mb:*,ex:*/,://,fb:-
+"setlocal comments-=s1:/*
+"setlocal comments-=mb:*
+"setlocal comments-=ex:*/
+"setlocal comments-=://
+"setlocal comments-=fb:-
 setlocal complete=k~/.vim/complete/mail.list,.,w,b,u,t,i
 setlocal dictionary+=/usr/share/dict/words
-setlocal formatoptions+=waj
+"setlocal formatoptions+=waj
 setlocal notitle
 setlocal textwidth=72
 setlocal keywordprg=dict
