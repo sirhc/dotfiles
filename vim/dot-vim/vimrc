@@ -69,6 +69,7 @@ nmap <Down>    :bnext<CR>
 nmap <Left>    :cprev<CR>
 nmap <Right>   :cnext<CR>
 nmap <Space>   <PageDown>
+nmap <Leader>d :!perldoc "%"<CR>
 nmap <Leader>f :NERDTreeToggle<CR>
 nmap <Leader>r :call RunScript()<CR>
 " navigate through wrapped lines
