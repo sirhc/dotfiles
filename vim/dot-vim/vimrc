@@ -1,6 +1,7 @@
 set autoindent
 set autowriteall
 set backspace=indent,eol,start
+set dir=~/tmp
 set expandtab
 set foldmethod=marker
 set formatoptions+=n
@@ -165,8 +166,8 @@ augroup OpenFile
         \ endif
 
     " Prevent swap files in the Dropbox directory, otherwise they will be
-    " synced.
-    au BufNewFile,BufRead ~/Dropbox/* set noswapfile
+    " synced. (This is unnecessary with dir=~/tmp.)
+    "au BufNewFile,BufRead ~/Dropbox/* set noswapfile
 
     " Start new files with a template, if one exists (and remove the empty
     " line at the end).
