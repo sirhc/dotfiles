@@ -15,7 +15,6 @@ set more
 set number
 set pastetoggle=<F2>
 set report=0
-set ruler
 set shiftround
 set shiftwidth=4
 set smartcase
@@ -210,11 +209,16 @@ if v:version >= 700
     endif
 end
 
-" https://github.com/scrooloose/syntastic
+" Ref: <https://github.com/scrooloose/syntastic>
+"
+"set statusline+=%#warningmsg#
+"set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%*
+"
+" Emulate standard status line with 'ruler' set
+"   :set statusline=%<%f\ %h%m%r%=%-14.(%l,%c%V%)\ %P
 
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+set statusline=\[%n\]\ %<%f\ %y\ %h%m%r\ %#warningmsg#%{SyntasticStatuslineFlag()}%*%=%-14.(%l,%c%V%)\ %P
 
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
