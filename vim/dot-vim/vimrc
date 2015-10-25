@@ -210,6 +210,8 @@ if v:version >= 700
     endif
 end
 
+let NERDTreeIgnore = ['\.o$', '\.pyc$']
+
 " Ref: <https://github.com/scrooloose/syntastic>
 "
 "set statusline+=%#warningmsg#
