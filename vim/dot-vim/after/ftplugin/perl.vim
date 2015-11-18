@@ -2,7 +2,7 @@ setlocal complete=.,w,b,u,t,i
 setlocal comments-=s1:/*,mb:*,ex:*/
 setlocal comments+=fb:*
 setlocal equalprg=perltidy
-setlocal keywordprg=pd
+setlocal keywordprg=perldoc
 setlocal iskeyword+=:,$,@,%
 setlocal matchpairs+=<:>,«:»
 
