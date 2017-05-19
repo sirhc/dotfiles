@@ -1,1 +1,1 @@
-let b:interpreter = "plantuml"
+let b:interpreter = "plantuml-display"

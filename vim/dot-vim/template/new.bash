@@ -1,1 +1,4 @@
-#!/bin/bash -eu
+#!/bin/bash
+
+set -euo pipefail
+IFS=$'\n\t'

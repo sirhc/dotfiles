@@ -1,7 +1,7 @@
 set autoindent
 set autowriteall
 set backspace=indent,eol,start
-set dir=~/tmp
+set directory=~/.vim/swapfiles//,~/tmp//,.
 set expandtab
 set foldmethod=marker
 set formatoptions+=n
@@ -105,7 +105,7 @@ if has("gui_running")
 
     if has("win32")
         set guifont=Lucida_Sans_Typewriter:h9:cANSI
-    elseif has("gui_gtk2")
+    elseif has("gui_gtk2") || has("gui_gtk3")
         set guifont=Inconsolata\ Medium\ 10
     else
         set guifont=-b&h-lucida\ sans\ typewriter-medium-r-normal-*-*-120-*-*-m-*-iso8859-1
@@ -159,6 +159,10 @@ if has("perl")
     "                               command :)
     perl *say = \&VIM::Msg
 endif
+
+"function! RpmDate()
+"    exec !date +'%a %b %d %Y'
+"endfunction
 
 augroup OpenFile
     au!
@@ -227,3 +231,23 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+
+" http://vim.wikia.com/wiki/Switching_case_of_characters
+"
+" With the following, you can visually select text then press ~ to convert the
+" text to UPPER CASE, then to lower case, then to Title Case. Keep pressing ~
+" until you get the case you want.
+
+function! TwiddleCase(str)
+    if a:str ==# toupper(a:str)
+        let l:result = tolower(a:str)
+    elseif a:str ==# tolower(a:str)
+        let l:result = substitute(a:str,'\(\<\w\+\>\)', '\u\1', 'g')
+    else
+        let l:result = toupper(a:str)
+    endif
+
+    return l:result
+endfunction
+
+vnoremap ~ y:call setreg('', TwiddleCase(@"), getregtype(''))<CR>gv""Pgv

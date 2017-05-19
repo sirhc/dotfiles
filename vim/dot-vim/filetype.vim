@@ -11,4 +11,6 @@ augroup filetypedetect
     au BufNewFile,BufRead *.p6        setf perl6
     au BufNewFile,BufRead *.pde       setf arduino
     au BufNewFile,BufRead *.zsh-theme setf zsh
+
+    au BufNewFile,BufRead *.tsv       setf tsv
 augroup END
