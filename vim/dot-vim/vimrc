@@ -233,6 +233,9 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
+" https://github.com/scrooloose/syntastic/wiki/%28v3.7.0%29---Perl%3A---perlcritic
+let g:syntastic_perl_perlcritic_post_args = '--verbose "\%s:\%f:\%l:\%c: \%p (\%s): \%m\n"'
+
 " http://vim.wikia.com/wiki/Switching_case_of_characters
 "
 " With the following, you can visually select text then press ~ to convert the
