@@ -52,10 +52,6 @@ endif
 filetype plugin on
 filetype indent on
 
-if $TERM == "xterm-256color" || $TERM == "screen-256color" || $COLORTERM == "gnome-terminal"
-    set t_Co=256
-endif
-
 if &t_Co > 2
     syntax on
 endif
