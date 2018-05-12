@@ -1,2 +1,5 @@
 setlocal equalprg=Rtidy
-setlocal keywordprg=Rman
+setlocal iskeyword+=:
+setlocal keywordprg=Rhelp
+
+let b:interpreter = "Rscript"
