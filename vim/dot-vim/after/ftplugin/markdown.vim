@@ -1,3 +1,5 @@
+let g:syntastic_markdown_checkers = ["proselint"]
+
 let b:interpreter = "markdown"
 
 setlocal cinwords=
