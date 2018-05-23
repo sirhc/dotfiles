@@ -210,7 +210,7 @@ if v:version >= 700
     endif
 end
 
-let NERDTreeIgnore = ['\.o$', '\.pyc$', '\~$']
+let NERDTreeIgnore = ['\.o$', '\.pyc$', '\~$', '^__pycache__$']
 let NERDTreeHijackNetrw = 1
 
 " Ref: <https://github.com/scrooloose/syntastic>
