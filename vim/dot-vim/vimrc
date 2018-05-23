@@ -40,6 +40,10 @@ end
 
 let mapleader = ','
 
+" http://vim.wikia.com/wiki/Disable_F1_built-in_help_key
+nmap <F1> :echo<CR>
+imap <F1> <C-o>:echo<CR>
+
 " http://blog.nixpanic.net/2013/01/changing-vim-settings-depending-on-git.html
 "
 " $ git config --add vim.modeline 'tabstop=4 expandtab'
