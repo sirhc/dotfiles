@@ -1,5 +1,5 @@
 function! s:DetectQtime()
-    if strpart(getline(1), 0, 23) == "#!/usr2/cgrau/bin/qtime"
+    if getline(1) =~ '^#!.*qtime'
         setfiletype qtime
     endif
 endfunction
