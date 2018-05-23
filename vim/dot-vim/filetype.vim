@@ -13,4 +13,6 @@ augroup filetypedetect
     au BufNewFile,BufRead *.zsh-theme setf zsh
 
     au BufNewFile,BufRead *.tsv       setf tsv
+
+    au BufNewFile,BufRead *.puml      setf plantuml
 augroup END
