@@ -1,1 +1,4 @@
-#!/bin/sh -eu
+#!/bin/sh
+
+set -eu
+
