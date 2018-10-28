@@ -182,10 +182,6 @@ augroup OpenFile
     au BufNewFile * silent! 0r ~/.vim/template/new.%:e
     au BufNewFile * silent! normal Gdd
 
-    " Use whichever script interpreter is in PATH.
-    au BufNewFile *.pl silent! 1s/^#!.*/\="#!" . substitute(system("which perl"), "\n", "", "")/
-    au BufNewFile *.py silent! 1s/^#!.*/\="#!" . substitute(system("which python"), "\n", "", "")/
-
     au BufNewFile,BufRead known_hosts set nowrap nospell
 
     " View various files types (see Vim tip #1356).
