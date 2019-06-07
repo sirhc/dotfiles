@@ -15,4 +15,6 @@ augroup filetypedetect
     au BufNewFile,BufRead *.tsv       setf tsv
 
     au BufNewFile,BufRead *.puml      setf plantuml
+
+    au BufNewFile,BufRead *.drl       setf drools
 augroup END
