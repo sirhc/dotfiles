@@ -221,7 +221,7 @@ let NERDTreeHijackNetrw = 1
 " Emulate standard status line with 'ruler' set
 "   :set statusline=%<%f\ %h%m%r%=%-14.(%l,%c%V%)\ %P
 
-set statusline=\[%n\]\ %<%f\ %y\ %h%m%r\ %#warningmsg#%{SyntasticStatuslineFlag()}%*%=%-14.(%l,%c%V%)\ %P
+set statusline=\[%n\]\ %<%f\ %y\ %{FugitiveStatusline()}\ %h%m%r\ %#warningmsg#%{SyntasticStatuslineFlag()}%*%=%-14.(%l,%c%V%)\ %P
 
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
