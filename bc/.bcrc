@@ -1,0 +1,8 @@
+# vim: ft=bc
+
+# A factorial function, the only purpose of which is to serve as an example of
+# how to define a function.
+define f (x) {
+    if (x <= 1) return (1);
+    return (f(x-1) * x);
+}
