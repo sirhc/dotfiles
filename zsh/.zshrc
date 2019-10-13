@@ -77,9 +77,10 @@ plugins=(
     vi-mode
     z
 
+    Renv
+    goenv
     plenv
     pyenv
-    Renv
 
     # Plugin for stuff limited to systems at work.
     qualcomm
