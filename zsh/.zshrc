@@ -81,9 +81,6 @@ plugins=(
     goenv
     plenv
     pyenv
-
-    # Plugin for stuff limited to systems at work.
-    qualcomm
 )
 
 source $ZSH/oh-my-zsh.sh
