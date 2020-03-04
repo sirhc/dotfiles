@@ -1,11 +1,3 @@
-if executable("proselint") == 1
-    let g:syntastic_markdown_checkers = ["proselint"]
-endif
-
-if executable("markdown") == 1
-    let b:interpreter = "markdown"
-endif
-
 setlocal cinwords=
 setlocal formatoptions+=n
 setlocal keywordprg=dict
