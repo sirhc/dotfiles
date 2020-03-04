@@ -239,6 +239,7 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_markdown_checkers = ["mdl", "proselint"]
 let g:syntastic_perl_perlcritic_post_args = '--verbose "\%s:\%f:\%l:\%c: \%p (\%s): \%m\n"'  " https://github.com/scrooloose/syntastic/wiki/%28v3.7.0%29---Perl%3A---perlcritic
+let g:syntastic_yaml_checkers = ["yamllint", "yamlxs"]
 
 " http://vim.wikia.com/wiki/Switching_case_of_characters
 "
