@@ -5,6 +5,9 @@
 [includeIf "gitdir:~/src/github.com/Flux7Labs/"]
     path = ~/src/github.com/Flux7Labs/.gitconfig
 
+[includeIf "gitdir:~/src/LicenseFoundry/"]
+    path = ~/src/LicenseFoundry/.gitconfig
+
 [color]
     ui = auto
 
