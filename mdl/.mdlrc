@@ -1,0 +1,5 @@
+# https://github.com/markdownlint/markdownlint/blob/master/docs/configuration.md
+
+rules "~MD013"  # Line length
+
+# vim: ft=config
