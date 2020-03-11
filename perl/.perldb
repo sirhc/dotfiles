@@ -1,0 +1,5 @@
+# http://blogs.perl.org/users/chisel/2013/01/command-history-in-the-perl-debugger.html
+# libncurses
+# libreadline
+# Term::ReadLine::Gnu
+&parse_options("HistFile=$ENV{HOME}/.perldb.hist");

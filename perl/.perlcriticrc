@@ -1,0 +1,14 @@
+; vim:ft=dosini:nospell
+
+; Use q{} or qq{} instead of quotes for awkward-looking strings.
+[-ValuesAndExpressions::ProhibitNoisyQuotes]
+
+; Must run code through perltidy.
+[-CodeLayout::RequireTidyCode]
+
+; Always use the /s modifier with regular expressions.
+[-RegularExpressions::RequireDotMatchAnything]
+; Always use the /x modifier with regular expressions.
+[-RegularExpressions::RequireExtendedFormatting]
+; Always use the /m modifier with regular expressions.
+[-RegularExpressions::RequireLineBoundaryMatching]

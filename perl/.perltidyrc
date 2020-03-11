@@ -1,0 +1,21 @@
+-pbp     # Damian Conway's Perl Best Practices
+#-pt=0    # Whitespace around *all* parens
+# http://petermblair.com/2009/10/writing-perl-with-vim/
+#-lp -vt=1 -vtc=1        # Format tight hash ref
+#-nbl                    # Place opening brace on same line
+#--cuddled-else          # } else {
+## Blank line stuff
+#--maximum-consecutive-blank-lines=2
+#--noblanks-before-blocks
+#--blanks-before-subs
+#--blanks-before-comments
+## Parentheses
+#--paren-tightness=0
+#--space-keyword-paren
+## Comments
+#--hanging-side-comments
+#--closing-side-comments
+#--indent-block-comments
+## indenting
+#-nola                   # don't outdent labels
+-l=198
