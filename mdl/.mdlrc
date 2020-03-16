@@ -1,5 +1,6 @@
 # https://github.com/markdownlint/markdownlint/blob/master/docs/configuration.md
 
-rules "~MD013"  # Line length
+rules "~MD013",  # Line length
+      "~MD029"   # Ordered list item prefix
 
 # vim: ft=config
