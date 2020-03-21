@@ -1,13 +1,3 @@
-aws-okta-login() {
-    profile="${1:?"usage: aws-okta-login <profile>"}"
-
-    eval $(aws-okta exec "$profile" -- env | grep '^AWS_' | sed -e 's/^/export /' -e 's/$/;/')
-}
-
-op-signin() {
-    eval $(op signin)
-}
-
 # Create a 1280x720 color plasma image. Different each time.
 bg:plasma() {
     convert -size 1280x720 plasma:green-blue background.png
