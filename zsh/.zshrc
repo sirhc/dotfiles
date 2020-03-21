@@ -73,18 +73,18 @@ export PYENV_VIRTUALENV_DISABLE_PROMPT=1
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
+    Renv
     aws
     docker
     docker-compose
     git
-    lsf
-    vi-mode
-    z
-
-    Renv
     goenv
+    okta
+    op
     plenv
     pyenv
+    vi-mode
+    z
 )
 
 source $ZSH/oh-my-zsh.sh
