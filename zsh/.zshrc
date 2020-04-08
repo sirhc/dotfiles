@@ -75,6 +75,7 @@ export PYENV_VIRTUALENV_DISABLE_PROMPT=1
 plugins=(
     Renv
     aws
+    colored-man-pages
     docker
     docker-compose
     git
