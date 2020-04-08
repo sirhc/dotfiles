@@ -13,12 +13,14 @@
 
 [core]
     editor = vim -i NONE
+    excludesFile = ~/.gitignore
     #safecrlf = true
     #autocrlf = input
 
 [alias]
     # Abbreviations.
     br = branch -avv
+    ci = commit
     co = checkout
     dc = diff --cached
     dt = difftool
@@ -106,6 +108,9 @@
 
 [difftool]
     prompt = false
+
+[fetch]
+    prune = true
 
 [push]
     default = upstream
