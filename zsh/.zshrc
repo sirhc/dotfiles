@@ -78,6 +78,7 @@ plugins=(
     docker
     docker-compose
     git
+    git-open
     goenv
     okta
     op
