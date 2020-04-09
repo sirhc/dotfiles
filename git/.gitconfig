@@ -84,7 +84,7 @@
 
     # Local tracking branch management.
     gone = !git branch -vv | cut -c 3- | awk '/: gone\\]/'
-    prune-branches = !git remote prune origin && git branch -vv | awk '$1 != \"*\" && /\\[origin\\// && /: gone\\]/ { print $1 }' | xargs -r git branch -d
+    prune-branches = !git branch -vv | awk '$1 != \"*\" && /\\[origin\\// && /: gone\\]/ { print $1 }' | xargs -r git branch -d
 
     # Clone repository and register it with mr.
     cr = "!f(){ git clone \"$1\" && mr register \"$(basename \"$1\" .git)\"; }; f"
