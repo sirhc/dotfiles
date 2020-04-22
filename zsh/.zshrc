@@ -83,15 +83,20 @@ plugins=(
     Renv
     aws
     colored-man-pages
+    colorize
     docker
     docker-compose
+    fd
+    fzf
     git
     git-open
     goenv
+    history-substring-search
     okta
     op
     plenv
     pyenv
+    tig
     vi-mode
     z
 )
