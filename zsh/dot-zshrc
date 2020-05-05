@@ -92,10 +92,10 @@ plugins=(
     git-open
     goenv
     history-substring-search
-    okta
     op
     plenv
     pyenv
+    saml2aws
     tig
     vi-mode
     z
