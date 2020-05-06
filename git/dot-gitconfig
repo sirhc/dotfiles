@@ -2,12 +2,6 @@
     name  = Chris Grau
     email = chris.grau@gmail.com
 
-[includeIf "gitdir:~/src/github.com/Flux7Labs/"]
-    path = ~/src/github.com/Flux7Labs/.gitconfig
-
-[includeIf "gitdir:~/src/LicenseFoundry/"]
-    path = ~/src/LicenseFoundry/.gitconfig
-
 [color]
     ui = auto
 
@@ -16,6 +10,38 @@
     excludesFile = ~/.gitignore
     #safecrlf = true
     #autocrlf = input
+
+[receive]
+    denyCurrentBranch = warn
+
+[merge]
+    conflictstyle = diff3
+    tool = fugitive
+
+[mergetool]
+    prompt = false
+
+[mergetool "fugitive"]
+    cmd = vim -f -c \"Gvdiffsplit!\" \"$MERGED\"
+
+[diff]
+    renames = true
+    tool = vimdiff
+
+[diff "perl"]
+    xfuncname = "^\\s*(sub.*)"
+
+[difftool]
+    prompt = false
+
+[fetch]
+    prune = true
+
+[push]
+    default = upstream
+
+[credential]
+    helper = cache --timeout=43200
 
 [alias]
     # Abbreviations.
@@ -89,31 +115,8 @@
     # Clone repository and register it with mr.
     cr = "!f(){ git clone \"$1\" && mr register \"$(basename \"$1\" .git)\"; }; f"
 
-[receive]
-    denyCurrentBranch = warn
+[includeIf "gitdir:~/src/github.com/Flux7Labs/"]
+    path = ~/src/github.com/Flux7Labs/.gitconfig
 
-[merge]
-    tool = vimdiff
-    conflictstyle = diff3
-
-[mergetool]
-    prompt = false
-
-[diff]
-    renames = true
-    tool = vimdiff
-
-[diff "perl"]
-    xfuncname = "^\\s*(sub.*)"
-
-[difftool]
-    prompt = false
-
-[fetch]
-    prune = true
-
-[push]
-    default = upstream
-
-[credential]
-    helper = cache --timeout=43200
+[includeIf "gitdir:~/src/LicenseFoundry/"]
+    path = ~/src/LicenseFoundry/.gitconfig
