@@ -159,6 +159,7 @@ path=(~/bin ~/bin/$__archname ~/.local/bin $path)
 
 umask 0022
 
+export AWS_PAGER=
 export BC_ENV_ARGS="-lq $HOME/.bcrc"
 #export CURL_CA_BUNDLE=~/.certs/cabundle.pem
 export CVS_RSH=ssh
