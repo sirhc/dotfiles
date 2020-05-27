@@ -84,6 +84,7 @@ plugins=(
     aws
     colored-man-pages
     colorize
+    dnf
     docker
     docker-compose
     fd
