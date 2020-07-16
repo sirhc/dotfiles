@@ -27,6 +27,7 @@
 [diff]
     renames = true
     tool = vimdiff
+    wsErrorHighlight = all
 
 [diff "perl"]
     xfuncname = "^\\s*(sub.*)"
