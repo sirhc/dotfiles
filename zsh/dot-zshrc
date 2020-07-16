@@ -172,6 +172,7 @@ export MANSECT=1,2,3,4,5,6,7,8,9
 export MAN_POSIXLY_CORRECT=1
 export MYSQL_PS1='(\u@\h) [\d]> '
 export NOPASTE_SERVICES=Gist
+export NPM_PACKAGES="$HOME/.local"
 export PAGER=less
 export PERL5LIB=~/perl5/lib/perl5
 export PERLDOC_PAGER=less
