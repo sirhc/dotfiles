@@ -3,5 +3,6 @@
 [flake8]
 max-line-length = 198
 
-# I201: Missing newline between sections or imports
-ignore = I201
+ignore =
+    # Missing newline between sections or imports
+    I201
