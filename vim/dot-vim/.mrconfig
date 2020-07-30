@@ -85,6 +85,9 @@ checkout = git clone 'https://github.com/cespare/vim-toml.git' 'vim-toml'
 [bundle/vim-unimpaired]
 checkout = git clone 'https://github.com/tpope/vim-unimpaired.git' 'vim-unimpaired'
 
+#[bundle/coc.nvim]
+#checkout = git clone 'https://github.com/neoclide/coc.nvim' 'coc.nvim'
+
 [bundle/logstash.vim]
 checkout = git clone 'https://github.com/vim-scripts/logstash.vim' 'logstash.vim'
 
