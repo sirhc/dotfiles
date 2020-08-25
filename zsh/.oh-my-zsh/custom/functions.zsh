@@ -239,10 +239,6 @@ x() {
     done
 }
 
-zs() {
-    . ~/.zshrc
-}
-
 # https://twitter.com/climagic/status/367676137310150656
 # Usage: blue "I'm blue"
 blue() {
