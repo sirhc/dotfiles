@@ -229,15 +229,15 @@ map() {
 }
 
 # Usage: x count command
-x() {
-    local count="$1"
-    local i
-    shift
-
-    for i in $(seq "$count"); do
-        "$@"
-    done
-}
+#x() {
+#    local count="$1"
+#    local i
+#    shift
+#
+#    for i in $(seq "$count"); do
+#        "$@"
+#    done
+#}
 
 # https://twitter.com/climagic/status/367676137310150656
 # Usage: blue "I'm blue"

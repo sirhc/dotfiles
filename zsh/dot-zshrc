@@ -87,6 +87,7 @@ plugins=(
     dnf
     docker
     docker-compose
+    extract
     fd
     fzf
     git
