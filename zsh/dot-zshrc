@@ -93,6 +93,7 @@ plugins=(
     git-open
     goenv
     history-substring-search
+    kubectl
     op
     plenv
     pyenv
