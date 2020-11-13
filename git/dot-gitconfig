@@ -41,6 +41,9 @@
 [push]
     default = upstream
 
+[pull]
+	rebase = false
+
 [credential]
     helper = cache --timeout=43200
 
