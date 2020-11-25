@@ -93,3 +93,6 @@ checkout = git clone 'https://github.com/vim-scripts/logstash.vim' 'logstash.vim
 
 [pack/plugins/start/vim-cfn]
 checkout = git clone 'https://github.com/speshak/vim-cfn.git' 'vim-cfn'
+
+[pack/plugins/start/vim-terraform]
+checkout = git clone 'https://github.com/hashivim/vim-terraform.git' 'vim-terraform'
