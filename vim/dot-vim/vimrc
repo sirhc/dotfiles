@@ -93,7 +93,7 @@ nmap <Leader>r :call RunScript()<CR>
 "
 " In visual mode, duplicate selection directly below. Handy when writing
 " tests.
-vmap D y'>p
+xmap D y'>p
 
 " http://vim.wikia.com/wiki/Insert_current_filename
 "
@@ -261,4 +261,4 @@ function! TwiddleCase(str)
     return l:result
 endfunction
 
-vnoremap ~ y:call setreg('', TwiddleCase(@"), getregtype(''))<CR>gv""Pgv
+xnoremap ~ y:call setreg('', TwiddleCase(@"), getregtype(''))<CR>gv""Pgv
