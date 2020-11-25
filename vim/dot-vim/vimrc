@@ -211,12 +211,12 @@ augroup OpenFile
     au BufNewFile,BufRead *.t let b:interpreter = "prove -v"
 augroup END
 
-if v:version >= 700
-    runtime bundle/vim-pathogen/autoload/pathogen.vim
-    if exists("g:loaded_pathogen")
-        call pathogen#infect()
-    endif
-end
+"if v:version >= 700
+"    runtime bundle/vim-pathogen/autoload/pathogen.vim
+"    if exists("g:loaded_pathogen")
+"        call pathogen#infect()
+"    endif
+"end
 
 let NERDTreeIgnore = ['\.o$', '\.class$', '\.pyc$', '\~$', '^__pycache__$']
 let NERDTreeHijackNetrw = 1
