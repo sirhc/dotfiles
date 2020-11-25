@@ -89,6 +89,11 @@ nmap <Leader>r :call RunScript()<CR>
 "nnoremap j gj
 "nnoremap k gk
 
+" Toggle highlight when refreshing the screen.
+"
+" <https://twitter.com/gumnos/status/1282057172763934720>
+nnoremap <C-L> :set hls!<CR><C-L>
+
 " http://robots.thoughtbot.com/post/619330025/viiiiiiiiiiiiiiiiiim
 "
 " In visual mode, duplicate selection directly below. Handy when writing
