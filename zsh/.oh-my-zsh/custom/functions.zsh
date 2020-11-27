@@ -130,6 +130,22 @@ splitpath() {
     eval "echo \$$1" | tr ':' '\n'
 }
 
+update-home-repos() {
+    (
+        cd $HOME
+        mr up
+        mr pr
+        mr gc
+
+        cd $HOME/.vim/pack
+        mr up
+        mr pr
+        mr gc
+    )
+
+    src
+}
+
 utime() {
     perl -le "print scalar localtime '$1'"
 }
