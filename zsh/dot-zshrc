@@ -82,6 +82,7 @@ export PYENV_VIRTUALENV_DISABLE_PROMPT=1
 plugins=(
     Renv
     aws
+    azure
     colored-man-pages
     colorize
     dnf
@@ -93,14 +94,17 @@ plugins=(
     git
     git-open
     goenv
+    golang
     history-substring-search
     kubectl
     op
     plenv
     pyenv
     saml2aws
+    terraform
     tig
     vi-mode
+    wd
     z
     zsh_reload
 )
