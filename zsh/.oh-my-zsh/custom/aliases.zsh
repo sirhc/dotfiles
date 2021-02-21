@@ -24,6 +24,7 @@ alias sumcolor='sed -e '"'"'s/\(^.*: \)\(OK\)$/\1\x1b[1;32m\2\x1b[0m/'"'"' -e '"
 alias tig='tig --all'
 alias today='date +%Y-%m-%d'
 alias tprove='prove --formatter TAP::Formatter::Elapsed'
+alias uhr=update-home-repos
 alias vimf='vim +:NERDTreeToggle'
 alias wgetk='wget --no-check-certificate'
 alias wgeto='wget --content-disposition'
