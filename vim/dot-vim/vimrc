@@ -267,3 +267,9 @@ function! TwiddleCase(str)
 endfunction
 
 xnoremap ~ y:call setreg('', TwiddleCase(@"), getregtype(''))<CR>gv""Pgv
+
+" https://vim.fandom.com/wiki/Folding
+inoremap <F9> <C-O>za
+nnoremap <F9> za
+onoremap <F9> <C-C>za
+vnoremap <F9> zf
