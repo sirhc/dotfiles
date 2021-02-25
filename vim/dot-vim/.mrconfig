@@ -96,3 +96,6 @@ checkout = git clone 'https://github.com/speshak/vim-cfn.git' 'vim-cfn'
 
 [pack/plugins/start/vim-terraform]
 checkout = git clone 'https://github.com/hashivim/vim-terraform.git' 'vim-terraform'
+
+[pack/plugins/start/ansible-vim]
+checkout = git clone 'https://github.com/pearofducks/ansible-vim.git' 'ansible-vim'
