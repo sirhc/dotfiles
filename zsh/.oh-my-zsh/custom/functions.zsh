@@ -132,12 +132,12 @@ splitpath() {
 
 update-home-repos() {
     (
-        cd $HOME
+        builtin cd $HOME
         mr up
         mr pr
         mr gc
 
-        cd $HOME/.vim/pack
+        builtin cd $HOME/.vim/pack
         mr up
         mr pr
         mr gc
