@@ -42,7 +42,7 @@
     prune = true
 
 [push]
-    default = upstream
+    default = current
 
 [pull]
 	rebase = false
