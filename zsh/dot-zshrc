@@ -101,6 +101,8 @@ plugins=(
     plenv
     pyenv
     saml2aws
+    screen
+    systemadmin
     terraform
     tig
     vi-mode
