@@ -106,6 +106,8 @@ plugins=(
     vi-mode
     wd
     z
+    zsh-autosuggestions
+    zsh-syntax-highlighting
     zsh_reload
 )
 
