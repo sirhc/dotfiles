@@ -96,6 +96,7 @@ plugins=(
     goenv
     golang
     history-substring-search
+    hitchhiker
     kubectl
     op
     plenv
