@@ -95,9 +95,7 @@ mkcd() {
 }
 
 myip() {
-    # https://stackoverflow.com/questions/3097589/getting-my-public-ip-via-api
-    # http://www.commandlinefu.com/commands/view/2966/return-external-ip#comment
-    curl ifconfig.me
+    curl -s http://ifconfig.io/ip
     printf '\n'
 }
 
