@@ -122,8 +122,5 @@
     # Clone repository and register it with mr.
     cr = "!f(){ git clone \"$1\" && mr register \"$(basename \"$1\" .git)\"; }; f"
 
-[includeIf "gitdir:~/src/github.com/Flux7Labs/"]
-    path = ~/src/github.com/Flux7Labs/.gitconfig
-
-[includeIf "gitdir:~/src/LicenseFoundry/"]
-    path = ~/src/LicenseFoundry/.gitconfig
+[include]
+    path = .gitconfig.local
