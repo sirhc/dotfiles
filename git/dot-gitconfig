@@ -2,6 +2,9 @@
     name  = Chris Grau
     email = chris.grau@gmail.com
 
+[init]
+	defaultBranch = main
+
 [color]
     ui = auto
 
