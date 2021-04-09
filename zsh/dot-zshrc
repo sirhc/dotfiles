@@ -99,6 +99,7 @@ plugins=(
     hitchhiker
     kubectl
     op
+    packer
     plenv
     pyenv
     saml2aws
