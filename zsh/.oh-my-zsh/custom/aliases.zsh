@@ -1,4 +1,3 @@
-alias blrdate='env TZ=Asia/Kolkata date'
 alias bofh='ncat bofh.jeffballard.us 666 </dev/null | sed -ne "s/[^:]*: //p"'
 alias curlk='curl -k'
 alias ed='ed -p:'
@@ -28,6 +27,7 @@ alias uhr=update-home-repos
 alias vimf='vim +:NERDTreeToggle'
 alias wgetk='wget --no-check-certificate'
 alias wgeto='wget --content-disposition'
+alias xclip='xclip -selection c'
 
 if type thefuck >/dev/null 2>&1; then
     eval "$(thefuck --alias)"
