@@ -77,6 +77,34 @@ funfact() {
     elinks -dump randomfunfacts.com | sed -n -e '/^| /p' | sed -e 's/^| //' -e 's/ *|$//'
 }
 
+gh() {
+    # Implement a simple `gh get` convenience command, analogous to `go get`.
+    # Clone the given repository into `~/src/github.com/<user>/<repo>`.
+
+    if [[ $1 == 'get' ]]; then
+        if [[ $# -eq 1 ]]; then
+            printf 'Usage: gh get <user>/<repo>\n' 1>&2
+            printf '       gh get https://github.com/<user>/<repo>\n' 1>&2
+            printf '       gh get https://github.com/<user>/<repo>.git\n' 1>&2
+            return
+        fi
+
+        if [[ $2 =~ ^https://github.com/ ]]; then
+            local repo="$2"
+            repo="${repo#https://github.com/}"
+            repo="${repo%.git}"
+            command gh repo clone "$repo" "$HOME/src/github.com/${repo}"
+            return
+        fi
+
+        # Assume $2 is `<user>/<repo>`.
+        command gh repo clone "$2" "$HOME/src/github.com/$2"
+        return
+    fi
+
+    command gh "$@"
+}
+
 git-top() {
     builtin cd "$(git root)" && pwd && ls
 }
