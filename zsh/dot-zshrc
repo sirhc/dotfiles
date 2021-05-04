@@ -92,6 +92,7 @@ plugins=(
     extract
     fd
     fzf
+    gh
     git
     golang
     history-substring-search
