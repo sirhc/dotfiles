@@ -118,6 +118,7 @@ plugins=(
 [[ -d $ZSH/custom/plugins/plenv ]] && plugins+=(plenv)
 [[ -d $ZSH/custom/plugins/saml2aws ]] && plugins+=(saml2aws)
 [[ -d $ZSH/custom/plugins/terraform-docs ]] && plugins+=(terraform-docs)
+[[ -d $ZSH/custom/plugins/tfenv ]] && plugins+=(tfenv)
 [[ -d $ZSH/custom/plugins/zsh-autosuggestions ]] && plugins+=(zsh-autosuggestions)
 [[ -d $ZSH/custom/plugins/zsh-syntax-highlighting ]] && plugins+=(zsh-syntax-highlighting)
 
