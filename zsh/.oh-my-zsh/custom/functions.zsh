@@ -109,10 +109,6 @@ git-top() {
     builtin cd "$(git root)" && pwd && ls
 }
 
-isodate() {
-    date +"%Y-%m-%dT%H:%M:%S"
-}
-
 # http://blogs.perl.org/users/aristotle/2015/12/locallib-ez.html
 perl-lib() {
     eval "$(perl -M'local::lib @ARGV' - "$@" 0<&-)"
