@@ -83,6 +83,7 @@ export ZSH_HIGHLIGHT_MAXLENGTH=256
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
+    aliases
     aws
     colored-man-pages
     colorize
@@ -97,6 +98,7 @@ plugins=(
     golang
     history-substring-search
     hitchhiker
+    isodate
     kubectl
     pyenv
     screen
