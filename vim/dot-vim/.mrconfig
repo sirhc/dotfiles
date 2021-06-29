@@ -105,3 +105,6 @@ checkout = git clone 'https://github.com/hashivim/vim-packer.git' 'vim-packer'
 
 [pack/plugins/start/tabular]
 checkout = git clone 'https://github.com/godlygeek/tabular.git' 'tabular'
+
+[pack/plugins/start/rainbow_csv]
+checkout = git clone 'https://github.com/mechatroner/rainbow_csv.git' 'rainbow_csv'
