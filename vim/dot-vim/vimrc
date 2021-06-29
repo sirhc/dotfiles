@@ -244,6 +244,10 @@ let g:syntastic_perl_perlcritic_post_args = '--verbose "\%s:\%f:\%l:\%c: \%p (\%
 let g:syntastic_python_checkers = ['python', 'flake8']
 let g:syntastic_yaml_checkers = ['yamllint', 'yamlxs']
 
+let g:terraform_align         = 1
+let g:terraform_fold_sections = 1
+let g:terraform_fmt_on_save   = 1
+
 " http://vim.wikia.com/wiki/Switching_case_of_characters
 "
 " With the following, you can visually select text then press ~ to convert the
