@@ -102,3 +102,6 @@ checkout = git clone 'https://github.com/pearofducks/ansible-vim.git' 'ansible-v
 
 [pack/plugins/start/vim-packer]
 checkout = git clone 'https://github.com/hashivim/vim-packer.git' 'vim-packer'
+
+[pack/plugins/start/tabular]
+checkout = git clone 'https://github.com/godlygeek/tabular.git' 'tabular'
