@@ -102,6 +102,19 @@ gh() {
         return
     fi
 
+    if [[ $1 == 'upgrade' ]]; then
+        local url="https://github.com$(curl -Ls 'https://github.com/cli/cli/releases/latest' | grep -- '_linux_amd64\.rpm"' | cut -d '"' -f 2)"
+        if type dnf >/dev/null 2>&1; then
+            sudo dnf upgrade "$url"
+            return
+        fi
+        if type zypper >/dev/null 2>&1; then
+            sudo zypper install "$url"
+            return
+        fi
+        return
+    fi
+
     command gh "$@"
 }
 
