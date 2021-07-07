@@ -21,6 +21,10 @@
     conflictstyle = diff3
     tool = fugitive
 
+[merge "daff-csv"]
+    name   = daff tabular csv merge
+    driver = daff merge --output %A %O %A %B
+
 [mergetool]
     prompt = false
 
@@ -31,6 +35,9 @@
     renames = true
     tool = vimdiff
     wsErrorHighlight = all
+
+[diff "daff-csv"]
+    command = daff diff --git
 
 [diff "perl"]
     xfuncname = "^\\s*(sub.*)"
