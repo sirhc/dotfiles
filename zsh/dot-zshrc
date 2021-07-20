@@ -188,7 +188,6 @@ umask 0022
 export ANSIBLE_COW_SELECTION=random
 export AWS_PAGER=
 export BC_ENV_ARGS="-lq $HOME/.bcrc"
-#export CURL_CA_BUNDLE=~/.certs/cabundle.pem
 export CVS_RSH=ssh
 export EDITOR=vim
 export GOPATH="$HOME"
@@ -203,7 +202,6 @@ export NPM_PACKAGES="$HOME/.local"
 export PAGER=less
 export PERL5LIB=~/perl5/lib/perl5
 export PERLDOC_PAGER=less
-#export REQUESTS_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt
 export RSYNC_RSH=ssh
 export R_LIBS=~/R
 export SSL_CERT_DIR=~/.certs
