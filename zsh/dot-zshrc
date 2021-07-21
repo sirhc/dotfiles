@@ -208,5 +208,10 @@ export SSL_CERT_DIR=~/.certs
 export TZ=US/Pacific
 export UNZIP=-qq
 
+# Running Docker Compose with Rootless Podman (https://fedoramagazine.org/use-docker-compose-with-podman-to-orchestrate-containers-on-fedora/).
+if [[ -S /run/user/$UID/podman/podman.sock ]]; then
+    export DOCKER_HOST=unix:///run/user/$UID/podman/podman.sock
+fi
+
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
