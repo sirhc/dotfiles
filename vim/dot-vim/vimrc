@@ -273,3 +273,9 @@ inoremap <F9> <C-O>za
 nnoremap <F9> za
 onoremap <F9> <C-C>za
 vnoremap <F9> zf
+
+" Testing out simplified window navigation.
+nmap <silent> <C-Up>    :wincmd k<CR>
+nmap <silent> <C-Down>  :wincmd j<CR>
+nmap <silent> <C-Left>  :wincmd h<CR>
+nmap <silent> <C-Right> :wincmd l<CR>
