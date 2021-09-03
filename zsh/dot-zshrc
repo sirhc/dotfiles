@@ -77,6 +77,8 @@ export PYENV_VIRTUALENV_DISABLE_PROMPT=1
 export ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=256
 export ZSH_HIGHLIGHT_MAXLENGTH=256
 
+export ZSH_PYENV_QUIET=true
+
 # Which plugins would you like to load?
 # Standard plugins can be found in ~/.oh-my-zsh/plugins/*
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
