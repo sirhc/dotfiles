@@ -101,6 +101,7 @@ plugins=(
     history-substring-search
     hitchhiker
     isodate
+    jsontools
     kubectl
     pyenv
     screen
