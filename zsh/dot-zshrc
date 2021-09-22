@@ -90,6 +90,7 @@ plugins=(
     colored-man-pages
     colorize
     copybuffer
+    cp
     dnf
     docker
     docker-compose
