@@ -113,7 +113,6 @@ plugins=(
     vi-mode
     wd
     z
-    zsh_reload
 )
 
 [[ -d $ZSH/custom/plugins/Renv ]] && plugins+=(Renv)
