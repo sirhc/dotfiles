@@ -137,7 +137,7 @@ update-home-repos() {
         mr gc
     )
 
-    src
+    omz reload
 }
 
 utime() {
