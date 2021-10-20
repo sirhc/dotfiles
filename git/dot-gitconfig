@@ -129,5 +129,8 @@
     # Clone repository and register it with mr.
     cr = "!f(){ git clone \"$1\" && mr register \"$(basename \"$1\" .git)\"; }; f"
 
+    # https://github.polettix.it/ETOOBUSY/2021/10/10/git-forest/
+    lg = log --graph --abbrev-commit --date=relative --date-order --format=format:'%C(yellow)%h%Creset -%C(yellow)%d%Creset %s %C(green)(%cr)%Creset %Cred<%an>%Creset'
+
 [include]
     path = .gitconfig.local
