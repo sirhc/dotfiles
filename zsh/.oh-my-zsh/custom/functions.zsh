@@ -186,6 +186,10 @@ topcount() {
     sort | uniq -c | sort -rn | head -n "${1:-10}"
 }
 
+vimless() {
+    vim -u \$VIMRUNTIME/macros/less.vim "${@:--}"
+}
+
 weather() {
     curl -s "http://wttr.in/${*// /+}"
 }
