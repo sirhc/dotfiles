@@ -26,3 +26,5 @@ Vim. The plugins can then be installed and maintained using
 > cd ~/.vim
 > mr update
 ```
+
+The current list of plugins are documented in [Plugins](Plugins.md).
