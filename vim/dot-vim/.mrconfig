@@ -11,7 +11,7 @@ checkout = git clone 'https://github.com/chooh/brightscript.vim.git' 'brightscri
 checkout = git clone 'https://github.com/kien/ctrlp.vim.git' 'ctrlp.vim'
 
 [pack/plugins/start/nerdtree]
-checkout = git clone 'https://github.com/scrooloose/nerdtree.git' 'nerdtree'
+checkout = git clone 'https://github.com/preservim/nerdtree.git' 'nerdtree'
 
 [pack/plugins/start/perl-nextmethod]
 checkout = git clone 'https://github.com/catalinciurea/perl-nextmethod.git' 'perl-nextmethod'
@@ -20,7 +20,7 @@ checkout = git clone 'https://github.com/catalinciurea/perl-nextmethod.git' 'per
 checkout = git clone 'https://github.com/aklt/plantuml-syntax.git' 'plantuml-syntax'
 
 [pack/plugins/start/powerline]
-checkout = git clone 'https://github.com/Lokaltog/powerline.git' 'powerline'
+checkout = git clone 'https://github.com/powerline/powerline.git' 'powerline'
 
 [pack/plugins/start/rainbow_levels.vim]
 checkout = git clone 'https://github.com/thiagoalessio/rainbow_levels.vim.git' 'rainbow_levels.vim'
@@ -61,9 +61,6 @@ checkout = git clone 'https://github.com/xolox/vim-notes.git' 'vim-notes'
 [pack/plugins/start/vim-orgmode]
 checkout = git clone 'https://github.com/jceb/vim-orgmode.git' 'vim-orgmode'
 
-#[pack/plugins/start/vim-pathogen]
-#checkout = git clone 'https://github.com/tpope/vim-pathogen.git' 'vim-pathogen'
-
 [pack/plugins/start/vim-perl]
 checkout = git clone 'https://github.com/vim-perl/vim-perl.git' 'vim-perl'
 
@@ -86,7 +83,7 @@ checkout = git clone 'https://github.com/tpope/vim-unimpaired.git' 'vim-unimpair
 #checkout = git clone 'https://github.com/neoclide/coc.nvim' 'coc.nvim'
 
 [pack/plugins/start/logstash.vim]
-checkout = git clone 'https://github.com/vim-scripts/logstash.vim' 'logstash.vim'
+checkout = git clone 'https://github.com/vim-scripts/logstash.vim.git' 'logstash.vim'
 
 [pack/plugins/start/vim-cfn]
 checkout = git clone 'https://github.com/speshak/vim-cfn.git' 'vim-cfn'
