@@ -40,9 +40,6 @@ checkout = git clone 'https://github.com/omega/vim-covered.git' 'vim-covered'
 [pack/plugins/start/vim-fugitive]
 checkout = git clone 'https://github.com/tpope/vim-fugitive.git' 'vim-fugitive'
 
-[pack/plugins/start/vim-geeknote]
-checkout = git clone 'https://github.com/neilagabriel/vim-geeknote' 'vim-geeknote'
-
 [pack/plugins/start/vim-go]
 checkout = git clone 'https://github.com/fatih/vim-go.git' 'vim-go'
 
