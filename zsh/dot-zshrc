@@ -106,6 +106,7 @@ plugins=(
     jsontools
     kubectl
     pyenv
+    rand-quote
     screen
     systemadmin
     terraform
