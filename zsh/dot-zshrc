@@ -129,6 +129,11 @@ plugins=(
 [[ -d $ZSH/custom/plugins/zsh-autosuggestions ]] && plugins+=(zsh-autosuggestions)
 [[ -d $ZSH/custom/plugins/zsh-syntax-highlighting ]] && plugins+=(zsh-syntax-highlighting)
 
+# Add machine-specific plugins.
+if [[ -e ~/.omz_plugins.local ]]; then
+    plugins+=($(sed -e 's/^ *//' -e 's/ *$//' -e 's/^#.*//' -e '/^$/d' ~/.omz_plugins.local))
+fi
+
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
@@ -216,6 +221,12 @@ export UNZIP=-qq
 # Running Docker Compose with Rootless Podman (https://fedoramagazine.org/use-docker-compose-with-podman-to-orchestrate-containers-on-fedora/).
 if [[ -S /run/user/$UID/podman/podman.sock ]]; then
     export DOCKER_HOST=unix:///run/user/$UID/podman/podman.sock
+fi
+
+# Machine-specific configuration that doesn't belong in the central version
+# control.
+if [[ -e ~/.zshrc.local ]]; then
+    . ~/.zshrc.local
 fi
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
