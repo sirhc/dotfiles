@@ -79,60 +79,76 @@ export ZSH_HIGHLIGHT_MAXLENGTH=256
 
 export ZSH_PYENV_QUIET=true
 
-# Which plugins would you like to load?
-# Standard plugins can be found in ~/.oh-my-zsh/plugins/*
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
-plugins=(
-    aliases
-    aws
-    colored-man-pages
-    colorize
-    copybuffer
-    cp
-    dnf
-    docker
-    docker-compose
-    extract
-    fd
-    fzf
-    gh
-    git
-    golang
-    history-substring-search
-    hitchhiker
-    isodate
-    jsontools
-    kubectl
-    pyenv
-    rand-quote
-    screen
-    systemadmin
-    terraform
-    tig
-    vi-mode
-    wd
-    z
-)
+plugins=()
 
-[[ -d $ZSH/custom/plugins/Renv ]] && plugins+=(Renv)
-[[ -d $ZSH/custom/plugins/azure ]] && plugins+=(azure)
-[[ -d $ZSH/custom/plugins/git-open ]] && plugins+=(git-open)
-[[ -d $ZSH/custom/plugins/goenv ]] && plugins+=(goenv)
-[[ -d $ZSH/custom/plugins/op ]] && plugins+=(op)
-[[ -d $ZSH/custom/plugins/packer ]] && plugins+=(packer)
-[[ -d $ZSH/custom/plugins/plenv ]] && plugins+=(plenv)
-[[ -d $ZSH/custom/plugins/saml2aws ]] && plugins+=(saml2aws)
-[[ -d $ZSH/custom/plugins/terraform-docs ]] && plugins+=(terraform-docs)
-[[ -d $ZSH/custom/plugins/tfenv ]] && plugins+=(tfenv)
-[[ -d $ZSH/custom/plugins/zsh-autosuggestions ]] && plugins+=(zsh-autosuggestions)
-[[ -d $ZSH/custom/plugins/zsh-syntax-highlighting ]] && plugins+=(zsh-syntax-highlighting)
+_add_plugin() {
+    local plugin="$1"
+
+    if [[ -d $ZSH/plugins/$plugin ]]; then
+        plugins+=($plugin)
+        return
+    fi
+
+    if [[ -d $ZSH/custom/plugins/$plugin ]]; then
+        plugins+=($plugin)
+        return
+    fi
+}
+
+_add_plugin aliases
+_add_plugin aws
+_add_plugin colored-man-pages
+_add_plugin colorize
+_add_plugin copybuffer
+_add_plugin cp
+_add_plugin dnf
+_add_plugin docker
+_add_plugin docker-compose
+_add_plugin extract
+_add_plugin fd
+_add_plugin fzf
+_add_plugin gh
+_add_plugin git
+_add_plugin golang
+_add_plugin history-substring-search
+_add_plugin hitchhiker
+_add_plugin isodate
+_add_plugin jsontools
+_add_plugin jump
+_add_plugin kubectl
+_add_plugin percol
+_add_plugin pyenv
+_add_plugin rand-quote
+_add_plugin screen
+_add_plugin systemadmin
+_add_plugin terraform
+_add_plugin tig
+_add_plugin vi-mode
+_add_plugin wd
+_add_plugin z
+
+_add_plugin Renv
+_add_plugin azure
+_add_plugin git-open
+_add_plugin goenv
+_add_plugin op
+_add_plugin packer
+_add_plugin plenv
+_add_plugin saml2aws
+_add_plugin terraform-docs
+_add_plugin tfenv
+_add_plugin zsh-autosuggestions
+_add_plugin zsh-syntax-highlighting
 
 # Add machine-specific plugins.
 if [[ -e ~/.omz_plugins.local ]]; then
-    plugins+=($(sed -e 's/^ *//' -e 's/ *$//' -e 's/^#.*//' -e '/^$/d' ~/.omz_plugins.local))
+    while read -r _plugin; do
+        _add_plugin $_plugin
+    done < <(sed -e 's/^ *//' -e 's/ *$//' -e 's/^#.*//' -e '/^$/d' ~/.omz_plugins.local)
 fi
+
+unset _plugin
+unset -f _add_plugin
 
 source $ZSH/oh-my-zsh.sh
 
