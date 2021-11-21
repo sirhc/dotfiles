@@ -239,6 +239,11 @@ if [[ -S /run/user/$UID/podman/podman.sock ]]; then
     export DOCKER_HOST=unix:///run/user/$UID/podman/podman.sock
 fi
 
+# https://github.com/cantino/mcfly
+if command -v mcfly >& /dev/null; then
+    eval "$(mcfly init zsh)"
+fi
+
 # Machine-specific configuration that doesn't belong in the central version
 # control.
 if [[ -e ~/.zshrc.local ]]; then
