@@ -103,6 +103,10 @@ proveall() {
     fi
 }
 
+qbc() {
+    echo "scale=${2:-2}; $1" | bc -l
+}
+
 enmorse() {
     perl -MConvert::Morse=as_morse -E 'say as_morse($_) while <>'
 }
