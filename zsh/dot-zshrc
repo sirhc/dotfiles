@@ -123,7 +123,6 @@ _add_plugin screen
 _add_plugin systemadmin
 _add_plugin terraform
 _add_plugin tig
-_add_plugin vi-mode
 _add_plugin wd
 _add_plugin z
 
@@ -139,6 +138,7 @@ _add_plugin terraform-docs
 _add_plugin tfenv
 _add_plugin zsh-autosuggestions
 _add_plugin zsh-syntax-highlighting
+_add_plugin zsh-vi-mode
 
 # Add machine-specific plugins.
 if [[ -e ~/.omz_plugins.local ]]; then
