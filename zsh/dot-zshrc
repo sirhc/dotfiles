@@ -99,11 +99,13 @@ _add_plugin aliases
 _add_plugin aws
 _add_plugin colored-man-pages
 _add_plugin colorize
+_add_plugin command-not-found
 _add_plugin copybuffer
 _add_plugin cp
 _add_plugin dnf
 _add_plugin docker
 _add_plugin docker-compose
+_add_plugin emoji
 _add_plugin extract
 _add_plugin fd
 _add_plugin fzf
@@ -123,6 +125,7 @@ _add_plugin screen
 _add_plugin systemadmin
 _add_plugin terraform
 _add_plugin tig
+_add_plugin tmux
 _add_plugin wd
 _add_plugin z
 
