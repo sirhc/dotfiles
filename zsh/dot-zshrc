@@ -121,6 +121,7 @@ _add_plugin kubectl
 _add_plugin percol
 _add_plugin pyenv
 _add_plugin rand-quote
+_add_plugin ripgrep
 _add_plugin screen
 _add_plugin systemadmin
 _add_plugin terraform
