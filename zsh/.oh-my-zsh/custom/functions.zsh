@@ -131,14 +131,14 @@ splitpath() {
 update-home-repos() {
     (
         builtin cd $HOME
-        mr up
-        mr pr
-        mr gc
+        mr -j up || return
+        mr -j pr || return
+        mr -j gc || return
 
         builtin cd $HOME/.vim/pack
-        mr up
-        mr pr
-        mr gc
+        mr -j up || return
+        mr -j pr || return
+        mr -j gc || return
     )
 
     omz reload
