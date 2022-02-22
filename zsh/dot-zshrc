@@ -101,6 +101,7 @@ _add_plugin colored-man-pages
 _add_plugin colorize
 _add_plugin command-not-found
 _add_plugin copybuffer
+_add_plugin copypath
 _add_plugin cp
 _add_plugin dnf
 _add_plugin docker
