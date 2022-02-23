@@ -10,7 +10,6 @@ alias indent="sed -e 's/^/    /'"
 alias lh='ls -lh'
 alias maze='perl -e "print qw(╱ ╲)[rand 2] while 1"'
 alias now='date +%H:%M:%S'
-alias open=xdg-open
 alias p5addlib='eval "$( envmgr -p PERL5LIB lib )"'
 alias p5clearenv='unset "$( env | grep ^PERL | cut -d= -f1 )"'
 alias p5rmlib='eval "$( envmgr -r PERL5LIB lib )"'
@@ -28,6 +27,10 @@ alias vimf='vim +:NERDTreeToggle'
 alias wgetk='wget --no-check-certificate'
 alias wgeto='wget --content-disposition'
 alias xclip='xclip -selection c'
+
+if [[ ! -x /usr/bin/open ]]; then
+    alias open=xdg-open
+fi
 
 if type thefuck >/dev/null 2>&1; then
     eval "$(thefuck --alias)"
