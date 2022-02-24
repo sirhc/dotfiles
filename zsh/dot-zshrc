@@ -142,6 +142,7 @@ _add_plugin plenv
 _add_plugin saml2aws
 _add_plugin terraform-docs
 _add_plugin tfenv
+_add_plugin tgenv
 _add_plugin zsh-autosuggestions
 _add_plugin zsh-syntax-highlighting
 _add_plugin zsh-vi-mode
