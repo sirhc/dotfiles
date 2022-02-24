@@ -14,4 +14,5 @@ augroup filetypedetect
     au BufNewFile,BufRead *.tsv       setf tsv
     au BufNewFile,BufRead *.zsh-theme setf zsh
     au BufNewFile,BufRead .mrconfig   setf dosini
+    au BufNewFile,BufRead Jenkinsfile setf groovy
 augroup END
