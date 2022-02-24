@@ -8,6 +8,10 @@ fi
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
+if [[ -d /opt/homebrew/bin ]]; then
+    path=(/opt/homebrew/bin $path)
+fi
+
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
 
@@ -146,6 +150,11 @@ _add_plugin tgenv
 _add_plugin zsh-autosuggestions
 _add_plugin zsh-syntax-highlighting
 _add_plugin zsh-vi-mode
+
+if (( $+commands[brew] )); then
+    _add_plugin brew
+    _add_plugin macos
+fi
 
 # Add machine-specific plugins.
 if [[ -e ~/.omz_plugins.local ]]; then
