@@ -19,9 +19,6 @@ checkout = git clone 'https://github.com/catalinciurea/perl-nextmethod.git' 'per
 [pack/plugins/start/plantuml-syntax]
 checkout = git clone 'https://github.com/aklt/plantuml-syntax.git' 'plantuml-syntax'
 
-[pack/plugins/start/powerline]
-checkout = git clone 'https://github.com/powerline/powerline.git' 'powerline'
-
 [pack/plugins/start/rainbow_levels.vim]
 checkout = git clone 'https://github.com/thiagoalessio/rainbow_levels.vim.git' 'rainbow_levels.vim'
 
@@ -102,3 +99,9 @@ checkout = git clone 'https://github.com/godlygeek/tabular.git' 'tabular'
 
 [pack/plugins/start/rainbow_csv]
 checkout = git clone 'https://github.com/mechatroner/rainbow_csv.git' 'rainbow_csv'
+
+[pack/plugins/start/vim-airline]
+checkout = git clone 'https://github.com/vim-airline/vim-airline.git' 'vim-airline'
+
+[pack/plugins/start/vim-airline-themes]
+checkout = git clone 'https://github.com/vim-airline/vim-airline-themes.git' 'vim-airline-themes'
