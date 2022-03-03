@@ -65,6 +65,16 @@ if &t_Co > 2
     syntax on
 endif
 
+if &diff
+    " Make vimdiff easier to read on a dark terminal.
+    highlight DiffAdd    cterm=bold ctermfg=10 ctermbg=17 gui=none guifg=bg guibg=Red
+    highlight DiffDelete cterm=bold ctermfg=10 ctermbg=17 gui=none guifg=bg guibg=Red
+    highlight DiffChange cterm=bold ctermfg=10 ctermbg=17 gui=none guifg=bg guibg=Red
+    highlight DiffText   cterm=bold ctermfg=10 ctermbg=88 gui=none guifg=bg guibg=Red
+
+    set nospell
+endif
+
 nmap <F3>      :set invnumber<CR>
 nmap <F4>      :set invspell<CR>
 nmap <F5>      :if exists("g:syntax_on") <Bar> syntax off <Bar> else <Bar> syntax enable <Bar> endif <CR>
