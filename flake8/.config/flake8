@@ -1,9 +1,0 @@
-# vim: ft=config
-
-[flake8]
-max-line-length = 198
-
-ignore =
-    D100  # Missing docstring in public module
-    D103  # Missing docstring in public function
-    I201  # Missing newline between sections or imports
