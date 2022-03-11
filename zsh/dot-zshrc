@@ -232,7 +232,6 @@ export AWS_PAGER=
 export BC_ENV_ARGS="-lq $HOME/.bcrc"
 export CVS_RSH=ssh
 export EDITOR=vim
-export GOPATH="$HOME"
 export GREP=egrep
 export LD_LIBRARY_PATH=~/.local/lib
 export LESS='-# 4 -c -I -j 10 -M -R -S'
