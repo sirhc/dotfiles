@@ -236,7 +236,6 @@ export GOPATH="$HOME"
 export GREP=egrep
 export LD_LIBRARY_PATH=~/.local/lib
 export LESS='-# 4 -c -I -j 10 -M -R -S'
-export MANSECT=1,2,3,4,5,6,7,8,9
 export MAN_POSIXLY_CORRECT=1
 export MYSQL_PS1='(\u@\h) [\d]> '
 export NOPASTE_SERVICES=Gist
