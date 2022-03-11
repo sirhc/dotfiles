@@ -120,6 +120,7 @@ _add_plugin golang
 _add_plugin history-substring-search
 _add_plugin hitchhiker
 _add_plugin isodate
+_add_plugin jenv
 _add_plugin jsontools
 _add_plugin jump
 _add_plugin kubectl
@@ -131,6 +132,7 @@ _add_plugin ripgrep
 _add_plugin screen
 _add_plugin systemadmin
 _add_plugin terraform
+_add_plugin terragrunt
 _add_plugin tig
 _add_plugin tmux
 _add_plugin wd
