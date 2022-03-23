@@ -10,6 +10,7 @@ fi
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
+# On macOS, Homebrew commands should come before system commands.
 if [[ -d /opt/homebrew/bin ]]; then
     path=(/opt/homebrew/bin $path)
 fi
