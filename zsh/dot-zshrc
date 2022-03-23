@@ -146,6 +146,7 @@ _add_plugin pyenv
 _add_plugin python
 _add_plugin rand-quote
 _add_plugin ripgrep
+_add_plugin safe-paste
 _add_plugin saml2aws
 _add_plugin screen
 _add_plugin systemadmin
