@@ -107,6 +107,14 @@ _add_plugin() {
     fi
 }
 
+# The zsh-vi-mode plugin needs to load first, or it will override keybindings
+# made by other plugins.
+function zvm_config() {
+    #ZVM_INIT_MODE=sourcing
+    ZVM_LINE_INIT_MODE=$ZVM_MODE_INSERT
+}
+_add_plugin zsh-vi-mode
+
 _add_plugin Renv
 _add_plugin aliases
 _add_plugin aws
@@ -161,7 +169,6 @@ _add_plugin wd
 _add_plugin z
 _add_plugin zsh-autosuggestions
 _add_plugin zsh-syntax-highlighting
-_add_plugin zsh-vi-mode
 
 if (( $+commands[brew] )); then
     _add_plugin brew
