@@ -259,7 +259,7 @@ if [[ -S /run/user/$UID/podman/podman.sock ]]; then
 fi
 
 # https://github.com/cantino/mcfly
-if command -v mcfly >& /dev/null; then
+if (( $+commands[mcfly] )); then
     eval "$(mcfly init zsh)"
 fi
 
