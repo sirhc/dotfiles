@@ -109,11 +109,15 @@ _add_plugin() {
 
 # The zsh-vi-mode plugin needs to load first, or it will override keybindings
 # made by other plugins.
-function zvm_config() {
-    #ZVM_INIT_MODE=sourcing
-    ZVM_LINE_INIT_MODE=$ZVM_MODE_INSERT
-}
-_add_plugin zsh-vi-mode
+#
+# FIXME: I wanted to like the zsh-vi-mode plugin, but it interferes with the
+# bindings of too many other plugins.
+#
+#function zvm_config() {
+#    ZVM_INIT_MODE=sourcing
+#    ZVM_LINE_INIT_MODE=$ZVM_MODE_INSERT
+#}
+#_add_plugin zsh-vi-mode
 
 _add_plugin Renv
 _add_plugin aliases
@@ -191,12 +195,15 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
+bindkey -v
+
 autoload -U up-line-or-beginning-search
 autoload -U down-line-or-beginning-search
 zle -N up-line-or-beginning-search
 zle -N down-line-or-beginning-search
-bindkey '^[[A' up-line-or-beginning-search   # for some reason ${key[Up]} doesn't work
-bindkey '^[[B' down-line-or-beginning-search # ditto ${key[Down]}
+bindkey "${terminfo[kcuu1]}" up-line-or-beginning-search   # ${key[Up]} doesn't work
+bindkey "${terminfo[kcud1]}" down-line-or-beginning-search # ditto ${key[Down]}
+
 
 bindkey ' ' magic-space
 
