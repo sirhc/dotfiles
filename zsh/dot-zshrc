@@ -198,6 +198,7 @@ source $ZSH/oh-my-zsh.sh
 # User configuration
 
 bindkey -v
+set -o vi
 
 autoload -U up-line-or-beginning-search
 autoload -U down-line-or-beginning-search
