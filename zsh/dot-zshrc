@@ -122,6 +122,7 @@ _add_plugin fzf
 _add_plugin gh
 _add_plugin git
 _add_plugin git-open
+_add_plugin go-jira
 _add_plugin goenv
 _add_plugin golang
 _add_plugin history-substring-search
@@ -135,6 +136,7 @@ _add_plugin op
 _add_plugin packer
 _add_plugin percol
 _add_plugin plenv
+_add_plugin podman
 _add_plugin pyenv
 _add_plugin python
 _add_plugin rand-quote
@@ -157,6 +159,8 @@ _add_plugin zsh-vi-mode
 
 if (( $+commands[brew] )); then
     _add_plugin brew
+    _add_plugin iterm2
+    _add_plugin iterm2-shell-integration
     _add_plugin macos
 fi
 
