@@ -10,9 +10,14 @@ fi
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
-# On macOS, Homebrew commands should come before system commands.
 if [[ -d /opt/homebrew/bin ]]; then
-    path=(/opt/homebrew/bin $path)
+    # On macOS, Homebrew and the `*env` plugins don't play nice together. The
+    # first invocation of a shell works fine, but subsequent invocations of
+    # `omz reload` causes the paths set by the `*env` plugins to move to the
+    # end of $path, leaving Homebrew's commands (e.g., `python`) in front.
+    #
+    # For the record, this works fine on Linux :shrug:.
+    path=(/opt/homebrew/bin /usr/local/bin /usr/bin /bin /usr/sbin /sbin)
 fi
 
 # Path to your oh-my-zsh installation.
