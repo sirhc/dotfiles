@@ -207,9 +207,11 @@ unsetopt sharehistory
 zstyle ':completion:*' accept-exact-dirs true  # https://unix.stackexchange.com/a/162145
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
 
-if [[ -d ~/.oh-my-zsh/custom/completions ]]; then
-    FPATH="$FPATH":~/.oh-my-zsh/custom/completions
+if [[ -d $HOME/.oh-my-zsh/custom/completions ]]; then
+    fpath=($fpath $HOME/.oh-my-zsh/custom/completions)
 fi
+
+autoload -U compinit && compinit
 
 HISTIGNORE="ls:[bf]g:exit:reset:clear:cd:cd ..:cd.."
 HISTFILE=~/.zsh_history
