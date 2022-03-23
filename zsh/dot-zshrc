@@ -171,8 +171,6 @@ _add_plugin tig
 _add_plugin tmux
 _add_plugin wd
 _add_plugin z
-_add_plugin zsh-autosuggestions
-_add_plugin zsh-syntax-highlighting
 
 if (( $+commands[brew] )); then
     _add_plugin brew
@@ -180,6 +178,10 @@ if (( $+commands[brew] )); then
     _add_plugin iterm2-shell-integration
     _add_plugin macos
 fi
+
+# To get the bindings right, these need to be loaded last.
+_add_plugin zsh-syntax-highlighting
+_add_plugin zsh-autosuggestions
 
 # Add machine-specific plugins.
 if [[ -e ~/.omz_plugins.local ]]; then
