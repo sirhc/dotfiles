@@ -75,7 +75,17 @@ fi
 [[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
 [[ -f ~/.zshrc.d/powerlevel10k/powerlevel10k.zsh-theme ]] && source ~/.zshrc.d/powerlevel10k/powerlevel10k.zsh-theme
 
-# Rudimentary plugin loading, but service my purposes at the moment.
+# Source files in my autoload directory. This is where I tend to keep aliases
+# and functions, which should always be loaded (unlike plugins, which are
+# loaded selectively).
+
+if [[ -d ~/.zshrc.d/autoload ]]; then
+    for _autoload_file in ~/.zshrc.d/autoload/*(.); do
+        source $_autoload_file
+    done
+    unset _autoload_file
+fi
+
 # Rudimentary plugin loading, but serves my purposes at the moment.
 
 _load_plugin() {
