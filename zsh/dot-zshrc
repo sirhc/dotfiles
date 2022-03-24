@@ -61,6 +61,14 @@ export RSYNC_RSH=ssh
 export TZ=US/Pacific
 export UNZIP=-qq
 
+export JENV_ROOT="${XDG_CONFIG_DIR:-$HOME/.config/jenv}"
+export PYENV_ROOT="${XDG_CONFIG_DIR:-$HOME/.config/pyenv}"
+export TFENV_CONFIG_DIR="${XDG_CONFIG_DIR:-$HOME/.config/tfenv}"
+export TGENV_CONFIG_DIR="${XDG_CONFIG_DIR:-$HOME/.config/tgenv}" # this doesn't actually do anything
+
+[[ -d $JENV_ROOT/shims ]] && path=($JENV_ROOT/shims $path)
+[[ -d $PYENV_ROOT/shims ]] && path=($PYENV_ROOT/shims $path)
+
 autoload -U compinit && compinit
 
 zstyle ':completion:*' accept-exact-dirs true
@@ -100,3 +108,16 @@ _load_plugin() {
 _load_plugin zsh-autosuggestions
 _load_plugin zsh-syntax-highlighting
 _load_plugin zsh-vim-mode
+
+# Lazy-load pyenv. Doing this, because there's a not-insignificant startup
+# cost if we do it for every shell.
+pyenv() {
+    if ! (( $+commands[pyenv] )); then
+        printf '%s: %s: not installed...\n' "$ZSH_NAME" pyenv
+        return 1
+    fi
+
+    eval "$(command pyenv init - --no-rehash zsh)"
+
+    pyenv "$@"
+}
