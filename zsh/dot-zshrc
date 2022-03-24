@@ -50,6 +50,7 @@ unsetopt NOMATCH   # leave unmatched patterns alone in arg list
 export ANSIBLE_COW_SELECTION=random
 export AWS_PAGER=
 export BC_ENV_ARGS="-lq $HOME/.bcrc"
+export CLICOLOR=1 # colorize ls(1) on Darwin
 export EDITOR=vim
 export GREP=egrep
 export LESS='-# 4 -c -I -j 10 -M -R -S'
