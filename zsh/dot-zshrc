@@ -23,7 +23,7 @@ path=(
 
 # See zshparam(1).
 HISTFILE=~/.zsh_history
-HISTORY_IGNORE='^(exit|reset|clear|cd|cd ..|cd..|ls)$'
+HISTORY_IGNORE='(exit|reset|clear|cd|cd ..|cd..|ls)'
 HISTSIZE=1000000   # the number of items for the internal history list
 LISTMAX=0          # only prompt if the list will scroll
 REPORTMEMORY=10240 # report on commands exceeding 10 MiB RSS
