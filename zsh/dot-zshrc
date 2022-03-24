@@ -123,7 +123,11 @@ pyenv() {
 }
 
 _set_terminal_title() {
-    print -Pn "\e]2;%n@%M:%~\a" # user@host:path
+    if [[ $LC_TERMINAL == iTerm2 ]]; then
+        print -Pn "\033];%~\007" # user@host:path
+    else
+        print -Pn "\e]2;%n@%M:%~\a" # user@host:path
+    fi
 }
 
 autoload -Uz add-zsh-hook
