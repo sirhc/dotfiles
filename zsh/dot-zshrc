@@ -76,6 +76,7 @@ fi
 [[ -f ~/.zshrc.d/powerlevel10k/powerlevel10k.zsh-theme ]] && source ~/.zshrc.d/powerlevel10k/powerlevel10k.zsh-theme
 
 # Rudimentary plugin loading, but service my purposes at the moment.
+# Rudimentary plugin loading, but serves my purposes at the moment.
 
 _load_plugin() {
     local plugin="$1"
