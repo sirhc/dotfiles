@@ -58,3 +58,8 @@ export PERLDOC_PAGER=less
 export RSYNC_RSH=ssh
 export TZ=US/Pacific
 export UNZIP=-qq
+
+autoload -U compinit && compinit
+
+zstyle ':completion:*' accept-exact-dirs true
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z-_}={A-Za-z_-}' 'r:|=*' 'l:|=* r:|=*'
