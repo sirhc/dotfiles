@@ -95,18 +95,12 @@ if [[ -d ~/.zshrc.d/autoload ]]; then
     unset _autoload_file
 fi
 
-# Rudimentary plugin loading, but serves my purposes at the moment.
+# Rudimentary plugin autoloading (à la Vim), but serves my purposes at the moment.
 
-_load_plugin() {
-    local plugin="$1"
-    if [[ -f ~/.zshrc.d/plugins/${plugin}/${plugin}.plugin.zsh ]]; then
-        source ~/.zshrc.d/plugins/${plugin}/${plugin}.plugin.zsh
-    fi
-}
-
-_load_plugin zsh-autosuggestions
-_load_plugin zsh-syntax-highlighting
-_load_plugin zsh-vim-mode
+for _plugin in ~/.zshrc.d/plugins/*/*.plugin.zsh; do
+    source $_plugin
+done
+unset _plugin
 
 # Lazy-load pyenv. Doing this, because there's a not-insignificant startup
 # cost if we do it for every shell.
