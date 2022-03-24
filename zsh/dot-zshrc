@@ -1,1 +1,20 @@
 # vim: ft=zsh nospell
+
+typeset -aU path manpath fpath
+
+path=(/usr/local/bin /usr/local/sbin)
+path+=(/usr/bin)
+[[ ! -L /bin ]] && path+=(/bin) # /bin and /sbin are symlinks on Fedora
+path+=(/usr/sbin)
+[[ ! -L /sbin ]] && path+=(/sbin)
+[[ -d /opt/homebrew/bin ]] && path=(/opt/homebrew/bin $path)
+
+path=(
+    ~/bin
+    # This is a habit from a time when my home directory was on NFS and shared on
+    # multiple types of systems. It still comes in handy when I want to keep
+    # binaries in `~/bin`, which I tend to sync between systems.
+    ~/bin/${OSTYPE/[0-9]*/}-${CPUTYPE} # e.g., linux-gnu-x86_64, darwin-arm64
+    ~/.local/bin
+    $path
+)
