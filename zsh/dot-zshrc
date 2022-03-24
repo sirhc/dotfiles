@@ -19,6 +19,8 @@ path=(
     $path
 )
 
+[[ -d ~/.zshrc.d/functions ]] && fpath=(~/.zshrc.d/functions $fpath) # in front, to override packaged functions
+
 # See zshparam(1).
 HISTFILE=~/.zsh_history
 HISTORY_IGNORE='^(exit|reset|clear|cd|cd ..|cd..|ls)$'
