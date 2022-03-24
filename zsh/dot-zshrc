@@ -18,3 +18,29 @@ path=(
     ~/.local/bin
     $path
 )
+
+# See zshparam(1).
+HISTFILE=~/.zsh_history
+HISTORY_IGNORE='(ls|[bf]g|exit|reset|clear|cd|cd ..|cd..)'
+HISTSIZE=1000000  # the number of items for the internal history list
+LISTMAX=0         # only prompt if the list will scroll
+REPORTMEMORY=1024 # report on commands exceeding 1 MiB RSS
+REPORTTIME=5      # report on commands exceeding 5 s exec time
+SAVEHIST=1000000  # maximum number of items for the history file
+TIMEFMT="${TIMEFMT} max RSS %M"
+
+# See zshoptions(1).
+setopt EXTENDED_GLOB           # use #, ~, ^ for filename generation
+setopt EXTENDED_HISTORY        # record command start time
+setopt HIST_FCNTL_LOCK         # use fcntl to lock history file
+setopt HIST_IGNORE_ALL_DUPS    # do not add duplicate command to history
+setopt HIST_IGNORE_SPACE       # do not add commands with leading space to history
+setopt HIST_NO_STORE           # do not store the `history` command
+setopt HIST_REDUCE_BLANKS      # remove superfluous blanks
+setopt HIST_SAVE_NO_DUPS       # do not save duplicate commands
+setopt HIST_VERIFY             # confirm history expansion before executing
+setopt INC_APPEND_HISTORY_TIME # append command to history file immediately after execution
+setopt INTERACTIVE_COMMENTS    # allow comments even in interactive shells
+
+unsetopt CASE_GLOB # case-insensitive file globbing
+unsetopt NOMATCH   # leave unmatched patterns alone in arg list
