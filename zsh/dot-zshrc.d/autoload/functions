@@ -161,6 +161,13 @@ t() {
     prove -PPretty "$@"
 }
 
+timeshell() {
+    print "Timing startup of $SHELL..."
+    for i in {0..10}; do
+        time $SHELL -i -c exit
+    done
+}
+
 tmpl() {
     local file
     file="$(mktemp --suffix=.pl --tmpdir XXXXXXXXXX)"
