@@ -102,19 +102,6 @@ for _plugin in ~/.zshrc.d/plugins/*/*.plugin.zsh; do
 done
 unset _plugin
 
-# Lazy-load pyenv. Doing this, because there's a not-insignificant startup
-# cost if we do it for every shell.
-pyenv() {
-    if ! (( $+commands[pyenv] )); then
-        printf '%s: %s: not installed...\n' "$ZSH_NAME" pyenv
-        return 1
-    fi
-
-    eval "$(command pyenv init - --no-rehash zsh)"
-
-    pyenv "$@"
-}
-
 _set_terminal_title() {
     if [[ $LC_TERMINAL == iTerm2 ]]; then
         print -Pn "\e]2;%n@%M\a" # user@host:path (title)
