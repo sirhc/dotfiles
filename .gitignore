@@ -1,0 +1,7 @@
+# Plugins and such that are managed by configuring in `.mrconfig` files.
+
+zsh/dot-zshrc.d/powerlevel10k/
+
+zsh/dot-zshrc.d/plugins/zsh-autosuggestions/
+zsh/dot-zshrc.d/plugins/zsh-syntax-highlighting/
+zsh/dot-zshrc.d/plugins/zsh-vim-mode/
