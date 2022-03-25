@@ -12,6 +12,16 @@ At the time of writing, Stow does not support using `--dotfiles` with
 subdirectories (see <https://github.com/aspiers/stow/issues/33>), so these
 have not been converted to use the `dot-*` names.
 
+## Zsh Plugins
+
+For the plugins that aren't captured in
+[`.mrconfig`](zsh/dot-zshrc.d/plugins/.mrconfig) (i.e., those I copied from
+somewhere), this documents where they came from.
+
+| Plugin | Source |
+| ------ | ------ |
+| [`git`](zsh/dot-zshrc.d/plugins/git/git.plugin.zsh) | <https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/git> |
+
 ## Zsh Functions
 
 This documents where the files in
