@@ -134,6 +134,16 @@ utime() {
     perl -le "print scalar localtime '$1'"
 }
 
+# Re-exec the shell to pick up configuration changes.
+reload() {
+    if [[ -n $(jobs) ]]; then
+        print "${ZSH_NAME}: you have suspended jobs."
+        return 0
+    fi
+
+    exec -l ${SHELL:t}
+}
+
 rlog() {
     command rlog "$@" |& ${=PAGER:-less -r}
 }
