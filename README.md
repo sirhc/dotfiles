@@ -20,7 +20,8 @@ somewhere), this documents where they came from.
 
 | Plugin | Source |
 | ------ | ------ |
-| [`git`](zsh/dot-zshrc.d/plugins/git/git.plugin.zsh) | <https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/git> |
+| [`aws`](zsh/dot-zshrc.d/plugins/aws/aws.plugin.zsh) | <https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/aws/aws.plugin.zsh> |
+| [`git`](zsh/dot-zshrc.d/plugins/git/git.plugin.zsh) | <https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/git/git.plugin.zsh> |
 
 ## Zsh Functions
 
