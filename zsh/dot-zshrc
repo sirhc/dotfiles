@@ -113,3 +113,15 @@ _set_terminal_title() {
 
 autoload -Uz add-zsh-hook
 add-zsh-hook precmd _set_terminal_title
+
+# From <https://github.com/ohmyzsh/ohmyzsh/blob/master/lib/completion.zsh>.
+expand-or-complete-with-dots() {
+  local dots='%F{red}…%f'
+  printf '\e[?7l%s\e[?7h' "${(%)dots}"
+  zle expand-or-complete
+  zle redisplay
+}
+zle -N expand-or-complete-with-dots
+bindkey -M emacs "^I" expand-or-complete-with-dots
+bindkey -M viins "^I" expand-or-complete-with-dots
+bindkey -M vicmd "^I" expand-or-complete-with-dots
