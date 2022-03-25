@@ -22,6 +22,7 @@ somewhere), this documents where they came from.
 | ------ | ------ |
 | [`aws`](zsh/dot-zshrc.d/plugins/aws/aws.plugin.zsh) | <https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/plugins/aws/aws.plugin.zsh> |
 | [`git`](zsh/dot-zshrc.d/plugins/git/git.plugin.zsh) | <https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/plugins/git/git.plugin.zsh> |
+| [`z`](zsh/dot-zshrc.d/plugins/z/z.plugin.zsh) | <https://github.com/rupa/z/raw/master/z.sh> |
 
 ## Zsh Functions
 
