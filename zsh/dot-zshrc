@@ -29,7 +29,7 @@ LISTMAX=0           # only prompt if the list will scroll
 REPORTMEMORY=102400 # report on commands exceeding 100 MiB RSS
 REPORTTIME=5        # report on commands exceeding 5 s exec time
 SAVEHIST=1000000    # maximum number of items for the history file
-TIMEFMT="${TIMEFMT} max rss %M"
+TIMEFMT="${TIMEFMT} %M max rss"
 
 # See zshoptions(1).
 setopt EXTENDED_GLOB           # use #, ~, ^ for filename generation
