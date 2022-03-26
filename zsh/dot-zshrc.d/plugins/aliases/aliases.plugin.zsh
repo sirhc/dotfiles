@@ -77,13 +77,3 @@ alias xsubcpp='cpp -I`perl -MConfig -le '"'"'print "$Config{archlib}/CORE"'"'"'`
 
 # https://twitter.com/dmarti/status/1295365357146791936
 alias 2020date='echo March $((($(date +%s)-$(date +%s --date "2020-02-29"))/86400))\, 2020'
-
-# Terraform aliases.
-alias tf='terraform'
-alias tfa='terraform apply'
-alias tfd='terraform destroy'
-alias tff='terraform fmt'
-alias tfi='terraform init'
-alias tfo='terraform output'
-alias tfp='terraform plan'
-alias tfv='terraform validate'
