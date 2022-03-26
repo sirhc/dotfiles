@@ -85,6 +85,14 @@ bindkey "${terminfo[kcud1]}" down-line-or-beginning-search # ditto ${key[Down]}
 
 bindkey ' ' magic-space
 
+# Only load bracketed-paste-magic if the zsh version is >= 5.1 (unlikely, but
+# safety first).
+if [[ ${ZSH_VERSION:0:3} -ge 5.1 ]]; then
+    set zle_bracketed_paste
+    autoload -Uz bracketed-paste-magic
+    zle -N bracketed-paste bracketed-paste-magic
+fi
+
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
