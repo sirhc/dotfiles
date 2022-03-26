@@ -1,0 +1,79 @@
+#compdef _myrepos mr
+
+function _myrepos_commands() {
+    local -a commands
+    commands=(
+        'checkout:Checks out any repositories that are not already checked out'
+        'co:Checks out any repositories that are not already checked out'
+        'update:Updates each repository from its configured remote repository'
+        'status:Displays a status report for each repository'
+        'clean:Print ignored files, untracked files and other cruft in the working directory'
+        'commit:Commits changes to each repository'
+        'record:Records changes to the local repository'
+        'fetch:Fetches from each repository'"'"'s remote repository'
+        'push:Pushes committed local changes to the remote repository'
+        'diff:Show a diff of uncommitted changes'
+        'log:Show the commit log'
+        'grep:Searches for a pattern in each repository using the grep subcommand'
+        'run:Runs the specified command in each repository'
+        'bootstrap:Retrieve source and use it as a .mrconfig file to checkout repositories'
+        'ls:List the repositories that mr will act on'
+        'register:Register an existing repository'
+        'config:Adds, modifies, removes, or prints a value from a mrconfig file'
+        'online:Advises mr that it is in offline mode'
+        'offline:Advices mr that it is in online mode'
+        'remember:Remember a command, to be run later when mr re-enters online mode'
+        'help:Displays help'
+    )
+    _describe -t commands 'command' commands
+}
+
+function _myrepos_bootstrap() {
+    _arguments \
+        ':src:' \
+        ':directory:_path_files -/' \
+        && return 0
+}
+
+function _myrepos_run() {
+    # TODO: Instead of _default, can we hook into _cmdstring's completion?
+    _arguments \
+        ': :((command))' \
+        ': :_cmdstring' \
+        ': :_default' \
+        && return 0
+}
+
+function _myrepos_bootstrap() {
+    _arguments \
+        ': :_path_files -/' \
+        && return 0
+}
+
+_arguments -C \
+    '(-d --directory)'{-d,--directory}'+[Specifies the topmost directory that mr should work in]:<directory>:_path_files -/' \
+    '(-c --config)'{-c+,--config=}'[Use the specified mrconfig file]:<mrconfig>:_path_files' \
+    '(-f --force)'{-f,--force}'[Force mr to act on repositories that would normally be skipped due to their configuration]' \
+    '--force-env[Force mr to execute even though potentially dangerous environment variables are set]' \
+    '(-v --verbose)'{-v,--verbose}'[Be verbose]' \
+    '(-m --minimal)'{-m,--minimal}'[Minimise output]' \
+    '(-q --quiet)'{-q,--quiet}'[Be quiet]' \
+    '(-k --insecure)'{-k,--insecure}'[Accept untrusted SSL certificates when bootstrapping]' \
+    '(-s --stats)'{-s,--stats}'[Expand the statistics line displayed at the end]' \
+    '(-i --interactive)'{-i,--interactive}'[Interactive mode]' \
+    '(-n --no-recurse)'{-n+,--no-recurse=}'[Limit recursion into repositories]:[number]' \
+    '(-j --jobs)'{-j+,--jobs=}'[Run the specified number of jobs in parallel]:[number]' \
+    '--cache[Saves the command output and return values]' \
+    '--cached[Prints the cached output instead of executing the commands]' \
+    '--uncache[Remove the cached output before executing any commands]' \
+    '--top[Change directory to the top of the repo before running any commands]' \
+    '(-t --trust-all)'{-t,--trust-all}'[Trust all mrconfig files]' \
+    '1:command:_myrepos_commands' \
+    '*::arg:->args' \
+    && ret=0
+
+case "$words[1]" in
+    run) _myrepos_run ;;
+    bootstrap) _myrepos_bootstrap ;;
+    register) _myrepos_register ;;
+esac

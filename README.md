@@ -33,4 +33,5 @@ know where to update them later.
 | Function | Source |
 | -------- | ------ |
 | [`_jira`](zsh/dot-zshrc.d/functions/_jira) | <https://github.com/go-jira/jira> <br /> `jira --completion-script-zsh` |
+| [`_myrepos`](zsh/dot-zshrc.d/functions/_myrepos) | <https://raw.githubusercontent.com/sirhc/myrepos.plugin.zsh/main/_myrepos> |
 | [`_terraform`](zsh/dot-zshrc.d/functions/_terraform) | <https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/plugins/terraform/_terraform> |
