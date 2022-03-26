@@ -40,3 +40,4 @@ know where to update them later.
 | [`_myrepos`](zsh/dot-zshrc.d/functions/_myrepos) | <https://raw.githubusercontent.com/sirhc/myrepos.plugin.zsh/main/_myrepos> |
 | [`_op`](zsh/dot-zshrc.d/functions/_op) | <https://developer.1password.com/docs/cli/reference/commands/completion> <br /> `op completion zsh` |
 | [`_terraform`](zsh/dot-zshrc.d/functions/_terraform) | <https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/plugins/terraform/_terraform> |
+| [`_terragrunt`](zsh/dot-zshrc.d/functions/_terragrunt) | <https://raw.githubusercontent.com/jkavan/terragrunt-oh-my-zsh-plugin/master/_terragrunt> |

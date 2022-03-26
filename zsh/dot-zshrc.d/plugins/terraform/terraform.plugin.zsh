@@ -8,3 +8,7 @@ if (( $+commands[terraform] )); then
     alias tfp='terraform plan'
     alias tfv='terraform validate'
 fi
+
+if (( $+commands[terragrunt] )); then
+    alias tg='terragrunt'
+fi
