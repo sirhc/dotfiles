@@ -3,7 +3,10 @@ SHELL = /bin/zsh
 all:
 
 install:
-	@for f in *(/); do stow -v --dotfiles "$$f"; done
+	@for f in *(/); do stow --target="$$HOME" --verbose=1 --restow "$$f" --dotfiles; done
+
+uninstall:
+	@for f in *(/); do stow --target="$$HOME" --verbose=1 --delete "$$f" --dotfiles; done
 
 update:
 	@for f in **/.mrconfig; do \
