@@ -107,6 +107,24 @@ qbc() {
     echo "scale=${2:-2}; $1" | bc -l
 }
 
+function quote {
+    setopt localoptions nopromptsubst
+
+    local data
+    data="$(command curl -s --connect-timeout 2 http://www.quotationspage.com/random.php |
+        command iconv -c -f ISO-8859-1 -t UTF-8 |
+        command grep -a -m 1 'dt class="quote"')"
+
+    [[ -n $data ]] || return 1
+
+    local quote author
+    quote=$(sed -e 's|</dt>.*||g' -e 's|.*html||g' -e 's|^[^a-zA-Z]*||' -e 's|</a..*$||g' <<< "$data")
+    author=$(sed -e 's|.*/quotes/||g' -e 's|<.*||g' -e 's|.*">||g' <<< "$data")
+
+    print -P "%F{5}${quote}%f"
+    print -P "%F{3}${author}%f"
+}
+
 enmorse() {
     perl -MConvert::Morse=as_morse -E 'say as_morse($_) while <>'
 }
