@@ -16,7 +16,8 @@ have not been converted to use the `dot-*` names.
 
 For the plugins that aren't captured in
 [`.mrconfig`](zsh/dot-zshrc.d/plugins/.mrconfig) (i.e., those I copied from
-somewhere), this documents where they came from.
+somewhere), this documents where they came from. Plugins I wrote or maintain
+myself are not listed here.
 
 | Plugin | Source |
 | ------ | ------ |
