@@ -20,7 +20,7 @@ path=(
 )
 
 [[ -d /opt/homebrew/share/zsh/site-functions ]] && fpath=(/opt/homebrew/share/zsh/site-functions $fpath)
-[[ -d ~/.zshrc.d/functions ]] && fpath=(~/.zshrc.d/functions $fpath) # in front, to override packaged functions
+fpath=(~/.zshrc.d/functions ~/.local/share/zsh/site-functions $fpath) # in front, to override packaged functions
 
 # See zshparam(1).
 HISTFILE=~/.zsh_history
