@@ -131,6 +131,10 @@ if (( $+commands[mcfly] )); then
     eval "$(mcfly init zsh)"
 fi
 
+# If ~/.zsh_history has reached 80% of SAVEHIST, copy it to a snapshot. Let
+# zsh take care of pruning the history.
+#(( $(wc -l ~/.zsh_history | cut -d' ' -f1) > (SAVEHIST * 0.8) )) && cp ~/.zsh_history ~/.zsh_history.$(date +%Y%m%d%H%M%S)
+
 # Finally, any machine-specific configuration that doesn't belong in my version
 # controlled file.
 [[ -e ~/.zshrc.local ]] && source ~/.zshrc.local

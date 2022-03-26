@@ -1,0 +1,98 @@
+#compdef 7z 7za 7zr
+
+local commoncommands commonswitches
+
+commoncommands=(
+  'a[add files to archive]'
+  'b[benchmark]'
+  'd[delete files from archive]'
+  'e[extract files from archive (without using directory names)]'
+  'h[calculate hash values for files]'
+  'i[show information about supported formats]'
+  'l[list contents of archive]'
+  'rn[rename files in archive]'
+  't[test integrity of archive]'
+  'u[update files to archive]'
+  'x[extract files with full paths]'
+)
+
+commonswitches=(
+  '-ai[include archives]'
+  '-ax[exclude archives]'
+  '-ao-[set overwrite mode]:parameters:(( a\:"overwrite all existing files without prompt" s\:"skip extracting of existing files" t\:"auto rename existing file" u\:"auto rename extracting file" ))'
+  '-an[disable archive_name field]'
+  '-bb-[set output log level]:parameters:( 0 1 2 3 )'
+  '-bd[disable progress indicator]'
+    '-bso-[set output stream for output/error/progress line]:parameters:(( 0\:"disable stream" 1\:"redirect to stdout stream" 2\:"redirect to stderr stream" ))'
+    '-bse-[set output stream for output/error/progress line]:parameters:(( 0\:"disable stream" 1\:"redirect to stdout stream" 2\:"redirect to stderr stream" ))'
+    '-bsp-[set output stream for output/error/progress line]:parameters:(( 0\:"disable stream" 1\:"redirect to stdout stream" 2\:"redirect to stderr stream" ))'
+  '-bt[show execution time statistics]'
+  '-i[include filenames]'
+  '-m-[set compression method]:parameters:'
+    '-mnt-[set number of CPU threads]:parameters:'
+  '-o-[set output directory]:directory:_files -/'
+  '-r-[recurse subdirectories]:parameters:(( \:"enable recurse subdirectories" \-\:"disable recurse subdirectories" 0\:"enable recurse subdirectories only for wildcard names" ))'
+  '-sa-[set archive name mode]:parameters:(( a\:"always add archive type extension" e\:"use exact name specified in command" s\:"add extension only if specified name has no extension" ))'
+  '-scc-[set charset for for console input/output]:parameters:( UTF-8 WIN DOS )'
+  '-scs-[set charset for list files]:parameters:( UTF-8 UTF-16LE UTF-16BE WIN DOS )'
+  '-scrc-[set hash function for x, e, h commands]:parameters:( CRC32 CRC64 SHA1 SHA256 )'
+  '-sdel[delete files after compression]'
+  '-seml[send archive by email]'
+  '-sfx[create SFX archive]'
+  '-si[read data from stdin]'
+  '-slp[set Large Pages mode]'
+  '-slt[show technical information for l (List) command]'
+  '-snh[store hard links as links]'
+  '-snl[store symbolic links as links]'
+  '-sni[store NT security information]'
+  '-sns-[store NTFS alternate streams]:parameters:(( \:"enable \"store NTFS alternate streams\" mode" \-\:"disable \"store NTFS alternate streams\" mode" ))'
+  '-so[write data to stdout]'
+  '-spd[disable wildcard matching for file names]'
+  '-spe[eliminate duplication of root folder for extract command]'
+  '-spf[use fully qualified file paths]'
+  '-ssc-[set sensitive case mode]:parameters:(( \:"set case-sensitive mode" \-\:"set case-insensitive mode" ))'
+  '-ssw[compress shared files]'
+  '-stl[set archive timestamp from the most recently modified file]'
+	'-stm-[set CPU thread affinity mask (hexadecimal number)]:parameters:'
+	'-stx-[exclude archive type]:parameters:'
+	'-t-[set type of archive]:parameters:( 7z tar zip xz )'
+	'-u-[update options]:parameters:'
+	'-v-[create volumes]:parameters:' 
+	'-w-[assign Work directory. Empty path means a temporary directory]:directory:_files -/'
+	'-x-[exclude filenames]:parameters:' 
+	'-y[assume Yes on all queries]'
+)
+
+case $service in
+  7z)
+    if (( CURRENT == 2 )); then
+      _values '7z command' \
+      "$commoncommands[@]"
+    else
+      _arguments -S \
+			'-p[set password]' \
+      "$commonswitches[@]" \
+      '*:files:_files'
+    fi
+  ;;
+  7za)
+    if (( CURRENT == 2 )); then
+      _values '7z command' \
+      "$commoncommands[@]"
+    else
+      _arguments -S \
+      "$commonswitches[@]" \
+      '*:files:_files'
+    fi
+  ;;
+  7zr)
+    if (( CURRENT == 2 )); then
+      _values '7z command' \
+      "$commoncommands[@]"
+    else
+      _arguments -S \
+      "$commonswitches[@]" \
+      '*:files:_files'
+    fi
+  ;;
+esac
