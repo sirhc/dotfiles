@@ -23,6 +23,7 @@ myself are not listed here.
 | ------ | ------ |
 | [`aws`](zsh/dot-zshrc.d/plugins/aws/aws.plugin.zsh) | <https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/plugins/aws/aws.plugin.zsh> |
 | [`git`](zsh/dot-zshrc.d/plugins/git/git.plugin.zsh) | <https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/plugins/git/git.plugin.zsh> |
+| [`screen`](zsh/dot-zshrc.d/plugins/screen/screen.plugin.zsh) | <https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/plugins/screen/screen.plugin.zsh> |
 | [`z`](zsh/dot-zshrc.d/plugins/z/z.plugin.zsh) | <https://raw.githubusercontent.com/rupa/z/master/z.sh> |
 
 ## Zsh Functions
