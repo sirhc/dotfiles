@@ -75,3 +75,9 @@ alias xsubcpp='cpp -I`perl -MConfig -le '"'"'print "$Config{archlib}/CORE"'"'"'`
 
 # https://twitter.com/dmarti/status/1295365357146791936
 alias 2020date='echo March $((($(date +%s)-$(date +%s --date "2020-02-29"))/86400))\, 2020'
+
+alias date-locale='date +%c'
+alias isodate='date +%Y-%m-%dT%H:%M:%S%z'
+alias isodate-basic='date -u +%Y%m%dT%H%M%SZ'
+alias isodate-utc='date -u +%Y-%m-%dT%H:%M:%SZ'
+alias unixstamp='date +%s'
