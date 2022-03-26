@@ -141,3 +141,7 @@ bindkey -M vicmd "^I" expand-or-complete-with-dots
 if (( $+commands[mcfly] )); then
     eval "$(mcfly init zsh)"
 fi
+
+# Finally, any machine-specific configuration that doesn't belong in my version
+# controlled file.
+[[ -e ~/.zshrc.local ]] && source ~/.zshrc.local
