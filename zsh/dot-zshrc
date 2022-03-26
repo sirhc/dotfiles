@@ -33,6 +33,7 @@ SAVEHIST=1000000    # maximum number of items for the history file
 TIMEFMT="${TIMEFMT} %Mk max rss"
 
 # See zshoptions(1).
+setopt AUTO_CD                 # change directories without cd
 setopt EXTENDED_GLOB           # use #, ~, ^ for filename generation
 setopt EXTENDED_HISTORY        # record command start time
 setopt HIST_FCNTL_LOCK         # use fcntl to lock history file
