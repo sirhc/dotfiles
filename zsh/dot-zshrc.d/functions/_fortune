@@ -1,0 +1,23 @@
+#compdef fortune
+
+# This works for <https://github.com/shlomif/fortune-mod> at any rate.
+
+_arguments -s -S : \
+    '-a[choose from all lists of maxims, both offensive and not]' \
+    '-c[show the cookie file from which the fortune came]' \
+    '-e[consider all fortune files to be of equal size]' \
+    '-f[print out the list of files which would be searched]' \
+    '-l[long dictums only]' \
+    '-m+[print out all fortunes which match the basic regular expression pattern]:[pattern]' \
+    '-n+[set the longest fortune length (in characters) considered to be short]:[number]' \
+    '-o[choose only from potentially offensive aphorisms]' \
+    '-s[short apothegms only]' \
+    '-i[ignore case for -m patterns]' \
+    '-w[wait before termination]' \
+    '*:fortune file:->file'
+
+case $state in
+    (file)
+        compadd $(fortune -f |& grep '^ ' | awk '{print $2}')
+        ;;
+esac
