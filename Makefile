@@ -28,6 +28,9 @@ update-functions:
 	# https://developer.1password.com/docs/cli/reference/commands/completion
 	which op >& /dev/null && op completion zsh > zsh/dot-zshrc.d/functions/_op || :
 
+	# https://github.com/99designs/aws-vault
+	which aws-vault >& /dev/null && aws-vault --completion-script-zsh > zsh/dot-zshrc.d/functions/_aws-vault || :
+
 update-plugins:
 	curl -Ls https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/plugins/aws/aws.plugin.zsh       > zsh/dot-zshrc.d/plugins/aws/aws.plugin.zsh
 	curl -Ls https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/plugins/git/git.plugin.zsh       > zsh/dot-zshrc.d/plugins/git/git.plugin.zsh
