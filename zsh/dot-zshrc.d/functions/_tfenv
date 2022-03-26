@@ -1,0 +1,63 @@
+#compdef tfenv
+
+local -a _tfenv_cmds opt_args
+_tfenv_cmds=(
+    'install:Install a specific version of Terraform'
+    'use:Switch a version to use'
+    'uninstall:Uninstall a specific version of Terraform'
+    'list:List all installed versions'
+    'list-remote:List all installable versions'
+    'version-name:Print current version'
+    'init:Update environment to use tfenv correctly'
+    'pin:Write the current active version to ./.terraform-version'
+)
+
+__versions_dir() {
+    if [[ -n $TFENV_CONFIG_DIR ]]; then
+        print "${TFENV_CONFIG_DIR}/versions"
+        return
+    fi
+
+    if [[ -n $TFENV_ROOT ]]; then
+        print "${TFENV_ROOT}/versions"
+        return
+    fi
+
+    print "${$(command -v tfenv):h}/../versions"
+}
+
+__install() {
+    compadd latest latest: min-required
+    compadd $(tfenv list-remote)
+}
+
+__uninstall() {
+    compadd latest latest:
+
+    local dir="$(__versions_dir)"
+    [[ -d $dir ]] && compadd "$dir"/../versions/*(/:t)
+}
+
+__use() {
+    compadd latest latest: min-required
+
+    local dir="$(__versions_dir)"
+    [[ -d $dir ]] && compadd "$dir"/../versions/*(/:t)
+}
+
+_arguments '*:: :->command'
+
+if (( CURRENT == 1 )); then
+    _describe -t commands 'tfenv command' _tfenv_cmds
+    return
+fi
+
+local -a _command_args
+case "$words[1]" in
+    install)
+        __install ;;
+    uninstall)
+        __uninstall ;;
+    use)
+        __use ;;
+esac

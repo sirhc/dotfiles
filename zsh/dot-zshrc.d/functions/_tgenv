@@ -1,0 +1,55 @@
+#compdef tgenv
+
+local -a _tgenv_cmds opt_args
+_tgenv_cmds=(
+    'install:Install a specific version of Terragrunt'
+    'use:Switch a version to use'
+    'uninstall:Uninstall a specific version of Terragrunt'
+    'list:List all installed versions'
+    'list-remote:List all installable versions'
+)
+
+__versions_dir() {
+    if [[ -n $TGENV_ROOT ]]; then
+        print "${TGENV_ROOT}/versions"
+        return
+    fi
+
+    print "${$(command -v tgenv):h}/../versions"
+}
+
+__install() {
+    compadd latest latest:
+    compadd $(tgenv list-remote)
+}
+
+__uninstall() {
+    compadd latest latest:
+
+    local dir="$(__versions_dir)"
+    [[ -d $dir ]] && compadd "$dir"/../versions/*(/:t)
+}
+
+__use() {
+    compadd latest latest:
+
+    local dir="$(__versions_dir)"
+    [[ -d $dir ]] && compadd "$dir"/../versions/*(/:t)
+}
+
+_arguments '*:: :->command'
+
+if (( CURRENT == 1 )); then
+    _describe -t commands 'tgenv command' _tgenv_cmds
+    return
+fi
+
+local -a _command_args
+case "$words[1]" in
+    install)
+        __install ;;
+    uninstall)
+        __uninstall ;;
+    use)
+        __use ;;
+esac
