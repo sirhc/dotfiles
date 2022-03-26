@@ -1,5 +1,3 @@
-# vim: ft=zsh nospell
-
 # Create a 1280x720 color plasma image. Different each time.
 bg:plasma() {
     convert -size 1280x720 plasma:green-blue background.png

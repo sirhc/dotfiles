@@ -1,5 +1,3 @@
-# vim: ft=zsh nospell
-
 if (( $+commands[dnf] )); then
     alias dnfgl='dnf grouplist'      # list package groups
     alias dnfl='dnf list'            # list packages

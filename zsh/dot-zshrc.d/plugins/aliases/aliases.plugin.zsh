@@ -1,5 +1,3 @@
-# vim: ft=zsh nospell
-
 alias bofh='ncat bofh.jeffballard.us 666 </dev/null | sed -ne "s/[^:]*: //p"'
 alias curlk='curl -k'
 alias ed='ed -p:'
