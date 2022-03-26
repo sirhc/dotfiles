@@ -34,6 +34,7 @@ know where to update them later.
 | Function | Source |
 | -------- | ------ |
 | [`_7z`](zsh/dot-zshrc.d/functions/_7z) | <https://raw.githubusercontent.com/AlexaraWu/zsh-completions/master/src/_7z> |
+| [`_fd`](zsh/dot-zshrc.d/functions/_fd) | <https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/plugins/fd/_fd> |
 | [`_jira`](zsh/dot-zshrc.d/functions/_jira) | <https://github.com/go-jira/jira> <br /> `jira --completion-script-zsh` |
 | [`_myrepos`](zsh/dot-zshrc.d/functions/_myrepos) | <https://raw.githubusercontent.com/sirhc/myrepos.plugin.zsh/main/_myrepos> |
 | [`_op`](zsh/dot-zshrc.d/functions/_op) | <https://developer.1password.com/docs/cli/reference/commands/completion> <br /> `op completion zsh` |
