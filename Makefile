@@ -17,7 +17,6 @@ update:
 
 update-functions:
 	curl -Ls https://raw.githubusercontent.com/AlexaraWu/zsh-completions/master/src/_7z              > zsh/dot-zshrc.d/functions/_7z
-	curl -Ls https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/plugins/fd/_fd                 > zsh/dot-zshrc.d/functions/_fd
 	curl -Ls https://raw.githubusercontent.com/sirhc/myrepos.plugin.zsh/main/_myrepos                > zsh/dot-zshrc.d/functions/_myrepos
 	curl -Ls https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/plugins/terraform/_terraform   > zsh/dot-zshrc.d/functions/_terraform
 	curl -Ls https://raw.githubusercontent.com/jkavan/terragrunt-oh-my-zsh-plugin/master/_terragrunt > zsh/dot-zshrc.d/functions/_terragrunt
