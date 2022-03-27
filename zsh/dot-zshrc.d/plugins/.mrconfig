@@ -1,7 +1,4 @@
 
-[wd]
-checkout = git clone 'https://github.com/mfaerevaag/wd.git' 'wd'
-
 [zsh-autosuggestions]
 checkout = git clone 'https://github.com/zsh-users/zsh-autosuggestions.git' 'zsh-autosuggestions'
 

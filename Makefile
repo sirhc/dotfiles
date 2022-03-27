@@ -11,7 +11,7 @@ uninstall:
 update:
 	@for f in **/.mrconfig; do \
 		printf '\033[1;97mRunning update on %s...\033[m\n' "$$f"; \
-		(cd "$${f:h}" && mr -j update); \
+		(cd "$${f:h}" && mr update); \
 		printf '\n'; \
 	done
 
