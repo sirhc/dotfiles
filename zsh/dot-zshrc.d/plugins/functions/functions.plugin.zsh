@@ -1,13 +1,4 @@
-function md5sum sha1sum sha224sum sha256sum sha384sum sha512sum {
-    command $0 "$@" |& sed -e 's/\(^.*: \)\(OK\)$/\1\x1b[1;32m\2\x1b[0m/' -e 's/\(^.*: FAILED\)$/\x1b[1;37;41m\1\x1b[0m/'
-}
-
-# Create a 1280x720 color plasma image. Different each time.
-bg:plasma() {
-    convert -size 1280x720 plasma:green-blue background.png
-}
-
-cd() {
+function cd {
     if [[ -z $2 ]]; then
         if [[ -f $1 ]]; then
             builtin cd $1:h && ls
@@ -19,25 +10,38 @@ cd() {
     fi
 }
 
-diffdirs() {
+function rlog {
+    command rlog "$@" |& ${=PAGER:-less -r}
+}
+
+function md5sum sha1sum sha224sum sha256sum sha384sum sha512sum {
+    command $0 "$@" |& sed -e 's/\(^.*: \)\(OK\)$/\1\x1b[1;32m\2\x1b[0m/' -e 's/\(^.*: FAILED\)$/\x1b[1;37;41m\1\x1b[0m/'
+}
+
+# Create a 1280x720 color plasma image. Different each time.
+bg:plasma() {
+    convert -size 1280x720 plasma:green-blue background.png
+}
+
+function diffdirs {
     diff -rq -x .git "$1" "$2" | sort
 }
 
-envappend() {
+function envappend {
     eval "$(envmgr -a "$@")"
 }
 
-envprefix() {
+function envprefix {
     eval "$(envmgr -p "$@")"
 }
 
-envrm() {
+function envrm {
     eval "$(envmgr -r "$@")"
 }
 
 # > diff -ruNq ...
 # Files file1 and file2 differ
-Files() {
+function Files {
     vimdiff "$1" "$3"
 }
 
@@ -50,7 +54,7 @@ function flip {
 }
 
 # https://sysadvent.blogspot.com/2017/12/day-18-awesome-command-line-fuzzy.html
-fshow() {
+function fshow {
     # TODO: Check for git repo
     # TODO: Make sure fzf is installed
     git log --graph --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr" "$@" \
@@ -64,26 +68,25 @@ FZF-EOF"
 }
 
 # https://twitter.com/climagic/status/416618976496463872
-funfact() {
+function funfact {
     elinks -dump randomfunfacts.com | sed -n -e '/^| /p' | sed -e 's/^| //' -e 's/ *|$//'
 }
 
-git-top() {
+function git-top {
     builtin cd "$(git root)" && pwd && ls
 }
 
 # http://blogs.perl.org/users/aristotle/2015/12/locallib-ez.html
-perl-lib() {
+function perl-lib {
     eval "$(perl -M'local::lib @ARGV' - "$@" 0<&-)"
 }
 
-myip() {
-    # TODO: This only does ipv6?
-    curl -s http://ifconfig.io/ip
-    printf '\n'
+function myip {
+    # TODO: This only does IPv6?
+    print "$(curl -s http://ifconfig.io/ip)"
 }
 
-qbc() {
+function qbc {
     echo "scale=${2:-2}; $1" | bc -l
 }
 
@@ -105,43 +108,30 @@ function quote {
     print -P "%F{3}${author}%f"
 }
 
-enmorse() {
+function enmorse {
     perl -MConvert::Morse=as_morse -E 'say as_morse($_) while <>'
 }
 
-demorse() {
+function demorse {
     perl -MConvert::Morse=as_ascii -E 'say as_ascii($_) while <>'
 }
 
-setenv() {
+function setenv {
     export "$1"="$2"
 }
 
-slang() {
+function slang {
     elinks -no-references -no-numbering -dump "http://www.urbandictionary.com/define.php?term=$1" | sed -n '/1\. /,/2\./p'
 }
 
-splitpath() {
-    # TODO: Is there a zsh way to do this?
-    eval "echo \$$1" | tr ':' '\n'
-}
-
-utime() {
-    perl -le "print scalar localtime '$1'"
-}
-
 # Re-exec the shell to pick up configuration changes.
-reload() {
+function reload {
     if [[ -n $(jobs) ]]; then
         print "${ZSH_NAME}: you have suspended jobs."
         return 0
     fi
 
     exec -l ${SHELL:t}
-}
-
-rlog() {
-    command rlog "$@" |& ${=PAGER:-less -r}
 }
 
 # E.g., `roll 2d6`
@@ -169,27 +159,22 @@ function roll {
 
 # Draw a horizontal rule in the terminal.
 # https://twitter.com/climagic/status/512254743985799168
-separator() {
+function separator {
     printf '%*s\n' "$(tput cols)" '' | tr ' ' -
 }
 
-stardate() {
+function stardate {
     perl -MAcme::Stardate -E 'say stardate()'
 }
 
-# http://www.perladvent.org/2012/2012-12-20.html
-t() {
-    prove -PPretty "$@"
-}
-
-timeshell() {
+function timeshell {
     print "Timing startup of $SHELL..."
     for i in {0..10}; do
         time $SHELL -i -c exit
     done
 }
 
-tmpl() {
+function tmpl {
     local file
     file="$(mktemp --suffix=.pl --tmpdir XXXXXXXXXX)"
     {
@@ -200,14 +185,14 @@ tmpl() {
     "${EDITOR:-vi}" "$file"
 }
 
-# take functions (from oh-my-zsh)
+# Some handy `take` functions, <https://github.com/ohmyzsh/ohmyzsh/blob/master/lib/functions.zsh>.
 
 # mkcd is equivalent to takedir
-function mkcd takedir() {
+function mkcd takedir {
     mkdir -p $@ && cd ${@:$#}
 }
 
-function takeurl() {
+function takeurl {
     local data thedir
     data="$(mktemp)"
     curl -L "$1" > "$data"
@@ -217,12 +202,12 @@ function takeurl() {
     cd "$thedir"
 }
 
-function takegit() {
+function takegit {
     git clone "$1"
     cd "$(basename ${1%%.git})"
 }
 
-function take() {
+function take {
     if [[ $1 =~ ^(https?|ftp).*\.tar\.(gz|bz2|xz)$ ]]; then
         takeurl "$1"
     elif [[ $1 =~ ^([A-Za-z0-9]\+@|https?|git|ssh|ftps?|rsync).*\.git/?$ ]]; then
@@ -232,23 +217,21 @@ function take() {
     fi
 }
 
-# take functions
-
-topcount() {
+function topcount {
     sort | uniq -c | sort -rn | head -n "${1:-10}"
 }
 
-vimless() {
+function vimless {
     vim -u \$VIMRUNTIME/macros/less.vim "${@:--}"
 }
 
-weather() {
+function weather {
     curl -s "http://wttr.in/${*// /+}"
 }
 
 # Silly command based on the Infocom wait/z instruction. This has since been
-# replaced by <~/.oh-my-zsh/plugins/z>.
-# z() {
+# replaced by the [z plugin](https://github.com/rupa/z.git).
+# function z {
 #     printf 'Time passes.\n\n'
 # }
 
@@ -280,10 +263,9 @@ weather() {
 #     awk $SP "{ a[$key]++ } END { for (i in a) { printf(\"%d %s\\n\", a[i], i) } }"
 # }
 
-# Functional stuff.
-# http://yannesposito.com/Scratch/en/blog/Higher-order-function-in-zsh/index.html
+# Functional stuff <http://yannesposito.com/Scratch/en/blog/Higher-order-function-in-zsh/index.html>.
 
-map() {
+function map {
     local fn="${1:?usage: map fn a b c d...}" i
     shift
 
@@ -292,27 +274,26 @@ map() {
     done
 }
 
-# Usage: x count command
-#x() {
-#    local count="$1"
-#    local i
-#    shift
-#
-#    for i in $(seq "$count"); do
-#        "$@"
-#    done
-#}
+# Usage: x <count> <command>
+function x {
+    local _count="${1:?usage: x <count> <command>}" _i
+    shift
+
+    for _i in {1..$_count}; do
+        "$@"
+    done
+}
 
 # https://twitter.com/climagic/status/367676137310150656
 # Usage: blue "I'm blue"
-blue() {
+function blue {
     tput setaf 4
     echo "$@"
     tput sgr0
 }
 
 # "List" grep, similar to Perl's grep builtin.
-lgrep () {
+function lgrep {
     local r="$1"; shift
     local i
 
