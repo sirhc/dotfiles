@@ -1,3 +1,7 @@
+function md5sum sha1sum sha224sum sha256sum sha384sum sha512sum {
+    command $0 "$@" |& sed -e 's/\(^.*: \)\(OK\)$/\1\x1b[1;32m\2\x1b[0m/' -e 's/\(^.*: FAILED\)$/\x1b[1;37;41m\1\x1b[0m/'
+}
+
 # Create a 1280x720 color plasma image. Different each time.
 bg:plasma() {
     convert -size 1280x720 plasma:green-blue background.png
@@ -15,23 +19,8 @@ cd() {
     fi
 }
 
-compreload() {
-    local fn=$1
-
-    if [[ ! $fn =~ '^_' ]]; then
-        fn="_${fn}"
-    fi
-
-    unfunction $fn
-    autoload -U $fn
-}
-
 diffdirs() {
     diff -rq -x .git "$1" "$2" | sort
-}
-
-dudirs() {
-    find . -type d -mindepth 1 -maxdepth 1 -print0 | xargs -0 du -hs | sort -hr
 }
 
 envappend() {
@@ -52,16 +41,18 @@ Files() {
     vimdiff "$1" "$3"
 }
 
-flip() {
-    if [[ $(roll 1d2) = 1 ]]; then
-        echo heads
+function flip {
+    if (( $(roll 1d2) == 1 )); then
+        print heads
     else
-        echo tails
+        print tails
     fi
 }
 
 # https://sysadvent.blogspot.com/2017/12/day-18-awesome-command-line-fuzzy.html
 fshow() {
+    # TODO: Check for git repo
+    # TODO: Make sure fzf is installed
     git log --graph --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr" "$@" \
         | fzf --ansi \
               --preview "echo {} | grep -o '[a-f0-9]\{7\}' | head -1 | xargs -I % sh -c 'git show --color=always %'" \
@@ -86,21 +77,10 @@ perl-lib() {
     eval "$(perl -M'local::lib @ARGV' - "$@" 0<&-)"
 }
 
-#mkcd() {
-#    mkdir "$1" && builtin cd "$1" && pwd
-#}
-
 myip() {
+    # TODO: This only does ipv6?
     curl -s http://ifconfig.io/ip
     printf '\n'
-}
-
-proveall() {
-    if [[ -d blib ]]; then
-        prove -j9 --state=slow,save -br t
-    else
-        prove -j9 --state=slow,save -lr t
-    fi
 }
 
 qbc() {
@@ -142,7 +122,7 @@ slang() {
 }
 
 splitpath() {
-    # TODO: Is there a Zsh way to do this?
+    # TODO: Is there a zsh way to do this?
     eval "echo \$$1" | tr ':' '\n'
 }
 
@@ -164,12 +144,27 @@ rlog() {
     command rlog "$@" |& ${=PAGER:-less -r}
 }
 
-roll() {
-    local i
+# E.g., `roll 2d6`
+function roll {
+    local _roll="${1:?missing die spec}"
 
-    for i in "$@"; do
-        perl -MGames::Dice=roll -E "say roll '$i'"
+    if [[ $_roll =~ '^d[0-9]+$' ]]; then
+        _roll="1$_roll"
+    fi
+
+    if [[ ! $_roll =~ '^[0-9]+d[0-9]+$' ]]; then
+        print "$0: invalid die spec: $_roll"
+    fi
+
+    local _count="${_roll%d*}"
+    local _sides="${_roll#*d}"
+
+    _roll=0
+    while (( _count > 0 )); do
+        _roll=$(( _roll + (RANDOM % _sides + 1) ))
+        _count=$(( _count - 1 ))
     done
+    print $_roll
 }
 
 # Draw a horizontal rule in the terminal.
@@ -202,7 +197,7 @@ tmpl() {
         printf 'use strict;\n'
         printf 'use warnings;\n'
     } >"$file"
-    "${EDITOR:-vim}" "$file"
+    "${EDITOR:-vi}" "$file"
 }
 
 # take functions (from oh-my-zsh)
@@ -288,10 +283,8 @@ weather() {
 # Functional stuff.
 # http://yannesposito.com/Scratch/en/blog/Higher-order-function-in-zsh/index.html
 
-# Usage: map fn a b c d
 map() {
-    local fn="$1"
-    local i=
+    local fn="${1:?usage: map fn a b c d...}" i
     shift
 
     for i in "$@"; do

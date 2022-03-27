@@ -125,7 +125,7 @@ _set_terminal_title() {
 autoload -Uz add-zsh-hook
 add-zsh-hook precmd _set_terminal_title
 
-# From <https://github.com/ohmyzsh/ohmyzsh/blob/master/lib/completion.zsh>.
+# https://github.com/ohmyzsh/ohmyzsh/blob/master/lib/completion.zsh
 expand-or-complete-with-dots() {
   local dots='%F{red}…%f'
   printf '\e[?7l%s\e[?7h' "${(%)dots}"
@@ -137,10 +137,9 @@ bindkey -M emacs "^I" expand-or-complete-with-dots
 bindkey -M viins "^I" expand-or-complete-with-dots
 bindkey -M vicmd "^I" expand-or-complete-with-dots
 
-# https://github.com/cantino/mcfly
-if (( $+commands[mcfly] )); then
-    eval "$(mcfly init zsh)"
-fi
+(( $+commands[open] )) || alias open=xdg-open
+(( $+commands[mcfly] )) && eval "$(mcfly init zsh)"    # https://github.com/cantino/mcfly
+(( $+commands[thefuck] )) && eval "$(thefuck --alias)" # warning, this is slow
 
 # If ~/.zsh_history has reached 80% of SAVEHIST, copy it to a snapshot. Let
 # zsh take care of pruning the history.
