@@ -1,4 +1,6 @@
-SHELL = /bin/zsh
+SHELL         = /bin/zsh
+FUNCTIONS_DIR = zsh/dot-zshrc.d/functions
+PLUGINS_DIR   = zsh/dot-zshrc.d/plugins
 
 all:
 
@@ -16,13 +18,13 @@ update:
 	done
 
 update-functions:
-	curl -Ls https://raw.githubusercontent.com/AlexaraWu/zsh-completions/master/src/_7z              > zsh/dot-zshrc.d/functions/_7z
-	curl -Ls https://raw.githubusercontent.com/sirhc/myrepos.plugin.zsh/main/_myrepos                > zsh/dot-zshrc.d/functions/_myrepos
-	curl -Ls https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/plugins/terraform/_terraform   > zsh/dot-zshrc.d/functions/_terraform
-	curl -Ls https://raw.githubusercontent.com/jkavan/terragrunt-oh-my-zsh-plugin/master/_terragrunt > zsh/dot-zshrc.d/functions/_terragrunt
+	curl -Ls https://raw.githubusercontent.com/AlexaraWu/zsh-completions/master/src/_7z              > $(FUNCTIONS_DIR)/_7z
+	curl -Ls https://raw.githubusercontent.com/sirhc/myrepos.plugin.zsh/main/_myrepos                > $(FUNCTIONS_DIR)/_myrepos
+	curl -Ls https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/plugins/terraform/_terraform   > $(FUNCTIONS_DIR)/_terraform
+	curl -Ls https://raw.githubusercontent.com/jkavan/terragrunt-oh-my-zsh-plugin/master/_terragrunt > $(FUNCTIONS_DIR)/_terragrunt
 
 update-plugins:
-	curl -Ls https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/plugins/aws/aws.plugin.zsh       > zsh/dot-zshrc.d/plugins/aws/aws.plugin.zsh
-	curl -Ls https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/plugins/git/git.plugin.zsh       > zsh/dot-zshrc.d/plugins/git/git.plugin.zsh
-	curl -Ls https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/plugins/screen/screen.plugin.zsh > zsh/dot-zshrc.d/plugins/screen/screen.plugin.zsh
-	curl -Ls https://raw.githubusercontent.com/rupa/z/master/z.sh                                      > zsh/dot-zshrc.d/plugins/z/z.plugin.zsh
+	curl -Ls https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/plugins/aws/aws.plugin.zsh       > $(PLUGINS_DIR)/aws/aws.plugin.zsh
+	curl -Ls https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/plugins/git/git.plugin.zsh       > $(PLUGINS_DIR)/git/git.plugin.zsh
+	curl -Ls https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/plugins/screen/screen.plugin.zsh > $(PLUGINS_DIR)/screen/screen.plugin.zsh
+	curl -Ls https://raw.githubusercontent.com/rupa/z/master/z.sh                                      > $(PLUGINS_DIR)/z/z.plugin.zsh
