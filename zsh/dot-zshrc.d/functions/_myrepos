@@ -1,4 +1,4 @@
-#compdef _myrepos mr
+#compdef mr
 
 function _myrepos_commands() {
     local -a commands
@@ -45,6 +45,12 @@ function _myrepos_run() {
 }
 
 function _myrepos_bootstrap() {
+    _arguments \
+        ': :_path_files -/' \
+        && return 0
+}
+
+function _myrepos_register() {
     _arguments \
         ': :_path_files -/' \
         && return 0
