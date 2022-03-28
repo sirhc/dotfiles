@@ -8,3 +8,11 @@ if (( $+commands[pyenv] )); then
         pyenv "$@"
     }
 fi
+
+if (( $+commands[jenv] )); then
+    jenv() {
+        unfunction jenv
+        eval "$(jenv init -)"
+        jenv "$@"
+    }
+fi
