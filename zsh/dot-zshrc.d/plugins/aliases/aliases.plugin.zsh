@@ -9,6 +9,7 @@ alias lh='ls -lh'
 alias now='date +%H:%M:%S'
 alias pbcopy='xclip -selection clipboard'
 alias pbpaste='xclip -selection clipboard -o'
+alias tiga='tig --all'
 alias today='date +%Y-%m-%d'
 
 alias p5addlib='eval "$( envmgr -p PERL5LIB lib )"'
