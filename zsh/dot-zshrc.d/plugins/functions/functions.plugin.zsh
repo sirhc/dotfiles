@@ -19,8 +19,9 @@ function md5sum sha1sum sha224sum sha256sum sha384sum sha512sum {
 }
 
 # Create a 1280x720 color plasma image. Different each time.
+# TODO: Add option for size.
 bg:plasma() {
-    convert -size 1280x720 plasma:green-blue background.png
+    convert -size 1280x720 plasma:"${1:-green}-${2:-blue}" PNG:- | display -
 }
 
 function diffdirs {
