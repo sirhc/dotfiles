@@ -1,3 +1,6 @@
+# Keep the functions that override existing commands near the top, so I don't
+# lose track of them.
+
 function cd {
     if [[ -z $2 ]]; then
         if [[ -f $1 ]]; then
@@ -188,7 +191,6 @@ function tmpl {
 
 # Some handy `take` functions, <https://github.com/ohmyzsh/ohmyzsh/blob/master/lib/functions.zsh>.
 
-# mkcd is equivalent to takedir
 function mkcd takedir {
     mkdir -p $@ && cd ${@:$#}
 }
