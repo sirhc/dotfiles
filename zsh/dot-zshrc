@@ -137,7 +137,6 @@ bindkey -M emacs "^I" expand-or-complete-with-dots
 bindkey -M viins "^I" expand-or-complete-with-dots
 bindkey -M vicmd "^I" expand-or-complete-with-dots
 
-(( $+commands[open] )) || alias open=xdg-open
 (( $+commands[mcfly] )) && eval "$(mcfly init zsh)"    # https://github.com/cantino/mcfly
 (( $+commands[thefuck] )) && eval "$(thefuck --alias)" # warning, this is slow
 

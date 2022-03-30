@@ -12,6 +12,8 @@ alias pbpaste='xclip -selection clipboard -o'
 alias tiga='tig --all'
 alias today='date +%Y-%m-%d'
 
+(( $+commands[open] )) || alias open=xdg-open
+
 alias p5addlib='eval "$( envmgr -p PERL5LIB lib )"'
 alias p5clearenv='unset "$( env | grep ^PERL | cut -d= -f1 )"'
 alias p5rmlib='eval "$( envmgr -r PERL5LIB lib )"'
