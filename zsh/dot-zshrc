@@ -9,6 +9,12 @@ path=($path /usr/sbin)
 [[ ! -L /sbin ]] && path=($path /sbin)
 [[ -d /opt/homebrew/bin ]] && path=(/opt/homebrew/bin $path)
 
+for _env in ~/.*env(/); do
+    [[ -d $_env/bin ]] && path=($_env/bin $path)
+    [[ -d $_env/shims ]] && path=($_env/shims $path)
+done
+unset _env
+
 path=(
     ~/bin
     # This is a habit from a time when my home directory was on NFS and shared on
@@ -63,12 +69,6 @@ export PERLDOC_PAGER=less
 export RSYNC_RSH=ssh
 export TZ=US/Pacific
 export UNZIP=-qq
-
-for _env in ~/.*env(/); do
-    [[ -d $_env/bin ]] && path=($_env/bin $path)
-    [[ -d $_env/shims ]] && path=($_env/shims $path)
-done
-unset _env
 
 autoload -U compinit && compinit
 
