@@ -7,6 +7,7 @@ path=($path /usr/bin)
 [[ ! -L /bin ]] && path=($path /bin) # /bin and /sbin are symlinks on Fedora
 path=($path /usr/sbin)
 [[ ! -L /sbin ]] && path=($path /sbin)
+[[ -d /opt/homebrew/sbin ]] && path=(/opt/homebrew/sbin $path)
 [[ -d /opt/homebrew/bin ]] && path=(/opt/homebrew/bin $path)
 
 for _env in ~/.*env(/); do
