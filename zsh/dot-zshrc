@@ -135,11 +135,14 @@ autoload -U down-line-or-beginning-search
 zle -N up-line-or-beginning-search
 zle -N down-line-or-beginning-search
 
-bindkey '^[[A' up-line-or-beginning-search   # up
-bindkey '^[[B' down-line-or-beginning-search # down
+bindkey '^[[A' up-line-or-beginning-search   # up arrow
+bindkey '^[[B' down-line-or-beginning-search # down arrow
 
-bindkey -M vicmd 'k' up-line-or-beginning-search   # up
-bindkey -M vicmd 'j' down-line-or-beginning-search # down
+bindkey -M vicmd 'k' up-line-or-beginning-search
+bindkey -M vicmd 'j' down-line-or-beginning-search
+
+bindkey -M viins '^K' up-line-or-beginning-search
+bindkey -M viins '^J' down-line-or-beginning-search
 
 bindkey ' ' magic-space
 
