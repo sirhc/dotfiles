@@ -138,6 +138,9 @@ zle -N down-line-or-beginning-search
 bindkey '^[[A' up-line-or-beginning-search   # up
 bindkey '^[[B' down-line-or-beginning-search # down
 
+bindkey -M vicmd 'k' up-line-or-beginning-search   # up
+bindkey -M vicmd 'j' down-line-or-beginning-search # down
+
 bindkey ' ' magic-space
 
 bindkey '^ ' autosuggest-accept # https://github.com/zsh-users/zsh-autosuggestions#key-bindings
