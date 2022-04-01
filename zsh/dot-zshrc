@@ -140,6 +140,8 @@ bindkey '^[[B' down-line-or-beginning-search # down
 
 bindkey ' ' magic-space
 
+bindkey '^ ' autosuggest-accept # https://github.com/zsh-users/zsh-autosuggestions#key-bindings
+
 (( $+commands[mcfly] )) && eval "$(mcfly init zsh)"    # https://github.com/cantino/mcfly
 (( $+commands[thefuck] )) && eval "$(thefuck --alias)" # warning, this is slow
 
