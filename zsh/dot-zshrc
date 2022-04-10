@@ -105,17 +105,35 @@ for _plugin in ~/.zshrc.d/plugins/*/*.plugin.zsh; do
 done
 unset _plugin
 
+# _set_terminal_title <window-title> [tab-title]
 _set_terminal_title() {
-    if [[ $LC_TERMINAL == iTerm2 ]]; then
-        print -Pn "\e]2;%n@%M\a" # user@host:path (title)
-        print -Pn "\e]1;%~\a"    # user@host:path (tab)
-    else
-        print -Pn "\e]2;%n@%M:%~\a" # user@host:path
+    : ${1=%n@%M:%~} # user@host:path
+    : ${2=1}
+
+    if [[ $TERM_PROGRAM == iTerm.app ]]; then
+        print -Pn "\e]2;%n@%M\a" # user@host (window)
+        print -Pn "\e]1;%~\a"    # current working directory (tab)
+        return
     fi
+
+    case "$TERM" in
+        xterm*)
+            print -Pn "\e]2;${1:q}\a" # set window name (this is the only one that works in gnome-terminal)
+            print -Pn "\e]1;${2:q}\a" # set tab name
+            ;;
+        screen*|tmux*)
+            print -Pn "\ek${1:q}\e\\" # set screen hardstatus
+            ;;
+    esac
+}
+
+_set_terminal_title_cmd() {
+    _set_terminal_title "%100>...>${2:gs/%/%%}%<< (%n@%M:%~)"
 }
 
 autoload -Uz add-zsh-hook
 add-zsh-hook precmd _set_terminal_title
+add-zsh-hook preexec _set_terminal_title_cmd
 
 # https://github.com/ohmyzsh/ohmyzsh/blob/master/lib/completion.zsh
 expand-or-complete-with-dots() {
