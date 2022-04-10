@@ -176,3 +176,9 @@ bindkey '^ ' autosuggest-accept # https://github.com/zsh-users/zsh-autosuggestio
 # Finally, any machine-specific configuration that doesn't belong in my version
 # controlled file.
 [[ -e ~/.zshrc.local ]] && source ~/.zshrc.local
+
+# If the last command in this file fails (e.g., if ~/.zshrc.local doesn't
+# exit), it will cause the p10k prompt to go red. This is just to make it
+# happy when a new shell is launched. Alternatively, I could use `if ...;
+# then`, but I like the one-liner.
+true
