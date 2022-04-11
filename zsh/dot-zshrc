@@ -108,11 +108,11 @@ unset _plugin
 # _set_terminal_title <window-title> [tab-title]
 _set_terminal_title() {
     : ${1=%n@%M:%~} # user@host:path
-    : ${2=1}
+    : ${2=$1}
 
     if [[ $TERM_PROGRAM == iTerm.app ]]; then
-        print -Pn "\e]2;%n@%M\a" # user@host (window)
-        print -Pn "\e]1;%~\a"    # current working directory (tab)
+        print -Pn "\e]2;${1:q}\a" # set window name
+        print -Pn "\e]1;${2:q}\a" # set tab name
         return
     fi
 
