@@ -108,7 +108,7 @@ unset _plugin
 # _set_terminal_title <window-title> [tab-title]
 _set_terminal_title() {
     : ${1=%n@%M:%~} # user@host:path
-    : ${2=$1}
+    : ${2=%n@%M:%~} # user@host:path
 
     if [[ $TERM_PROGRAM == iTerm.app ]]; then
         print -Pn "\e]2;${1:q}\a" # set window name
@@ -128,7 +128,7 @@ _set_terminal_title() {
 }
 
 _set_terminal_title_cmd() {
-    _set_terminal_title "%100>...>${2:gs/%/%%}%<< (%n@%M:%~)"
+    _set_terminal_title "%100>...>${2:gs/%/%%}%<< (%~)"
 }
 
 autoload -Uz add-zsh-hook
