@@ -64,3 +64,6 @@ alias isodate='date +%Y-%m-%dT%H:%M:%S%z'
 alias isodate-basic='date -u +%Y%m%dT%H%M%SZ'
 alias isodate-utc='date -u +%Y-%m-%dT%H:%M:%SZ'
 alias unixstamp='date +%s'
+
+# https://docs.commonfate.io/granted-cli/shell-alias/
+(( $+commands[assume] )) && alias assume='source assume'
