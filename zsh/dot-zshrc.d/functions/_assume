@@ -1,0 +1,35 @@
+#compdef assume
+
+local ret=1
+local url='https://raw.githubusercontent.com/boto/botocore/develop/botocore/data/endpoints.json'
+
+_arguments -C -A '-*' : \
+    '(-c --console)'{-c,--console}'[Open a web console to the role]' \
+    '(--unset --un)'{--unset,--un}'[Unset all environment variables configured by Assume]' \
+    '(-u --url)'{-u,--url}'[Get an active console session url]' \
+    '(-s --service)'{-s+,--service=}'[Specify a service to open the console into]:service:->service' \
+    '(-r --region)'{-r+,--region=}'[Specify a region to open the console into]:region:->region' \
+    '(--pt --pass-through)'{--pt=,--pass-through=}'[Pass args to proxy assumer]:args' \
+    '(--ar --active-role)'{--ar,--active-role}'[Open console using active role]' \
+    --verbose'[Log debug messages]' \
+    --auto-configure-shell'[Configure shell alias without prompts]' \
+    --exec='[assume a profile then execute this command]:command:_command_names -e' \
+    '(-d --duration)'{-d+,--duration=}'[Set session duration for your assumed role]:duration' \
+    '(-h --help)'{-h,--help}'[show help]' \
+    '(-v --version)'{-v,--version}'[print the version]' \
+    '1: :->profile' && ret=0
+
+case $state in
+    (service)
+        compadd "$@" - $(curl -fsSL "$url" | jq -r '.partitions[0].services | keys[]')
+        ;;
+    (region)
+        compadd "$@" - $(curl -fsSL "$url" | jq -r '.partitions[0].regions | keys[]')
+        ;;
+    (profile)
+        [[ -r "${AWS_CONFIG_FILE:-$HOME/.aws/config}" ]] || return 1
+        compadd "$@" - $(grep --color=never -Eo '\[.*\]' "${AWS_CONFIG_FILE:-$HOME/.aws/config}" | sed -E 's/^[[:space:]]*\[(profile)?[[:space:]]*([-_[:alnum:]\.@]+)\][[:space:]]*$/\2/g')
+        ;;
+esac
+
+return ret
