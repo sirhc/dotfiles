@@ -1,4 +1,5 @@
 SHELL         = /bin/zsh
+LIB_DIR       = zsh/dot-zshrc.d/lib
 FUNCTIONS_DIR = zsh/dot-zshrc.d/functions
 PLUGINS_DIR   = zsh/dot-zshrc.d/plugins
 
@@ -16,6 +17,9 @@ update:
 		(cd "$${f:h}" && mr update); \
 		printf '\n'; \
 	done
+
+update-libs:
+	curl -Ls https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/lib/git.zsh > $(LIB_DIR)/git.zsh
 
 update-functions:
 	curl -Ls https://raw.githubusercontent.com/AlexaraWu/zsh-completions/master/src/_7z              > $(FUNCTIONS_DIR)/_7z
