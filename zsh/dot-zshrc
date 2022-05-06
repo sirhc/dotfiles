@@ -2,33 +2,6 @@
 
 typeset -aU path manpath fpath
 
-path=(/usr/local/bin /usr/local/sbin)
-path=($path /usr/bin)
-[[ ! -L /bin ]] && path=($path /bin) # /bin and /sbin are symlinks on Fedora
-path=($path /usr/sbin)
-[[ ! -L /sbin ]] && path=($path /sbin)
-[[ -d /opt/homebrew/sbin ]] && path=(/opt/homebrew/sbin $path)
-[[ -d /opt/homebrew/bin ]] && path=(/opt/homebrew/bin $path)
-
-for _env in ~/.*env(/); do
-    [[ -d $_env/bin ]] && path=($_env/bin $path)
-    [[ -d $_env/shims ]] && path=($_env/shims $path)
-done
-unset _env
-
-path=(
-    ~/bin
-    # This is a habit from a time when my home directory was on NFS and shared on
-    # multiple types of systems. It still comes in handy when I want to keep
-    # binaries in `~/bin`, which I tend to sync between systems.
-    ~/bin/${OSTYPE/[0-9]*/}-${CPUTYPE} # e.g., linux-gnu-x86_64, darwin-arm64
-    ~/.local/bin
-    $path
-)
-
-[[ -d /opt/homebrew/share/zsh/site-functions ]] && fpath=(/opt/homebrew/share/zsh/site-functions $fpath)
-fpath=(~/.zshrc.d/functions ~/.local/share/zsh/site-functions $fpath) # in front, to override packaged functions
-
 # See zshparam(1).
 HISTFILE=~/.zsh_history
 HISTORY_IGNORE='(exit|reset|clear|cd|cd ..|cd..|ls)'
@@ -70,6 +43,33 @@ export PERLDOC_PAGER=less
 export RSYNC_RSH=ssh
 export TZ=US/Pacific
 export UNZIP=-qq
+
+path=(/usr/local/bin /usr/local/sbin)
+path=($path /usr/bin)
+[[ ! -L /bin ]] && path=($path /bin) # /bin and /sbin are symlinks on Fedora
+path=($path /usr/sbin)
+[[ ! -L /sbin ]] && path=($path /sbin)
+[[ -d /opt/homebrew/sbin ]] && path=(/opt/homebrew/sbin $path)
+[[ -d /opt/homebrew/bin ]] && path=(/opt/homebrew/bin $path)
+
+for _env in ~/.*env(/); do
+    [[ -d $_env/bin ]] && path=($_env/bin $path)
+    [[ -d $_env/shims ]] && path=($_env/shims $path)
+done
+unset _env
+
+path=(
+    ~/bin
+    # This is a habit from a time when my home directory was on NFS and shared on
+    # multiple types of systems. It still comes in handy when I want to keep
+    # binaries in `~/bin`, which I tend to sync between systems.
+    ~/bin/${OSTYPE/[0-9]*/}-${CPUTYPE} # e.g., linux-gnu-x86_64, darwin-arm64
+    ~/.local/bin
+    $path
+)
+
+[[ -d /opt/homebrew/share/zsh/site-functions ]] && fpath=(/opt/homebrew/share/zsh/site-functions $fpath)
+fpath=(~/.zshrc.d/functions ~/.local/share/zsh/site-functions $fpath) # in front, to override packaged functions
 
 autoload -U compinit && compinit
 
