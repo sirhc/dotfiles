@@ -229,8 +229,9 @@ augroup END
 "    endif
 "end
 
-let NERDTreeIgnore = ['\.o$', '\.class$', '\.pyc$', '\~$', '^__pycache__$', '\.tfstate\(\|\..*\)$']
-let NERDTreeHijackNetrw = 1
+let g:NERDTreeIgnore      = ['\.o$', '\.class$', '\.pyc$', '\~$', '^__pycache__$', '\.tfstate\(\|\..*\)$']
+let g:NERDTreeHijackNetrw = 1
+let g:NERDTreeMinimalMenu = 1  " https://github.com/preservim/nerdtree/issues/1321
 
 " Ref: <https://github.com/scrooloose/syntastic>
 "
