@@ -132,6 +132,9 @@
     # https://github.polettix.it/ETOOBUSY/2021/10/10/git-forest/
     lg = log --graph --abbrev-commit --date=relative --date-order --format=format:'%C(yellow)%h%Creset -%C(yellow)%d%Creset %s %C(green)(%cr)%Creset %Cred<%an>%Creset'
 
+    default-branch = !git remote show origin | awk '/HEAD branch:/ { print $NF }'
+    switch-default = !git switch $( git default-branch )
+
 [include]
     path = .gitconfig.local
 
