@@ -1,30 +1,28 @@
+alias bofh='ncat bofh.jeffballard.us 666 </dev/null | sed -ne "s/[^:]*: //p"'
 alias ed='ed -p:'
-alias wget='wget --content-disposition'
-alias xclip='xclip -selection c'
-
 alias emdash='echo "<—>"'
 alias endash='echo "<–>"'
 alias headers='curl -s -D- -o/dev/null'
 alias lh='ls -lh'
+alias maze='perl -e "print qw(╱ ╲)[rand 2] while 1"'
+alias mrwip='mr -c .mrconfig.wip'
 alias now='date +%H:%M:%S'
-alias pbcopy='xclip -selection clipboard'
-alias pbpaste='xclip -selection clipboard -o'
-alias tiga='tig --all'
-alias today='date +%Y-%m-%d'
-
-(( $+commands[open] )) || alias open=xdg-open
-
 alias p5addlib='eval "$( envmgr -p PERL5LIB lib )"'
 alias p5clearenv='unset "$( env | grep ^PERL | cut -d= -f1 )"'
 alias p5rmlib='eval "$( envmgr -r PERL5LIB lib )"'
 alias perlconf='perl -V:".*"'
 alias pprove='prove -PPretty'
+alias tiga='tig --all'
+alias today='date +%Y-%m-%d'
 alias tprove='prove --formatter TAP::Formatter::Elapsed'
 alias typemap='perl -MConfig -le '"'"'print "$Config{installprivlib}/ExtUtils/typemap"'"'"''
+alias wget='wget --content-disposition'
+alias xclip='xclip -selection c'
 alias xsubcpp='cpp -I`perl -MConfig -le '"'"'print "$Config{archlib}/CORE"'"'"'`'
 
-alias bofh='ncat bofh.jeffballard.us 666 </dev/null | sed -ne "s/[^:]*: //p"'
-alias maze='perl -e "print qw(╱ ╲)[rand 2] while 1"'
+(( $+commands[open] ))    || alias open='xdg-open'
+(( $+commands[pbcopy] ))  || alias pbcopy='xclip -selection clipboard'
+(( $+commands[pbpaste] )) || alias pbpaste='xclip -selection clipboard -o'
 
 # http://dbocklandt.be/networking/ldapsearch-without-all-the-line-wrapping/
 alias ldapunwrap='perl -p00e '"'"'s/\r?\n //g'"'"''
