@@ -10,7 +10,10 @@ git_gone   = git gone
 git_prune  = git prune-branches
 git_tags   = git tag -l
 
-include = [[ -d ~/.mrconfig.d ]] && cat ~/.mrconfig.d/*.conf
+include =
+    if [[ -d ~/.mrconfig.d ]]; then
+        cat ~/.mrconfig.d/*.conf
+    fi
 
 [.dotfiles]
 checkout = git clone 'https://github.com/sirhc/dotfiles.git' '.dotfiles'
