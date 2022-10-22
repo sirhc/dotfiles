@@ -11,7 +11,9 @@ install:
 uninstall:
 	@for f in *(/); do stow --target="$$HOME" --verbose=1 --delete "$$f" --dotfiles; done
 
-update:
+update: update-repos update-libs update-functions update-plugins
+
+update-repos:
 	@for f in **/.mrconfig; do \
 		printf '\033[1;97mRunning update on %s...\033[m\n' "$$f"; \
 		(cd "$${f:h}" && mr update); \
