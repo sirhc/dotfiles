@@ -1,3 +1,5 @@
+[DEFAULT]
+
 edit = vim
 
 git_branch = git rev-parse --abbrev-ref HEAD
@@ -7,3 +9,11 @@ git_gc     = git gc --aggressive --auto --prune=now "$@"
 git_gone   = git gone
 git_prune  = git prune-branches
 git_tags   = git tag -l
+
+include = [[ -d ~/.mrconfig.d ]] && cat ~/.mrconfig.d/*.conf
+
+[.dotfiles]
+checkout = git clone 'https://github.com/sirhc/dotfiles.git' '.dotfiles'
+
+[.vim]
+checkout = git clone 'https://github.com/sirhc/vim-profile.git' '.vim'
