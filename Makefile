@@ -14,11 +14,9 @@ uninstall:
 update: update-repos update-libs update-functions update-plugins
 
 update-repos:
-	@for f in **/.mrconfig; do \
-		printf '\033[1;97mRunning update on %s...\033[m\n' "$$f"; \
-		(cd "$${f:h}" && mr update); \
-		printf '\n'; \
-	done
+	mr -j4 update
+	mr -j4 prune
+	mr -j4 gc
 
 update-libs:
 	curl -Ls https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/lib/git.zsh > $(LIB_DIR)/git.zsh
