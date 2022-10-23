@@ -76,8 +76,9 @@ checkout = git clone 'https://github.com/cespare/vim-toml.git' 'vim-toml'
 [pack/plugins/start/vim-unimpaired]
 checkout = git clone 'https://github.com/tpope/vim-unimpaired.git' 'vim-unimpaired'
 
-#[pack/plugins/start/coc.nvim]
-#checkout = git clone 'https://github.com/neoclide/coc.nvim' 'coc.nvim'
+[pack/plugins/start/coc.nvim]
+checkout = git clone 'https://github.com/neoclide/coc.nvim' 'coc.nvim'
+skip     = true
 
 [pack/plugins/start/logstash.vim]
 checkout = git clone 'https://github.com/vim-scripts/logstash.vim.git' 'logstash.vim'
