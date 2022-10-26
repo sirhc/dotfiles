@@ -51,6 +51,7 @@ _jenkins_cmds=(
     'enable-job:Enables a job'
     'enable-plugin:Enables one or more installed plugins transitively'
     'export-configuration:Export jenkins configuration as YAML'
+    'get-branch:Get the branch specifier for a job'
     'get-credentials-as-xml:Get a Credentials as XML (secrets redacted)'
     'get-credentials-domain-as-xml:Get a Credentials Domain as XML'
     'get-gradle:List available gradle installations'
@@ -89,7 +90,7 @@ _jenkins_cmds=(
     'session-id:Outputs the session ID, which changes every time Jenkins restarts'
     'set-build-description:Sets the description of a build'
     'set-build-display-name:Sets the displayName of a build'
-    'set-job-branch:Sets the branch specifier of a job'
+    'set-branch:Sets the branch specifier of a job'
     'shutdown:Immediately shuts down Jenkins server'
     'stop-builds:Stop all running builds for job(s)'
     'update-credentials-by-xml:Update Credentials by XML'
@@ -116,6 +117,11 @@ __build() {
         '-w[wait until start of command]'
 }
 
+__get_branch() {
+    _arguments \
+        ':job:__job_names'
+}
+
 __get_parameters() {
     _arguments \
         ':job:__job_names'
@@ -132,7 +138,7 @@ __refresh() {
         ':job:__job_names'
 }
 
-__set_job_branch() {
+__set_branch() {
     _arguments \
         ':job:__job_names' \
         ':branch:__branch_names'
@@ -148,8 +154,9 @@ fi
 local -a _command_args
 case "$words[1]" in
     build) __build ;;
+    get-branch) __get_branch ;;
     get-parameters) __get_parameters ;;
     open) __open ;;
     refresh) __refresh ;;
-    set-job-branch) __set_job_branch ;;
+    set-branch) __set_branch ;;
 esac
