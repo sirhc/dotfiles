@@ -5,7 +5,7 @@ edit = vim
 git_branch = git rev-parse --abbrev-ref HEAD
 git_drb    = git push origin --delete "$@"
 git_fa     = git fetch --all
-git_gc     = git gc --aggressive --auto --prune=now "$@"
+git_gc     = git gc "$@"
 git_gone   = git gone
 git_prune  = git prune-branches
 git_tags   = git tag -l
