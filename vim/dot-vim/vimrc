@@ -52,10 +52,9 @@ imap <F1> <C-o>:echo<CR>
 " http://blog.nixpanic.net/2013/01/changing-vim-settings-depending-on-git.html
 "
 " $ git config --add vim.modeline 'tabstop=4 expandtab'
-"
-let s:git_modeline = system("git config --get vim.modeline")
+let s:git_modeline = system('git config --get vim.modeline')
 if strlen(s:git_modeline)
-    exe "set" s:git_modeline
+    exe set s:git_modeline
 endif
 
 filetype plugin on
@@ -95,9 +94,9 @@ nmap <Leader>r :call RunScript()<CR>
 "nnoremap j gj
 "nnoremap k gk
 
-" Toggle highlight when refreshing the screen.
+" https://twitter.com/gumnos/status/1282057172763934720
 "
-" <https://twitter.com/gumnos/status/1282057172763934720>
+" Toggle highlight when refreshing the screen.
 nnoremap <C-L> :set hls!<CR><C-L>
 
 " http://robots.thoughtbot.com/post/619330025/viiiiiiiiiiiiiiiiiim
@@ -107,11 +106,9 @@ nnoremap <C-L> :set hls!<CR><C-L>
 xmap D y'>p
 
 " http://vim.wikia.com/wiki/Insert_current_filename
-"
 "inoremap \fn <C-R>=expand("%:t")<CR>
 
 " http://mislav.uniqpath.com/2011/12/vim-revisited/
-"
 nnoremap <Leader><Leader> <C-^>
 
 " http://www.catonmat.net/blog/sudo-vim/
@@ -165,23 +162,16 @@ iabbrev existance existence
 iabbrev paramter  parameter
 
 " Highlight trailing whitespace.
-match ErrorMsg /\s\+\%#\@!$/    " \s\+  one or more whitespace characters
-                                " \%#   current cursor position
-                                " \@!   zero-width match if previous fails
-                                " $     end of line
+match ErrorMsg /\s\+\%#\@!$/  " \s\+  one or more whitespace characters
+                              " \%#   current cursor position
+                              " \@!   zero-width match if previous fails
+                              " $     end of line
 
 if has("perl")
     " From freenode/#perl:
-    " 01/05/11 07:34:56 < grondilu> add "perl *say = \&VIM::Msg" in your
-    "                               .vimrc and you'll spare 5 chars each time
-    "                               you'll want to see the ouput of a :perl
-    "                               command :)
+    " 2011-01-05 07:34:56 < grondilu> add "perl *say = \&VIM::Msg" in your .vimrc and you'll spare 5 chars each time you'll want to see the ouput of a :perl command :)
     perl *say = \&VIM::Msg
 endif
-
-"function! RpmDate()
-"    exec !date +'%a %b %d %Y'
-"endfunction
 
 augroup OpenFile
     au!
@@ -222,13 +212,6 @@ augroup OpenFile
     au BufNewFile,BufRead *.t let b:interpreter = "prove -v"
 augroup END
 
-"if v:version >= 700
-"    runtime bundle/vim-pathogen/autoload/pathogen.vim
-"    if exists("g:loaded_pathogen")
-"        call pathogen#infect()
-"    endif
-"end
-
 let g:NERDTreeIgnore      = ['\.o$', '\.class$', '\.pyc$', '\~$', '^__pycache__$', '\.tfstate\(\|\..*\)$']
 let g:NERDTreeHijackNetrw = 1
 let g:NERDTreeMinimalMenu = 1  " https://github.com/preservim/nerdtree/issues/1321
@@ -244,16 +227,16 @@ let g:NERDTreeMinimalMenu = 1  " https://github.com/preservim/nerdtree/issues/13
 
 "set statusline=\[%n\]\ %<%f\ %y\ %{FugitiveStatusline()}\ %h%m%r\ %#warningmsg#%{SyntasticStatuslineFlag()}%*%=%-14.(%l,%c%V%)\ %P
 
-let g:syntastic_aggregate_errors = 1
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-let g:syntastic_cloudformation_checkers = ['cfn_lint', 'cfn_nag']
-let g:syntastic_markdown_checkers = ['mdl', 'proselint']
+let g:syntastic_aggregate_errors          = 1
+let g:syntastic_always_populate_loc_list  = 1
+let g:syntastic_auto_loc_list             = 1
+let g:syntastic_check_on_open             = 1
+let g:syntastic_check_on_wq               = 0
+let g:syntastic_cloudformation_checkers   = ['cfn_lint', 'cfn_nag']
+let g:syntastic_markdown_checkers         = ['mdl', 'proselint']
 let g:syntastic_perl_perlcritic_post_args = '--verbose "\%s:\%f:\%l:\%c: \%p (\%s): \%m\n"'  " https://github.com/scrooloose/syntastic/wiki/%28v3.7.0%29---Perl%3A---perlcritic
-let g:syntastic_python_checkers = ['python', 'flake8']
-let g:syntastic_yaml_checkers = ['yamllint', 'yamlxs']
+let g:syntastic_python_checkers           = ['python', 'flake8']
+let g:syntastic_yaml_checkers             = ['yamllint', 'yamlxs']
 
 let g:terraform_align         = 0
 let g:terraform_fold_sections = 0
@@ -285,22 +268,22 @@ nnoremap <F9> za
 onoremap <F9> <C-C>za
 vnoremap <F9> zf
 
-" Testing out simplified window navigation.
+" Quick window navigation using ctrl+arrow.
 nmap <silent> <C-Up>    :wincmd k<CR>
 nmap <silent> <C-Down>  :wincmd j<CR>
 nmap <silent> <C-Left>  :wincmd h<CR>
 nmap <silent> <C-Right> :wincmd l<CR>
 
-" Testing out vim-airline.
+" https://github.com/vim-airline/vim-airline
 let g:airline_powerline_fonts = 1
 if !exists('g:airline_symbols')
     let g:airline_symbols = {}
 endif
-let g:airline_symbols.space = "\ua0"
-let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#enabled      = 1
 let g:airline#extensions#tabline#show_buffers = 0
-"let g:airline_theme = 'molokai'
-let g:airline_section_x = '%{ScrollStatus()}'
+let g:airline_section_x                       = '%{ScrollStatus()}'
+let g:airline_symbols.space                   = "\ua0"
+let g:airline_theme                           = 'powerlineish'
 
 if executable('ag')
     let g:ackprg = 'ag --vimgrep'
