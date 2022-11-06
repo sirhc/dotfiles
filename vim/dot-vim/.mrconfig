@@ -108,4 +108,7 @@ checkout = git clone 'https://github.com/vim-airline/vim-airline.git' 'vim-airli
 checkout = git clone 'https://github.com/vim-airline/vim-airline-themes.git' 'vim-airline-themes'
 
 [pack/plugins/start/vim-scrollstatus]
-checkout = git clone 'https://github.com/ojroques/vim-scrollstatus' 'vim-scrollstatus'
+checkout = git clone 'https://github.com/ojroques/vim-scrollstatus.git' 'vim-scrollstatus'
+
+[pack/plugins/start/abbott.vim]
+checkout = git clone 'https://github.com/bcat/abbott.vim.git' 'abbott.vim'

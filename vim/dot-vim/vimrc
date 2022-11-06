@@ -305,3 +305,11 @@ let g:airline_section_x = '%{ScrollStatus()}'
 if executable('ag')
     let g:ackprg = 'ag --vimgrep'
 endif
+
+" https://github.com/bcat/abbott.vim/blob/master/README.md
+let g:abbott_set_term_ansi_colors     = 1
+let g:abbott_term_set_underline_color = 1
+let g:abbott_term_use_italics         = 1
+let g:abbott_term_use_undercurl       = 1
+
+colorscheme abbott
