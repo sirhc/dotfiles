@@ -80,6 +80,7 @@
     terraform               # terraform workspace (https://www.terraform.io)
     terraform_version       # terraform version (https://www.terraform.io)
     aws                     # aws profile (https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-profiles.html)
+    jenkins                 # my jenkins prompt
     # aws_eb_env            # aws elastic beanstalk environment (https://aws.amazon.com/elasticbeanstalk/)
     # azure                 # azure account name (https://docs.microsoft.com/en-us/cli/azure)
     # gcloud                # google cloud cli account and project (https://cloud.google.com/)
@@ -99,6 +100,7 @@
     # disk_usage            # disk usage
     # ram                   # free RAM
     # swap                  # used swap
+    email
     # todo                  # todo items (https://github.com/todotxt/todo.txt-cli)
     # timewarrior           # timewarrior tracking status (https://timewarrior.net/)
     taskwarrior             # taskwarrior task count (https://taskwarrior.org/)
@@ -1707,6 +1709,47 @@
     # instant_prompt_example. This will give us the same `example` prompt segment in the instant
     # and regular prompts.
     prompt_example
+  }
+
+  function prompt_jenkins() {
+    if [[ -n "${JENKINS_URL:-}" ]]; then
+      local url="$JENKINS_URL"
+      url="${url#http?://}"
+      url="${url%/}"
+
+      p10k segment -b 094 -f 7 -i $'\uE767' -t "$url"
+    fi
+  }
+
+  function instant_prompt_jenkins() {
+    prompt_jenkins
+  }
+
+  function prompt_email() {
+    local cache="${XDG_CACHE_HOME:-$HOME/.cache}/mail/cache.json"
+    local messages unseen color icon
+
+    if [[ -e "$cache" ]]; then
+      read -r messages unseen <<<"$( jq -r '"\(.messages) \(.unseen)"' "$cache" )"
+    fi
+
+    if [[ -z $messages ]]; then
+      return
+    fi
+
+    if [[ $unseen -gt 0 ]]; then
+      color='167' # indianred
+      icon=$'\uFBCD'
+    else
+      color='028' # green4
+      icon=$'\uFAEE'
+    fi
+
+    p10k segment -b "$color" -f 7 -i "$icon" -t "${unseen}/${messages}"
+  }
+
+  function instant_prompt_email() {
+    prompt_email
   }
 
   # User-defined prompt segments can be customized the same way as built-in segments.
