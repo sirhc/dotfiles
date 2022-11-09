@@ -19,14 +19,14 @@ update-repos:
 	mr -j4 gc
 
 update-libs:
-	curl -Ls https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/lib/git.zsh > $(LIB_DIR)/git.zsh
+	curl -Ls https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/lib/git.zsh                      > $(LIB_DIR)/git.zsh
 
 update-functions:
-	curl -Ls https://raw.githubusercontent.com/AlexaraWu/zsh-completions/master/src/_7z              > $(FUNCTIONS_DIR)/_7z
-	curl -Ls https://raw.githubusercontent.com/exercism/cli/main/shell/exercism_completion.zsh       > $(FUNCTIONS_DIR)/_exercism
-	curl -Ls https://raw.githubusercontent.com/sirhc/myrepos.plugin.zsh/main/_myrepos                > $(FUNCTIONS_DIR)/_myrepos
-	curl -Ls https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/plugins/terraform/_terraform   > $(FUNCTIONS_DIR)/_terraform
-	curl -Ls https://raw.githubusercontent.com/jkavan/terragrunt-oh-my-zsh-plugin/master/_terragrunt > $(FUNCTIONS_DIR)/_terragrunt
+	curl -Ls https://raw.githubusercontent.com/AlexaraWu/zsh-completions/master/src/_7z                > $(FUNCTIONS_DIR)/_7z
+	curl -Ls https://raw.githubusercontent.com/exercism/cli/main/shell/exercism_completion.zsh         > $(FUNCTIONS_DIR)/_exercism
+	curl -Ls https://raw.githubusercontent.com/sirhc/myrepos.plugin.zsh/main/_myrepos                  > $(FUNCTIONS_DIR)/_myrepos
+	curl -Ls https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/plugins/terraform/_terraform     > $(FUNCTIONS_DIR)/_terraform
+	curl -Ls https://raw.githubusercontent.com/jkavan/terragrunt-oh-my-zsh-plugin/master/_terragrunt   > $(FUNCTIONS_DIR)/_terragrunt
 
 update-plugins:
 	curl -Ls https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/plugins/aws/aws.plugin.zsh       > $(PLUGINS_DIR)/aws/aws.plugin.zsh
