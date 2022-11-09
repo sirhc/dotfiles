@@ -6,10 +6,10 @@ PLUGINS_DIR   = zsh/dot-zshrc.d/plugins
 all:
 
 stow:
-	@for f in *(/); do stow --target="$$HOME" --verbose=1 --restow "$$f" --dotfiles; done
+	stow --target="$$HOME" --verbose=1 --restow --dotfiles *(/)
 
 unstow:
-	@for f in *(/); do stow --target="$$HOME" --verbose=1 --delete "$$f" --dotfiles; done
+	stow --simulate --target="$$HOME" --verbose=1 --delete --dotfiles *(/)
 
 update: update-repos update-libs update-functions update-plugins
 
