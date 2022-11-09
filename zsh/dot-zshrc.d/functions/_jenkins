@@ -122,6 +122,11 @@ __get_branch() {
         ':job:__job_names'
 }
 
+__get_job() {
+    _arguments \
+        ':job:__job_names'
+}
+
 __get_parameters() {
     _arguments \
         ':job:__job_names'
@@ -155,6 +160,7 @@ local -a _command_args
 case "$words[1]" in
     build) __build ;;
     get-branch) __get_branch ;;
+    get-job) __get_job ;;
     get-parameters) __get_parameters ;;
     open) __open ;;
     refresh) __refresh ;;
