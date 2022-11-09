@@ -289,6 +289,8 @@ if executable('ag')
     let g:ackprg = 'ag --vimgrep'
 endif
 
+let g:vimwiki_list = [{'path': '~/Dropbox/VimWiki', 'syntax': 'markdown', 'ext': '.wiki'}]
+
 " https://vimcolorschemes.com/tomasiser/vim-code-dark
 colorscheme codedark
 
