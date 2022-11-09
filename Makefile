@@ -6,7 +6,7 @@ PLUGINS_DIR   = zsh/dot-zshrc.d/plugins
 all:
 
 stow:
-	stow --target="$$HOME" --verbose=1 --restow --dotfiles *(/)
+	stow --target="$$HOME" --verbose=1 --stow --dotfiles *(/)
 
 unstow:
 	stow --simulate --target="$$HOME" --verbose=1 --delete --dotfiles *(/)
