@@ -30,6 +30,7 @@ update-functions:
 
 update-plugins:
 	curl -Ls https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/plugins/aws/aws.plugin.zsh       > $(PLUGINS_DIR)/aws/aws.plugin.zsh
+	curl -Ls https://raw.githubusercontent.com/tj/git-extras/master/etc/git-extras-completion.zsh      > $(PLUGINS_DIR)/git-extras/git-extras.plugin.zsh
 	curl -Ls https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/plugins/git/git.plugin.zsh       > $(PLUGINS_DIR)/git/git.plugin.zsh
 	curl -Ls https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/plugins/screen/screen.plugin.zsh > $(PLUGINS_DIR)/screen/screen.plugin.zsh
 	curl -Ls https://raw.githubusercontent.com/rupa/z/master/z.sh                                      > $(PLUGINS_DIR)/z/z.plugin.zsh
