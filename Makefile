@@ -12,7 +12,7 @@ stow:
 unstow:
 	stow --simulate --target="$$HOME" --verbose=1 --delete --dotfiles *(/)
 
-update: update-repos update-libs update-functions update-plugins
+update: update-libs update-functions update-plugins
 
 update-repos:
 	mr -j4 update
