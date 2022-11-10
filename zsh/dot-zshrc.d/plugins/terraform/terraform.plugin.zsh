@@ -7,6 +7,9 @@ if (( $+commands[terraform] )); then
     alias tfo='terraform output'
     alias tfp='terraform plan'
     alias tfv='terraform validate'
+
+    autoload -U +X bashcompinit && bashcompinit
+    complete -o nospace -C terraform terraform
 fi
 
 if (( $+commands[terragrunt] )); then
