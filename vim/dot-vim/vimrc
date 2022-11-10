@@ -283,7 +283,7 @@ let g:airline#extensions#tabline#enabled      = 1
 let g:airline#extensions#tabline#show_buffers = 0
 let g:airline_section_x                       = '%{ScrollStatus()}'
 let g:airline_symbols.space                   = "\ua0"
-let g:airline_theme                           = 'powerlineish'
+let g:airline_theme                           = 'codedark'
 
 if executable('ag')
     let g:ackprg = 'ag --vimgrep'
