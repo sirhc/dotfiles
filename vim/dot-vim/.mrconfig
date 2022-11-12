@@ -1,20 +1,15 @@
 [pack/plugins/start/ack.vim]
 checkout = git clone 'https://github.com/mileszs/ack.vim.git' 'ack.vim'
 
-[pack/plugins/start/asciidoc-vim]
-checkout = git clone 'https://github.com/dagwieers/asciidoc-vim.git' 'asciidoc-vim'
-
 [pack/plugins/start/brightscript.vim]
 checkout = git clone 'https://github.com/chooh/brightscript.vim.git' 'brightscript.vim'
+skip = true
 
 [pack/plugins/start/ctrlp.vim]
 checkout = git clone 'https://github.com/kien/ctrlp.vim.git' 'ctrlp.vim'
 
 [pack/plugins/start/nerdtree]
 checkout = git clone 'https://github.com/preservim/nerdtree.git' 'nerdtree'
-
-[pack/plugins/start/perl-nextmethod]
-checkout = git clone 'https://github.com/catalinciurea/perl-nextmethod.git' 'perl-nextmethod'
 
 [pack/plugins/start/plantuml-syntax]
 checkout = git clone 'https://github.com/aklt/plantuml-syntax.git' 'plantuml-syntax'
@@ -24,9 +19,6 @@ checkout = git clone 'https://github.com/thiagoalessio/rainbow_levels.vim.git' '
 
 [pack/plugins/start/syntastic]
 checkout = git clone 'https://github.com/vim-syntastic/syntastic.git' 'syntastic'
-
-[pack/plugins/start/vim-colors-solarized]
-checkout = git clone 'https://github.com/altercation/vim-colors-solarized.git' 'vim-colors-solarized'
 
 [pack/plugins/start/vim-commentary]
 checkout = git clone 'https://github.com/tpope/vim-commentary.git' 'vim-commentary'
@@ -45,6 +37,7 @@ checkout = git clone 'https://github.com/dbakker/vim-lint.git' 'vim-lint'
 
 [pack/plugins/start/vim-lsf]
 checkout = git clone 'https://github.com/sirhc/vim-lsf.git' 'vim-lsf'
+skip = true
 
 [pack/plugins/start/vim-markdown]
 checkout = git clone 'https://github.com/tpope/vim-markdown.git' 'vim-markdown'
@@ -109,9 +102,6 @@ checkout = git clone 'https://github.com/vim-airline/vim-airline-themes.git' 'vi
 
 [pack/plugins/start/vim-scrollstatus]
 checkout = git clone 'https://github.com/ojroques/vim-scrollstatus.git' 'vim-scrollstatus'
-
-[pack/plugins/start/abbott.vim]
-checkout = git clone 'https://github.com/bcat/abbott.vim.git' 'abbott.vim'
 
 [pack/plugins/start/vim-code-dark]
 checkout = git clone 'https://github.com/tomasiser/vim-code-dark.git' 'vim-code-dark'
