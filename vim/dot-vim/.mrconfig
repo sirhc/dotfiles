@@ -48,9 +48,6 @@ checkout = git clone 'https://github.com/xolox/vim-misc' 'vim-misc'
 [pack/plugins/start/vim-notes]
 checkout = git clone 'https://github.com/xolox/vim-notes' 'vim-notes'
 
-[pack/plugins/start/vim-orgmode]
-checkout = git clone 'https://github.com/jceb/vim-orgmode' 'vim-orgmode'
-
 [pack/plugins/start/vim-perl]
 checkout = git clone 'https://github.com/vim-perl/vim-perl' 'vim-perl'
 
