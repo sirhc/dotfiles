@@ -31,3 +31,6 @@ last-updated:
 		print "  Last updated : $$( git log -1 --format="%ar" )"; \
 		print "  Last commit  : $$( git log -1 --format="%cN %s" )"; \
 	' |& "$${PAGER:-less}"
+
+Plugins.md: .mrconfig
+	./mkpluginsdoc > "$@"
