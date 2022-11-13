@@ -3,6 +3,10 @@ SHELL = zsh
 .PHONY: all
 all:
 
+.PHONY: check-config
+check-config:
+	@find pack/ -type d -name .git -exec zsh -c 'mr config $$( dirname {} ) checkout 1>/dev/null' \;
+
 # Check that the configured URL matches the GitHub URL. If the repository has
 # been moved to another user or organization, the URL will change. Generally,
 # the existing configuration continues to work, because GitHub sets up a
