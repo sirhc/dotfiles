@@ -293,11 +293,3 @@ let g:vimwiki_list = [{'path': '~/Dropbox/VimWiki', 'syntax': 'markdown', 'ext':
 
 " https://vimcolorschemes.com/tomasiser/vim-code-dark
 colorscheme codedark
-
-" https://github.com/bcat/abbott.vim/blob/master/README.md
-"let g:abbott_set_term_ansi_colors     = 1
-"let g:abbott_term_set_underline_color = 1
-"let g:abbott_term_use_italics         = 1
-"let g:abbott_term_use_undercurl       = 1
-"
-"colorscheme abbott
