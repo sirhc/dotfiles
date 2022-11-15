@@ -3,6 +3,10 @@ SHELL = zsh
 .PHONY: all
 all:
 
+.PHONY: helptags
+helptags:
+	vim -c 'helptags ALL' -c quit
+
 .PHONY: check-config
 check-config:
 	@find pack/ -type d -name .git -exec zsh -c 'mr config $$( dirname {} ) checkout 1>/dev/null' \;
