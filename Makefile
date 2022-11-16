@@ -24,6 +24,7 @@ update-libs:
 
 update-functions:
 	$(CURL) https://raw.githubusercontent.com/AlexaraWu/zsh-completions/master/src/_7z                > $(FUNCTIONS_DIR)/_7z
+	$(CURL) https://raw.githubusercontent.com/sirhc/awsvpn-cli/main/completion.zsh                    > $(FUNCTIONS_DIR)/_awsvpn_cli
 	$(CURL) https://raw.githubusercontent.com/exercism/cli/main/shell/exercism_completion.zsh         > $(FUNCTIONS_DIR)/_exercism
 	$(CURL) https://raw.githubusercontent.com/sirhc/myrepos.plugin.zsh/main/_myrepos                  > $(FUNCTIONS_DIR)/_myrepos
 	$(CURL) https://raw.githubusercontent.com/jkavan/terragrunt-oh-my-zsh-plugin/master/_terragrunt   > $(FUNCTIONS_DIR)/_terragrunt
