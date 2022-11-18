@@ -102,3 +102,6 @@ checkout = git clone 'https://github.com/ojroques/vim-scrollstatus' 'vim-scrolls
 
 [pack/plugins/start/vim-code-dark]
 checkout = git clone 'https://github.com/tomasiser/vim-code-dark' 'vim-code-dark'
+
+[pack/plugins/start/bufexplorer]
+checkout = git clone 'https://github.com/jlanzarotta/bufexplorer.git' 'bufexplorer'
