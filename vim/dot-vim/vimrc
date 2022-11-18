@@ -274,6 +274,10 @@ nmap <silent> <C-Down>  :wincmd j<CR>
 nmap <silent> <C-Left>  :wincmd h<CR>
 nmap <silent> <C-Right> :wincmd l<CR>
 
+" List buffers and prompt to switch with a number. Do not make it silent,
+" otherwise the message will overlap selection prompt.
+nnoremap <C-G> :buffers<CR>:buffer<Space>
+
 " https://github.com/vim-airline/vim-airline
 let g:airline_powerline_fonts = 1
 if !exists('g:airline_symbols')
