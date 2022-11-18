@@ -1,4 +1,4 @@
-let b:interpreter = 'yq r'
+let b:runscript_interpreter = 'yq r'
 
 setlocal shiftwidth=2
 setlocal softtabstop=2

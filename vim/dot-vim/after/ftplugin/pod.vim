@@ -1,4 +1,4 @@
-let b:interpreter = "perldoc -F"
+let b:runscript_interpreter = "perldoc -F"
 
 setlocal cinwords=
 setlocal comments+=fb:*

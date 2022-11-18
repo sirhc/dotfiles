@@ -3,7 +3,7 @@
 " Maintainer:  Christopher D. Grau <chris@sirhc.us>
 " Last Change: 2014 July 24
 
-let b:interpreter = "asciidoc"
+let b:runscript_interpreter = "asciidoc"
 
 function! AsciidocFold()
     let line  = getline(v:lnum)

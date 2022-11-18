@@ -2,4 +2,4 @@ setlocal equalprg=Rtidy
 setlocal iskeyword+=:
 setlocal keywordprg=Rhelp
 
-let b:interpreter = "Rscript"
+let b:runscript_interpreter = "Rscript"

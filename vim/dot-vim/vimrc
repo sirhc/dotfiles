@@ -209,7 +209,7 @@ augroup OpenFile
     au BufReadPre *.epub setlocal ro
     au BufReadCmd *.epub call zip#Browse(expand("<amatch>"))
 
-    au BufNewFile,BufRead *.t let b:interpreter = "prove -v"
+    au BufNewFile,BufRead *.t let b:runscript_interpreter = "prove -v"
 augroup END
 
 let g:NERDTreeIgnore      = ['\.o$', '\.class$', '\.pyc$', '\~$', '^__pycache__$', '\.tfstate\(\|\..*\)$']

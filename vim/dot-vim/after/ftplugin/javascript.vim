@@ -1,1 +1,1 @@
-let b:interpreter = "js"
+let b:runscript_interpreter = "js"

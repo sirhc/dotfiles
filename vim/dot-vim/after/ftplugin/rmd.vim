@@ -1,4 +1,4 @@
 setlocal equalprg=Rtidy
 setlocal iskeyword+=:
 setlocal keywordprg=Rhelp
-let b:interpreter = "rmarkdown"
+let b:runscript_interpreter = "rmarkdown"

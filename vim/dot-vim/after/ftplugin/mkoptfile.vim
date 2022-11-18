@@ -1,3 +1,3 @@
 setlocal nospell
 
-let b:interpreter = "mkoptfile -v"
+let b:runscript_interpreter = "mkoptfile -v"
