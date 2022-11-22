@@ -1,6 +1,7 @@
 #compdef awsvpn-cli
 
 local ret=1
+local context state line expl
 
 _arguments -C -A '-*' : \
     '(-c --connect -C --force-connect -d --disconnect)'{-c+,--connect=}'[connect to a profile, if not connected]:profile:->profile' \
@@ -14,7 +15,7 @@ _arguments -C -A '-*' : \
 case $state in
     (profile)
         local -a profiles=("${(f)"$( awsvpn-cli --profiles )"}")
-        compadd - "${profiles[@]}"
+        _wanted profiles expl profile compadd -- "${profiles[@]}" && ret=0
         ;;
 esac
 
