@@ -43,8 +43,6 @@ if v:version >= 700
     set cursorline
 end
 
-let mapleader = ','
-
 " http://vim.wikia.com/wiki/Disable_F1_built-in_help_key
 nmap <F1> :echo<CR>
 imap <F1> <C-o>:echo<CR>
