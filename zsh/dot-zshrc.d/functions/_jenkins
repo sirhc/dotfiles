@@ -58,6 +58,7 @@ _jenkins_cmds=(
     'get-job:Dumps the job definition XML to stdout'
     'get-node:Dumps the node definition XML to stdout'
     'get-parameters:Dumps the job parameters to stdout'
+    'get-url:Print the job URL to stdout'
     'get-view:Dumps the view definition XML to stdout'
     'groovy:Executes the specified Groovy script'
     'groovysh:Runs an interactive groovy shell'
@@ -132,6 +133,11 @@ __get_parameters() {
         ':job:__job_names'
 }
 
+__get_url() {
+    _arguments \
+        ':job:__job_names'
+}
+
 __open() {
     _arguments \
         ':job:__job_names' \
@@ -162,6 +168,7 @@ case "$words[1]" in
     get-branch) __get_branch ;;
     get-job) __get_job ;;
     get-parameters) __get_parameters ;;
+    get-url) __get_url ;;
     open) __open ;;
     refresh) __refresh ;;
     set-branch) __set_branch ;;
