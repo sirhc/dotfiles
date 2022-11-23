@@ -28,6 +28,7 @@ set timeout timeoutlen=300 ttimeoutlen=300  " keycodes and maps timeout in 3/10 
 set title
 set viminfo='20,<50,s10,h
 set wildmode=list:longest,full
+set wildoptions=pum
 
 set nocompatible
 set nojoinspaces
