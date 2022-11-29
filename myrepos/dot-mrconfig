@@ -2,6 +2,15 @@
 
 edit = vim "$@"
 
+tab =
+    if [ "$( uname -s )" = Darwin ]; then
+        osascript -e 'tell application "iTerm2" to tell current window' \
+                  -e '    create tab with default profile' \
+                  -e '    tell current session to write text "builtin cd '"'$MR_REPO'"'; '"$@"'"' \
+                  -e 'end tell'
+        exit
+    fi
+
 git_branch = git rev-parse --abbrev-ref HEAD
 git_drb    = git push origin --delete "$@"
 git_fa     = git fetch --all
