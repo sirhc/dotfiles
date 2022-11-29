@@ -1,6 +1,6 @@
 [DEFAULT]
 
-edit = vim
+edit = vim "$@"
 
 git_branch = git rev-parse --abbrev-ref HEAD
 git_drb    = git push origin --delete "$@"
