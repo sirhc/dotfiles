@@ -1,1 +1,1 @@
-setlocal equalprg=terraform\ fmt\ -
+setlocal formatprg=terraform\ fmt\ -
