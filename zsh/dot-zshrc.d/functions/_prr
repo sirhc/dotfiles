@@ -1,0 +1,46 @@
+#compdef prr
+
+local ret=1
+
+_prr_subcommands() {
+    local subcommands=(
+        'apply:Apply a pull request to the working directory'
+        'get:Get a pull request and begin a review'
+        'help:Print this message or the help of the given subcommand(s)'
+        'remove:Remove a review'
+        'status:Print a status summary of all known reviews'
+        'submit:Submit a review'
+    )
+
+    _describe -t subcommands 'Subcommands' subcommands
+}
+
+_prr_pull_requests() {
+    local repo="$( gh repo view --json 'owner,name' --jq '"\(.owner.login)/\(.name)"' )"
+    local prs=("${(f)$( gh pr list --limit 1000 --json 'number,title' --jq '.[] | "\(.number) \(.title)"' | sed -e "s,^,${repo}/," -e 's/ /:/' )}")
+
+    _describe -t pull-requests 'Pull Requests' prs
+}
+
+_prr_cmd_get() {
+    _arguments -C -A '-*' : \
+        '(-f --force)'{-f,--force}'[Ignore unsubmitted review checks]' \
+        '(-h --help)'{-h,--help}'[Print help information]' \
+        ': :_prr_pull_requests' && ret=0
+}
+
+_arguments -C -A '-*' : \
+    --config='[Path to config file]:config:_files' \
+    '(-h --help)'{-h,--help}'[Print help information]' \
+    '(-V --version)'{-V,--version}'[Print version information]' \
+    '1:subcommand:_prr_subcommands' \
+    '*::arg:->args' \
+    && ret=0
+
+case "$words[1]" in
+    get)
+        _prr_cmd_get
+        ;;
+esac
+
+return ret
