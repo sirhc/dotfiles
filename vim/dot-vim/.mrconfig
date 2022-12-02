@@ -1,3 +1,6 @@
+[DEFAULT]
+include = cat .mrconfig.local 2> /dev/null || :
+
 [pack/plugins/start/ack.vim]
 checkout = git clone 'https://github.com/mileszs/ack.vim.git' 'ack.vim'
 
