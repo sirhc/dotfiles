@@ -63,25 +63,26 @@ if &t_Co > 2
     syntax on
 endif
 
-nmap <F3>      :set invnumber<CR>
-nmap <F4>      :set invspell<CR>
-nmap <F5>      :if exists("g:syntax_on") <Bar> syntax off <Bar> else <Bar> syntax enable <Bar> endif <CR>
-nmap <F6>      :SyntasticToggleMode<CR>
-nmap <F7>      :SyntasticCheck<CR>
-nmap <BS>      :nohlsearch<CR>
-nmap <Up>      :bprev<CR>
-nmap <Down>    :bnext<CR>
-nmap <Left>    :cprev<CR>
-nmap <Right>   :cnext<CR>
-nmap <Space>   <PageDown>
-nmap <Leader>d :!perldoc "%"<CR>
-nmap <Leader>f :NERDTreeToggle<CR>
-nmap <Leader>g :Geeknote<CR>
-nmap <Leader>l :RainbowLevelsToggle<CR>
-nmap <Leader>r :call RunScript()<CR>
-" navigate through wrapped lines
-"nnoremap j gj
-"nnoremap k gk
+nnoremap <F3>      :set invnumber<CR>
+nnoremap <F4>      :set invspell<CR>
+nnoremap <F5>      :if exists("g:syntax_on") <Bar> syntax off <Bar> else <Bar> syntax enable <Bar> endif <CR>
+nnoremap <F6>      :SyntasticToggleMode<CR>
+nnoremap <F7>      :SyntasticCheck<CR>
+nnoremap <BS>      :nohlsearch<CR>
+nnoremap <Up>      :bprev<CR>
+nnoremap <Down>    :bnext<CR>
+nnoremap <Left>    :cprev<CR>
+nnoremap <Right>   :cnext<CR>
+nnoremap <Space>   <PageDown>
+nnoremap <Leader>d :!perldoc "%"<CR>
+nnoremap <Leader>f :NERDTreeToggle<CR>
+nnoremap <Leader>g :Geeknote<CR>
+nnoremap <Leader>l :RainbowLevelsToggle<CR>
+nnoremap <Leader>r :call RunScript()<CR>
+
+" Navigate through wrapped lines.
+nnoremap j gj
+nnoremap k gk
 
 " https://twitter.com/gumnos/status/1282057172763934720
 "
