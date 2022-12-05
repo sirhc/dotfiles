@@ -11,16 +11,19 @@ tab =
         exit
     fi
 
-git_branch = git rev-parse --abbrev-ref HEAD
-git_drb    = git push origin --delete "$@"
-git_fa     = git fetch --all
-git_gc     = git gc "$@"
-git_gone   = git gone
-git_prune  = git prune-branches
-git_tags   = git tag -l
-git_upq    = git pull "$@" | sed -e '/^Already up to date.$/d'
+git_branch      = git rev-parse --abbrev-ref HEAD
+git_drb         = git push origin --delete "$@"
+git_fa          = git fetch --all
+git_gc          = git gc "$@"
+git_gone        = git gone
+git_prune       = git prune-branches
+git_tags        = git tag -l
+git_quietupdate = git pull "$@" | sed -e '/^Already up to date.$/d'
 
 include = cat ~/.mrconfig.d/*.conf 2> /dev/null || :
+
+[ALIAS]
+qu = quietupdate
 
 [.dotfiles]
 checkout = git clone 'https://github.com/sirhc/dotfiles.git' '.dotfiles'
