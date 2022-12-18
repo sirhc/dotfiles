@@ -2,6 +2,7 @@ set autoindent
 set autowriteall
 set backspace=indent,eol,start
 set directory=~/.vim/swapfiles//,~/tmp//,.
+set display=lastline
 set expandtab
 set foldmethod=marker
 set formatoptions+=n
@@ -10,6 +11,7 @@ set hlsearch
 set ignorecase
 set incsearch
 set laststatus=2
+set linebreak
 set listchars=eol:$,tab:..,trail:.,extends:>,precedes:<
 set more
 set number
@@ -20,8 +22,9 @@ set shiftwidth=4
 set smartcase
 set smartindent
 set smarttab
-set spell
+set smoothscroll
 set softtabstop=4
+set spell
 set tabstop=4
 set textwidth=78
 set timeout timeoutlen=300 ttimeoutlen=300  " keycodes and maps timeout in 3/10 sec
