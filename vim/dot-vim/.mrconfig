@@ -4,10 +4,6 @@ include = cat .mrconfig.local 2> /dev/null || :
 [pack/plugins/start/ack.vim]
 checkout = git clone 'https://github.com/mileszs/ack.vim.git' 'ack.vim'
 
-[pack/plugins/start/brightscript.vim]
-checkout = git clone 'https://github.com/chooh/brightscript.vim.git' 'brightscript.vim'
-skip = true
-
 [pack/plugins/start/ctrlp.vim]
 checkout = git clone 'https://github.com/kien/ctrlp.vim.git' 'ctrlp.vim'
 
@@ -26,9 +22,6 @@ checkout = git clone 'https://github.com/vim-syntastic/syntastic.git' 'syntastic
 [pack/plugins/start/vim-commentary]
 checkout = git clone 'https://github.com/tpope/vim-commentary.git' 'vim-commentary'
 
-[pack/plugins/start/vim-covered]
-checkout = git clone 'https://github.com/omega/vim-covered.git' 'vim-covered'
-
 [pack/plugins/start/vim-fugitive]
 checkout = git clone 'https://github.com/tpope/vim-fugitive.git' 'vim-fugitive'
 
@@ -37,10 +30,6 @@ checkout = git clone 'https://github.com/fatih/vim-go.git' 'vim-go'
 
 [pack/plugins/start/vim-lint]
 checkout = git clone 'https://github.com/dbakker/vim-lint.git' 'vim-lint'
-
-[pack/plugins/start/vim-lsf]
-checkout = git clone 'https://github.com/sirhc/vim-lsf.git' 'vim-lsf'
-skip = true
 
 [pack/plugins/start/vim-markdown]
 checkout = git clone 'https://github.com/tpope/vim-markdown.git' 'vim-markdown'
@@ -68,13 +57,6 @@ checkout = git clone 'https://github.com/cespare/vim-toml.git' 'vim-toml'
 
 [pack/plugins/start/vim-unimpaired]
 checkout = git clone 'https://github.com/tpope/vim-unimpaired.git' 'vim-unimpaired'
-
-[pack/plugins/start/coc.nvim]
-checkout = git clone 'https://github.com/neoclide/coc.nvim.git' 'coc.nvim'
-skip = true
-
-[pack/plugins/start/logstash.vim]
-checkout = git clone 'https://github.com/vim-scripts/logstash.vim.git' 'logstash.vim'
 
 [pack/plugins/start/vim-cfn]
 checkout = git clone 'https://github.com/speshak/vim-cfn.git' 'vim-cfn'
