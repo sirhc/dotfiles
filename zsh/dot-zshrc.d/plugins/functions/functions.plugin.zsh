@@ -1,6 +1,10 @@
 # Keep the functions that override existing commands near the top, so I don't
 # lose track of them.
 
+function \=() {
+    print $(( ${@//,} ))
+}
+
 function cd {
     if [[ -z $2 ]]; then
         if [[ -f $1 ]]; then

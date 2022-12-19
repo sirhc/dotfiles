@@ -182,6 +182,11 @@ bindkey '^ ' autosuggest-accept # https://github.com/zsh-users/zsh-autosuggestio
 # zsh take care of pruning the history.
 #(( $(wc -l ~/.zsh_history | cut -d' ' -f1) > (SAVEHIST * 0.8) )) && cp ~/.zsh_history ~/.zsh_history.$(date +%Y%m%d%H%M%S)
 
+# Don't do this in my aliases plugin, because,
+#
+#   zsh-syntax-highlighting.zsh:31: invalid alias '=' encountered while printing aliases
+aliases[=]='noglob ='
+
 # Finally, any machine-specific configuration that doesn't belong in my version
 # controlled file.
 [[ -e ~/.zshrc.local ]] && source ~/.zshrc.local
