@@ -15,4 +15,5 @@ augroup filetypedetect
     au BufNewFile,BufRead *.zsh-theme  setf zsh
     au BufNewFile,BufRead .mrconfig    setf dosini
     au BufNewFile,BufRead Jenkinsfile* setf groovy
+    au BufNewFile,BufRead known_hosts  setf known_hosts
 augroup END

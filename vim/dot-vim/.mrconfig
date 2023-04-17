@@ -1,92 +1,82 @@
 [DEFAULT]
 include = cat .mrconfig.local 2> /dev/null || :
 
-[pack/plugins/start/ack.vim]
-checkout = git clone 'https://github.com/mileszs/ack.vim.git' 'ack.vim'
+# Color Schemes
 
-[pack/plugins/start/ctrlp.vim]
-checkout = git clone 'https://github.com/kien/ctrlp.vim.git' 'ctrlp.vim'
+[pack/colors/start/codedark]
+checkout = git clone 'https://github.com/tomasiser/vim-code-dark.git' 'codedark'
 
-[pack/plugins/start/nerdtree]
-checkout = git clone 'https://github.com/preservim/nerdtree.git' 'nerdtree'
+# Plugins
 
-[pack/plugins/start/plantuml-syntax]
-checkout = git clone 'https://github.com/aklt/plantuml-syntax.git' 'plantuml-syntax'
+[pack/plugins/start/airline]
+checkout = git clone 'https://github.com/vim-airline/vim-airline.git' 'airline'
 
-[pack/plugins/start/rainbow_levels.vim]
-checkout = git clone 'https://github.com/thiagoalessio/rainbow_levels.vim.git' 'rainbow_levels.vim'
+[pack/plugins/start/ale]
+checkout = git clone 'https://github.com/dense-analysis/ale.git' 'ale'
 
-[pack/plugins/start/syntastic]
-checkout = git clone 'https://github.com/vim-syntastic/syntastic.git' 'syntastic'
+[pack/plugins/start/bufexplorer]
+checkout = git clone 'https://github.com/jlanzarotta/bufexplorer.git' 'bufexplorer'
 
-[pack/plugins/start/vim-commentary]
-checkout = git clone 'https://github.com/tpope/vim-commentary.git' 'vim-commentary'
+[pack/plugins/start/commentary]
+checkout = git clone 'https://github.com/tpope/vim-commentary.git' 'commentary'
 
-[pack/plugins/start/vim-fugitive]
-checkout = git clone 'https://github.com/tpope/vim-fugitive.git' 'vim-fugitive'
+[pack/plugins/start/ctrlp]
+checkout = git clone 'https://github.com/kien/ctrlp.vim.git' 'ctrlp'
 
-[pack/plugins/start/vim-go]
-checkout = git clone 'https://github.com/fatih/vim-go.git' 'vim-go'
-
-[pack/plugins/start/vim-lint]
-checkout = git clone 'https://github.com/dbakker/vim-lint.git' 'vim-lint'
-
-[pack/plugins/start/vim-markdown]
-checkout = git clone 'https://github.com/tpope/vim-markdown.git' 'vim-markdown'
-
-[pack/plugins/start/vim-misc]
-checkout = git clone 'https://github.com/xolox/vim-misc.git' 'vim-misc'
-
-[pack/plugins/start/vim-notes]
-checkout = git clone 'https://github.com/xolox/vim-notes.git' 'vim-notes'
-
-[pack/plugins/start/vim-perl]
-checkout = git clone 'https://github.com/vim-perl/vim-perl.git' 'vim-perl'
-
-[pack/plugins/start/vim-runscript]
-checkout = git clone 'https://github.com/sirhc/vim-runscript.git' 'vim-runscript'
-
-[pack/plugins/start/vim-speeddating]
-checkout = git clone 'https://github.com/tpope/vim-speeddating.git' 'vim-speeddating'
-
-[pack/plugins/start/vim-surround]
-checkout = git clone 'https://github.com/tpope/vim-surround.git' 'vim-surround'
-
-[pack/plugins/start/vim-toml]
-checkout = git clone 'https://github.com/cespare/vim-toml.git' 'vim-toml'
-
-[pack/plugins/start/vim-unimpaired]
-checkout = git clone 'https://github.com/tpope/vim-unimpaired.git' 'vim-unimpaired'
-
-[pack/plugins/start/vim-cfn]
-checkout = git clone 'https://github.com/speshak/vim-cfn.git' 'vim-cfn'
-
-[pack/plugins/start/vim-terraform]
-checkout = git clone 'https://github.com/hashivim/vim-terraform.git' 'vim-terraform'
-
-[pack/plugins/start/ansible-vim]
-checkout = git clone 'https://github.com/pearofducks/ansible-vim.git' 'ansible-vim'
-
-[pack/plugins/start/vim-packer]
-checkout = git clone 'https://github.com/hashivim/vim-packer.git' 'vim-packer'
-
-[pack/plugins/start/tabular]
-checkout = git clone 'https://github.com/godlygeek/tabular.git' 'tabular'
+[pack/plugins/start/fugitive]
+checkout = git clone 'https://github.com/tpope/vim-fugitive.git' 'fugitive'
 
 [pack/plugins/start/rainbow_csv]
 checkout = git clone 'https://github.com/mechatroner/rainbow_csv.git' 'rainbow_csv'
 
-[pack/plugins/start/vim-airline]
-checkout = git clone 'https://github.com/vim-airline/vim-airline.git' 'vim-airline'
+[pack/plugins/start/rainbow_levels]
+checkout = git clone 'https://github.com/thiagoalessio/rainbow_levels.vim.git' 'rainbow_levels'
 
-[pack/plugins/start/vim-airline-themes]
-checkout = git clone 'https://github.com/vim-airline/vim-airline-themes.git' 'vim-airline-themes'
+[pack/plugins/start/repeat]
+checkout = git clone 'https://github.com/tpope/vim-repeat.git' 'repeat'
 
-[pack/plugins/start/vim-scrollstatus]
-checkout = git clone 'https://github.com/ojroques/vim-scrollstatus.git' 'vim-scrollstatus'
+[pack/plugins/start/runscript]
+checkout = git clone 'https://github.com/sirhc/vim-runscript.git' 'runscript'
 
-[pack/plugins/start/vim-code-dark]
-checkout = git clone 'https://github.com/tomasiser/vim-code-dark.git' 'vim-code-dark'
+[pack/plugins/start/speeddating]
+checkout = git clone 'https://github.com/tpope/vim-speeddating.git' 'speeddating'
 
-[pack/plugins/start/bufexplorer]
-checkout = git clone 'https://github.com/jlanzarotta/bufexplorer.git' 'bufexplorer'
+[pack/plugins/start/surround]
+checkout = git clone 'https://github.com/tpope/vim-surround.git' 'surround'
+
+[pack/plugins/start/tabular]
+checkout = git clone 'https://github.com/godlygeek/tabular.git' 'tabular'
+
+[pack/plugins/start/unimpaired]
+checkout = git clone 'https://github.com/tpope/vim-unimpaired.git' 'unimpaired'
+
+# Syntax (Language/File Type) Support
+
+[pack/syntax/start/ansible]
+checkout = git clone 'https://github.com/pearofducks/ansible-vim.git' 'ansible'
+
+[pack/syntax/start/cfn]
+checkout = git clone 'https://github.com/speshak/vim-cfn.git' 'cfn'
+
+[pack/syntax/start/go]
+checkout = git clone 'https://github.com/fatih/vim-go.git' 'go'
+
+[pack/syntax/start/packer]
+checkout = git clone 'https://github.com/hashivim/vim-packer.git' 'packer'
+
+[pack/syntax/start/perl]
+checkout = git clone 'https://github.com/vim-perl/vim-perl.git' 'perl'
+
+[pack/syntax/start/plantuml]
+checkout = git clone 'https://github.com/aklt/plantuml-syntax.git' 'plantuml'
+
+[pack/syntax/start/terraform]
+checkout = git clone 'https://github.com/hashivim/vim-terraform.git' 'terraform'
+
+[pack/syntax/start/toml]
+checkout = git clone 'https://github.com/cespare/vim-toml.git' 'toml'
+
+# Themes
+
+[pack/themes/start/airline]
+checkout = git clone 'https://github.com/vim-airline/vim-airline-themes.git' 'airline'

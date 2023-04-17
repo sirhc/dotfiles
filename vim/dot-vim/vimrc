@@ -1,6 +1,8 @@
 set autoindent
+set autoread
 set autowriteall
 set backspace=indent,eol,start
+set cursorline
 set directory=~/.vim/swapfiles//,~/tmp//,.
 set display=lastline
 set expandtab
@@ -11,6 +13,7 @@ set hlsearch
 set ignorecase
 set incsearch
 set laststatus=2
+set laststatus=2   " Always display the statusline in all windows
 set linebreak
 set listchars=eol:$,tab:..,trail:.,extends:>,precedes:<
 set more
@@ -19,6 +22,7 @@ set pastetoggle=<F2>
 set report=0
 set shiftround
 set shiftwidth=4
+set showtabline=2  " Always display the tabline, even if there is only one tab
 set smartcase
 set smartindent
 set smarttab
@@ -27,115 +31,76 @@ set softtabstop=4
 set spell
 set tabstop=4
 set textwidth=78
-set timeout timeoutlen=300 ttimeoutlen=300  " keycodes and maps timeout in 3/10 sec
+set timeout timeoutlen=300 ttimeoutlen=300   " keycodes and maps timeout in 3/10 sec
 set title
 set viminfo='20,<50,s10,h
+set wildignorecase
 set wildmode=list:longest,full
 set wildoptions=pum
 
 set nocompatible
 set nojoinspaces
 set nolist
+set noshowmode  " Hide the default mode text (e.g. -- INSERT -- below the statusline)
 set nostartofline
 
-set laststatus=2   " Always display the statusline in all windows
-set showtabline=2  " Always display the tabline, even if there is only one tab
-set noshowmode     " Hide the default mode text (e.g. -- INSERT -- below the statusline)
 set t_Co=256
 
-if v:version >= 700
-    set cursorline
-end
-
-" http://vim.wikia.com/wiki/Disable_F1_built-in_help_key
-nmap <F1> :echo<CR>
-imap <F1> <C-o>:echo<CR>
-
-" http://blog.nixpanic.net/2013/01/changing-vim-settings-depending-on-git.html
+" Emulate Vim's modeline support using `git config`. For example,
 "
-" $ git config --add vim.modeline 'tabstop=4 expandtab'
+" > git config --add vim.modeline 'tabstop=4 expandtab'
+
 let s:git_modeline = system('git config --get vim.modeline')
 if strlen(s:git_modeline)
-    exe set s:git_modeline
+    execute 'set ' . s:git_modeline
 endif
 
-filetype plugin on
-filetype indent on
+silent! colorscheme codedark  " https://vimcolorschemes.com/tomasiser/vim-code-dark
 
-if &t_Co > 2
-    syntax on
-endif
+filetype plugin indent on
+syntax on
 
-nnoremap <F3>      :set invnumber<CR>
-nnoremap <F4>      :set invspell<CR>
-nnoremap <F5>      :if exists("g:syntax_on") <Bar> syntax off <Bar> else <Bar> syntax enable <Bar> endif <CR>
-nnoremap <F6>      :SyntasticToggleMode<CR>
-nnoremap <F7>      :SyntasticCheck<CR>
-nnoremap <BS>      :nohlsearch<CR>
-nnoremap <Up>      :bprev<CR>
-nnoremap <Down>    :bnext<CR>
-nnoremap <Left>    :cprev<CR>
-nnoremap <Right>   :cnext<CR>
-nnoremap <Space>   <PageDown>
-nnoremap <Leader>d :!perldoc "%"<CR>
-nnoremap <Leader>f :NERDTreeToggle<CR>
-nnoremap <Leader>g :Geeknote<CR>
-nnoremap <Leader>l :RainbowLevelsToggle<CR>
-nnoremap <Leader>r :call RunScript()<CR>
+nnoremap <silent> <F3>      :set invnumber<CR>
+nnoremap <silent> <F4>      :set invspell<CR>
+nnoremap <silent> <F5>      :update<CR> :call RunScript()<CR>
+nnoremap <silent> <F6>      :update<CR> :make<CR>
+nnoremap <silent> <F9>      :if exists("g:syntax_on") <Bar> syntax off <Bar> else <Bar> syntax enable <Bar> endif <CR>
+inoremap <silent> <F10>     <C-O>za
+nnoremap <silent> <F10>     za
+onoremap <silent> <F10>     <C-C>za
+vnoremap <silent> <F10>     zf
+nnoremap <silent> <Up>      :bprev<CR>
+nnoremap <silent> <Down>    :bnext<CR>
+nnoremap <silent> <Left>    :cprev<CR>
+nnoremap <silent> <Right>   :cnext<CR>
+nnoremap <silent> <Space>   <PageDown>
 
-" Navigate through wrapped lines.
+" Quick window navigation using Ctrl+<Arrow>.
+nnoremap <silent> <C-Up>    :wincmd k<CR>
+nnoremap <silent> <C-Down>  :wincmd j<CR>
+nnoremap <silent> <C-Left>  :wincmd h<CR>
+nnoremap <silent> <C-Right> :wincmd l<CR>
+
+nnoremap <silent> <Leader>aj :ALENextWrap<CR>
+nnoremap <silent> <Leader>ak :ALEPreviousWrap<CR>
+
+" Always navigate through wrapped lines.
 nnoremap j gj
 nnoremap k gk
 
-" https://twitter.com/gumnos/status/1282057172763934720
-"
-" Toggle highlight when refreshing the screen.
-nnoremap <C-L> :set hls!<CR><C-L>
+" Toggle highlight search when redrawing the screen.
+nnoremap <silent> <C-L> :set hlsearch!<CR><C-L>
 
-" http://robots.thoughtbot.com/post/619330025/viiiiiiiiiiiiiiiiiim
-"
-" In visual mode, duplicate selection directly below. Handy when writing
-" tests.
-xmap D y'>p
+" Duplicate the selection directly below.
+vnoremap <Leader>dd y'>p
 
-" http://vim.wikia.com/wiki/Insert_current_filename
-"inoremap \fn <C-R>=expand("%:t")<CR>
+" List buffers and prompt to switch with a number (g = go to).
+nnoremap <Leader>g :buffers<CR>:buffer<Space>
 
-" http://mislav.uniqpath.com/2011/12/vim-revisited/
-nnoremap <Leader><Leader> <C-^>
+" http://vim.wikia.com/wiki/Switching_case_of_characters
+vnoremap ~ y:call setreg('', twiddlecase#TwiddleCase(@"), getregtype(''))<CR>gv""Pgv
 
-" http://www.catonmat.net/blog/sudo-vim/
 cnoremap sudow w !sudo tee % >/dev/null
-
-if has("gui_running")
-    set columns=85 lines=45
-    set guioptions-=m   " hide menubar
-    set guioptions-=T   " hide toolbar
-
-    if has("win32")
-        set guifont=Lucida_Sans_Typewriter:h9:cANSI
-    elseif has("gui_gtk2") || has("gui_gtk3")
-        set guifont=Inconsolata\ Medium\ 10
-    else
-        set guifont=-b&h-lucida\ sans\ typewriter-medium-r-normal-*-*-120-*-*-m-*-iso8859-1
-    endif
-
-    function! ToggleMenuToolbar()
-        if &guioptions =~# 'T'
-            set guioptions-=T
-            set guioptions-=m
-        else
-            set guioptions+=T
-            set guioptions+=m
-        endif
-    endfunction
-
-    nmap <silent> <F4> :call ToggleMenuToolbar()<CR>
-
-    " Make shift-insert work like in a terminal.
-    imap <S-Insert> <MiddleMouse>
-    cmap <S-Insert> <MiddleMouse>
-endif
 
 " Handy abbreviations.
 iabbrev fiancee fiancée
@@ -154,139 +119,74 @@ iabbrev dont'     don't
 iabbrev existance existence
 iabbrev paramter  parameter
 
-" Highlight trailing whitespace.
-match ErrorMsg /\s\+\%#\@!$/  " \s\+  one or more whitespace characters
-                              " \%#   current cursor position
-                              " \@!   zero-width match if previous fails
-                              " $     end of line
-
 if has("perl")
-    " From freenode/#perl:
-    " 2011-01-05 07:34:56 < grondilu> add "perl *say = \&VIM::Msg" in your .vimrc and you'll spare 5 chars each time you'll want to see the ouput of a :perl command :)
+    " freenode #perl 2011-01-05 07:34:56 < grondilu> add "perl *say = \&VIM::Msg" in your .vimrc and you'll spare 5 chars each time you'll want to see the ouput of a :perl command :)
     perl *say = \&VIM::Msg
 endif
 
-augroup OpenFile
-    au!
-
-    " When editing an existing file, always jump to the last cursor position.
-    au BufReadPost *
-        \ if line("'\"") > 0 && line("'\"") <= line("$") |
-        \     exe "normal! g'\"" |
-        \ endif
-
-    " Prevent swap files in the Dropbox directory, otherwise they will be
-    " synced. (This is unnecessary with dir=~/tmp.)
-    "au BufNewFile,BufRead ~/Dropbox/* set noswapfile
+augroup ReadFile
+    autocmd!
 
     " Start new files with a template, if one exists (and remove the empty
     " line at the end).
-    au BufNewFile * silent! 0r ~/.vim/template/new.%:e
-    au BufNewFile * silent! normal Gdd
+    autocmd BufNewFile * silent! 0r ~/.vim/template/new.%:e | normal Gdd
 
-    au BufNewFile,BufRead known_hosts set nowrap nospell
+    " Tricks to view various non-text file types.
 
-    " View various files types (see Vim tip #1356).
-    au BufReadPre  *.pdf setlocal ro
-    au BufReadPost *.pdf %!pdftotext -nopgbrk "%" -
-
-    au BufReadPre  *.rtf setlocal ro
-    au BufReadPost *.rtf %!unrtf -t text "%"
-
-    au BufReadPre  *.rpm setlocal ro
-    au BufReadPost *.rpm %!rpm -qilp "%"
-
-    au BufReadPre  *.gpg setlocal ro
-    au BufReadPost *.gpg %!gpg --decrypt "%" -
-
-    au BufReadPre *.epub setlocal ro
-    au BufReadCmd *.epub call zip#Browse(expand("<amatch>"))
-
-    au BufNewFile,BufRead *.t let b:runscript_interpreter = "prove -v"
-augroup END
-
-let g:NERDTreeIgnore      = ['\.o$', '\.class$', '\.pyc$', '\~$', '^__pycache__$', '\.tfstate\(\|\..*\)$']
-let g:NERDTreeHijackNetrw = 1
-let g:NERDTreeMinimalMenu = 1  " https://github.com/preservim/nerdtree/issues/1321
-
-" Ref: <https://github.com/scrooloose/syntastic>
-"
-"set statusline+=%#warningmsg#
-"set statusline+=%{SyntasticStatuslineFlag()}
-"set statusline+=%*
-"
-" Emulate standard status line with 'ruler' set
-"   :set statusline=%<%f\ %h%m%r%=%-14.(%l,%c%V%)\ %P
-
-"set statusline=\[%n\]\ %<%f\ %y\ %{FugitiveStatusline()}\ %h%m%r\ %#warningmsg#%{SyntasticStatuslineFlag()}%*%=%-14.(%l,%c%V%)\ %P
-
-let g:syntastic_aggregate_errors          = 1
-let g:syntastic_always_populate_loc_list  = 1
-let g:syntastic_auto_loc_list             = 1
-let g:syntastic_check_on_open             = 1
-let g:syntastic_check_on_wq               = 0
-let g:syntastic_cloudformation_checkers   = ['cfn_lint', 'cfn_nag']
-let g:syntastic_markdown_checkers         = ['mdl', 'proselint']
-let g:syntastic_perl_perlcritic_post_args = '--verbose "\%s:\%f:\%l:\%c: \%p (\%s): \%m\n"'  " https://github.com/scrooloose/syntastic/wiki/%28v3.7.0%29---Perl%3A---perlcritic
-let g:syntastic_python_checkers           = ['python', 'flake8']
-let g:syntastic_yaml_checkers             = ['yamllint', 'yamlxs']
-
-let g:terraform_align         = 0
-let g:terraform_fold_sections = 0
-let g:terraform_fmt_on_save   = 0
-
-" http://vim.wikia.com/wiki/Switching_case_of_characters
-"
-" With the following, you can visually select text then press ~ to convert the
-" text to UPPER CASE, then to lower case, then to Title Case. Keep pressing ~
-" until you get the case you want.
-
-function! TwiddleCase(str)
-    if a:str ==# toupper(a:str)
-        let l:result = tolower(a:str)
-    elseif a:str ==# tolower(a:str)
-        let l:result = substitute(a:str,'\(\<\w\+\>\)', '\u\1', 'g')
-    else
-        let l:result = toupper(a:str)
+    if executable('gpg')
+        autocmd BufReadPre  *.gpg setlocal ro
+        autocmd BufReadPost *.gpg silent execute '%!gpg --decrypt' shellescape(expand('%')) '-'
     endif
 
-    return l:result
-endfunction
+    if executable('pdftotext')
+        autocmd BufReadPre  *.pdf setlocal ro
+        autocmd BufReadPost *.pdf silent execute '%!pdftotext -layout -nopgbrk' shellescape(expand('%')) '-'
+    endif
 
-xnoremap ~ y:call setreg('', TwiddleCase(@"), getregtype(''))<CR>gv""Pgv
+    if executable('rpm')
+        autocmd BufReadPre  *.rpm setlocal ro
+        autocmd BufReadPost *.rpm silent execute '%!rpm -qilp' shellescape(expand('%'))
+    endif
 
-" https://vim.fandom.com/wiki/Folding
-inoremap <F9> <C-O>za
-nnoremap <F9> za
-onoremap <F9> <C-C>za
-vnoremap <F9> zf
+    if executable('unrtf')
+        autocmd BufReadPre  *.rtf setlocal ro
+        autocmd BufReadPost *.rtf silent execute '%!unrtf -t text' shellescape(expand('%'))
+    endif
+augroup END
 
-" Quick window navigation using ctrl+arrow.
-nmap <silent> <C-Up>    :wincmd k<CR>
-nmap <silent> <C-Down>  :wincmd j<CR>
-nmap <silent> <C-Left>  :wincmd h<CR>
-nmap <silent> <C-Right> :wincmd l<CR>
+augroup QuickFix
+    autocmd!
+    autocmd QuickFixCmdPost [^l]* cwindow
+    autocmd QuickFixCmdPost    l* lwindow
+augroup END
 
-" List buffers and prompt to switch with a number. Do not make it silent,
-" otherwise the message will overlap selection prompt.
-nnoremap <C-G> :buffers<CR>:buffer<Space>
+let g:netrw_altfile      = 1    " CTRL-^ won't return to netrw
+let g:netrw_altv         = 1    " right splitting
+let g:netrw_banner       = 1    " show the netrw banner
+let g:netrw_browse_split = 4    " act like "P"
+let g:netrw_list_hide    = netrw_gitignore#Hide() .. ',^\..*'
+let g:netrw_liststyle    = 3    " tree style listing
+let g:netrw_sizestyle    = 'H'  " human-readable (1024 base)
+let g:netrw_winsize      = 20   " 20% window size
 
 " https://github.com/vim-airline/vim-airline
-let g:airline_powerline_fonts = 1
+
 if !exists('g:airline_symbols')
     let g:airline_symbols = {}
 endif
+
+let g:airline_powerline_fonts                 = 1
 let g:airline#extensions#tabline#enabled      = 1
 let g:airline#extensions#tabline#show_buffers = 0
-let g:airline_section_x                       = '%{ScrollStatus()}'
 let g:airline_symbols.space                   = "\ua0"
 let g:airline_theme                           = 'codedark'
 
-if executable('ag')
-    let g:ackprg = 'ag --vimgrep'
+if executable('rg')
+    set grepprg=rg\ --vimgrep\ --no-heading\ --smart-case
+    set grepformat+=%f:%l:%c:%m
+
+    let g:ctrlp_user_command = 'rg %s --files --hidden --color=never --glob ""'
 endif
-
-let g:vimwiki_list = [{'path': '~/Dropbox/VimWiki', 'syntax': 'markdown', 'ext': '.wiki'}]
-
-" https://vimcolorschemes.com/tomasiser/vim-code-dark
-colorscheme codedark
+if executable('fd')
+    let g:ctrlp_user_command = 'fd --unrestricted --color=never --glob --type file "" %s'
+endif

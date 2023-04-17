@@ -8,7 +8,7 @@ function! GitCommitComplete(findstart, base)
         let l:line  = getline('.')
         let l:start = col('.') - 1
 
-        while start > 0 && line[start - 1] =~ '\S'
+        while start > 0 && line[start - 1] =~# '\S'
             let l:start -= 1
         endwhile
 
@@ -16,7 +16,7 @@ function! GitCommitComplete(findstart, base)
     endif
 
     " Complete user names.
-    if strpart(a:base, 0, 1) == '@'
+    if strpart(a:base, 0, 1) ==# '@'
         let l:prefix = strpart(a:base, 1)
         let l:result = []
         let l:output = systemlist('getent passwd | cut -d: -f1,5 | sort')
@@ -40,7 +40,7 @@ function! GitCommitComplete(findstart, base)
     endif
 
     " Complete GitHub issues.
-    if strpart(a:base, 0, 1) == '#'
+    if strpart(a:base, 0, 1) ==# '#'
         let l:prefix = strpart(a:base, 1)
         let l:result = []
         let l:output = systemlist('hub issue | sort -n')

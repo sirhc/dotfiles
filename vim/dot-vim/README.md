@@ -18,8 +18,8 @@ With the advent of Vim 8 and its native package system, I switched over from
 [Pathogen](https://github.com/tpope/vim-pathogen). For hopefully obvious
 reasons, I don't include the plugins I use in this repository.
 
-I maintain a `.mrconfig` file with the list of plugins I currently use with
-Vim. The plugins can then be installed and maintained using
+I maintain a [`.mrconfig`](.mrconfig) file with the list of plugins I
+currently use with Vim. The plugins can then be installed and maintained using
 [myrepos](https://myrepos.branchable.com/).
 
 ```

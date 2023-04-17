@@ -1,10 +1,12 @@
+scriptencoding utf-8
+
 setlocal complete=.,w,b,u,t,i
 setlocal comments-=s1:/*,mb:*,ex:*/
 setlocal comments+=fb:*
 setlocal equalprg=perltidy
 setlocal keywordprg=pd
 setlocal iskeyword+=:,$,@,%
-setlocal matchpairs+=<:>,«:»
+setlocal matchpairs+=<:>,Â«:Â»
 
 "map <buffer> <Leader>r :call RunScript('-w')<CR>
 "map <buffer> <Leader>b :call RunScript('-d')<CR>

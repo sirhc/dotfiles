@@ -1,1 +1,1 @@
-let b:runscript_interpreter = "plantuml"
+let b:runscript_interpreter = 'plantuml'

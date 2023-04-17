@@ -1,8 +1,8 @@
 *.swp
 *~
 .mrconfig.local
+.netrwbook
 .netrwhist
-bundle/
 local/
 pack/
 spell/

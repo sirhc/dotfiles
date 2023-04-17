@@ -1,1 +1,2 @@
 setlocal nospell
+setlocal nowrap
