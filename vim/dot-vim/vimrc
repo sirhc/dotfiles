@@ -188,5 +188,5 @@ if executable('rg')
     let g:ctrlp_user_command = 'rg %s --files --hidden --color=never --glob ""'
 endif
 if executable('fd')
-    let g:ctrlp_user_command = 'fd --unrestricted --color=never --glob --type file "" %s'
+    let g:ctrlp_user_command = 'fd --color=never --glob --type file "" %s'
 endif
