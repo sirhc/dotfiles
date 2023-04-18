@@ -124,6 +124,12 @@ endif
 augroup ReadFile
     autocmd!
 
+    " When editing an existing file, always jump to the last cursor position.
+    au BufReadPost *
+        \ if line("'\"") > 0 && line("'\"") <= line("$") |
+        \     exe "normal! g'\"" |
+        \ endif
+
     " Start new files with a template, if one exists (and remove the empty
     " line at the end).
     autocmd BufNewFile * silent! 0r ~/.vim/template/new.%:e | normal Gdd
