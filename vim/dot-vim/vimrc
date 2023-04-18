@@ -9,7 +9,6 @@ set expandtab
 set foldmethod=marker
 set formatoptions+=n
 set history=50
-set hlsearch
 set ignorecase
 set incsearch
 set laststatus=2
@@ -69,6 +68,7 @@ inoremap <silent> <F10>     <C-O>za
 nnoremap <silent> <F10>     za
 onoremap <silent> <F10>     <C-C>za
 vnoremap <silent> <F10>     zf
+nnoremap <silent> <BS>      :nohlsearch<CR>
 nnoremap <silent> <Up>      :bprev<CR>
 nnoremap <silent> <Down>    :bnext<CR>
 nnoremap <silent> <Left>    :cprev<CR>
@@ -87,9 +87,6 @@ nnoremap <silent> <Leader>ak :ALEPreviousWrap<CR>
 " Always navigate through wrapped lines.
 nnoremap j gj
 nnoremap k gk
-
-" Toggle highlight search when redrawing the screen.
-nnoremap <silent> <C-L> :set hlsearch!<CR><C-L>
 
 " Duplicate the selection directly below.
 vnoremap <Leader>dd y'>p
