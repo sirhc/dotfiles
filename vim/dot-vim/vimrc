@@ -9,6 +9,7 @@ set expandtab
 set foldmethod=marker
 set formatoptions+=n
 set history=50
+set hlsearch
 set ignorecase
 set incsearch
 set laststatus=2
