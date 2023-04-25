@@ -3,7 +3,7 @@
     email = 113591+sirhc@users.noreply.github.com
 
 [init]
-	defaultBranch = main
+    defaultBranch = main
 
 [color]
     ui = auto
@@ -11,8 +11,6 @@
 [core]
     editor = vim -i NONE
     excludesFile = ~/.gitignore
-    #safecrlf = true
-    #autocrlf = input
 
 [interactive]
     diffFilter = delta --color-only
@@ -60,7 +58,7 @@
     default = current
 
 [pull]
-	rebase = false
+    rebase = false
 
 [credential]
     helper = store
