@@ -14,6 +14,13 @@
     #safecrlf = true
     #autocrlf = input
 
+[interactive]
+    diffFilter = delta --color-only
+
+[delta]
+    light = false
+    navigate = true # use n and N to move between diff sections
+
 [receive]
     denyCurrentBranch = warn
 
@@ -32,6 +39,7 @@
     cmd = vim -f -c \"Gvdiffsplit!\" \"$MERGED\"
 
 [diff]
+    colorMoved = default
     renames = true
     tool = vimdiff
     wsErrorHighlight = all
