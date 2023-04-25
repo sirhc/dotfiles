@@ -1,6 +1,7 @@
 # https://github.com/markdownlint/markdownlint/blob/master/docs/configuration.md
 
 rules "~MD013",  # Line length
-      "~MD029"   # Ordered list item prefix
+      "~MD029",  # Ordered list item prefix
+      "~MD034"   # Bare URL used (until I figure out how to exclude this only on *.wiki files)
 
 # vim: ft=config
