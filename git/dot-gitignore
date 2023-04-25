@@ -1,4 +1,5 @@
 *.swp
 .nobackup
+.prr.toml
 .tmp/
 tmp/
