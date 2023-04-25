@@ -20,6 +20,17 @@ git_prune       = git prune-branches
 git_tags        = git tag -l
 git_quietupdate = git pull "$@" | sed -e '/^Already up to date.$/d'
 
+git_defaultbranch =
+    export PAGER=cat
+    gh repo view --json 'defaultBranchRef' --jq '.defaultBranchRef.name'
+
+git_nondefaultbranch =
+    current_branch="$( git rev-parse --abbrev-ref HEAD )"
+    default_branch="$( gh repo view --json 'defaultBranchRef' --jq '.defaultBranchRef.name' )"
+    if [[ ! "$current_branch" = "$default_branch" ]]; then
+        echo "$current_branch"
+    fi
+
 include = cat ~/.mrconfig.d/*.conf 2> /dev/null || :
 
 [ALIAS]
