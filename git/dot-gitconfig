@@ -110,6 +110,7 @@
     untrack = rm --cached
     tags = show-ref --tags
     hard = reset --hard HEAD
+    open = !gh repo view -w
 
     show-tag = !git name-rev --tags --name-only $(git rev-parse HEAD)
 
