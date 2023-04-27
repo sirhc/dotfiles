@@ -50,6 +50,9 @@ checkout = git clone 'https://github.com/godlygeek/tabular.git' 'tabular'
 [pack/plugins/start/unimpaired]
 checkout = git clone 'https://github.com/tpope/vim-unimpaired.git' 'unimpaired'
 
+[pack/plugins/start/vimwiki]
+checkout = git clone 'https://github.com/vimwiki/vimwiki.git' 'vimwiki'
+
 # Syntax (Language/File Type) Support
 
 [pack/syntax/start/ansible]
