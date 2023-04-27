@@ -131,10 +131,6 @@ augroup ReadFile
         \     exe "normal! g'\"" |
         \ endif
 
-    " Start new files with a template, if one exists (and remove the empty
-    " line at the end).
-    autocmd BufNewFile * silent! 0r ~/.vim/template/new.%:e | normal Gdd
-
     " Tricks to view various non-text file types.
 
     if executable('gpg')
