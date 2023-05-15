@@ -45,6 +45,7 @@ set noshowmode  " Hide the default mode text (e.g. -- INSERT -- below the status
 set nostartofline
 
 set t_Co=256
+set t_ut=
 
 " Emulate Vim's modeline support using `git config`. For example,
 "
@@ -55,6 +56,9 @@ if strlen(s:git_modeline)
     execute 'set ' . s:git_modeline
 endif
 
+let g:codedark_italics     = 1
+let g:codedark_modern      = 1
+let g:codedark_transparent = 1
 silent! colorscheme codedark  " https://vimcolorschemes.com/tomasiser/vim-code-dark
 
 filetype plugin indent on
