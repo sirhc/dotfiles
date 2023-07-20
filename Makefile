@@ -20,9 +20,11 @@ update-repos:
 	mr -j4 gc
 
 update-libs:
+	mkdir -p $(LIB_DIR)
 	$(CURL) https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/lib/git.zsh                      > $(LIB_DIR)/git.zsh
 
 update-functions:
+	mkdir -p $(FUNCTIONS_DIR)
 	$(CURL) https://raw.githubusercontent.com/AlexaraWu/zsh-completions/master/src/_7z                > $(FUNCTIONS_DIR)/_7z
 	$(CURL) https://raw.githubusercontent.com/sirhc/awsvpn-cli/main/completion.zsh                    > $(FUNCTIONS_DIR)/_awsvpn_cli
 	$(CURL) https://raw.githubusercontent.com/exercism/cli/main/shell/exercism_completion.zsh         > $(FUNCTIONS_DIR)/_exercism
@@ -30,6 +32,7 @@ update-functions:
 	$(CURL) https://raw.githubusercontent.com/jkavan/terragrunt-oh-my-zsh-plugin/master/_terragrunt   > $(FUNCTIONS_DIR)/_terragrunt
 
 update-plugins:
+	mkdir -p $(PLUGINS_DIR)/{aws,fzf-completion,git,git-extras,screen,z}
 	$(CURL) https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/plugins/aws/aws.plugin.zsh       > $(PLUGINS_DIR)/aws/aws.plugin.zsh
 	$(CURL) https://raw.githubusercontent.com/tj/git-extras/master/etc/git-extras-completion.zsh      > $(PLUGINS_DIR)/git-extras/git-extras.plugin.zsh
 	$(CURL) https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/plugins/git/git.plugin.zsh       > $(PLUGINS_DIR)/git/git.plugin.zsh
