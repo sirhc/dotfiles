@@ -29,20 +29,21 @@ setopt INTERACTIVE_COMMENTS    # allow comments even in interactive shells
 unsetopt CASE_GLOB # case-insensitive file globbing
 unsetopt NOMATCH   # leave unmatched patterns alone in arg list
 
-export ANSIBLE_COW_SELECTION=random
+export ANSIBLE_COW_SELECTION='random'
 export AWS_PAGER=
 export BC_ENV_ARGS="-lq $HOME/.bcrc"
 export CLICOLOR=1 # colorize ls(1) on Darwin
-export EDITOR=vim
-export GREP=egrep
+export EDITOR='vim'
+export FZF_DEFAULT_COMMAND='fd --type f'
+export GREP='egrep'
 export LESS='--LONG-PROMPT --RAW-CONTROL-CHARS --chop-long-lines --clear-screen --ignore-case --jump-target=10 --shift=4 --mouse'
 export MAN_POSIXLY_CORRECT=1
 export NPM_PACKAGES="$HOME/.local"
-export PAGER=less
-export PERLDOC_PAGER=less
-export RSYNC_RSH=ssh
-export TZ=US/Pacific
-export UNZIP=-qq
+export PAGER='less'
+export PERLDOC_PAGER='less'
+export RSYNC_RSH='ssh'
+export TZ='US/Pacific'
+export UNZIP='-qq'
 
 path=(
     ~/bin
