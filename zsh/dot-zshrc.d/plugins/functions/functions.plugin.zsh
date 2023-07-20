@@ -89,6 +89,14 @@ function perl-lib {
     eval "$(perl -M'local::lib @ARGV' - "$@" 0<&-)"
 }
 
+function mr {
+    if [[ -n "${MR_CONFIG:-}" ]]; then
+        command mr --config "$MR_CONFIG" "$@"
+    else
+        command mr "$@"
+    fi
+}
+
 function myip {
     # TODO: This only does IPv6?
     print "$(curl -s http://ifconfig.io/ip)"
