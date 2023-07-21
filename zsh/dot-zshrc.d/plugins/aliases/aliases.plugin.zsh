@@ -1,4 +1,5 @@
 alias bofh='ncat bofh.jeffballard.us 666 </dev/null | sed -ne "s/[^:]*: //p"'
+alias chat='cheat'
 alias ed='ed -p:'
 alias emdash='print -- "—"'
 alias endash='print -- "–"'
