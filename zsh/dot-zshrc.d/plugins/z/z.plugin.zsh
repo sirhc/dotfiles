@@ -102,17 +102,26 @@ With no ARGUMENT, list the directory history in ascending rank.
 # Load zsh/datetime module, if necessary
 (( $+EPOCHSECONDS )) || zmodload zsh/datetime
 
-# Load zsh/files, if necessary
-[[ ${builtins[zf_chown]} == 'defined' &&
-   ${builtins[zf_mv]}    == 'defined' &&
-   ${builtins[zf_rm]}    == 'defined' ]] ||
-  zmodload -F zsh/files b:zf_chown b:zf_mv b:zf_rm
+# Global associative array for internal use
+typeset -gA ZSHZ
+
+# Load zsh/files, if necessary and if available (MobaXterm zsh lacks zsh/files)
+if [[ ! ${builtins[zf_chown]} == 'defined' ||
+      ! ${builtins[zf_mv]}    == 'defined' ||
+      ! ${builtins[zf_rm]}    == 'defined' ]]; then
+  if zmodload -F zsh/files b:zf_chown b:zf_mv b:zf_rm &> /dev/null; then
+    ZSHZ[CHOWN]='zf_chown'
+    ZSHZ[MV]='zf_mv'
+    ZSHZ[RM]='zf_rm'
+  else
+    ZSHZ[CHOWN]='chown'
+    ZSHZ[MV]='mv'
+    ZSHZ[RM]='rm'
+  fi
+fi
 
 # Load zsh/system, if necessary
 [[ ${modules[zsh/system]} == 'loaded' ]] || zmodload zsh/system &> /dev/null
-
-# Global associative array for internal use
-typeset -gA ZSHZ
 
 # Make sure ZSHZ_EXCLUDE_DIRS has been declared so that other scripts can
 # simply append to it
@@ -277,7 +286,7 @@ zshz() {
 
     if (( ret != 0 )); then
       # Avoid clobbering the datafile if the write to tempfile failed
-      zf_rm -f "$tempfile"
+      ${ZSHZ[RM]} -f "$tempfile"
       return $ret
     fi
 
@@ -285,16 +294,17 @@ zshz() {
     owner=${ZSHZ_OWNER:-${_Z_OWNER}}
 
     if (( ZSHZ[USE_FLOCK] )); then
-      zf_mv "$tempfile" "$datafile" 2> /dev/null || zf_rm -f "$tempfile"
+      ${ZSHZ[MV]} "$tempfile" "$datafile" 2> /dev/null || ${ZSHZ[RM]} -f "$tempfile"
 
       if [[ -n $owner ]]; then
-        zf_chown ${owner}:"$(id -ng ${owner})" "$datafile"
+        ${ZSHZ[CHOWN]} ${owner}:"$(id -ng ${owner})" "$datafile"
       fi
     else
       if [[ -n $owner ]]; then
-        zf_chown "${owner}":"$(id -ng "${owner}")" "$tempfile"
+        ${ZSHZ[CHOWN]} "${owner}":"$(id -ng "${owner}")" "$tempfile"
       fi
-      zf_mv -f "$tempfile" "$datafile" 2> /dev/null || zf_rm -f "$tempfile"
+      ${ZSHZ[MV]} -f "$tempfile" "$datafile" 2> /dev/null ||
+          ${ZSHZ[RM]} -f "$tempfile"
     fi
 
     # In order to make z -x work, we have to disable zsh-z's adding
