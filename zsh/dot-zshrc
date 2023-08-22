@@ -172,7 +172,8 @@ bindkey '^ ' autosuggest-accept # https://github.com/zsh-users/zsh-autosuggestio
 
 (( $+commands[mcfly] )) && eval "$(mcfly init zsh)"    # https://github.com/cantino/mcfly
 (( $+commands[navi] )) && eval "$(navi widget zsh)"    # https://github.com/denisidoro/navi
-(( $+commands[thefuck] )) && eval "$(thefuck --alias)" # warning, this is slow
+(( $+commands[thefuck] )) && eval "$(thefuck --alias)" # https://github.com/nvbn/thefuck
+(( $+commands[zoxide] )) && eval "$(zoxide init zsh)"  # https://github.com/ajeetdsouza/zoxide
 
 # If ~/.zsh_history has reached 80% of SAVEHIST, copy it to a snapshot. Let
 # zsh take care of pruning the history.

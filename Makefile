@@ -32,7 +32,6 @@ update-functions:
 	$(CURL) $(GITHUB_RAW)/exercism/cli/main/shell/exercism_completion.zsh         > $(FUNCTIONS_DIR)/_exercism
 	$(CURL) $(GITHUB_RAW)/sirhc/myrepos.plugin.zsh/main/_myrepos                  > $(FUNCTIONS_DIR)/_myrepos
 	$(CURL) $(GITHUB_RAW)/jkavan/terragrunt-oh-my-zsh-plugin/master/_terragrunt   > $(FUNCTIONS_DIR)/_terragrunt
-	$(CURL) $(GITHUB_RAW)/agkozak/zsh-z/master/_zshz                              > $(FUNCTIONS_DIR)/_z
 
 update-plugins:
 	mkdir -p $(PLUGINS_DIR)/{aws,fzf-completion,git,git-extras,screen,z}
@@ -41,4 +40,3 @@ update-plugins:
 	$(CURL) $(GITHUB_RAW)/ohmyzsh/ohmyzsh/master/plugins/git/git.plugin.zsh       > $(PLUGINS_DIR)/git/git.plugin.zsh
 	$(CURL) $(GITHUB_RAW)/tj/git-extras/master/etc/git-extras-completion.zsh      > $(PLUGINS_DIR)/git-extras/git-extras.plugin.zsh
 	$(CURL) $(GITHUB_RAW)/ohmyzsh/ohmyzsh/master/plugins/screen/screen.plugin.zsh > $(PLUGINS_DIR)/screen/screen.plugin.zsh
-	$(CURL) $(GITHUB_RAW)/agkozak/zsh-z/master/zsh-z.plugin.zsh                   > $(PLUGINS_DIR)/z/z.plugin.zsh
