@@ -1,5 +1,6 @@
 sanitize tridactyllocal tridactylsync
 
+set allowautofocus false
 set smoothscroll true
 
 bind J tabnext
