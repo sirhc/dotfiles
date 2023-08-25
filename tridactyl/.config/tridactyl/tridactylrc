@@ -13,7 +13,3 @@ bind K tabprev
 autocmd DocStart feedly.com/i         mode ignore
 autocmd DocStart mail.google.com/mail mode ignore
 autocmd DocStart todoist.com/app      mode ignore
-
-" TODO: Pull in shortcut keys from different sites.
-" unbindurl mail.google.com --mode=normal j
-" unbindurl mail.google.com --mode=normal k
