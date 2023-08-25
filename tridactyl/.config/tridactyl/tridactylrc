@@ -1,7 +1,10 @@
 sanitize tridactyllocal tridactylsync
 
-set allowautofocus false
+" set allowautofocus false
 set smoothscroll true
+
+" The gitParameter input type steals input focus.
+seturl jenkins-.*.tlium.com/job allowautofocus false
 
 bind J tabnext
 bind K tabprev
