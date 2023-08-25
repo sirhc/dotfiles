@@ -1,0 +1,13 @@
+sanitize tridactyllocal tridactylsync
+
+set smoothscroll true
+
+bind J tabnext
+bind K tabprev
+
+blacklistadd feedly.com
+blacklistadd mail.google.com/mail
+
+" TODO: Pull in shortcut keys from different sites.
+" unbindurl mail.google.com --mode=normal j
+" unbindurl mail.google.com --mode=normal k
