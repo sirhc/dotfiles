@@ -6,6 +6,14 @@ set smoothscroll true
 " The gitParameter input type steals input focus.
 seturl jenkins-.*.tlium.com/job allowautofocus false
 
+" Ctrl-F should use the browser's native 'find' functionality.
+unbind <C-f>
+
+bind / fillcmdline find
+bind ? fillcmdline find -?
+bind n findnext 1
+bind N findnext -1
+
 bind J tabnext
 bind K tabprev
 
