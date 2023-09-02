@@ -194,3 +194,7 @@ endif
 if executable('fd')
     let g:ctrlp_user_command = 'fd --color=never --glob --type file "" %s'
 endif
+
+" Load a local configuration, if it exists. This allows for custom
+" configuration per-host (e.g., for VimWiki).
+runtime vimrc.local
