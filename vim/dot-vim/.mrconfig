@@ -85,6 +85,9 @@ checkout = git clone 'https://github.com/hashivim/vim-terraform.git' 'terraform'
 [pack/syntax/start/toml]
 checkout = git clone 'https://github.com/cespare/vim-toml.git' 'toml'
 
+[pack/syntax/start/tridactyl]
+checkout = git clone 'https://github.com/tridactyl/vim-tridactyl.git' 'tridactyl'
+
 # Themes
 
 [pack/themes/start/airline]
