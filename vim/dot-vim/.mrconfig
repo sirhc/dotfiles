@@ -53,6 +53,9 @@ checkout = git clone 'https://github.com/tpope/vim-unimpaired.git' 'unimpaired'
 [pack/plugins/start/vimwiki]
 checkout = git clone 'https://github.com/vimwiki/vimwiki.git' 'vimwiki'
 
+[pack/plugins/start/zoxide]
+checkout = git clone 'https://github.com/nanotee/zoxide.vim.git' 'zoxide'
+
 # Syntax (Language/File Type) Support
 
 [pack/syntax/start/ansible]
@@ -83,6 +86,3 @@ checkout = git clone 'https://github.com/cespare/vim-toml.git' 'toml'
 
 [pack/themes/start/airline]
 checkout = git clone 'https://github.com/vim-airline/vim-airline-themes.git' 'airline'
-
-[pack/plugins/start/zoxide]
-checkout = git clone 'https://github.com/nanotee/zoxide.vim.git' 'zoxide'
