@@ -112,6 +112,9 @@ iabbrev passee  passé
 iabbrev resumee résumé
 iabbrev touchee touché
 
+iabbrev Rohai   Rōhai
+iabbrev rohai   Rōhai
+
 " Common typos.
 iabbrev absense   absence
 iabbrev acheive   achieve
