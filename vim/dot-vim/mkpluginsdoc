@@ -15,7 +15,7 @@ get_data() {
     mr -j8 run command zsh -c '
         print -n "\"$( git rev-parse --abbrev-ref HEAD )\","
         print -n "\"$( git log -1 --format=%H )\","
-        print -n "\"$( git log -1 --format=%cD )\","
+        print -n "\"$( git log -1 --format=%cs )\","
         gh repo view --json name,description,url --jq "[.name, .description, .url] | @csv"
     ' | sed -e '/^$/d' -e '/^mr run:/d'
 }
