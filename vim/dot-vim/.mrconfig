@@ -17,6 +17,9 @@ checkout = git clone 'https://github.com/dense-analysis/ale.git' 'ale'
 [pack/plugins/start/bufexplorer]
 checkout = git clone 'https://github.com/jlanzarotta/bufexplorer.git' 'bufexplorer'
 
+[pack/plugins/start/calendar]
+checkout = git clone 'https://github.com/mattn/calendar-vim.git' 'calendar'
+
 [pack/plugins/start/commentary]
 checkout = git clone 'https://github.com/tpope/vim-commentary.git' 'commentary'
 
