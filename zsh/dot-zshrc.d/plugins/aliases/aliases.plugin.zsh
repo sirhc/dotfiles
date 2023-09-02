@@ -27,6 +27,8 @@ alias wget='wget --content-disposition'
 alias xclip='xclip -selection c'
 alias xsubcpp='cpp -I`perl -MConfig -le '"'"'print "$Config{archlib}/CORE"'"'"'`'
 
+(( $+commands[vimx] ))    && alias vim='vimx'
+
 (( $+commands[ncat] ))    || alias ncat='netcat'
 (( $+commands[open] ))    || alias open='xdg-open'
 (( $+commands[pbcopy] ))  || alias pbcopy='xclip -selection clipboard'
