@@ -36,6 +36,8 @@ set tabstop=4
 set textwidth=78
 set timeout timeoutlen=300 ttimeoutlen=300   " keycodes and maps timeout in 3/10 sec
 set title
+set undodir=~/.vim/undofiles//,~/tmp//,.
+set undofile
 set viminfo='20,<50,s10,h
 set wildignorecase
 set wildmode=list:longest,full
