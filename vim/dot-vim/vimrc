@@ -21,9 +21,11 @@ set more
 set number
 set pastetoggle=<F2>
 set report=0
+set scrolloff=5
 set shiftround
 set shiftwidth=4
 set showtabline=2  " Always display the tabline, even if there is only one tab
+set sidescrolloff=10
 set smartcase
 set smartindent
 set smarttab
