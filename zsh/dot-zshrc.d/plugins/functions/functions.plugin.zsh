@@ -1,6 +1,19 @@
 # Keep the functions that override existing commands near the top, so I don't
 # lose track of them.
 
+function \$() {
+    local cmd=("$@")
+    local r
+
+    print -- "Do you want to run this command? ${cmd[*]}"
+    read 'r?[y/N] '
+    if [[ ${r:l} =~ '^y(es)?$' ]]; then
+        "${cmd[@]}"
+    else
+        return 2
+    fi
+}
+
 function \=() {
     print $(( ${@//,} ))
 }
