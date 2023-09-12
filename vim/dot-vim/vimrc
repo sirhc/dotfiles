@@ -205,7 +205,9 @@ endif
 
 let wiki_1 = {}
 let wiki_1.path = '~/vimwiki/'
+let wiki_1.maxhi = 1
 let wiki_1.automatic_nested_syntaxes = 1
+let wiki_1.diary_frequency = 'weekly'
 let wiki_1.list_margin = 0
 let wiki_1.auto_tags = 1
 
