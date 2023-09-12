@@ -29,6 +29,9 @@ checkout = git clone 'https://github.com/kien/ctrlp.vim.git' 'ctrlp'
 [pack/plugins/start/fugitive]
 checkout = git clone 'https://github.com/tpope/vim-fugitive.git' 'fugitive'
 
+[pack/plugins/start/pandoc]
+checkout = git clone 'https://github.com/vim-pandoc/vim-pandoc.git' 'pandoc'
+
 [pack/plugins/start/rainbow_csv]
 checkout = git clone 'https://github.com/mechatroner/rainbow_csv.git' 'rainbow_csv'
 
@@ -75,6 +78,9 @@ checkout = git clone 'https://github.com/bfrg/vim-jq.git' 'jq'
 
 [pack/syntax/start/packer]
 checkout = git clone 'https://github.com/hashivim/vim-packer.git' 'packer'
+
+[pack/syntax/start/pandoc]
+checkout = git clone 'https://github.com/vim-pandoc/vim-pandoc-syntax.git' 'pandoc'
 
 [pack/syntax/start/perl]
 checkout = git clone 'https://github.com/vim-perl/vim-perl.git' 'perl'
