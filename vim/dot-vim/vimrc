@@ -203,6 +203,21 @@ if executable('fd')
     let g:ctrlp_user_command = 'fd --color=never --glob --type file "" %s'
 endif
 
+let wiki_1 = {}
+let wiki_1.path = '~/vimwiki/'
+let wiki_1.ext = '.md'
+let wiki_1.syntax = 'markdown'
+let wiki_1.automatic_nested_syntaxes = 1
+let wiki_1.list_margin = 0
+let wiki_1.auto_tags = 1
+
+let g:vimwiki_list = [wiki_1]
+
+let g:vimwiki_hl_headers = 1
+let g:vimwiki_hl_cb_checked = 2
+let g:vimwiki_global_ext = 0
+let g:vimwiki_auto_chdir = 1
+
 " Load a local configuration, if it exists. This allows for custom
 " configuration per-host (e.g., for VimWiki).
 runtime vimrc.local
