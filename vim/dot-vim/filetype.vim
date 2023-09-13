@@ -13,7 +13,7 @@ augroup filetypedetect
     au BufNewFile,BufRead *.puml       setf plantuml
     au BufNewFile,BufRead *.tsv        setf tsv
     au BufNewFile,BufRead *.zsh-theme  setf zsh
-    au BufNewFile,BufRead .mrconfig    setf dosini
+    au BufNewFile,BufRead .mrconfig*   setf toml
     au BufNewFile,BufRead Jenkinsfile* setf groovy
     au BufNewFile,BufRead known_hosts  setf known_hosts
 augroup END
