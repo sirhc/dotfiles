@@ -12,6 +12,7 @@ augroup filetypedetect
     au BufNewFile,BufRead *.pde        setf arduino
     au BufNewFile,BufRead *.prr        setf prr
     au BufNewFile,BufRead *.puml       setf plantuml
+    au BufNewFile,BufRead *.risor      setf risor
     au BufNewFile,BufRead *.tsv        setf tsv
     au BufNewFile,BufRead *.zsh-theme  setf zsh
     au BufNewFile,BufRead .mrconfig*   setf toml
