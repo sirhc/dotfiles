@@ -10,6 +10,7 @@ augroup filetypedetect
     au BufNewFile,BufRead *.mail       setf mail
     au BufNewFile,BufRead *.p6         setf perl6
     au BufNewFile,BufRead *.pde        setf arduino
+    au BufNewFile,BufRead *.prr        setf prr
     au BufNewFile,BufRead *.puml       setf plantuml
     au BufNewFile,BufRead *.tsv        setf tsv
     au BufNewFile,BufRead *.zsh-theme  setf zsh
