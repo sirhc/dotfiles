@@ -1,40 +1,53 @@
 [DEFAULT]
 
-edit = vim "$@"
+edit =
+    if [[ $# -gt 0 ]]; then
+        vim "$@"
+    else
+        vim .
+    fi
 
+# TODO: Figure out how to tell Tilix to open a tab.
 tab =
-    if [ "$( uname -s )" = Darwin ]; then
+    if [[ "$( uname -s )" = Darwin ]]; then
         osascript -e 'tell application "iTerm2" to tell current window' \
                   -e '    create tab with default profile' \
                   -e '    tell current session to write text "builtin cd '"'$MR_REPO'"'; '"$@"'"' \
                   -e 'end tell'
         exit
     fi
+    echo "mr ${MR_ACTION}: unsupported on $( uname -s )" 1>&2
+    exit 1
 
-git_branch      = git rev-parse --abbrev-ref HEAD
-git_drb         = git push origin --delete "$@"
-git_fa          = git fetch --all
-git_gc          = git gc "$@"
-git_gone        = git gone
-git_prune       = git prune-branches
-git_tags        = git tag -l
-git_quietupdate = git pull "$@" | sed -e '/^Already up to date.$/d'
+git_branch        = git rev-parse --abbrev-ref HEAD
+git_defaultbranch = env GH_PAGER= gh repo view --json 'defaultBranchRef' --jq '.defaultBranchRef.name'
+git_gc            = git gc --auto "$@"
+git_localbranches = git --no-pager branch --verbose --verbose
+git_tags          = git --no-pager tag --list
 
-git_defaultbranch =
-    export PAGER=cat
-    gh repo view --json 'defaultBranchRef' --jq '.defaultBranchRef.name'
+# Print branch details if not currently on the default branch (as defined by
+# GitHub and cached in .git/config).
+git_activebranch =
+    { git rev-parse --abbrev-ref HEAD; git config --local github.default-branch; } |
+        paste -s -d ' ' - |
+        awk '(NF > 1 && $1 != $2) { print $1 }' |
+        xargs -r git --no-pager branch --list --verbose --verbose
 
-git_nondefaultbranch =
-    current_branch="$( git rev-parse --abbrev-ref HEAD )"
-    default_branch="$( gh repo view --json 'defaultBranchRef' --jq '.defaultBranchRef.name' )"
-    if [[ ! "$current_branch" = "$default_branch" ]]; then
-        echo "$current_branch"
-    fi
+git_prunebranches =
+    git for-each-ref --format '%(refname) %(upstream:track,nobracket)' refs/heads |
+        awk '$2 == "gone" {sub("refs/heads/", "", $1); print $1}' |
+        xargs -r git branch --delete
+
+git_unsynced =
+    git for-each-ref --format '%(refname) %(upstream:track,nobracket)' refs/heads |
+        awk '(NF > 1) { sub("refs/heads/", "", $1); print $1 }' |
+        xargs -r git --no-pager branch --list --verbose --verbose
 
 include = cat ~/.mrconfig.d/*.conf 2> /dev/null || :
 
 [ALIAS]
-qu = quietupdate
+db = defaultbranch
+lb = localbranches
 
 [.dotfiles]
 checkout = git clone 'https://github.com/sirhc/dotfiles.git' '.dotfiles'

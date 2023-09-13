@@ -1,9 +1,40 @@
-[user]
-    name  = Chris Grau
-    email = 113591+sirhc@users.noreply.github.com
+[advice]
+    detachedHead = false
 
-[init]
-    defaultBranch = main
+[alias]
+    bd = for-each-ref --sort=committerdate --format='%(color:brightblack)%(objectname:short) %(color:green)%(committerdate:iso8601) %(color:blue)%(committerdate:relative) %(color:reset)%(refname:short)' refs/heads/
+    br = branch -avv
+    cached = diff --cached
+    ci = commit
+    co = checkout
+    co-default = ! git switch $( git config --local github.default-branch )
+    commits-per-day = ! git log --pretty=format:%cd --date=short | uniq -c
+    current-branch = rev-parse --abbrev-ref HEAD
+    dc = diff --cached
+    dt = difftool
+    fa = fetch --all
+    graph = log --all --graph --oneline --decorate
+    hard = reset --hard HEAD
+    hist = log --graph --pretty='[%h]%d %cd %s'
+    lastlog = log -1 --pretty='%s'
+    lg = log --graph --abbrev-commit --date=relative --date-order --format=format:'%C(yellow)%h%Creset -%C(yellow)%d%Creset %s %C(green)(%cr)%Creset %Cred<%an>%Creset'
+    ls = ls-tree --abbrev=8 -r HEAD
+    mrclean = clean -dfx  # Mr. Clean!
+    mt = mergetool
+    mylog = ! git log --author=`git config user.email` --stat -C
+    one = log --oneline
+    open = ! gh repo view --web
+    root = rev-parse --show-toplevel
+    set-origin = ! git remote add origin $( gh repo view $( basename $( pwd ) ) --json url --jq .url )
+    show-tags = ! git name-rev --tags --name-only $( git rev-parse HEAD )
+    stashed = stash list --pretty=format:'%gd: %Cred%h%Creset %Cgreen[%ar]%Creset %s'
+    stat = diff --stat
+    tags = show-ref --tags
+    unadd = restore --staged
+    undo = ! "f() { git reset $( git rev-parse --abbrev-ref HEAD )@{${1:-1}}; }; f"
+    wd = diff --word-diff
+    whereis = branch --contains --remotes
+    who = shortlog --numbered --summary --email --
 
 [color]
     ui = auto
@@ -13,8 +44,8 @@
     excludesFile = ~/.gitignore
     pager = delta
 
-[interactive]
-    diffFilter = delta --color-only --features=interactive
+[credential]
+    helper = store
 
 [delta]
     features = decorations
@@ -38,23 +69,6 @@
     hunk-header-line-number-style = "#067a00"
     hunk-header-style = file line-number syntax
 
-[receive]
-    denyCurrentBranch = warn
-
-[merge]
-    conflictstyle = diff3
-    tool = fugitive
-
-[merge "daff-csv"]
-    name   = daff tabular csv merge
-    driver = daff merge --output %A %O %A %B
-
-[mergetool]
-    prompt = false
-
-[mergetool "fugitive"]
-    cmd = vim -f -c \"Gvdiffsplit!\" \"$MERGED\"
-
 [diff]
     colorMoved = default
     renames = true
@@ -70,8 +84,28 @@
 [difftool]
     prompt = false
 
+[init]
+    defaultBranch = main
+
 [fetch]
     prune = true
+
+[interactive]
+    diffFilter = delta --color-only --features=interactive
+
+[merge]
+    conflictstyle = diff3
+    tool = fugitive
+
+[merge "daff-csv"]
+    name   = daff tabular csv merge
+    driver = daff merge --output %A %O %A %B
+
+[mergetool]
+    prompt = false
+
+[mergetool "fugitive"]
+    cmd = vim -f -c \"Gvdiffsplit!\" \"$MERGED\"
 
 [push]
     default = current
@@ -79,63 +113,13 @@
 [pull]
     rebase = false
 
-[credential]
-    helper = store
+[receive]
+    denyCurrentBranch = warn
 
-[alias]
-    aliases = !git config --get-regexp 'alias\\..*' | colrm 1 6 | sed 's/[ ]/ = /' | sort -k1
-    bare = init --bare --shared=true
-    br = branch -avv
-    branch-date = "!git for-each-ref --sort=committerdate --format='%1B[30;1m%(objectname:short) %1b[0;m%1B[32m%(committerdate:iso8601) %1B[34m%(committerdate:relative) %1B[0;m%(refname:short)' refs/heads/"
-    cached = diff --cached
-    ci = commit
-    co = checkout
-    commits-per-day = !git log --pretty=format:%cd --date=short | uniq -c
-    cr = "!f(){ git clone \"$1\" && mr register \"$(basename \"$1\" .git)\"; }; f"
-    current-branch = rev-parse --abbrev-ref HEAD
-    dc = diff --cached
-    default-branch = !git remote show origin | awk '/HEAD branch:/ { print $NF }'
-    describe-branch = !git config --local \"branch.$( git branch | awk '/^\\*/{print $2}' ).description\"
-    dt = difftool
-    dv = !git diff | vim -
-    exclude-file = "!f(){ echo \"$1\" >> .git/info/exclude; }; f"
-    fa = fetch --all
-    gone = !git branch -vv | cut -c 3- | awk '/: gone\\]/'
-    graph = log --all --graph --oneline --decorate
-    hard = reset --hard HEAD
-    hist = log --graph --pretty='[%h]%d %cd %s'
-    ignore-file  = "!f(){ echo \"$1\" >> .gitignore; }; f"
-    k = !exec gitk --all &
-    lastlog = log -1 --pretty='%s'
-    lg = log --graph --abbrev-commit --date=relative --date-order --format=format:'%C(yellow)%h%Creset -%C(yellow)%d%Creset %s %C(green)(%cr)%Creset %Cred<%an>%Creset'
-    ls = ls-tree --abbrev=8 -r HEAD
-    mt = mergetool
-    mylog = !git log --author=`git config --global user.email` --stat -C
-    one = log --oneline
-    open = !gh repo view -w
-    orphank = !gitk --all `git reflog | cut -c1-7`
-    orphanl = !git log `git reflog | cut -c1-7`
-    orphant = !tig --all `git reflog | cut -c1-7`
-    prune-branches = !git branch -vv | awk '$1 != \"*\" && /\\[origin\\// && /: gone\\]/ { print $1 }' | xargs -r git branch -d
-    pudr = push --dry-run
-    puor = push --set-upstream origin master
-    puordr = push --set-upstream --dry-run origin master
-    realclean = clean -dfx
-    root = rev-parse --show-toplevel
-    set-origin = ! git remote add origin $( gh repo view $( basename $( pwd ) ) --json url --jq '.url' )
-    show-tag = !git name-rev --tags --name-only $(git rev-parse HEAD)
-    stashed = stash list --pretty=format:'%gd: %Cred%h%Creset %Cgreen[%ar]%Creset %s'
-    stat = diff --stat
-    switch-default = !git switch $( git default-branch )
-    tags = show-ref --tags
-    undo = "!f() { git reset --hard $(git rev-parse --abbrev-ref HEAD)@{${1:-1}}; }; f"
-    untrack = rm --cached
-    wd = diff --word-diff
-    whereis = branch -r --contains
-    who = shortlog -s --
+[user]
+    name = Chris Grau
+    email = 113591+sirhc@users.noreply.github.com
 
+# This needs to be last, to override anything above.
 [include]
     path = ~/.gitconfig.local
-
-[advice]
-    detachedHead = false
