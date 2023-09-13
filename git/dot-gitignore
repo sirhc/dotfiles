@@ -3,4 +3,5 @@
 .pipeline-name
 .prr.toml
 .tmp/
+doc/tags
 tmp/
