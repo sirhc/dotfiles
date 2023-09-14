@@ -30,6 +30,49 @@ function cd {
     fi
 }
 
+function exercism {
+    local output
+
+    # > exercism download --exercise=bob --track=jq
+    #                         -> stderr
+    # Downloaded to           -> stderr
+    # <home>/exercism/jq/bob  -> stdout
+    { output="$( command exercism "$@" | tee /dev/fd/3 )"; } 3>&1
+
+    if [[ $1 = download ]]; then
+        print
+
+        if [[ ! -d "$output" ]]; then
+            print "$0: $output: not found" 1>&2
+            return 1
+        fi
+
+        if [[ $( git -C "${output}" -P log --oneline . | wc -l ) -gt 0 ]]; then
+            print "$0: ${output}: already committed to git"
+            return
+        fi
+
+        # Welcome to Hello World on Exercism's Vim script Track.
+        git -C "$output" add .
+        git -C "$output" commit -m "Download $( sed -n -e '/^Welcome to /{s/^Welcome to //; s/\.$//; p}' "$output/README.md" | head -1 )"
+
+        return
+    fi
+
+    if [[ $1 = submit ]]; then
+        print
+
+        if [[ ! -f README.md ]]; then
+            print "$0: README.md not found" 1>&2
+            return 1
+        fi
+
+        git commit -am "Submit solution for $( sed -n -e '/^Welcome to /{s/^Welcome to //; s/\.$//; p}' README.md | head -1 )"
+
+        return
+    fi
+}
+
 function rlog {
     command rlog "$@" |& ${=PAGER:-less -r}
 }
