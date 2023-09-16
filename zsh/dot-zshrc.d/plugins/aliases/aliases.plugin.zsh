@@ -24,6 +24,7 @@ alias unassume='assume --un'
 alias uriencode='jq -Rrs "@uri"'
 alias vimwiki='vim +:VimwikiIndex'
 alias wget='wget --content-disposition'
+alias ww=vimwiki
 alias xclip='xclip -selection c'
 alias xsubcpp='cpp -I`perl -MConfig -le '"'"'print "$Config{archlib}/CORE"'"'"'`'
 
