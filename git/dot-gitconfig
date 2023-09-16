@@ -12,6 +12,7 @@
     current-branch = rev-parse --abbrev-ref HEAD
     dc = diff --cached
     dt = difftool
+    env = ! env | sort
     fa = fetch --all
     graph = log --all --graph --oneline --decorate
     hard = reset --hard HEAD
