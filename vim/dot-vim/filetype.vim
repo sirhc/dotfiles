@@ -5,6 +5,7 @@ endif
 augroup filetypedetect
     au!
     au BufNewFile,BufRead *.adoc       setf asciidoc
+    au BufNewFile,BufRead *.cheat      setf navi
     au BufNewFile,BufRead *.drl        setf drools
     au BufNewFile,BufRead *.ifm        setf ifm
     au BufNewFile,BufRead *.mail       setf mail
