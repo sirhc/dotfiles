@@ -22,6 +22,7 @@ if (( $+commands[terraform] )); then
     alias tfwd='terraform workspace delete'
     alias tfwl='terraform workspace list'
     alias tfwn='terraform workspace new'
+    alias tfwr='terraform workspace select default'
     alias tfws='terraform workspace select'
     alias tfww='terraform workspace show'
 
