@@ -20,6 +20,7 @@ tab =
     exit 1
 
 git_branch        = git rev-parse --abbrev-ref HEAD
+git_checkoutdefaultbranch = git checkout $( gh repo view --json 'defaultBranchRef' --jq '.defaultBranchRef.name' )
 git_defaultbranch = env GH_PAGER= gh repo view --json 'defaultBranchRef' --jq '.defaultBranchRef.name'
 git_gc            = git gc --auto "$@"
 git_localbranches = git --no-pager branch --verbose --verbose
@@ -46,8 +47,9 @@ git_unsynced =
 include = cat ~/.mrconfig.d/*.conf 2> /dev/null || :
 
 [ALIAS]
-db = defaultbranch
-lb = localbranches
+cod = checkoutdefaultbranch
+db  = defaultbranch
+lb  = localbranches
 
 [.dotfiles]
 checkout = git clone 'https://github.com/sirhc/dotfiles.git' '.dotfiles'
