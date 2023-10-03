@@ -24,6 +24,7 @@ git_checkoutdefaultbranch = git checkout $( gh repo view --json 'defaultBranchRe
 git_defaultbranch = env GH_PAGER= gh repo view --json 'defaultBranchRef' --jq '.defaultBranchRef.name'
 git_gc            = git gc --auto "$@"
 git_localbranches = git --no-pager branch --verbose --verbose
+git_switch        = git switch "$@"
 git_tags          = git --no-pager tag --list
 
 # Print branch details if not currently on the default branch (as defined by
