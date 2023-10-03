@@ -38,7 +38,7 @@ git_activebranch =
 git_prunebranches =
     git for-each-ref --format '%(refname) %(upstream:track,nobracket)' refs/heads |
         awk '$2 == "gone" {sub("refs/heads/", "", $1); print $1}' |
-        xargs -r git branch --delete
+        xargs -r git branch --delete "$@"
 
 git_unsynced =
     git for-each-ref --format '%(refname) %(upstream:track,nobracket)' refs/heads |
