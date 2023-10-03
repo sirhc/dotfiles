@@ -11,6 +11,8 @@
     commits-per-day = ! git log --pretty=format:%cd --date=short | uniq -c
     current-branch = rev-parse --abbrev-ref HEAD
     dc = diff --cached
+    db = config --local github.default-branch
+    diff-default = ! git diff $( git config --local github.default-branch )..HEAD
     dt = difftool
     env = ! env | sort
     fa = fetch --all
