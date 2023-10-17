@@ -24,6 +24,8 @@ git_checkoutdefaultbranch = git switch $( git config --local github.default-bran
 git_defaultbranch = git config --local github.default-branch
 git_gc            = git gc --auto "$@"
 git_localbranches = git --no-pager branch --verbose --verbose
+git_prready       = env GH_PAGER= gh pr view --json reviews,url --template '{{.url|autocolor "yellow"}}{{"\n"}}{{if .reviews}}{{range .reviews}}{{tablerow .state .author.login}}{{end}}{{else}}PENDING{{"\n"}}{{end}}'
+git_prstatus      = env GH_PAGER= gh pr status
 git_switch        = git switch "$@"
 git_tags          = git --no-pager tag --list
 
