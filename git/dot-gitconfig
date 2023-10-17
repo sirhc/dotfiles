@@ -7,11 +7,12 @@
     cached = diff --cached
     ci = commit
     co = checkout
-    co-default = ! git switch $( git config --local github.default-branch )
+    cod = ! git switch $( git default-branch )
     commits-per-day = ! git log --pretty=format:%cd --date=short | uniq -c
     current-branch = rev-parse --abbrev-ref HEAD
     dc = diff --cached
     db = config --local github.default-branch
+    default-branch = config --local github.default-branch
     diff-default = ! git diff $( git config --local github.default-branch )..HEAD
     dt = difftool
     env = ! env | sort
@@ -22,12 +23,14 @@
     lastlog = log -1 --pretty='%s'
     lg = log --graph --abbrev-commit --date=relative --date-order --format=format:'%C(yellow)%h%Creset -%C(yellow)%d%Creset %s %C(green)(%cr)%Creset %Cred<%an>%Creset'
     ls = ls-tree --abbrev=8 -r HEAD
+    merge-default = ! git merge $( git default-branch )
     mrclean = clean -dfx  # Mr. Clean!
     mt = mergetool
     mylog = ! git log --author=`git config user.email` --stat -C
     one = log --oneline
     open = ! gh repo view --web
     root = rev-parse --show-toplevel
+    set-default-branch = git config --local github.default-branch $( gh repo view --json defaultBranchRef --jq .defaultBranchRef.name )
     set-origin = ! git remote add origin $( gh repo view $( basename $( pwd ) ) --json url --jq .url )
     show-tags = ! git name-rev --tags --name-only $( git rev-parse HEAD )
     stashed = stash list --pretty=format:'%gd: %Cred%h%Creset %Cgreen[%ar]%Creset %s'

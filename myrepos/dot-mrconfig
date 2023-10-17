@@ -20,8 +20,8 @@ tab =
     exit 1
 
 git_branch        = git rev-parse --abbrev-ref HEAD
-git_checkoutdefaultbranch = git checkout $( gh repo view --json 'defaultBranchRef' --jq '.defaultBranchRef.name' )
-git_defaultbranch = env GH_PAGER= gh repo view --json 'defaultBranchRef' --jq '.defaultBranchRef.name'
+git_checkoutdefaultbranch = git switch $( git config --local github.default-branch )
+git_defaultbranch = git config --local github.default-branch
 git_gc            = git gc --auto "$@"
 git_localbranches = git --no-pager branch --verbose --verbose
 git_switch        = git switch "$@"
@@ -39,6 +39,11 @@ git_prunebranches =
     git for-each-ref --format '%(refname) %(upstream:track,nobracket)' refs/heads |
         awk '$2 == "gone" {sub("refs/heads/", "", $1); print $1}' |
         xargs -r git branch --delete "$@"
+
+git_setdefaultbranch =
+    if [[ -z "$( git config --local github.default-branch )" ]]; then
+        git config --local github.default-branch "$( gh repo view --json defaultBranchRef --jq .defaultBranchRef.name )"
+    fi
 
 git_unsynced =
     git for-each-ref --format '%(refname) %(upstream:track,nobracket)' refs/heads |
