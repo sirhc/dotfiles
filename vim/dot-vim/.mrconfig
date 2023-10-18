@@ -41,6 +41,9 @@ checkout = git clone 'https://github.com/thiagoalessio/rainbow_levels.vim.git' '
 [pack/plugins/start/repeat]
 checkout = git clone 'https://github.com/tpope/vim-repeat.git' 'repeat'
 
+[pack/plugins/start/rhubarb]
+checkout = git clone 'https://github.com/tpope/vim-rhubarb.git' 'rhubarb'
+
 [pack/plugins/start/runscript]
 checkout = git clone 'https://github.com/sirhc/vim-runscript.git' 'runscript'
 
