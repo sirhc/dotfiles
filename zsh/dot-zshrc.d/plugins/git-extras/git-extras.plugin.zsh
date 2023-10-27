@@ -101,6 +101,14 @@ __gitex_author_names() {
     _wanted author-names expl author-name compadd $* - $author_names
 }
 
+__gitex_author_emails() {
+    local expl
+    declare -a author_names
+    author_names=(${(f)"$(_call_program branchrefs git log --format='%aE' | sort -u)"})
+    __gitex_command_successful || return
+    _wanted author-names expl author-name compadd $* - $author_names
+}
+
 # subcommands
 # new subcommand should be added in alphabetical order
 _git-authors() {
@@ -122,8 +130,8 @@ _git-clear() {
 
 _git-coauthor() {
     _arguments \
-        ':co-author[co-author to add]' \
-        ':co-author-email[email address of co-author to add]'
+        ':co-author[co-author to add]:__gitex_author_names' \
+        ':co-author-email[email address of co-author to add]:__gitex_author_emails'
 }
 
 _git-contrib() {
