@@ -45,6 +45,9 @@
 [color]
     ui = auto
 
+[commit]
+    verbose = true
+
 [core]
     editor = vim -i NONE
     excludesFile = ~/.gitignore
