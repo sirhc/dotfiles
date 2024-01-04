@@ -214,6 +214,12 @@ let g:vimwiki_hl_cb_checked = 2
 let g:vimwiki_global_ext = 0
 let g:vimwiki_auto_chdir = 1
 
+let g:copilot_filetypes = {
+    \ 'gitcommit': v:true,
+    \ 'markdown': v:true,
+    \ 'yaml': v:true
+    \ }
+
 " Load a local configuration, if it exists. This allows for custom
 " configuration per-host (e.g., for VimWiki).
 runtime vimrc.local

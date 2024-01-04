@@ -23,6 +23,9 @@ checkout = git clone 'https://github.com/mattn/calendar-vim.git' 'calendar'
 [pack/plugins/start/commentary]
 checkout = git clone 'https://github.com/tpope/vim-commentary.git' 'commentary'
 
+[pack/plugins/start/copilot]
+checkout = git clone 'https://github.com/github/copilot.vim.git' 'copilot'
+
 [pack/plugins/start/ctrlp]
 checkout = git clone 'https://github.com/kien/ctrlp.vim.git' 'ctrlp'
 
