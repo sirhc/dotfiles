@@ -32,7 +32,7 @@ set smoothscroll
 set softtabstop=4
 set spell
 set tabstop=4
-set textwidth=78
+set textwidth=120
 set timeout timeoutlen=300 ttimeoutlen=300   " keycodes and maps timeout in 3/10 sec
 set title
 set undodir=~/.vim/undofiles//,~/tmp//,.
