@@ -42,6 +42,9 @@
     whereis = branch --contains --remotes
     who = shortlog --numbered --summary --email --
 
+[branch]
+    sort = -committerdate
+
 [color]
     ui = auto
 
