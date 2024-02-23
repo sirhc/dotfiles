@@ -102,6 +102,9 @@
 [fetch]
     prune = true
 
+[gpg]
+    format = ssh
+
 [interactive]
     diffFilter = delta --color-only --features=interactive
 
