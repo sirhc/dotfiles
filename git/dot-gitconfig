@@ -49,6 +49,7 @@
     ui = auto
 
 [commit]
+    gpgsign = true
     verbose = true
 
 [core]
