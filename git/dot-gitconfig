@@ -116,7 +116,8 @@
     diffFilter = delta --color-only --features=interactive
 
 [merge]
-    conflictstyle = diff3
+    conflictStyle = zdiff3
+    keepBackup = false
     tool = fugitive
 
 [merge "daff-csv"]
