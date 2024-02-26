@@ -137,6 +137,10 @@
 [pull]
     rebase = false
 
+[rebase]
+    autoSquash = true
+    autoStash = true
+
 [receive]
     denyCurrentBranch = warn
 
