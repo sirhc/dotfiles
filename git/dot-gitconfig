@@ -99,6 +99,9 @@
 [difftool]
     prompt = false
 
+[help]
+    autoCorrect = prompt
+
 [init]
     defaultBranch = main
 
