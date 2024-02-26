@@ -49,6 +49,7 @@
     ui = auto
 
 [commit]
+    cleanup = scissors
     gpgSign = true
     verbose = true
 
