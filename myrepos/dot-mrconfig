@@ -28,6 +28,7 @@ git_prready       = env GH_PAGER= gh pr view --json reviews,url --template '{{.u
 git_prstatus      = env GH_PAGER= gh pr status
 git_switch        = git switch "$@"
 git_tags          = git --no-pager tag --list
+git_update        = git pull "$@" | { grep -v '^Already up to date.$' || :; }
 
 # Print branch details if not currently on the default branch (as defined by
 # GitHub and cached in .git/config).
