@@ -31,12 +31,13 @@ alias ww=vimwiki
 alias xclip='xclip -selection c'
 alias xsubcpp='cpp -I`perl -MConfig -le '"'"'print "$Config{archlib}/CORE"'"'"'`'
 
-(( $+commands[vimx] ))    && alias vim='vimx'
+(( $+commands[kubecolor] )) && alias kubectl='kubecolor'
+(( $+commands[vimx] ))      && alias vim='vimx'
 
-(( $+commands[ncat] ))    || alias ncat='netcat'
-(( $+commands[open] ))    || alias open='xdg-open'
-(( $+commands[pbcopy] ))  || alias pbcopy='xclip -selection clipboard'
-(( $+commands[pbpaste] )) || alias pbpaste='xclip -selection clipboard -o'
+(( $+commands[ncat] ))      || alias ncat='netcat'
+(( $+commands[open] ))      || alias open='xdg-open'
+(( $+commands[pbcopy] ))    || alias pbcopy='xclip -selection clipboard'
+(( $+commands[pbpaste] ))   || alias pbpaste='xclip -selection clipboard -o'
 
 # http://dbocklandt.be/networking/ldapsearch-without-all-the-line-wrapping/
 alias ldapunwrap='perl -p00e '"'"'s/\r?\n //g'"'"''
