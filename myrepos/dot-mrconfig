@@ -20,8 +20,8 @@ tab =
     exit 1
 
 git_branch        = git rev-parse --abbrev-ref HEAD
-git_checkoutdefaultbranch = git switch $( git config --local github.default-branch )
-git_defaultbranch = git config --local github.default-branch
+git_checkoutdefaultbranch = git switch $( git default-branch )
+git_defaultbranch = git default-branch
 git_gc            = git gc --auto "$@"
 git_localbranches = git --no-pager branch --verbose --verbose
 git_prready       = env GH_PAGER= gh pr view --json reviews,url --template '{{.url|autocolor "yellow"}}{{"\n"}}{{if .reviews}}{{range .reviews}}{{tablerow .state .author.login}}{{end}}{{else}}PENDING{{"\n"}}{{end}}'
@@ -33,7 +33,7 @@ git_update        = git pull "$@" | { grep -v '^Already up to date.$' || :; }
 # Print branch details if not currently on the default branch (as defined by
 # GitHub and cached in .git/config).
 git_activebranch =
-    { git rev-parse --abbrev-ref HEAD; git config --local github.default-branch; } |
+    { git rev-parse --abbrev-ref HEAD; git default-branch; } |
         paste -s -d ' ' - |
         awk '(NF > 1 && $1 != $2) { print $1 }' |
         xargs -r git --no-pager branch --list --verbose --verbose
@@ -42,11 +42,6 @@ git_prunebranches =
     git for-each-ref --format '%(refname) %(upstream:track,nobracket)' refs/heads |
         awk '$2 == "gone" {sub("refs/heads/", "", $1); print $1}' |
         xargs -r git branch --delete "$@"
-
-git_setdefaultbranch =
-    if [[ -z "$( git config --local github.default-branch )" ]]; then
-        git config --local github.default-branch "$( gh repo view --json defaultBranchRef --jq .defaultBranchRef.name )"
-    fi
 
 git_unsynced =
     git for-each-ref --format '%(refname) %(upstream:track,nobracket)' refs/heads |
