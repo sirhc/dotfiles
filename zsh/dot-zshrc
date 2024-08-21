@@ -98,14 +98,14 @@ fi
 # Load any library files (à la Oh My Zsh), because plugins may want to use
 # them (e.g., git.plugin.zsh).
 
-for _lib in ~/.zshrc.d/lib/*.zsh; do
+for _lib in ~/.zshrc.d/lib/*.zsh(#qN); do
     source $_lib
 done
 unset _lib
 
 # Rudimentary plugin autoloading (à la Vim), but serves my purposes at the moment.
 
-for _plugin in ~/.zshrc.d/plugins/*/*.plugin.zsh; do
+for _plugin in ~/.zshrc.d/plugins/*/*.plugin.zsh(#qN); do
     source $_plugin
 done
 unset _plugin
