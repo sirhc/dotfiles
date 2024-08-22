@@ -19,6 +19,7 @@
     # Added Functionality
     branch-date = branch --list --format='%(HEAD)%20%(if)%(HEAD)%(then)%(color:green)%(end)%(align:20)%(refname:short)%(end)%(color:reset)%20%(objectname:short)%(if)%(upstream)%(then)%20[%(color:blue)%(upstream:short)%(color:reset)]%(end)%20%(contents:lines=1)%20(%(committerdate:relative))'
     current-branch = rev-parse --abbrev-ref HEAD
+    cod = ! git checkout $( git default-branch )
     default-branch = ! git rev-parse --abbrev-ref origin/HEAD | sed 's@^origin/@@'
     del = restore --staged
     env = ! env | sort
