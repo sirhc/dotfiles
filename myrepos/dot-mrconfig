@@ -24,6 +24,7 @@ git_checkoutdefaultbranch = git switch $( git default-branch )
 git_defaultbranch = git default-branch
 git_gc            = git gc --auto "$@"
 git_localbranches = git --no-pager branch --verbose --verbose
+git_mergedefaultbranch = git merge $( git default-branch )
 git_prready       = env GH_PAGER= gh pr view --json reviews,url --template '{{.url|autocolor "yellow"}}{{"\n"}}{{if .reviews}}{{range .reviews}}{{tablerow .state .author.login}}{{end}}{{else}}PENDING{{"\n"}}{{end}}'
 git_prstatus      = env GH_PAGER= gh pr status
 git_switch        = git switch "$@"
@@ -54,6 +55,7 @@ include = cat ~/.mrconfig.d/*.conf 2> /dev/null || :
 cod = checkoutdefaultbranch
 db  = defaultbranch
 lb  = localbranches
+mod = mergedefaultbranch
 
 [.dotfiles]
 checkout = git clone 'https://github.com/sirhc/dotfiles.git' '.dotfiles'
