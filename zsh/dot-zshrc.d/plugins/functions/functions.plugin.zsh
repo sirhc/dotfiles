@@ -30,6 +30,21 @@ function cd {
     fi
 }
 
+# > sd https://github.com/<user>/<repo>/pull/<num> -> cd ~/src/github.com/<user>/<repo>
+function sd {
+    local dir="${HOME}/src/${1#*://}"
+
+    # Even if the directory from the argument doesn't exist, eventually we'll drop back to $HOME and the while loop will
+    # break.
+    while true; do
+        if [[ -d $dir ]]; then
+            cd "$dir"
+            break
+        fi
+        dir="${dir:h}"
+    done
+}
+
 function exercism {
     local output
 
