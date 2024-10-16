@@ -175,6 +175,22 @@ bindkey '^h' _complete_help
 (( $+commands[thefuck] )) && eval "$(thefuck --alias)" # https://github.com/nvbn/thefuck
 (( $+commands[zoxide] )) && eval "$(zoxide init zsh)"  # https://github.com/ajeetdsouza/zoxide
 
+export FZF_DEFAULT_COMMAND='fd --hidden --strip-cwd-prefix --exclude .git'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_ALT_C_COMMAND='fd --type d --hidden --strip-cwd-prefix --exclude .git'
+
+_fzf_compgen_path() {
+  fd --hidden --exclude .git . "$1"
+}
+
+_fzf_compgen_dir() {
+  fd --type d --hidden --exclude .git . "$1"
+}
+
+export MCFLY_FUZZY=2
+export MCFLY_KEY_SCHEME=vim
+export MCFLY_RESULTS=50
+
 # If ~/.zsh_history has reached 80% of SAVEHIST, copy it to a snapshot. Let zsh take care of pruning the history.
 #(( $(wc -l ~/.zsh_history | cut -d' ' -f1) > (SAVEHIST * 0.8) )) && cp ~/.zsh_history ~/.zsh_history.$(date +%Y%m%d%H%M%S)
 
