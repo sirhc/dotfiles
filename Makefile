@@ -34,9 +34,9 @@ update-functions:
 	$(CURL) $(GITHUB_RAW)/jkavan/terragrunt-oh-my-zsh-plugin/master/_terragrunt   > $(FUNCTIONS_DIR)/_terragrunt
 
 update-plugins:
-	mkdir -p $(PLUGINS_DIR)/{aws,fzf-completion,git,git-extras,screen,z}
+	mkdir -p $(PLUGINS_DIR)/{aws,fzf-completion,git-extras,git,screen}
 	$(CURL) $(GITHUB_RAW)/ohmyzsh/ohmyzsh/master/plugins/aws/aws.plugin.zsh       > $(PLUGINS_DIR)/aws/aws.plugin.zsh
 	$(CURL) $(GITHUB_RAW)/junegunn/fzf/master/shell/completion.zsh                > $(PLUGINS_DIR)/fzf-completion/fzf-completion.plugin.zsh
-	$(CURL) $(GITHUB_RAW)/ohmyzsh/ohmyzsh/master/plugins/git/git.plugin.zsh       > $(PLUGINS_DIR)/git/git.plugin.zsh
 	$(CURL) $(GITHUB_RAW)/tj/git-extras/master/etc/git-extras-completion.zsh      > $(PLUGINS_DIR)/git-extras/git-extras.plugin.zsh
+	$(CURL) $(GITHUB_RAW)/ohmyzsh/ohmyzsh/master/plugins/git/git.plugin.zsh       > $(PLUGINS_DIR)/git/git.plugin.zsh
 	$(CURL) $(GITHUB_RAW)/ohmyzsh/ohmyzsh/master/plugins/screen/screen.plugin.zsh > $(PLUGINS_DIR)/screen/screen.plugin.zsh
