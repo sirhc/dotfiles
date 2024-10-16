@@ -1,6 +1,15 @@
 # vim: ft=config
+# https://jonas.github.io/tig/doc/tigrc.5.html
 
-set line-graphics = utf-8
+set line-graphics = auto
+set truncation-delimiter = utf-8
+# set ignore-space = some
+set ignore-case = smart-case
+set mailmap = true
+set editor-line-number = true
+
+bind main R !?git revert %(commit)
+bind diff R !?git revert %(commit)
 
 # https://stackoverflow.com/a/25975171
 bind diff 7 !git diff %(commit)^ %(commit)
