@@ -54,26 +54,10 @@
     helper = store
 
 [delta]
-    features = decorations
-    hyperlinks = true
-    hyperlinks-file-link-format = "file-line://{path}:{line}"
-    light = false
-    line-numbers = true
+    features = arctic-fox
     navigate = true # use n and N to move between diff sections
     paging = always
     side-by-side = true
-
-[delta "interactive"]
-    keep-plus-minus-markers = false
-
-[delta "decorations"]
-    commit-decoration-style = blue ol
-    commit-style = raw
-    file-style = omit
-    hunk-header-decoration-style = blue box
-    hunk-header-file-style = red
-    hunk-header-line-number-style = "#067a00"
-    hunk-header-style = file line-number syntax
 
 [diff]
     algorithm = histogram
@@ -147,4 +131,5 @@
 
 # This needs to be last, to override anything above.
 [include]
+    path = ~/.gitconfig.delta
     path = ~/.gitconfig.local
