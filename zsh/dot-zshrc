@@ -48,9 +48,8 @@ export UNZIP='-qq'
 
 path=(
     ~/bin
-    # This is a habit from a time when my home directory was on NFS and shared on
-    # multiple types of systems. It still comes in handy when I want to keep
-    # binaries in `~/bin`, which I tend to sync between systems.
+    # This is a habit from a time when my home directory was on NFS and shared on multiple types of systems. It still
+    # comes in handy when I want to keep binaries in `~/bin`, which I tend to sync between systems.
     ~/bin/${OSTYPE/[0-9]*/}-${CPUTYPE} # e.g., linux-gnu-x86_64, darwin-arm64
     ~/.local/{bin,sbin}
     # Shim directories for goenv, pyenv, etc.
@@ -76,17 +75,15 @@ zstyle ':completion:*' accept-exact-dirs true
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z-_}={A-Za-z_-}' 'r:|=*' 'l:|=* r:|=*'
 zstyle ':completion:*' menu select
 
-# Only load bracketed-paste-magic if the zsh version is >= 5.1 (unlikely, but
-# safety first).
+# Only load bracketed-paste-magic if the zsh version is >= 5.1 (unlikely, but safety first).
 if [[ ${ZSH_VERSION:0:3} -ge 5.1 ]]; then
     set zle_bracketed_paste
     autoload -Uz bracketed-paste-magic
     zle -N bracketed-paste bracketed-paste-magic
 fi
 
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc. Initialization code that may require
+# console input (password prompts, [y/n] confirmations, etc.) must go above this block; everything else may go below.
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
     source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
@@ -95,8 +92,7 @@ fi
 [[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
 [[ -f ~/.zshrc.d/powerlevel10k/powerlevel10k.zsh-theme ]] && source ~/.zshrc.d/powerlevel10k/powerlevel10k.zsh-theme
 
-# Load any library files (à la Oh My Zsh), because plugins may want to use
-# them (e.g., git.plugin.zsh).
+# Load any library files (à la Oh My Zsh), because plugins may want to use them (e.g., git.plugin.zsh).
 
 for _lib in ~/.zshrc.d/lib/*.zsh(#qN); do
     source $_lib
@@ -179,8 +175,7 @@ bindkey '^h' _complete_help
 (( $+commands[thefuck] )) && eval "$(thefuck --alias)" # https://github.com/nvbn/thefuck
 (( $+commands[zoxide] )) && eval "$(zoxide init zsh)"  # https://github.com/ajeetdsouza/zoxide
 
-# If ~/.zsh_history has reached 80% of SAVEHIST, copy it to a snapshot. Let
-# zsh take care of pruning the history.
+# If ~/.zsh_history has reached 80% of SAVEHIST, copy it to a snapshot. Let zsh take care of pruning the history.
 #(( $(wc -l ~/.zsh_history | cut -d' ' -f1) > (SAVEHIST * 0.8) )) && cp ~/.zsh_history ~/.zsh_history.$(date +%Y%m%d%H%M%S)
 
 # Don't do this in my aliases plugin, because,
@@ -188,12 +183,10 @@ bindkey '^h' _complete_help
 #   zsh-syntax-highlighting.zsh:31: invalid alias '=' encountered while printing aliases
 aliases[=]='noglob ='
 
-# Finally, any machine-specific configuration that doesn't belong in my version
-# controlled file.
+# Finally, any machine-specific configuration that doesn't belong in my version controlled file.
 [[ -e ~/.zshrc.local ]] && source ~/.zshrc.local
 
-# If the last command in this file fails (e.g., if ~/.zshrc.local doesn't
-# exit), it will cause the p10k prompt to go red. This is just to make it
-# happy when a new shell is launched. Alternatively, I could use `if ...;
-# then`, but I like the one-liner.
+# If the last command in this file fails (e.g., if ~/.zshrc.local doesn't exit), it will cause the p10k prompt to go
+# red. This is just to make it happy when a new shell is launched. Alternatively, I could use `if ...; then`, but I like
+# the one-liner.
 true
