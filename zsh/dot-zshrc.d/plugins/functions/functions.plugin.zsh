@@ -18,18 +18,6 @@ function \=() {
     print $(( ${@//,} ))
 }
 
-function cd {
-    if [[ -z $2 ]]; then
-        if [[ -f $1 ]]; then
-            builtin cd $1:h && ls
-        else
-            builtin cd $1 && ls
-        fi
-    else
-        builtin cd $* && ls
-    fi
-}
-
 # > sd https://github.com/<user>/<repo>/pull/<num> -> cd ~/src/github.com/<user>/<repo>
 function sd {
     local dir="${HOME}/src/${1#*://}"

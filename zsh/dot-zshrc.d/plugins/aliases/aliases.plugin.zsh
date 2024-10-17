@@ -32,8 +32,10 @@ alias ww=vimwiki
 alias xclip='xclip -selection c'
 alias xsubcpp='cpp -I`perl -MConfig -le '"'"'print "$Config{archlib}/CORE"'"'"'`'
 
+(( $+commands[eza] ))       && alias ls='eza'
 (( $+commands[kubecolor] )) && alias kubectl='kubecolor'
 (( $+commands[vimx] ))      && alias vim='vimx'
+(( $+commands[zoxide] ))    && alias cd='z'
 
 (( $+commands[ncat] ))      || alias ncat='netcat'
 (( $+commands[open] ))      || alias open='xdg-open'
