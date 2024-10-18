@@ -57,6 +57,7 @@
     navigate = true # use n and N to move between diff sections
     paging = always
     side-by-side = true
+    true-color = always
 
 [diff]
     algorithm = histogram
