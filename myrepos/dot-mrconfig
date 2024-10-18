@@ -1,61 +1,54 @@
 [DEFAULT]
 
+lib =
+  git() {
+    command git --no-pager "$@"
+  }
+  #
+  gh() {
+    env GH_PAGER= gh "$@"
+  }
+
 edit =
-    if [[ $# -gt 0 ]]; then
-        vim "$@"
-    else
-        vim .
-    fi
+  if [[ $# -gt 0 ]]; then
+    vim "$@"
+  else
+    vim .
+  fi
 
 # TODO: Figure out how to tell Tilix to open a tab.
 tab =
-    if [[ "$( uname -s )" = Darwin ]]; then
-        osascript -e 'tell application "iTerm2" to tell current window' \
-                  -e '    create tab with default profile' \
-                  -e '    tell current session to write text "builtin cd '"'$MR_REPO'"'; '"$@"'"' \
-                  -e 'end tell'
-        exit
-    fi
-    echo "mr ${MR_ACTION}: unsupported on $( uname -s )" 1>&2
-    exit 1
+  if [[ "$( uname -s )" = Darwi ]]; then
+    osascript -e 'tell application "iTerm2" to tell current window' \
+              -e '    create tab with default profile' \
+              -e '    tell current session to write text "builtin cd '"'$MR_REPO'"'; '"$@"'"' \
+              -e 'end tell'
+    exit
+  fi
+  error "unsupported on $( uname -s )"
 
-git_branch        = git rev-parse --abbrev-ref HEAD
-git_checkoutdefaultbranch = git switch $( git default-branch )
-git_defaultbranch = git default-branch
-git_gc            = git gc --auto "$@"
-git_localbranches = git --no-pager branch --verbose --verbose
-git_mergedefaultbranch = git merge $( git default-branch )
-git_prready       = env GH_PAGER= gh pr view --json reviews,url --template '{{.url|autocolor "yellow"}}{{"\n"}}{{if .reviews}}{{range .reviews}}{{tablerow .state .author.login}}{{end}}{{else}}PENDING{{"\n"}}{{end}}'
-git_prstatus      = env GH_PAGER= gh pr status
-git_switch        = git switch "$@"
-git_tags          = git --no-pager tag --list
-git_update        = git pull "$@" | { grep -v '^Already up to date.$' || :; }
+# Quick access to the git(1) and gh(1) commands.
+git_git = git "$@"
+git_gh  = gh "$@"
 
-# Print branch details if not currently on the default branch (as defined by
-# GitHub and cached in .git/config).
-git_activebranch =
-    { git rev-parse --abbrev-ref HEAD; git default-branch; } |
-        paste -s -d ' ' - |
-        awk '(NF > 1 && $1 != $2) { print $1 }' |
-        xargs -r git --no-pager branch --list --verbose --verbose
+# Some of the more common git(1) commands.
+git_branch = git branch "$@"
+git_gc     = git gc "$@"
+git_switch = git switch "$@"
+git_tags   = git tag "$@"
 
-git_prunebranches =
-    git for-each-ref --format '%(refname) %(upstream:track,nobracket)' refs/heads |
-        awk '$2 == "gone" {sub("refs/heads/", "", $1); print $1}' |
-        xargs -r git branch --delete "$@"
+git_checkoutdefaultbranch = git switch "$( git default-branch )"
+git_defaultbranch         = git default-branch
+git_localbranches         = git branch -vv
+git_mergedefaultbranch    = git merge "$( git default-branch )"
 
-git_unsynced =
-    git for-each-ref --format '%(refname) %(upstream:track,nobracket)' refs/heads |
-        awk '(NF > 1) { sub("refs/heads/", "", $1); print $1 }' |
-        xargs -r git --no-pager branch --list --verbose --verbose
-
-include = cat ~/.mrconfig.d/*.conf 2> /dev/null || :
+include = cat ~/.mrconfig.d/*.conf 2>/dev/null || :
 
 [ALIAS]
 cod = checkoutdefaultbranch
 db  = defaultbranch
 lb  = localbranches
-mod = mergedefaultbranch
+md  = mergedefaultbranch
 
 [.dotfiles]
 checkout = git clone 'https://github.com/sirhc/dotfiles.git' '.dotfiles'
