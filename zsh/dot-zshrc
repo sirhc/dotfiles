@@ -34,6 +34,7 @@ export AWS_PAGER=
 export BC_ENV_ARGS="-lq $HOME/.bcrc"
 export CLICOLOR=1 # colorize ls(1) on Darwin
 export EDITOR='vim'
+export EZA_CONFIG_DIR="$HOME/${XDG_CONFIG_HOME:-.config}/eza"
 export FZF_DEFAULT_COMMAND='fd --type f'
 export GRANTED_ALIAS_CONFIGURED='true'
 export GREP='egrep'
