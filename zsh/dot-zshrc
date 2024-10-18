@@ -39,6 +39,7 @@ export FZF_DEFAULT_COMMAND='fd --type f'
 export GRANTED_ALIAS_CONFIGURED='true'
 export GREP='egrep'
 export LESS='--LONG-PROMPT --RAW-CONTROL-CHARS --chop-long-lines --ignore-case --jump-target=10 --shift=4 --mouse --quit-if-one-screen'
+export LESS_LINES='-2'
 export MAN_POSIXLY_CORRECT=1
 export NPM_PACKAGES="$HOME/.local"
 export PAGER='less'
