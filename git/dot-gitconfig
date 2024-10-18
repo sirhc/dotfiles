@@ -17,6 +17,7 @@
   mt = mergetool
 
   # Added Functionality
+  branch-age = for-each-ref refs/heads/ refs/remotes/ --sort=-committerdate --format='%(HEAD)%20%(if)%(HEAD)%(then)%(color:green)%(end)%(align:40)%(refname:short)%(end)%(color:reset)%20%(align:20)%(color:yellow)(%(committerdate:relative))%(color:reset)%(end)%20%(objectname:short)%(if)%(upstream)%(then)%20[%(color:blue)%(upstream:short)%(color:reset)]%(end)%20%(contents:lines=1)' --color=always
   current-branch = rev-parse --abbrev-ref HEAD
   default-branch = ! git rev-parse --abbrev-ref origin/HEAD | sed 's@^origin/@@'
   env = ! env | sort
@@ -34,10 +35,6 @@
 
   # No really, even the unmerged ones.
   begone = ! "git for-each-ref --format='%(refname:short) %(upstream:track,nobracket)' refs/heads/ | awk '($2 == \"gone\") { print $1 }' | xargs git branch -D"
-
-  # branch-date = branch --list --format='%(HEAD)%20%(if)%(HEAD)%(then)%(color:green)%(end)%(align:20)%(refname:short)%(end)%(color:reset)%20%(objectname:short)%(if)%(upstream)%(then)%20[%(color:blue)%(upstream:short)%(color:reset)]%(end)%20%(contents:lines=1)%20%(color:yellow)(%(committerdate:relative))%(color:reset)'
-  # undo = ! "f() { git reset $( git rev-parse --abbrev-ref HEAD )@{${1:-1}}; }; f"
-  # whereis = branch --contains --remotes
 
 [branch]
   sort = -committerdate
