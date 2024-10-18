@@ -3,7 +3,7 @@
 
 [alias]
   # Abbreviations
-  bd = branch-date
+  ba = branch-age
   br = branch --list --verbose --verbose
   cd = ! git switch $( git default-branch )
   ci = commit
