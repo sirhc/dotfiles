@@ -1,7 +1,6 @@
 %*
 *.swp
 *~
-.mrconfig.local
 .netrwbook
 .netrwhist
 local/

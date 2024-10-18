@@ -1,5 +1,8 @@
 [DEFAULT]
-include = cat .mrconfig.local 2> /dev/null || :
+
+lastUpdated =
+  echo "  Last updated : $( git log -1 --format='%ar' )"
+  echo "  Last commit  : $( git log -1 --format='%cN %s' )"
 
 # Color Schemes
 
@@ -32,8 +35,8 @@ checkout = git clone 'https://github.com/kien/ctrlp.vim.git' 'ctrlp'
 [pack/plugins/start/fugitive]
 checkout = git clone 'https://github.com/tpope/vim-fugitive.git' 'fugitive'
 
-# [pack/plugins/start/pandoc]
-# checkout = git clone 'https://github.com/vim-pandoc/vim-pandoc.git' 'pandoc'
+[pack/plugins/start/nerdcommenter]
+checkout = git clone 'https://github.com/preservim/nerdcommenter.git' 'nerdcommenter'
 
 [pack/plugins/start/rainbow_csv]
 checkout = git clone 'https://github.com/mechatroner/rainbow_csv.git' 'rainbow_csv'
@@ -70,6 +73,9 @@ checkout = git clone 'https://github.com/nanotee/zoxide.vim.git' 'zoxide'
 
 # Syntax (Language/File Type) Support
 
+[pack/syntax/start/applescript]
+checkout = git clone 'https://github.com/vim-scripts/applescript.vim' 'applescript'
+
 [pack/syntax/start/ansible]
 checkout = git clone 'https://github.com/pearofducks/ansible-vim.git' 'ansible'
 
@@ -84,9 +90,6 @@ checkout = git clone 'https://github.com/bfrg/vim-jq.git' 'jq'
 
 [pack/syntax/start/packer]
 checkout = git clone 'https://github.com/hashivim/vim-packer.git' 'packer'
-
-# [pack/syntax/start/pandoc]
-# checkout = git clone 'https://github.com/vim-pandoc/vim-pandoc-syntax.git' 'pandoc'
 
 [pack/syntax/start/perl]
 checkout = git clone 'https://github.com/vim-perl/vim-perl.git' 'perl'
