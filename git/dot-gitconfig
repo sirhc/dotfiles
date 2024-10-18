@@ -17,11 +17,8 @@
     mt = mergetool
 
     # Added Functionality
-    branch-date = branch --list --format='%(HEAD)%20%(if)%(HEAD)%(then)%(color:green)%(end)%(align:20)%(refname:short)%(end)%(color:reset)%20%(objectname:short)%(if)%(upstream)%(then)%20[%(color:blue)%(upstream:short)%(color:reset)]%(end)%20%(contents:lines=1)%20(%(committerdate:relative))'
     current-branch = rev-parse --abbrev-ref HEAD
-    cod = ! git checkout $( git default-branch )
     default-branch = ! git rev-parse --abbrev-ref origin/HEAD | sed 's@^origin/@@'
-    del = restore --staged
     env = ! env | sort
     mylog = ! git log --decorate=full --author=$( git config user.email ) --stat
     root = rev-parse --show-toplevel
@@ -29,8 +26,10 @@
     stat = diff --stat
     tags = ! git name-rev --tags --name-only $( git rev-parse HEAD )
     tip = log --decorate=full -n 1 --stat
+    unstage = restore --staged
     who = shortlog --numbered --summary --email --
 
+    # branch-date = branch --list --format='%(HEAD)%20%(if)%(HEAD)%(then)%(color:green)%(end)%(align:20)%(refname:short)%(end)%(color:reset)%20%(objectname:short)%(if)%(upstream)%(then)%20[%(color:blue)%(upstream:short)%(color:reset)]%(end)%20%(contents:lines=1)%20%(color:yellow)(%(committerdate:relative))%(color:reset)'
     # undo = ! "f() { git reset $( git rev-parse --abbrev-ref HEAD )@{${1:-1}}; }; f"
     # whereis = branch --contains --remotes
 
