@@ -1,135 +1,135 @@
 [advice]
-    detachedHead = false
+  detachedHead = false
 
 [alias]
-    # Abbreviations
-    bd = branch-date
-    br = branch --list --verbose --verbose
-    cd = ! git switch $( git default-branch )
-    ci = commit
-    cf = ! git checkout $(git for-each-ref --format='%(refname:short)' refs | fzf | awk -F/ '{ print $NF }')
-    co = checkout
-    db = default-branch
-    dc = diff --cached
-    dt = difftool
-    fa = fetch --all
-    lg = log --decorate=full --graph --oneline
-    mt = mergetool
+  # Abbreviations
+  bd = branch-date
+  br = branch --list --verbose --verbose
+  cd = ! git switch $( git default-branch )
+  ci = commit
+  cf = ! git checkout $(git for-each-ref --format='%(refname:short)' refs | fzf | awk -F/ '{ print $NF }')
+  co = checkout
+  db = default-branch
+  dc = diff --cached
+  dt = difftool
+  fa = fetch --all
+  lg = log --decorate=full --graph --oneline
+  mt = mergetool
 
-    # Added Functionality
-    current-branch = rev-parse --abbrev-ref HEAD
-    default-branch = ! git rev-parse --abbrev-ref origin/HEAD | sed 's@^origin/@@'
-    env = ! env | sort
-    mylog = ! git log --decorate=full --author=$( git config user.email ) --stat
-    root = rev-parse --show-toplevel
-    stashed = stash list --pretty=format:'%gd: %Cred%h%Creset %Cgreen[%ar]%Creset %s'
-    stat = diff --stat
-    tags = ! git name-rev --tags --name-only $( git rev-parse HEAD )
-    tip = log --decorate=full -n 1 --stat
-    unstage = restore --staged
-    who = shortlog --numbered --summary --email --
+  # Added Functionality
+  current-branch = rev-parse --abbrev-ref HEAD
+  default-branch = ! git rev-parse --abbrev-ref origin/HEAD | sed 's@^origin/@@'
+  env = ! env | sort
+  mylog = ! git log --decorate=full --author=$( git config user.email ) --stat
+  root = rev-parse --show-toplevel
+  stashed = stash list --pretty=format:'%gd: %Cred%h%Creset %Cgreen[%ar]%Creset %s'
+  stat = diff --stat
+  tags = ! git name-rev --tags --name-only $( git rev-parse HEAD )
+  tip = log --decorate=full -n 1 --stat
+  unstage = restore --staged
+  who = shortlog --numbered --summary --email --
 
-    # branch-date = branch --list --format='%(HEAD)%20%(if)%(HEAD)%(then)%(color:green)%(end)%(align:20)%(refname:short)%(end)%(color:reset)%20%(objectname:short)%(if)%(upstream)%(then)%20[%(color:blue)%(upstream:short)%(color:reset)]%(end)%20%(contents:lines=1)%20%(color:yellow)(%(committerdate:relative))%(color:reset)'
-    # undo = ! "f() { git reset $( git rev-parse --abbrev-ref HEAD )@{${1:-1}}; }; f"
-    # whereis = branch --contains --remotes
+  # branch-date = branch --list --format='%(HEAD)%20%(if)%(HEAD)%(then)%(color:green)%(end)%(align:20)%(refname:short)%(end)%(color:reset)%20%(objectname:short)%(if)%(upstream)%(then)%20[%(color:blue)%(upstream:short)%(color:reset)]%(end)%20%(contents:lines=1)%20%(color:yellow)(%(committerdate:relative))%(color:reset)'
+  # undo = ! "f() { git reset $( git rev-parse --abbrev-ref HEAD )@{${1:-1}}; }; f"
+  # whereis = branch --contains --remotes
 
 [branch]
-    sort = -committerdate
+  sort = -committerdate
 
 [color]
-    ui = auto
+  ui = auto
 
 [commit]
-    cleanup = scissors
-    gpgSign = true
-    verbose = true
+  cleanup = scissors
+  gpgSign = true
+  verbose = true
 
 [core]
-    editor = vim -i NONE
-    excludesFile = ~/.gitignore
-    pager = delta
+  editor = vim -i NONE
+  excludesFile = ~/.gitignore
+  pager = delta
 
 [credential]
-    helper = store
+  helper = store
 
 [delta]
-    features = arctic-fox
-    navigate = true # use n and N to move between diff sections
-    paging = always
-    side-by-side = true
-    true-color = always
+  features = arctic-fox
+  navigate = true # use n and N to move between diff sections
+  paging = always
+  side-by-side = true
+  true-color = always
 
 [diff]
-    algorithm = histogram
-    colorMoved = default
-    renames = true
-    tool = vimdiff
-    wsErrorHighlight = all
+  algorithm = histogram
+  colorMoved = default
+  renames = true
+  tool = vimdiff
+  wsErrorHighlight = all
 
 [diff "daff-csv"]
-    command = daff diff --git
+  command = daff diff --git
 
 [diff "perl"]
-    xfuncname = "^\\s*(sub.*)"
+  xfuncname = "^\\s*(sub.*)"
 
 [difftool]
-    prompt = false
+  prompt = false
 
 [help]
-    autoCorrect = prompt
+  autoCorrect = prompt
 
 [init]
-    defaultBranch = main
+  defaultBranch = main
 
 [fetch]
-    prune = true
-    pruneTags = true
+  prune = true
+  pruneTags = true
 
 [gpg]
-    format = ssh
+  format = ssh
 
 [interactive]
-    diffFilter = delta --color-only --features=interactive
+  diffFilter = delta --color-only --features=interactive
 
 [merge]
-    conflictStyle = zdiff3
-    keepBackup = false
-    tool = fugitive
+  conflictStyle = zdiff3
+  keepBackup = false
+  tool = fugitive
 
 [merge "daff-csv"]
-    name   = daff tabular csv merge
-    driver = daff merge --output %A %O %A %B
+  name   = daff tabular csv merge
+  driver = daff merge --output %A %O %A %B
 
 [mergetool]
-    prompt = false
+  prompt = false
 
 [mergetool "fugitive"]
-    cmd = vim -f -c \"Gvdiffsplit!\" \"$MERGED\"
+  cmd = vim -f -c \"Gvdiffsplit!\" \"$MERGED\"
 
 [push]
-    autoSetupRemote = true
-    default = current
+  autoSetupRemote = true
+  default = current
 
 [pull]
-    rebase = false
+  rebase = false
 
 [rebase]
-    autoSquash = true
-    autoStash = true
-    updateRefs = true
+  autoSquash = true
+  autoStash = true
+  updateRefs = true
 
 [receive]
-    denyCurrentBranch = warn
+  denyCurrentBranch = warn
 
 [rerere]
-    enabled = true
-    autoUpdate = true
+  enabled = true
+  autoUpdate = true
 
 [user]
-    name = Chris Grau
-    email = 113591+sirhc@users.noreply.github.com
+  name = Chris Grau
+  email = 113591+sirhc@users.noreply.github.com
 
 # This needs to be last, to override anything above.
 [include]
-    path = ~/.gitconfig.delta
-    path = ~/.gitconfig.local
+  path = ~/.gitconfig.delta
+  path = ~/.gitconfig.local
