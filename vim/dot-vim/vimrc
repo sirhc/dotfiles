@@ -220,6 +220,10 @@ let g:copilot_filetypes = {
     \ 'yaml': v:true
     \ }
 
+let g:copilot_workspace_folders = [
+    \ '~/src'
+    \ ]
+
 " Load a local configuration, if it exists. This allows for custom
 " configuration per-host (e.g., for VimWiki).
 runtime vimrc.local
