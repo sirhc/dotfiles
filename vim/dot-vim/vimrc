@@ -22,16 +22,16 @@ set pastetoggle=<F2>
 set report=0
 set scrolloff=5
 set shiftround
-set shiftwidth=4
+set shiftwidth=2
 set showtabline=2  " Always display the tabline, even if there is only one tab
 set sidescrolloff=10
 set smartcase
 set smartindent
 set smarttab
 set smoothscroll
-set softtabstop=4
+set softtabstop=2
 set spell
-set tabstop=4
+set tabstop=2
 set textwidth=120
 set timeout timeoutlen=300 ttimeoutlen=300   " keycodes and maps timeout in 3/10 sec
 set title
