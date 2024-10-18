@@ -38,7 +38,7 @@ export EZA_CONFIG_DIR="$HOME/${XDG_CONFIG_HOME:-.config}/eza"
 export FZF_DEFAULT_COMMAND='fd --type f'
 export GRANTED_ALIAS_CONFIGURED='true'
 export GREP='egrep'
-export LESS='--LONG-PROMPT --RAW-CONTROL-CHARS --chop-long-lines --clear-screen --ignore-case --jump-target=10 --shift=4 --mouse'
+export LESS='--LONG-PROMPT --RAW-CONTROL-CHARS --chop-long-lines --ignore-case --jump-target=10 --shift=4 --mouse --quit-if-one-screen'
 export MAN_POSIXLY_CORRECT=1
 export NPM_PACKAGES="$HOME/.local"
 export PAGER='less'
