@@ -20,6 +20,7 @@ set more
 set number
 set pastetoggle=<F2>
 set report=0
+set runtimepath+=~/.local/vim/vimfiles
 set scrolloff=5
 set shiftround
 set shiftwidth=2
@@ -203,6 +204,10 @@ if executable('rg')
 endif
 if executable('fd')
     let g:ctrlp_user_command = 'fd --color=never --glob --type file "" %s'
+endif
+
+if !empty(glob("/opt/homebrew/opt/fzf"))
+  set runtimepath+=/opt/homebrew/opt/fzf
 endif
 
 let wiki_1 = {}

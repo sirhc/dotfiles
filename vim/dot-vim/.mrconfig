@@ -35,6 +35,9 @@ checkout = git clone 'https://github.com/kien/ctrlp.vim.git' 'ctrlp'
 [pack/plugins/start/fugitive]
 checkout = git clone 'https://github.com/tpope/vim-fugitive.git' 'fugitive'
 
+[pack/plugins/start/fzf]
+checkout = git clone 'https://github.com/junegunn/fzf.vim.git' 'fzf'
+
 [pack/plugins/start/nerdcommenter]
 checkout = git clone 'https://github.com/preservim/nerdcommenter.git' 'nerdcommenter'
 
