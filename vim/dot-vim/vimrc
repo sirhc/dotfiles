@@ -34,7 +34,7 @@ set softtabstop=2
 set spell
 set tabstop=2
 set textwidth=120
-set timeout timeoutlen=300 ttimeoutlen=300   " keycodes and maps timeout in 3/10 sec
+set timeout timeoutlen=500 ttimeoutlen=500   " keycodes and maps timeout in 1/2 sec
 set title
 set undodir=~/.vim/undofiles//,~/tmp//,.
 set undofile
@@ -57,6 +57,8 @@ set nostartofline
 
 set t_Co=256
 set t_ut=
+
+let g:mapleader = ","
 
 " Emulate Vim's modeline support using `git config`. For example,
 "
