@@ -42,6 +42,12 @@ set wildignorecase
 set wildmode=list:longest,full
 set wildoptions=pum
 
+if has('unnamedplus')
+  set clipboard=unnamedplus
+else
+  set clipboard=unnamed,unnamedplus
+endif
+
 set nocompatible
 set nojoinspaces
 set nolist
