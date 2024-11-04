@@ -103,6 +103,7 @@
     # disk_usage            # disk usage
     # ram                   # free RAM
     # swap                  # used swap
+    meeting
     email
     # todo                  # todo items (https://github.com/todotxt/todo.txt-cli)
     # timewarrior           # timewarrior tracking status (https://timewarrior.net/)
@@ -1812,6 +1813,23 @@
 
   function instant_prompt_jenkins() {
     prompt_jenkins
+  }
+
+  function prompt_meeting() {
+    if ! (( $+commands[icalBuddy] )); then
+      return
+    fi
+
+    next_event="$( icalBuddy -n -b '' -iep datetime -eed -ic chris.grau@tealium.com eventsToday+1 | head -1 )"
+    if [[ -z "$next_event" ]]; then
+      return
+    fi
+
+    p10k segment -b blue -f 7 -i $'\uF455' -t "$next_event"
+  }
+
+  function instant_prompt_meeting() {
+    prompt_meeting
   }
 
   function prompt_email() {
