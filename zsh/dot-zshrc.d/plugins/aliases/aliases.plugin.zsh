@@ -1,38 +1,39 @@
 alias bofh='ncat bofh.jeffballard.us 666 </dev/null | sed -ne "s/[^:]*: //p"'
-alias chat='cheat'
 alias ed='ed -p:'
 alias emdash='print -- "—"'
 alias endash='print -- "–"'
-alias headers='curl -s -D- -o/dev/null'
+alias headers='curl -D - -o /dev/null'
 alias lh='ls -lh'
+alias ll='ls -l'
 alias maze='perl -e "print qw(╱ ╲)[rand 2] while 1"'
-alias mlrlook='mlr --icsv --opprint cat'
-alias mrsync='mr -j8 -m qu && mr -j8 -m prune && mr -j8 -m gc'
-alias mrtest='mr -c .mrconfig.test'
-alias mrwip='mr -c .mrconfig.wip'
-alias now='date +%H:%M:%S'
+alias shrug='print -- "¯\\\\_(ツ)_/¯"'
+alias tiga='tig --all'
+alias unassume='assume --un'
+alias uriencode='jq -Rrs "@uri"'
+alias wget='wget --content-disposition'
+alias xclip='xclip -selection c'
+
 alias p5addlib='eval "$( envmgr -p PERL5LIB lib )"'
 alias p5clearenv='unset "$( env | grep ^PERL | cut -d= -f1 )"'
 alias p5rmlib='eval "$( envmgr -r PERL5LIB lib )"'
 alias perlconf='perl -V:".*"'
 alias pprove='prove -PPretty'
-alias shrug='print -- "¯\\\\_(ツ)_/¯"'
-alias t='task'
-alias tiga='tig --all'
-alias to='taskopen'
-alias today='date +%Y-%m-%d'
 alias tprove='prove --formatter TAP::Formatter::Elapsed'
 alias typemap='perl -MConfig -le '"'"'print "$Config{installprivlib}/ExtUtils/typemap"'"'"''
-alias unassume='assume --un'
-alias uriencode='jq -Rrs "@uri"'
-alias vimwiki='vim +:VimwikiIndex'
-alias wget='wget --content-disposition'
-alias wi='vim +:VimwikiDiaryIndex'
-alias ww=vimwiki
-alias xclip='xclip -selection c'
 alias xsubcpp='cpp -I`perl -MConfig -le '"'"'print "$Config{archlib}/CORE"'"'"'`'
 
+alias today='date +%Y-%m-%d'
+alias now='date +%H:%M:%S'
+
+alias t='task'
+alias to='taskopen'
+
+alias wi='vim -c :VimwikiDiaryGenerateLinks -c :VimwikiDiaryIndex'
+alias ww='vim -c :VimwikiIndex'
+
+(( $+commands[assume] ))    && alias assume='source assume'  # https://docs.commonfate.io/granted-cli/shell-alias/
 (( $+commands[eza] ))       && alias ls='eza'
+(( $+commands[moar] ))      && alias more='moar'
 (( $+commands[kubecolor] )) && alias kubectl='kubecolor'
 (( $+commands[vimx] ))      && alias vim='vimx'
 (( $+commands[zoxide] ))    && alias cd='z'
@@ -70,7 +71,7 @@ alias chr="perl -E 'say chr \$_ for @ARGV'"
 alias ord="perl -E 'say ord \$_ for @ARGV'"
 
 # https://twitter.com/climagic/status/507611283818942465
-alias what_are_those_damn_conditional_expressions="man bash | sed -n '/^CONDITIONAL EXPRESSIONS/,/^SIMPLE COMMAND/p'"
+alias what-are-those-damn-conditional-expressions="man bash | sed -n '/^CONDITIONAL EXPRESSIONS/,/^SIMPLE COMMAND/p'"
 
 # https://twitter.com/dmarti/status/1295365357146791936
 alias 2020date='echo March $((($(date +%s)-$(date +%s --date "2020-02-29"))/86400))\, 2020'
@@ -80,6 +81,3 @@ alias isodate='date +%Y-%m-%dT%H:%M:%S%z'
 alias isodate-basic='date -u +%Y%m%dT%H%M%SZ'
 alias isodate-utc='date -u +%Y-%m-%dT%H:%M:%SZ'
 alias unixstamp='date +%s'
-
-# https://docs.commonfate.io/granted-cli/shell-alias/
-(( $+commands[assume] )) && alias assume='source assume'
