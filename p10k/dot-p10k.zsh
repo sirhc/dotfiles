@@ -1820,7 +1820,20 @@
       return
     fi
 
-    next_event="$( icalBuddy -n -b '' -iep datetime -eed -ic chris.grau@tealium.com eventsToday+1 | head -1 )"
+    local now=$( gdate +'%s' )
+    local next_event
+
+    while read -r next_event; do
+      local event_time="$( <<<$next_event sed -e 's/ at / /' | xargs -I . gdate -d . +'%s' 2> /dev/null )"
+
+      if [[ -n $event_time && $event_time -lt $now ]]; then
+        # I don't care about events happening now. I'm either already joined or am already missing it.
+        continue
+      fi
+
+      break
+    done < <( icalBuddy -n -b '' -iep datetime -eed -ic chris.grau@tealium.com eventsToday+3 )
+
     if [[ -z "$next_event" ]]; then
       return
     fi
