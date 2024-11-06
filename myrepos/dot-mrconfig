@@ -45,10 +45,10 @@ git_mergedefaultbranch    = git merge "$( git default-branch )"
 include = cat ~/.mrconfig.d/*.conf 2>/dev/null || :
 
 [ALIAS]
-cod = checkoutdefaultbranch
-db  = defaultbranch
-lb  = localbranches
-md  = mergedefaultbranch
+cd = checkoutdefaultbranch
+db = defaultbranch
+lb = localbranches
+md = mergedefaultbranch
 
 [.dotfiles]
 checkout = git clone 'https://github.com/sirhc/dotfiles.git' '.dotfiles'
