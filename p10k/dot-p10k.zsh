@@ -1816,29 +1816,21 @@
   }
 
   function prompt_meeting() {
-    if ! (( $+commands[icalBuddy] )); then
+    local cache="${XDG_CACHE_HOME:-$HOME/.cache}/$USER/meeting.txt"
+    local next_event
+
+    if [[ ! -r "$cache" ]]; then
       return
     fi
 
-    local now=$( gdate +'%s' )
-    local next_event
-
-    while read -r next_event; do
-      local event_time="$( <<<$next_event sed -e 's/ at / /' | xargs -I . gdate -d . +'%s' 2> /dev/null )"
-
-      if [[ -n $event_time && $event_time -lt $now ]]; then
-        # I don't care about events happening now. I'm either already joined or am already missing it.
-        continue
-      fi
-
-      break
-    done < <( icalBuddy -n -b '' -iep datetime -eed -ic chris.grau@tealium.com eventsToday+3 )
+    read -r next_event <<<"$( head -1 "$cache" )"
 
     if [[ -z "$next_event" ]]; then
       return
     fi
 
-    p10k segment -b blue -f 7 -i $'\uF455' -t "$next_event"
+    # Use the same colors as the macOS Calendar app.
+    p10k segment -b '#ECF8FA' -f '#4F7174' -i $'\uF455' -t "$next_event"
   }
 
   function instant_prompt_meeting() {
@@ -1846,22 +1838,24 @@
   }
 
   function prompt_email() {
-    local cache="${XDG_CACHE_HOME:-$HOME/.cache}/mail/cache.json"
+    local cache="${XDG_CACHE_HOME:-$HOME/.cache}/$USER/mail.json"
     local messages unseen color icon
 
-    if [[ -e "$cache" ]]; then
-      read -r messages unseen <<<"$( jq -r '"\(.messages) \(.unseen)"' "$cache" )"
+    if [[ ! -r "$cache" ]]; then
+      return
     fi
+
+    read -r messages unseen <<<"$( jq -r '"\(.messages) \(.unseen)"' "$cache" )"
 
     if [[ -z $messages ]]; then
       return
     fi
 
     if [[ $unseen -gt 0 ]]; then
-      color='167' # indianred
+      color='167'  # indianred
       icon=$'\uFBCD'
     else
-      color='028' # green4
+      color='028'  # green4
       icon=$'\uFAEE'
     fi
 
