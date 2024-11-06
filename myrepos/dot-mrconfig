@@ -18,7 +18,7 @@ edit =
 
 # TODO: Figure out how to tell Tilix to open a tab.
 tab =
-  if [[ "$( uname -s )" = Darwi ]]; then
+  if [[ "$( uname -s )" = Darwin ]]; then
     osascript -e 'tell application "iTerm2" to tell current window' \
               -e '    create tab with default profile' \
               -e '    tell current session to write text "builtin cd '"'$MR_REPO'"'; '"$@"'"' \
