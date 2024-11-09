@@ -14,7 +14,7 @@ stow:
 	stow --target='$(HOME)' --verbose=1 --stow --dotfiles *(/)
 
 unstow:
-	stow --simulate --target='$(HOME)' --verbose=1 --delete --dotfiles *(/)
+	stow --target='$(HOME)' --verbose=1 --delete --dotfiles *(/)
 
 update: libs functions plugins
 
@@ -38,6 +38,4 @@ plugins: _dirs
 	$(CURL) $(GITHUB)/ohmyzsh/ohmyzsh/master/plugins/screen/screen.plugin.zsh > $(PLUGINS)/screen/screen.plugin.zsh
 
 _dirs:
-	mkdir -p $(LIB)
-	mkdir -p $(FUNCTIONS)
-	mkdir -p $(PLUGINS)/{aws,fzf-completion,fzf-git,git-extras,git,screen}
+	mkdir -p $(LIB) $(FUNCTIONS) $(PLUGINS)/{aws,fzf-completion,fzf-git,git-extras,git,screen}
