@@ -2,186 +2,168 @@
 
 typeset -aU path manpath fpath
 
-# See zshparam(1).
+# zshparam(1)
 HISTFILE=~/.zsh_history
 HISTORY_IGNORE='(exit|reset|clear|cd|cd ..|cd..|ls)'
-HISTSIZE=1000000    # the number of items for the internal history list
-LISTMAX=0           # only prompt if the list will scroll
-#REPORTMEMORY=102400 # report on commands exceeding 100 MiB RSS
-REPORTTIME=5        # report on commands exceeding 5 s exec time
-SAVEHIST=1000000    # maximum number of items for the history file
+HISTSIZE=1000000     # the number of items for the internal history list
+LISTMAX=0            # only prompt if the list will scroll
+# REPORTMEMORY=102400  # report on commands exceeding 100 MiB RSS
+REPORTTIME=5         # report on commands exceeding 5 s exec time
+SAVEHIST=1000000     # maximum number of items for the history file
 TIMEFMT="${TIMEFMT} %Mk max rss"
 
-# See zshoptions(1).
-setopt AUTO_CD                 # change directories without cd
-setopt EXTENDED_GLOB           # use #, ~, ^ for filename generation
-setopt EXTENDED_HISTORY        # record command start time
-setopt HIST_FCNTL_LOCK         # use fcntl to lock history file
-setopt HIST_IGNORE_ALL_DUPS    # do not add duplicate command to history
-setopt HIST_IGNORE_SPACE       # do not add commands with leading space to history
-setopt HIST_NO_STORE           # do not store the `history` command
-setopt HIST_REDUCE_BLANKS      # remove superfluous blanks
-setopt HIST_SAVE_NO_DUPS       # do not save duplicate commands
-setopt HIST_VERIFY             # confirm history expansion before executing
-setopt INC_APPEND_HISTORY_TIME # append command to history file immediately after execution
-setopt INTERACTIVE_COMMENTS    # allow comments even in interactive shells
+# zshoptions(1)
+setopt AUTO_CD                  # change directories without cd
+setopt EXTENDED_GLOB            # use #, ~, ^ for filename generation
+setopt EXTENDED_HISTORY         # record command start time
+setopt HIST_FCNTL_LOCK          # use fcntl to lock history file
+setopt HIST_IGNORE_ALL_DUPS     # do not add duplicate command to history
+setopt HIST_IGNORE_SPACE        # do not add commands with leading space to history
+setopt HIST_NO_STORE            # do not store the `history` command
+setopt HIST_REDUCE_BLANKS       # remove superfluous blanks
+setopt HIST_SAVE_NO_DUPS        # do not save duplicate commands
+setopt HIST_VERIFY              # confirm history expansion before executing
+setopt INC_APPEND_HISTORY_TIME  # append command to history file immediately after execution
+setopt INTERACTIVE_COMMENTS     # allow comments even in interactive shells
 
-unsetopt CASE_GLOB # case-insensitive file globbing
-unsetopt NOMATCH   # leave unmatched patterns alone in arg list
+unsetopt CASE_GLOB  # case-insensitive file globbing
+unsetopt NOMATCH    # leave unmatched patterns alone in arg list
 
 export ANSIBLE_COW_SELECTION='random'
-export AWS_PAGER=
 export BC_ENV_ARGS="-lq $HOME/.bcrc"
-export CLICOLOR=1 # colorize ls(1) on Darwin
+export CLICOLOR=1  # colorize ls(1) on Darwin
 export EDITOR='vim'
 export EZA_CONFIG_DIR="$HOME/${XDG_CONFIG_HOME:-.config}/eza"
-export FZF_DEFAULT_COMMAND='fd --type f'
-export GRANTED_ALIAS_CONFIGURED='true'
-export GREP='egrep'
-export LESS='--LONG-PROMPT --RAW-CONTROL-CHARS --chop-long-lines --ignore-case --jump-target=10 --shift=4 --mouse --quit-if-one-screen'
-export LESS_LINES='-1'
-export MAN_POSIXLY_CORRECT=1
-export NPM_PACKAGES="$HOME/.local"
-export PAGER='less'
-export PERLDOC_PAGER='less'
-export RSYNC_RSH='ssh'
-export TZ='US/Pacific'
-export UNZIP='-qq'
-
-path=(
-    ~/bin
-    # This is a habit from a time when my home directory was on NFS and shared on multiple types of systems. It still
-    # comes in handy when I want to keep binaries in `~/bin`, which I tend to sync between systems.
-    ~/bin/${OSTYPE/[0-9]*/}-${CPUTYPE} # e.g., linux-gnu-x86_64, darwin-arm64
-    ~/.local/{bin,sbin}
-    # Shim directories for goenv, pyenv, etc.
-    ~/.*env/shims(/N)
-    /opt/homebrew/{bin,sbin}(/N)
-    /usr/local/{bin,sbin}
-    /usr/{bin,sbin}
-    /{bin,sbin}
-)
-
-fpath=(
-    ~/.zshrc.d/functions
-    ~/.local/share/zsh/site-functions
-    /opt/homebrew/share/zsh/site-functions(/N)
-    $fpath
-)
-
-autoload -U compinit && compinit
-
-ZLE_REMOVE_SUFFIX_CHARS=$' \t\n'
-
-zstyle ':completion:*' accept-exact-dirs true
-zstyle ':completion:*' matcher-list 'm:{a-zA-Z-_}={A-Za-z_-}' 'r:|=*' 'l:|=* r:|=*'
-zstyle ':completion:*' menu select
-
-# Only load bracketed-paste-magic if the zsh version is >= 5.1 (unlikely, but safety first).
-if [[ ${ZSH_VERSION:0:3} -ge 5.1 ]]; then
-    set zle_bracketed_paste
-    autoload -Uz bracketed-paste-magic
-    zle -N bracketed-paste bracketed-paste-magic
-fi
-
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc. Initialization code that may require
-# console input (password prompts, [y/n] confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-    source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
-
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
-[[ -f ~/.zshrc.d/powerlevel10k/powerlevel10k.zsh-theme ]] && source ~/.zshrc.d/powerlevel10k/powerlevel10k.zsh-theme
-
-# Load any library files (à la Oh My Zsh), because plugins may want to use them (e.g., git.plugin.zsh).
-
-for _lib in ~/.zshrc.d/lib/*.zsh(#qN); do
-    source $_lib
-done
-unset _lib
-
-# Rudimentary plugin autoloading (à la Vim), but serves my purposes at the moment.
-
-for _plugin in ~/.zshrc.d/plugins/*/*.plugin.zsh(#qN); do
-    source $_plugin
-done
-unset _plugin
-
-# _set_terminal_title <window-title> [tab-title]
-_set_terminal_title() {
-    : ${1=%n@%M:%~} # user@host:path
-    : ${2=%n@%M:%~} # user@host:path
-
-    if [[ $TERM_PROGRAM == iTerm.app ]]; then
-        print -Pn "\e]2;${1:q}\a" # set window name
-        print -Pn "\e]1;${2:q}\a" # set tab name
-        return
-    fi
-
-    case "$TERM" in
-        xterm*)
-            print -Pn "\e]2;${1:q}\a" # set window name (this is the only one that works in gnome-terminal)
-            print -Pn "\e]1;${2:q}\a" # set tab name
-            ;;
-        screen*|tmux*)
-            print -Pn "\ek${1:q}\e\\" # set screen hardstatus
-            ;;
-    esac
-}
-
-_set_terminal_title_cmd() {
-    _set_terminal_title "%100>...>${2:gs/%/%%}%<< (%~)"
-}
-
-autoload -Uz add-zsh-hook
-add-zsh-hook precmd _set_terminal_title
-add-zsh-hook preexec _set_terminal_title_cmd
-
-# https://github.com/ohmyzsh/ohmyzsh/blob/master/lib/completion.zsh
-expand-or-complete-with-dots() {
-    local dots='%F{red}…%f'
-    printf '\e[?7l%s\e[?7h' "${(%)dots}"
-    zle expand-or-complete
-    zle redisplay
-}
-zle -N expand-or-complete-with-dots
-bindkey -M emacs '^I' expand-or-complete-with-dots
-bindkey -M viins '^I' expand-or-complete-with-dots
-bindkey -M vicmd '^I' expand-or-complete-with-dots
-
-autoload -U up-line-or-beginning-search
-autoload -U down-line-or-beginning-search
-
-zle -N up-line-or-beginning-search
-zle -N down-line-or-beginning-search
-
-bindkey '^[[A' up-line-or-beginning-search   # up arrow
-bindkey '^[[B' down-line-or-beginning-search # down arrow
-
-bindkey -M vicmd 'k' up-line-or-beginning-search
-bindkey -M vicmd 'j' down-line-or-beginning-search
-
-bindkey -M viins '^K' up-line-or-beginning-search
-bindkey -M viins '^J' down-line-or-beginning-search
-
-bindkey ' ' magic-space
-
-bindkey '^ ' autosuggest-accept # https://github.com/zsh-users/zsh-autosuggestions#key-bindings
-
-bindkey '^h' _complete_help
-
-(( $+commands[fzf] )) && eval "$(fzf --zsh)"           # https://github.com/junegunn/fzf
-(( $+commands[mcfly] )) && eval "$(mcfly init zsh)"    # https://github.com/cantino/mcfly
-(( $+commands[navi] )) && eval "$(navi widget zsh)"    # https://github.com/denisidoro/navi
-(( $+commands[thefuck] )) && eval "$(thefuck --alias)" # https://github.com/nvbn/thefuck
-(( $+commands[zoxide] )) && eval "$(zoxide init zsh)"  # https://github.com/ajeetdsouza/zoxide
-
 export FZF_DEFAULT_COMMAND='fd --hidden --strip-cwd-prefix --exclude .git'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 # export FZF_CTRL_T_OPTS='--preview "bat -n --color always --line-range :500 {}"'
 export FZF_ALT_C_COMMAND='fd --type d --hidden --strip-cwd-prefix --exclude .git'
 # export FZF_ALT_C_OPTS='--preview "eza --tree --color always {} | head -200"'
+export GRANTED_ALIAS_CONFIGURED='true'
+export GREP='egrep'
+export LESS='--LONG-PROMPT --RAW-CONTROL-CHARS --chop-long-lines --ignore-case --jump-target=10 --shift=4 --mouse --quit-if-one-screen'
+export LESS_LINES='-1'
+export MAN_POSIXLY_CORRECT=1
+#export MCFLY_FUZZY=1
+#export MCFLY_KEY_SCHEME=vim
+export MCFLY_RESULTS=50
+export NPM_PACKAGES="$HOME/.local"
+export PAGER='less'
+export PERLDOC_PAGER='bat -l man'
+export RSYNC_RSH='ssh'
+export TZ='US/Pacific'
+export UNZIP='-qq'
+
+path=(
+  ~/bin
+  ~/bin/${OSTYPE/[0-9]*/}-${CPUTYPE}(/N)  # e.g., linux-gnu-x86_64, darwin-arm64
+  ~/.local/{bin,sbin}
+  ~/.*env/shims(/N)                       # shim directories for goenv, pyenv, &c
+  /opt/homebrew/{bin,sbin}(/N)
+  /usr/local/{bin,sbin}
+  /usr/{bin,sbin}
+  /{bin,sbin}
+)
+
+fpath=(
+  ~/.zshrc.d/functions
+  ~/.local/share/zsh/site-functions
+  /opt/homebrew/share/zsh/site-functions(/N)
+  $fpath
+)
+
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc. Initialization code that may require
+# console input (password prompts, [y/n] confirmations, etc.) must go above this block; everything else may go below.
+source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" 2> /dev/null || true
+
+(( $+commands[fzf] )) && eval "$(fzf --zsh)"            # https://github.com/junegunn/fzf
+(( $+commands[mcfly] )) && eval "$(mcfly init zsh)"     # https://github.com/cantino/mcfly
+(( $+commands[navi] )) && eval "$(navi widget zsh)"     # https://github.com/denisidoro/navi
+(( $+commands[thefuck] )) && eval "$(thefuck --alias)"  # https://github.com/nvbn/thefuck
+(( $+commands[zoxide] )) && eval "$(zoxide init zsh)"   # https://github.com/ajeetdsouza/zoxide
+
+# (( $+commands[starship] )) && eval "$( starship init zsh )"  # https://starship.rs/
+
+ZLE_REMOVE_SUFFIX_CHARS=$' \t\n'
+
+autoload -Uz compinit && compinit
+
+autoload -Uz add-zsh-hook
+autoload -Uz bracketed-paste-magic
+autoload -Uz down-line-or-beginning-search
+autoload -Uz up-line-or-beginning-search
+
+# Load library files and plugins.
+for __file in ~/.zshrc.d/lib/*.zsh(#qN) ~/.zshrc.d/plugins/*/*.plugin.zsh(#qN); do
+  source $__file
+done
+unset __file
+
+# zsh-syntax-highlighting.zsh:31: invalid alias '=' encountered while printing aliases
+aliases[=]='noglob ='
+
+zstyle ':completion:*' accept-exact-dirs true
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z-_}={A-Za-z_-}' 'r:|=*' 'l:|=* r:|=*'
+zstyle ':completion:*' menu select
+
+set zle_bracketed_paste
+
+zle -N bracketed-paste bracketed-paste-magic
+zle -N up-line-or-beginning-search
+zle -N down-line-or-beginning-search
+
+bindkey '^[[A' up-line-or-beginning-search    # up arrow
+bindkey '^[[B' down-line-or-beginning-search  # down arrow
+
+bindkey -M vicmd 'k'  up-line-or-beginning-search
+bindkey -M vicmd 'j'  down-line-or-beginning-search
+bindkey -M viins '^K' up-line-or-beginning-search
+bindkey -M viins '^J' down-line-or-beginning-search
+
+bindkey ' '  magic-space
+bindkey '^ ' autosuggest-accept
+bindkey '^h' _complete_help
+
+# _set_terminal_title <window-title> [tab-title]
+_set_terminal_title() {
+  : ${1=%n@%M:%~}  # user@host:path
+  : ${2=%n@%M:%~}  # user@host:path
+
+  if [[ $TERM_PROGRAM == iTerm.app ]]; then
+    print -Pn "\e]2;${1:q}\a"  # set window name
+    print -Pn "\e]1;${2:q}\a"  # set tab name
+    return
+  fi
+
+  case "$TERM" in
+    xterm*)
+      print -Pn "\e]2;${1:q}\a"  # set window name (this is the only one that works in gnome-terminal)
+      print -Pn "\e]1;${2:q}\a"  # set tab name
+      ;;
+    screen*|tmux*)
+      print -Pn "\ek${1:q}\e\\"  # set screen hardstatus
+      ;;
+  esac
+}
+
+_set_terminal_title_cmd() {
+  _set_terminal_title "%100>...>${2:gs/%/%%}%<< (%~)"
+}
+
+add-zsh-hook precmd  _set_terminal_title
+add-zsh-hook preexec _set_terminal_title_cmd
+
+# https://github.com/ohmyzsh/ohmyzsh/blob/master/lib/completion.zsh
+# expand-or-complete-with-dots() {
+#   local dots='%F{red}…%f'
+#   printf '\e[?7l%s\e[?7h' "${(%)dots}"
+#   zle expand-or-complete
+#   zle redisplay
+# }
+# zle -N expand-or-complete-with-dots
+# bindkey -M emacs '^I' expand-or-complete-with-dots
+# bindkey -M viins '^I' expand-or-complete-with-dots
+# bindkey -M vicmd '^I' expand-or-complete-with-dots
 
 _fzf_compgen_path() {
   fd --hidden --exclude .git . "$1"
@@ -202,22 +184,12 @@ _fzf_comprun() {
   esac
 }
 
-export MCFLY_FUZZY=2
-export MCFLY_KEY_SCHEME=vim
-export MCFLY_RESULTS=50
-
 # If ~/.zsh_history has reached 80% of SAVEHIST, copy it to a snapshot. Let zsh take care of pruning the history.
-#(( $(wc -l ~/.zsh_history | cut -d' ' -f1) > (SAVEHIST * 0.8) )) && cp ~/.zsh_history ~/.zsh_history.$(date +%Y%m%d%H%M%S)
+(( $( grep -c . ~/.zsh_history ) > (SAVEHIST * 0.8) )) && cp ~/.zsh_history ~/.zsh_history.$( date +'%Y-%m-%dT%H:%M:%S' )
 
-# Don't do this in my aliases plugin, because,
-#
-#   zsh-syntax-highlighting.zsh:31: invalid alias '=' encountered while printing aliases
-aliases[=]='noglob ='
+# Finally, any host-specific configuration that doesn't belong in my version controlled file.
+source ~/.zshrc.local 2> /dev/null || true
 
-# Finally, any machine-specific configuration that doesn't belong in my version controlled file.
-[[ -e ~/.zshrc.local ]] && source ~/.zshrc.local
-
-# If the last command in this file fails (e.g., if ~/.zshrc.local doesn't exit), it will cause the p10k prompt to go
-# red. This is just to make it happy when a new shell is launched. Alternatively, I could use `if ...; then`, but I like
-# the one-liner.
-true
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+source ~/.p10k.zsh 2> /dev/null || true
+source ~/.zshrc.d/powerlevel10k/powerlevel10k.zsh-theme 2> /dev/null || true
