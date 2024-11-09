@@ -1,42 +1,42 @@
-CURL          = curl -fsSL
-FUNCTIONS_DIR = zsh/dot-zshrc.d/functions
-GITHUB_RAW    = https://raw.githubusercontent.com
-LIB_DIR       = zsh/dot-zshrc.d/lib
-PLUGINS_DIR   = zsh/dot-zshrc.d/plugins
-SHELL         = /bin/zsh
+SHELL     = /usr/bin/env zsh
+
+CURL      = curl -fsSL
+GITHUB    = https://raw.githubusercontent.com
+
+TOP       = zsh/dot-zshrc.d
+FUNCTIONS = $(TOP)/functions
+PLUGINS   = $(TOP)/plugins
+LIB       = $(TOP)/lib
 
 all:
 
 stow:
-	stow --target="$$HOME" --verbose=1 --stow --dotfiles *(/)
+	stow --target='$(HOME)' --verbose=1 --stow --dotfiles *(/)
 
 unstow:
-	stow --simulate --target="$$HOME" --verbose=1 --delete --dotfiles *(/)
+	stow --simulate --target='$(HOME)' --verbose=1 --delete --dotfiles *(/)
 
-update: update-libs update-functions update-plugins
+update: libs functions plugins
 
-update-repos:
-	mr -j4 update
-	mr -j4 prune
-	mr -j4 gc
+libs: _dirs
+	$(CURL) $(GITHUB)/ohmyzsh/ohmyzsh/master/lib/git.zsh                      > $(LIB)/git.zsh
 
-update-libs:
-	mkdir -p $(LIB_DIR)
-	$(CURL) $(GITHUB_RAW)/ohmyzsh/ohmyzsh/master/lib/git.zsh                      > $(LIB_DIR)/git.zsh
+functions: _dirs
+	$(CURL) $(GITHUB)/AlexaraWu/zsh-completions/master/src/_7z                > $(FUNCTIONS)/_7z
+	$(CURL) $(GITHUB)/sirhc/awsvpn-cli/main/completion.zsh                    > $(FUNCTIONS)/_awsvpn_cli
+	$(CURL) $(GITHUB)/cheat/cheat/master/scripts/cheat.zsh                    > $(FUNCTIONS)/_cheat
+	$(CURL) $(GITHUB)/exercism/cli/main/shell/exercism_completion.zsh         > $(FUNCTIONS)/_exercism
+	$(CURL) $(GITHUB)/sirhc/myrepos.plugin.zsh/main/_myrepos                  > $(FUNCTIONS)/_myrepos
+	$(CURL) $(GITHUB)/jkavan/terragrunt-oh-my-zsh-plugin/master/_terragrunt   > $(FUNCTIONS)/_terragrunt
 
-update-functions:
-	mkdir -p $(FUNCTIONS_DIR)
-	$(CURL) $(GITHUB_RAW)/AlexaraWu/zsh-completions/master/src/_7z                > $(FUNCTIONS_DIR)/_7z
-	$(CURL) $(GITHUB_RAW)/sirhc/awsvpn-cli/main/completion.zsh                    > $(FUNCTIONS_DIR)/_awsvpn_cli
-	$(CURL) $(GITHUB_RAW)/cheat/cheat/master/scripts/cheat.zsh                    > $(FUNCTIONS_DIR)/_cheat
-	$(CURL) $(GITHUB_RAW)/exercism/cli/main/shell/exercism_completion.zsh         > $(FUNCTIONS_DIR)/_exercism
-	$(CURL) $(GITHUB_RAW)/sirhc/myrepos.plugin.zsh/main/_myrepos                  > $(FUNCTIONS_DIR)/_myrepos
-	$(CURL) $(GITHUB_RAW)/jkavan/terragrunt-oh-my-zsh-plugin/master/_terragrunt   > $(FUNCTIONS_DIR)/_terragrunt
+plugins: _dirs
+	$(CURL) $(GITHUB)/ohmyzsh/ohmyzsh/master/plugins/aws/aws.plugin.zsh       > $(PLUGINS)/aws/aws.plugin.zsh
+	$(CURL) $(GITHUB)/junegunn/fzf/master/shell/completion.zsh                > $(PLUGINS)/fzf-completion/fzf-completion.plugin.zsh
+	$(CURL) $(GITHUB)/tj/git-extras/master/etc/git-extras-completion.zsh      > $(PLUGINS)/git-extras/git-extras.plugin.zsh
+	$(CURL) $(GITHUB)/ohmyzsh/ohmyzsh/master/plugins/git/git.plugin.zsh       > $(PLUGINS)/git/git.plugin.zsh
+	$(CURL) $(GITHUB)/ohmyzsh/ohmyzsh/master/plugins/screen/screen.plugin.zsh > $(PLUGINS)/screen/screen.plugin.zsh
 
-update-plugins:
-	mkdir -p $(PLUGINS_DIR)/{aws,fzf-completion,git-extras,git,screen}
-	$(CURL) $(GITHUB_RAW)/ohmyzsh/ohmyzsh/master/plugins/aws/aws.plugin.zsh       > $(PLUGINS_DIR)/aws/aws.plugin.zsh
-	$(CURL) $(GITHUB_RAW)/junegunn/fzf/master/shell/completion.zsh                > $(PLUGINS_DIR)/fzf-completion/fzf-completion.plugin.zsh
-	$(CURL) $(GITHUB_RAW)/tj/git-extras/master/etc/git-extras-completion.zsh      > $(PLUGINS_DIR)/git-extras/git-extras.plugin.zsh
-	$(CURL) $(GITHUB_RAW)/ohmyzsh/ohmyzsh/master/plugins/git/git.plugin.zsh       > $(PLUGINS_DIR)/git/git.plugin.zsh
-	$(CURL) $(GITHUB_RAW)/ohmyzsh/ohmyzsh/master/plugins/screen/screen.plugin.zsh > $(PLUGINS_DIR)/screen/screen.plugin.zsh
+_dirs:
+	mkdir -p $(LIB)
+	mkdir -p $(FUNCTIONS)
+	mkdir -p $(PLUGINS)/{aws,fzf-completion,git-extras,git,screen}
