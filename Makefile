@@ -32,6 +32,7 @@ functions: _dirs
 plugins: _dirs
 	$(CURL) $(GITHUB)/ohmyzsh/ohmyzsh/master/plugins/aws/aws.plugin.zsh       > $(PLUGINS)/aws/aws.plugin.zsh
 	$(CURL) $(GITHUB)/junegunn/fzf/master/shell/completion.zsh                > $(PLUGINS)/fzf-completion/fzf-completion.plugin.zsh
+	$(CURL) $(GITHUB)/junegunn/fzf-git.sh/refs/heads/main/fzf-git.sh          > $(PLUGINS)/fzf-git/fzf-git.plugin.zsh
 	$(CURL) $(GITHUB)/tj/git-extras/master/etc/git-extras-completion.zsh      > $(PLUGINS)/git-extras/git-extras.plugin.zsh
 	$(CURL) $(GITHUB)/ohmyzsh/ohmyzsh/master/plugins/git/git.plugin.zsh       > $(PLUGINS)/git/git.plugin.zsh
 	$(CURL) $(GITHUB)/ohmyzsh/ohmyzsh/master/plugins/screen/screen.plugin.zsh > $(PLUGINS)/screen/screen.plugin.zsh
@@ -39,4 +40,4 @@ plugins: _dirs
 _dirs:
 	mkdir -p $(LIB)
 	mkdir -p $(FUNCTIONS)
-	mkdir -p $(PLUGINS)/{aws,fzf-completion,git-extras,git,screen}
+	mkdir -p $(PLUGINS)/{aws,fzf-completion,fzf-git,git-extras,git,screen}

@@ -82,6 +82,8 @@ source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" 2> /
 (( $+commands[thefuck] )) && eval "$(thefuck --alias)"  # https://github.com/nvbn/thefuck
 (( $+commands[zoxide] )) && eval "$(zoxide init zsh)"   # https://github.com/ajeetdsouza/zoxide
 
+bindkey -r '^g'
+
 # (( $+commands[starship] )) && eval "$( starship init zsh )"  # https://starship.rs/
 
 ZLE_REMOVE_SUFFIX_CHARS=$' \t\n'
@@ -123,6 +125,9 @@ bindkey -M viins '^J' down-line-or-beginning-search
 bindkey ' '  magic-space
 bindkey '^ ' autosuggest-accept
 bindkey '^h' _complete_help
+
+# I unbound ^g so it would work with fzf-git, so I'm moving it to another key.
+bindkey '^n' _navi_widget
 
 # _set_terminal_title <window-title> [tab-title]
 _set_terminal_title() {
