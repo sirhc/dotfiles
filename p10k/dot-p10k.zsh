@@ -53,13 +53,13 @@
     # asdf                  # asdf version manager (https://github.com/asdf-vm/asdf)
     virtualenv              # python virtual environment (https://docs.python.org/3/library/venv.html)
     # anaconda              # conda environment (https://conda.io/)
-    pyenv                   # python environment (https://github.com/pyenv/pyenv)
+    # pyenv                 # python environment (https://github.com/pyenv/pyenv)
     # goenv                 # go environment (https://github.com/syndbg/goenv)
     # nodenv                # node.js version from nodenv (https://github.com/nodenv/nodenv)
     # nvm                   # node.js version from nvm (https://github.com/nvm-sh/nvm)
     # nodeenv               # node.js environment (https://github.com/ekalinin/nodeenv)
     # node_version          # node.js version
-    # go_version            # go version (https://golang.org)
+    go_version              # go version (https://golang.org)
     # rust_version          # rustc version (https://www.rust-lang.org)
     # dotnet_version        # .NET version (https://dotnet.microsoft.com)
     # php_version           # php version (https://www.php.net/)
@@ -70,7 +70,7 @@
     # rvm                   # ruby version from rvm (https://rvm.io)
     # fvm                   # flutter version management (https://github.com/leoafarias/fvm)
     # luaenv                # lua version from luaenv (https://github.com/cehoffman/luaenv)
-    jenv                    # java version from jenv (https://github.com/jenv/jenv)
+    # jenv                  # java version from jenv (https://github.com/jenv/jenv)
     # plenv                 # perl version from plenv (https://github.com/tokuhirom/plenv)
     # perlbrew              # perl version from perlbrew (https://github.com/gugod/App-perlbrew)
     # phpenv                # php version from phpenv (https://github.com/phpenv/phpenv)
@@ -87,18 +87,18 @@
     # google_app_cred       # google application credentials (https://cloud.google.com/docs/authentication/production)
     # toolbox               # toolbox name (https://github.com/containers/toolbox)
     context                 # user@hostname
-    nordvpn                 # nordvpn connection status, linux only (https://nordvpn.com/)
-    ranger                  # ranger shell (https://github.com/ranger/ranger)
-    yazi                    # yazi shell (https://github.com/sxyazi/yazi)
+    # nordvpn               # nordvpn connection status, linux only (https://nordvpn.com/)
+    # ranger                # ranger shell (https://github.com/ranger/ranger)
+    # yazi                  # yazi shell (https://github.com/sxyazi/yazi)
     nnn                     # nnn shell (https://github.com/jarun/nnn)
-    lf                      # lf shell (https://github.com/gokcehan/lf)
-    xplr                    # xplr shell (https://github.com/sayanarijit/xplr)
+    # lf                    # lf shell (https://github.com/gokcehan/lf)
+    # xplr                  # xplr shell (https://github.com/sayanarijit/xplr)
     vim_shell               # vim shell indicator (:sh)
-    midnight_commander      # midnight commander shell (https://midnight-commander.org/)
-    nix_shell               # nix shell (https://nixos.org/nixos/nix-pills/developing-with-nix-shell.html)
-    chezmoi_shell           # chezmoi shell (https://www.chezmoi.io/)
+    # midnight_commander    # midnight commander shell (https://midnight-commander.org/)
+    # nix_shell             # nix shell (https://nixos.org/nixos/nix-pills/developing-with-nix-shell.html)
+    # chezmoi_shell         # chezmoi shell (https://www.chezmoi.io/)
     # vi_mode               # vi mode (you don't need this if you've enabled prompt_char)
-    # vpn_ip                # virtual private network indicator
+    vpn_ip                  # virtual private network indicator
     # load                  # CPU load
     # disk_usage            # disk usage
     # ram                   # free RAM
@@ -108,7 +108,7 @@
     # todo                  # todo items (https://github.com/todotxt/todo.txt-cli)
     # timewarrior           # timewarrior tracking status (https://timewarrior.net/)
     taskwarrior             # taskwarrior task count (https://taskwarrior.org/)
-    per_directory_history   # Oh My Zsh per-directory-history local/global indicator
+    # per_directory_history # Oh My Zsh per-directory-history local/global indicator
     # cpu_arch              # CPU architecture
     time                    # current time
     # =========================[ Line #2 ]=========================
@@ -1802,12 +1802,8 @@
   }
 
   function prompt_jenkins() {
-    if [[ -n "${JENKINS_URL:-}" ]]; then
-      local url="$JENKINS_URL"
-      url="${url#http?://}"
-      url="${url%/}"
-
-      p10k segment -b 094 -f 7 -i $'\uE767' -t "$url"
+    if [[ -n ${JENKINS_URL:-} ]]; then
+      p10k segment -b 094 -f 7 -i $'\uE767' -t ${${JENKINS_URL#http?://}%%.*}
     fi
   }
 
@@ -1819,18 +1815,18 @@
     local cache="${XDG_CACHE_HOME:-$HOME/.cache}/$USER/meeting.txt"
     local next_event
 
-    if [[ ! -r "$cache" ]]; then
+    if [[ ! -r $cache ]]; then
       return
     fi
 
-    read -r next_event <<<"$( head -1 "$cache" )"
+    read -r next_event <<<"$( head -1 $cache )"
 
-    if [[ -z "$next_event" ]]; then
+    if [[ -z $next_event ]]; then
       return
     fi
 
     # Use the same colors as the macOS Calendar app.
-    p10k segment -b '#ECF8FA' -f '#4F7174' -i $'\uF455' -t "$next_event"
+    p10k segment -b '#ECF8FA' -f '#4F7174' -i $'\uF455' -t $next_event
   }
 
   function instant_prompt_meeting() {
@@ -1841,7 +1837,7 @@
     local cache="${XDG_CACHE_HOME:-$HOME/.cache}/$USER/mail.json"
     local messages unseen color icon
 
-    if [[ ! -r "$cache" ]]; then
+    if [[ ! -r $cache ]]; then
       return
     fi
 
@@ -1859,7 +1855,7 @@
       icon=$'\uFAEE'
     fi
 
-    p10k segment -b "$color" -f 7 -i "$icon" -t "${unseen}/${messages}"
+    p10k segment -b $color -f 7 -i $icon -t "$unseen/$messages"
   }
 
   function instant_prompt_email() {
