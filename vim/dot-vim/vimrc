@@ -1,3 +1,4 @@
+set autochdir
 set autoindent
 set autoread
 set autowriteall
