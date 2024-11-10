@@ -76,16 +76,6 @@ fpath=(
 # console input (password prompts, [y/n] confirmations, etc.) must go above this block; everything else may go below.
 source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" 2> /dev/null || true
 
-(( $+commands[fzf] )) && eval "$(fzf --zsh)"            # https://github.com/junegunn/fzf
-(( $+commands[mcfly] )) && eval "$(mcfly init zsh)"     # https://github.com/cantino/mcfly
-(( $+commands[navi] )) && eval "$(navi widget zsh)"     # https://github.com/denisidoro/navi
-(( $+commands[thefuck] )) && eval "$(thefuck --alias)"  # https://github.com/nvbn/thefuck
-(( $+commands[zoxide] )) && eval "$(zoxide init zsh)"   # https://github.com/ajeetdsouza/zoxide
-
-bindkey -r '^g'
-
-# (( $+commands[starship] )) && eval "$( starship init zsh )"  # https://starship.rs/
-
 ZLE_REMOVE_SUFFIX_CHARS=$' \t\n'
 
 autoload -Uz compinit && compinit
@@ -94,6 +84,90 @@ autoload -Uz add-zsh-hook
 autoload -Uz bracketed-paste-magic
 autoload -Uz down-line-or-beginning-search
 autoload -Uz up-line-or-beginning-search
+
+# Command Specific Configuration {{{
+
+(( $+commands[mcfly] )) && eval "$( mcfly init zsh )"     # https://github.com/cantino/mcfly
+(( $+commands[thefuck] )) && eval "$( thefuck --alias )"  # https://github.com/nvbn/thefuck
+(( $+commands[zoxide] )) && eval "$( zoxide init zsh )"   # https://github.com/ajeetdsouza/zoxide
+
+if (( $+commands[dnf] )); then
+  alias dnfgl='dnf grouplist'          # list package groups
+  alias dnfl='dnf list'                # list packages
+  alias dnfli='dnf list installed'     # list installed packages
+  alias dnfmc='dnf makecache'          # generate metadata cache
+  alias dnfp='dnf info'                # show package information
+  alias dnfs='dnf search'              # search package
+
+  alias dnfc='sudo dnf clean all'      # clean cache
+  alias dnfgi='sudo dnf groupinstall'  # install package group
+  alias dnfgr='sudo dnf groupremove'   # remove package group
+  alias dnfi='sudo dnf install'        # install package
+  alias dnfr='sudo dnf remove'         # remove package
+  alias dnfu='sudo dnf upgrade'        # upgrade package
+fi
+
+if (( $+commands[fzf] )); then  # https://github.com/junegunn/fzf
+  eval "$( fzf --zsh )"
+
+  _fzf_compgen_path() {
+    fd --hidden --exclude .git . "$1"
+  }
+
+  _fzf_compgen_dir() {
+    fd --type d --hidden --exclude .git . "$1"
+  }
+
+  _fzf_comprun() {
+    local command="$1"; shift
+
+    case "$command" in
+      cd)           fzf --preview 'eza --tree --color=always {} | head -200' "$@" ;;
+      export|unset) fzf --preview 'eval "echo $"{}' "$@" ;;
+      ssh)          fzf --preview 'dig {}' "$@" ;;
+      *)            fzf --preview 'bat -n --color always --line-range :500 {}' "$@" ;;
+    esac
+  }
+fi
+
+if (( $+commands[navi] )); then  # https://github.com/denisidoro/navi
+  eval "$( navi widget zsh )"
+
+  # Remove navi's keybinding, so the fzf-git plugin can use it. The fzf-git plugin doesn't use ^g^g, and every other
+  # letter is taken by something, so I'm trying it for now.
+  bindkey -r '^g'
+  bindkey '^g^g' _navi_widget
+fi
+
+if (( $+commands[terraform] )); then
+  autoload -U +X bashcompinit && bashcompinit
+  complete -o nospace -C terraform terraform
+
+  alias tf='terraform'
+fi
+
+if (( $+commands[terragrunt] )); then
+  alias tg='terragrunt'
+fi
+
+if (( $+commands[wd.sh] )); then
+  wd() {
+    source "$( command -v wd.sh )"
+  }
+fi
+
+# Lazy load the *env commands. I don't use them much, so save the shell startup time. At the moment, I don't even use
+# them, so revisit this if I need to.
+
+# if (( $+commands[pyenv] )); then
+#   pyenv() {
+#     unfunction pyenv
+#     eval "$( pyenv init - --no-rehash zsh )"
+#     pyenv "$@"
+#   }
+# fi
+
+# }}}
 
 # Load library files and plugins.
 for __file in ~/.zshrc.d/lib/*.zsh(#qN) ~/.zshrc.d/plugins/*/*.plugin.zsh(#qN); do
@@ -125,9 +199,6 @@ bindkey -M viins '^J' down-line-or-beginning-search
 bindkey ' '  magic-space
 bindkey '^ ' autosuggest-accept
 bindkey '^h' _complete_help
-
-# I unbound ^g so it would work with fzf-git, so I'm moving it to another key.
-bindkey '^n' _navi_widget
 
 # _set_terminal_title <window-title> [tab-title]
 _set_terminal_title() {
@@ -170,24 +241,437 @@ add-zsh-hook preexec _set_terminal_title_cmd
 # bindkey -M viins '^I' expand-or-complete-with-dots
 # bindkey -M vicmd '^I' expand-or-complete-with-dots
 
-_fzf_compgen_path() {
-  fd --hidden --exclude .git . "$1"
+# Aliases {{{
+
+alias bofh='ncat bofh.jeffballard.us 666 </dev/null | sed -ne "s/[^:]*: //p"'
+alias ed='ed -p:'
+alias emdash='print -- "—"'
+alias endash='print -- "–"'
+alias headers='curl -D - -o /dev/null'
+alias lh='ls -lh'
+alias ll='ls -l'
+alias maze='perl -e "print qw(╱ ╲)[rand 2] while 1"'
+alias shrug='print -- "¯\\\\_(ツ)_/¯"'
+alias tiga='tig --all'
+alias unassume='assume --un'
+alias uriencode='jq -Rrs "@uri"'
+alias wget='wget --content-disposition'
+alias xclip='xclip -selection c'
+
+alias p5addlib='eval "$( envmgr -p PERL5LIB lib )"'
+alias p5clearenv='unset "$( env | grep ^PERL | cut -d= -f1 )"'
+alias p5rmlib='eval "$( envmgr -r PERL5LIB lib )"'
+alias perlconf='perl -V:".*"'
+alias pprove='prove -PPretty'
+alias tprove='prove --formatter TAP::Formatter::Elapsed'
+alias typemap='perl -MConfig -le '"'"'print "$Config{installprivlib}/ExtUtils/typemap"'"'"''
+alias xsubcpp='cpp -I`perl -MConfig -le '"'"'print "$Config{archlib}/CORE"'"'"'`'
+
+alias today='date +%Y-%m-%d'
+alias now='date +%H:%M:%S'
+
+alias t='task'
+alias to='taskopen'
+
+alias wi='vim -c :VimwikiDiaryGenerateLinks -c :VimwikiDiaryIndex'
+alias ww='vim -c :VimwikiIndex'
+
+(( $+commands[assume] ))    && alias assume='source assume'  # https://docs.commonfate.io/granted-cli/shell-alias/
+(( $+commands[eza] ))       && alias ls='eza'
+(( $+commands[moar] ))      && alias more='moar'
+(( $+commands[kubecolor] )) && alias kubectl='kubecolor'
+(( $+commands[vimx] ))      && alias vim='vimx'
+(( $+commands[zoxide] ))    && alias cd='z'
+
+(( $+commands[ncat] ))      || alias ncat='netcat'
+(( $+commands[open] ))      || alias open='xdg-open'
+(( $+commands[pbcopy] ))    || alias pbcopy='xclip -selection clipboard'
+(( $+commands[pbpaste] ))   || alias pbpaste='xclip -selection clipboard -o'
+
+# http://dbocklandt.be/networking/ldapsearch-without-all-the-line-wrapping/
+alias ldapunwrap='perl -p00e '"'"'s/\r?\n //g'"'"''
+
+alias a2b="perl -E 'say sprintf q(%b), ord shift'"
+alias a2d="perl -E 'say sprintf q(%d), ord shift'"
+alias a2h="perl -E 'say sprintf q(%x), ord shift'"
+alias a2o="perl -E 'say sprintf q(%o), ord shift'"
+alias b2a="perl -E 'say sprintf q(%s), chr eval q(0b) . shift'"
+alias b2d="perl -E 'say sprintf q(%d), eval q(0b) . shift'"
+alias b2h="perl -E 'say sprintf q(%x), eval q(0b) . shift'"
+alias b2o="perl -E 'say sprintf q(%o), eval q(0b) . shift'"
+alias d2a="perl -E 'say sprintf q(%s), chr int shift'"
+alias d2b="perl -E 'say sprintf q(%b), int shift'"
+alias d2h="perl -E 'say sprintf q(%x), int shift'"
+alias d2o="perl -E 'say sprintf q(%o), int shift'"
+alias h2a="perl -E 'say sprintf q(%s), chr hex shift'"
+alias h2b="perl -E 'say sprintf q(%b), hex shift'"
+alias h2d="perl -E 'say sprintf q(%d), hex shift'"
+alias h2o="perl -E 'say sprintf q(%o), hex shift'"
+alias o2a="perl -E 'say sprintf q(%s), chr oct shift'"
+alias o2b="perl -E 'say sprintf q(%b), oct shift'"
+alias o2d="perl -E 'say sprintf q(%d), oct shift'"
+alias o2h="perl -E 'say sprintf q(%x), oct shift'"
+
+alias chr="perl -E 'say chr \$_ for @ARGV'"
+alias ord="perl -E 'say ord \$_ for @ARGV'"
+
+# https://twitter.com/climagic/status/507611283818942465
+alias what-are-those-damn-conditional-expressions="man bash | sed -n '/^CONDITIONAL EXPRESSIONS/,/^SIMPLE COMMAND/p'"
+
+# https://twitter.com/dmarti/status/1295365357146791936
+alias 2020date='echo March $((($(date +%s)-$(date +%s --date "2020-02-29"))/86400))\, 2020'
+
+alias date-locale='date +%c'
+alias isodate='date +%Y-%m-%dT%H:%M:%S%z'
+alias isodate-basic='date -u +%Y%m%dT%H%M%SZ'
+alias isodate-utc='date -u +%Y-%m-%dT%H:%M:%SZ'
+alias unixstamp='date +%s'
+
+# }}}
+
+# Functions {{{
+
+# Keep the functions that override existing commands near the top, so I don't lose track of them.
+
+function \$() {
+  local cmd=("$@")
+  local r
+
+  print -- "Do you want to run this command? ${cmd[*]}"
+  read 'r?[y/N] '
+  if [[ ${r:l} =~ '^y(es)?$' ]]; then
+    "${cmd[@]}"
+  else
+    return 2
+  fi
 }
 
-_fzf_compgen_dir() {
-  fd --type d --hidden --exclude .git . "$1"
+function \=() {
+  print $(( ${@//,} ))
 }
 
-_fzf_comprun() {
-  local command="$1"; shift
+# > sd https://github.com/<user>/<repo>/pull/<num> -> cd ~/src/github.com/<user>/<repo>
+function sd {
+  local dir="${HOME}/src/${1#*://}"
 
-  case "$command" in
-    cd)           fzf --preview 'eza --tree --color=always {} | head -200' "$@" ;;
-    export|unset) fzf --preview 'eval "echo $"{}' "$@" ;;
-    ssh)          fzf --preview 'dig {}' "$@" ;;
-    *)            fzf --preview 'bat -n --color always --line-range :500 {}' "$@" ;;
+  # Even if the directory from the argument doesn't exist, eventually we'll drop back to $HOME and the while loop will
+  # break.
+  while true; do
+    if [[ -d $dir ]]; then
+      cd "$dir"
+      break
+    fi
+    dir="${dir:h}"
+  done
+}
+
+function exercism {
+  local output
+
+  # > exercism download --exercise=bob --track=jq
+  #                         -> stderr
+  # Downloaded to           -> stderr
+  # <home>/exercism/jq/bob  -> stdout
+  { output="$( command exercism "$@" | tee /dev/fd/3 )"; } 3>&1
+
+  case $1 in
+    download)
+      print
+
+      if [[ ! -d $output ]]; then
+        print "$0: $output: not found" 1>&2
+        return 1
+      fi
+
+      if [[ $( git -C $output -P log --oneline . | wc -l ) -gt 0 ]]; then
+        print "$0: ${output}: already committed to git"
+        return
+      fi
+
+      # Welcome to Hello World on Exercism's Vim script Track.
+      git -C $output add .
+      git -C $output commit -m "Download $( sed -n -e '/^Welcome to /{s/^Welcome to //; s/\.$//; p}' "$output/README.md" | head -1 )"
+      ;;
+    submit)
+      print
+
+      if [[ ! -f README.md ]]; then
+          print "$0: README.md not found" 1>&2
+          return 1
+      fi
+
+      git commit -am "Submit solution for $( sed -n -e '/^Welcome to /{s/^Welcome to //; s/\.$//; p}' README.md | head -1 )"
+      ;;
   esac
 }
+
+function md5sum sha1sum sha224sum sha256sum sha384sum sha512sum {
+  command $0 "$@" |& sed -e 's/\(^.*: \)\(OK\)$/\1\x1b[1;32m\2\x1b[0m/' -e 's/\(^.*: FAILED\)$/\x1b[1;37;41m\1\x1b[0m/'
+}
+
+# Create a 1280x720 color plasma image. Different each time.
+# TODO: Add option for size.
+bg:plasma() {
+  convert -size 1280x720 plasma:"${1:-green}-${2:-blue}" PNG:- | display -
+}
+
+function diffdirs {
+  diff -rq -x .git "$1" "$2" | sort
+}
+
+function envappend {
+  eval "$( envmgr -a "$@" )"
+}
+
+function envprefix {
+  eval "$( envmgr -p "$@" )"
+}
+
+function envrm {
+  eval "$( envmgr -r "$@" )"
+}
+
+# > diff -ruNq ...
+# Files file1 and file2 differ
+function Files {
+  vimdiff $1 $3
+}
+
+function flip {
+  if (( $( roll 1d2 ) == 1 )); then
+    print heads
+  else
+    print tails
+  fi
+}
+
+function funfact {
+  https randomfunfacts.com | pup 'div:nth-of-type(2) td text{}'
+}
+
+# Draw a horizontal rule in the terminal. https://twitter.com/climagic/status/512254743985799168
+function hr {
+  printf '%*s\n' "$( tput cols )" '' | tr ' ' -
+}
+
+# http://blogs.perl.org/users/aristotle/2015/12/locallib-ez.html
+function perl-lib {
+  eval "$( perl -M'local::lib @ARGV' - "$@" 0<&- )"
+}
+
+function mr {
+  if [[ -n ${MR_CONFIG:-} ]]; then
+    command mr --config $MR_CONFIG "$@"
+  else
+    command mr "$@"
+  fi
+}
+
+function myip {
+  # TODO: This only does IPv6?
+  curl -s http://ifconfig.io/ip
+}
+
+function qbc {
+  echo "scale=${2:-2}; $1" | bc -l
+}
+
+# function quote {
+#   setopt localoptions nopromptsubst
+
+#   local data
+#   data="$(command curl -s --connect-timeout 2 http://www.quotationspage.com/random.php | command iconv -c -f ISO-8859-1 -t UTF-8 | command grep -a -m 1 'dt class="quote"')"
+
+#   [[ -n $data ]] || return 1
+
+#   local quote author
+#   quote=$(sed -e 's|</dt>.*||g' -e 's|.*html||g' -e 's|^[^a-zA-Z]*||' -e 's|</a..*$||g' <<< "$data")
+#   author=$(sed -e 's|.*/quotes/||g' -e 's|<.*||g' -e 's|.*">||g' <<< "$data")
+
+#   print -P "%F{5}${quote}%f"
+#   print -P "%F{3}${author}%f"
+# }
+
+# function enmorse {
+#   perl -MConvert::Morse=as_morse -E 'say as_morse($_) while <>'
+# }
+
+# function demorse {
+#   perl -MConvert::Morse=as_ascii -E 'say as_ascii($_) while <>'
+# }
+
+function setenv {
+  export "$1"="$2"
+}
+
+# function slang {
+#   elinks -no-references -no-numbering -dump "http://www.urbandictionary.com/define.php?term=$1" | sed -n '/1\. /,/2\./p'
+# }
+
+# Re-exec the shell to pick up configuration changes.
+function reload {
+  if [[ -n $( jobs ) ]]; then
+    print "${ZSH_NAME}: you have suspended jobs."
+    return 0
+  fi
+
+  exec -l ${SHELL:t}
+}
+
+# E.g., `roll 2d6`
+function roll {
+  local _roll="${1:?missing die spec}"
+
+  if [[ $_roll =~ '^d[0-9]+$' ]]; then
+    _roll="1$_roll"
+  fi
+
+  if [[ ! $_roll =~ '^[0-9]+d[0-9]+$' ]]; then
+    print "$0: invalid die spec: $_roll"
+  fi
+
+  local _count="${_roll%d*}"
+  local _sides="${_roll#*d}"
+
+  _roll=0
+  while (( _count > 0 )); do
+    _roll=$(( _roll + (RANDOM % _sides + 1) ))
+    _count=$(( _count - 1 ))
+  done
+  print $_roll
+}
+
+# function stardate {
+#   perl -MAcme::Stardate -E 'say stardate()'
+# }
+
+function timeshell {
+  print "Timing startup of $SHELL..."
+  for i in {0..10}; do
+    time $SHELL -i -c exit
+  done
+}
+
+# Some handy `take` functions. https://github.com/ohmyzsh/ohmyzsh/blob/master/lib/functions.zsh
+
+function mkcd takedir {
+  mkdir -p $@ && cd ${@:$#}
+}
+
+function takeurl {
+  local data thedir
+  data="$(mktemp)"
+  curl -L "$1" > "$data"
+  tar xf "$data"
+  thedir="$(tar tf "$data" | head -n 1)"
+  rm "$data"
+  cd "$thedir"
+}
+
+function takegit {
+  git clone "$1"
+  cd "$(basename ${1%%.git})"
+}
+
+function take {
+  if [[ $1 =~ ^(https?|ftp).*\.tar\.(gz|bz2|xz)$ ]]; then
+    takeurl "$1"
+  elif [[ $1 =~ ^([A-Za-z0-9]\+@|https?|git|ssh|ftps?|rsync).*\.git/?$ ]]; then
+    takegit "$1"
+  else
+    takedir "$@"
+  fi
+}
+
+function topcount {
+  sort | uniq -c | sort -rn | head -n "${1:-10}"
+}
+
+function vimless {
+  vim -u '$VIMRUNTIME/macros/less.vim' "${@:--}"
+}
+
+function weather {
+  curl -fsSL "http://wttr.in/${*// /+}"
+}
+
+# Silly command based on the Infocom wait/z instruction. This has since been replaced by the [z
+# plugin](https://github.com/rupa/z.git).
+# function z {
+#   printf 'Time passes.\n\n'
+# }
+
+# http://sysadvent.blogspot.com/2011/12/day-9-data-in-shell.html
+
+# _awk_col() {
+#   echo "$1" | egrep -v '^[0-9]+$' || echo "\$$1"
+# }
+
+# sum() {
+#   [[ "${1#-F}" != "$1" ]] && SP=${1} && shift
+#   [[ "$#" -eq 0 ]] && set -- 0
+#   key="$(_awk_col "$1")"
+#   awk $SP "{ x+=$key } END { printf(\"%d\n\", x) }"
+# }
+
+# sumby() {
+#   [[ "${1#-F}" != "$1" ]] && SP=${1} && shift
+#   [[ "$#" -lt 0 ]] && set -- 0 1
+#   key="$(_awk_col "$1")"
+#   val="$(_awk_col "$2")"
+#   awk $SP "{ a[$key] += $val } END { for (i in a) { printf(\"%d %s\\n\", a[i], i) } }"
+# }
+
+# countby() {
+#   [[ "${1#-F}" != "$1" ]] && SP=${1} && shift
+#   [[ "$#" -eq 0 ]] && set -- 0
+#   key="$(_awk_col "$1")"
+#   awk $SP "{ a[$key]++ } END { for (i in a) { printf(\"%d %s\\n\", a[i], i) } }"
+# }
+
+# Functional stuff <http://yannesposito.com/Scratch/en/blog/Higher-order-function-in-zsh/index.html>.
+
+function map {
+  local fn="${1:?usage: map fn a b c d...}"
+  local arg
+
+  for arg in "${@:2}"; do
+    $fn "$i"
+  done
+}
+
+# Usage: x <count> <command>
+function x {
+  local count="${1:?usage: x <count> <command>}"
+  local _i
+
+  for _i in {1..$count}; do
+    "${@:2}"
+  done
+}
+
+# https://twitter.com/climagic/status/367676137310150656
+# Usage: blue "I'm blue"
+function blue {
+  tput setaf 4
+  print "$@"
+  tput sgr0
+}
+
+# "List" grep, similar to Perl's grep builtin.
+function lgrep {
+  local pattern="$1"
+  local i
+
+  for i in "${@:2}"; do
+    if [[ $i =~ $pattern ]]; then
+      printf '%s ' $i
+    fi
+  done
+  printf '\n'
+}
+
+# }}}
 
 # If ~/.zsh_history has reached 80% of SAVEHIST, copy it to a snapshot. Let zsh take care of pruning the history.
 (( $( grep -c . ~/.zsh_history ) > (SAVEHIST * 0.8) )) && cp ~/.zsh_history ~/.zsh_history.$( date +'%Y-%m-%dT%H:%M:%S' )
