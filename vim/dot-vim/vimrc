@@ -1,3 +1,5 @@
+scriptencoding utf-8
+
 set autochdir
 set autoindent
 set autoread
@@ -50,7 +52,6 @@ else
   set clipboard=unnamed,unnamedplus
 endif
 
-set nocompatible
 set nojoinspaces
 set nolist
 set noshowmode  " Hide the default mode text (e.g. -- INSERT -- below the statusline)
@@ -59,7 +60,7 @@ set nostartofline
 set t_Co=256
 set t_ut=
 
-let g:mapleader = ","
+let g:mapleader = ','
 
 " Emulate Vim's modeline support using `git config`. For example,
 "
@@ -67,7 +68,7 @@ let g:mapleader = ","
 
 let s:git_modeline = system('git config --get vim.modeline')
 if strlen(s:git_modeline)
-    execute 'set ' . s:git_modeline
+  execute 'set ' . s:git_modeline
 endif
 
 let g:codedark_italics     = 1
@@ -135,47 +136,47 @@ iabbrev dont'     don't
 iabbrev existance existence
 iabbrev paramter  parameter
 
-if has("perl")
-    " freenode #perl 2011-01-05 07:34:56 < grondilu> add "perl *say = \&VIM::Msg" in your .vimrc and you'll spare 5 chars each time you'll want to see the ouput of a :perl command :)
-    perl *say = \&VIM::Msg
+if has('perl')
+  " freenode #perl 2011-01-05 07:34:56 < grondilu> add "perl *say = \&VIM::Msg" in your .vimrc and you'll spare 5 chars each time you'll want to see the ouput of a :perl command :)
+  perl *say = \&VIM::Msg
 endif
 
 augroup ReadFile
-    autocmd!
+  autocmd!
 
-    " When editing an existing file, always jump to the last cursor position.
-    au BufReadPost *
-        \ if line("'\"") > 0 && line("'\"") <= line("$") |
-        \     exe "normal! g'\"" |
-        \ endif
+  " When editing an existing file, always jump to the last cursor position.
+  au BufReadPost *
+    \ if line("'\"") > 0 && line("'\"") <= line("$") |
+    \     exe "normal! g'\"" |
+    \ endif
 
-    " Tricks to view various non-text file types.
+  " Tricks to view various non-text file types.
 
-    if executable('gpg')
-        autocmd BufReadPre  *.gpg setlocal ro
-        autocmd BufReadPost *.gpg silent execute '%!gpg --decrypt' shellescape(expand('%')) '-'
-    endif
+  if executable('gpg')
+    autocmd BufReadPre  *.gpg setlocal ro
+    autocmd BufReadPost *.gpg silent execute '%!gpg --decrypt' shellescape(expand('%')) '-'
+  endif
 
-    if executable('pdftotext')
-        autocmd BufReadPre  *.pdf setlocal ro
-        autocmd BufReadPost *.pdf silent execute '%!pdftotext -layout -nopgbrk' shellescape(expand('%')) '-'
-    endif
+  if executable('pdftotext')
+    autocmd BufReadPre  *.pdf setlocal ro
+    autocmd BufReadPost *.pdf silent execute '%!pdftotext -layout -nopgbrk' shellescape(expand('%')) '-'
+  endif
 
-    if executable('rpm')
-        autocmd BufReadPre  *.rpm setlocal ro
-        autocmd BufReadPost *.rpm silent execute '%!rpm -qilp' shellescape(expand('%'))
-    endif
+  if executable('rpm')
+    autocmd BufReadPre  *.rpm setlocal ro
+    autocmd BufReadPost *.rpm silent execute '%!rpm -qilp' shellescape(expand('%'))
+  endif
 
-    if executable('unrtf')
-        autocmd BufReadPre  *.rtf setlocal ro
-        autocmd BufReadPost *.rtf silent execute '%!unrtf -t text' shellescape(expand('%'))
-    endif
+  if executable('unrtf')
+    autocmd BufReadPre  *.rtf setlocal ro
+    autocmd BufReadPost *.rtf silent execute '%!unrtf -t text' shellescape(expand('%'))
+  endif
 augroup END
 
 augroup QuickFix
-    autocmd!
-    autocmd QuickFixCmdPost [^l]* cwindow
-    autocmd QuickFixCmdPost    l* lwindow
+  autocmd!
+  autocmd QuickFixCmdPost [^l]* cwindow
+  autocmd QuickFixCmdPost    l* lwindow
 augroup END
 
 let g:netrw_altfile      = 1    " CTRL-^ won't return to netrw
@@ -190,26 +191,28 @@ let g:netrw_winsize      = 20   " 20% window size
 " https://github.com/vim-airline/vim-airline
 
 if !exists('g:airline_symbols')
-    let g:airline_symbols = {}
+  let g:airline_symbols = {}
 endif
 
 let g:airline_powerline_fonts                 = 1
 let g:airline#extensions#tabline#enabled      = 1
 let g:airline#extensions#tabline#show_buffers = 0
+" vint: next-line -ProhibitUnnecessaryDoubleQuote
 let g:airline_symbols.space                   = "\ua0"
 let g:airline_theme                           = 'codedark'
 
 if executable('rg')
-    set grepprg=rg\ --vimgrep\ --no-heading\ --smart-case
-    set grepformat+=%f:%l:%c:%m
+  set grepprg=rg\ --vimgrep\ --no-heading\ --smart-case
+  set grepformat+=%f:%l:%c:%m
 
-    let g:ctrlp_user_command = 'rg %s --files --hidden --color=never --glob ""'
+  let g:ctrlp_user_command = 'rg %s --files --hidden --color=never --glob ""'
 endif
+
 if executable('fd')
-    let g:ctrlp_user_command = 'fd --color=never --glob --type file "" %s'
+  let g:ctrlp_user_command = 'fd --color=never --glob --type file "" %s'
 endif
 
-if !empty(glob("/opt/homebrew/opt/fzf"))
+if !empty(glob('/opt/homebrew/opt/fzf'))
   set runtimepath+=/opt/homebrew/opt/fzf
 endif
 
@@ -229,10 +232,10 @@ let g:vimwiki_global_ext = 0
 let g:vimwiki_auto_chdir = 1
 
 let g:copilot_filetypes = {
-    \ 'gitcommit': v:true,
-    \ 'markdown': v:true,
-    \ 'yaml': v:true
-    \ }
+  \ 'gitcommit': v:true,
+  \ 'markdown': v:true,
+  \ 'yaml': v:true,
+  \ }
 
 " Load a local configuration, if it exists. This allows for custom
 " configuration per-host (e.g., for VimWiki).
