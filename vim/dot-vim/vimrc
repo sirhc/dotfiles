@@ -114,6 +114,9 @@ vnoremap <Leader>dd y'>p
 " List buffers and prompt to switch with a number (g = go to).
 nnoremap <Leader>g :buffers<CR>:buffer<Space>
 
+nnoremap <silent> <Leader>gb :call fzf#vim#buffers()<CR>
+nnoremap <silent> <Leader>gf :if empty(FugitiveGitDir()) <Bar> call fzf#vim#files(getcwd()) <Bar> else <Bar> call fzf#vim#gitfiles('') <Bar> endif <CR>
+
 " http://vim.wikia.com/wiki/Switching_case_of_characters
 vnoremap ~ y:call setreg('', twiddlecase#TwiddleCase(@"), getregtype(''))<CR>gv""Pgv
 
