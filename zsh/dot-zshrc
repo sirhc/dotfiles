@@ -175,6 +175,9 @@ for __file in ~/.zshrc.d/lib/*.zsh(#qN) ~/.zshrc.d/plugins/*/*.plugin.zsh(#qN); 
 done
 unset __file
 
+# Need to rebind ^r, because the vim mode plugin binds it after mcfly was loaded.
+bindkey '^r' mcfly-history-widget
+
 # zsh-syntax-highlighting.zsh:31: invalid alias '=' encountered while printing aliases
 aliases[=]='noglob ='
 
