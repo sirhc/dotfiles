@@ -276,7 +276,7 @@ alias now='date +%H:%M:%S'
 alias t='task'
 alias to='taskopen'
 
-alias wi='vim -c :VimwikiDiaryGenerateLinks -c :VimwikiDiaryIndex'
+alias wi='vim -c :VimwikiDiaryIndex -c :VimwikiDiaryGenerateLinks -c :VimwikiMakeDiaryNote'
 alias ww='vim -c :VimwikiIndex'
 
 (( $+commands[assume] ))    && alias assume='source assume'  # https://docs.commonfate.io/granted-cli/shell-alias/
