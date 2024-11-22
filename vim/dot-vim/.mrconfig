@@ -91,6 +91,9 @@ checkout = git clone 'https://github.com/fatih/vim-go.git' 'go'
 [pack/syntax/start/jq]
 checkout = git clone 'https://github.com/bfrg/vim-jq.git' 'jq'
 
+[pack/syntax/start/just]
+checkout = git clone 'https://github.com/NoahTheDuke/vim-just.git' 'just'
+
 [pack/syntax/start/packer]
 checkout = git clone 'https://github.com/hashivim/vim-packer.git' 'packer'
 
