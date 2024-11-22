@@ -42,6 +42,11 @@ git_defaultbranch         = git default-branch
 git_localbranches         = git branch -vv
 git_mergedefaultbranch    = git merge "$( git default-branch )"
 
+# Override the default `mr update` command for Git to suppress the "Already up to date" message. This will let it play
+# nice with `mr -m`.
+git_update =
+  git pull "$@" | sed -e '/^Already up to date.$/d'
+
 include = cat ~/.mrconfig.d/*.conf 2>/dev/null || :
 
 [ALIAS]
