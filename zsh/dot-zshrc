@@ -246,6 +246,8 @@ add-zsh-hook preexec _set_terminal_title_cmd
 
 # Aliases {{{
 
+alias .j='just --justfile ~/.user.justfile --working-directory .'
+
 alias bofh='ncat bofh.jeffballard.us 666 </dev/null | sed -ne "s/[^:]*: //p"'
 alias ed='ed -p:'
 alias emdash='print -- "—"'
