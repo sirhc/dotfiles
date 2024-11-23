@@ -4,7 +4,7 @@ set shell := ["zsh", "-cu"]
 set quiet
 
 just  :=  "just --justfile " + justfile() + " --working-directory " + invocation_directory()
-njobs := `nproc --all`
+njobs := num_cpus()
 
 # These packages have overlapping links.
 brew_overlap := "moreutils parallel terraform tfenv"
