@@ -1,6 +1,7 @@
 # vim: ft=just
 
 set shell := ["zsh", "-cu"]
+set dotenv-load
 set quiet
 
 just  :=  "just --justfile " + justfile() + " --working-directory " + invocation_directory()
