@@ -56,6 +56,17 @@ brew:
   brew update
   if ! brew outdated {{ brew_overlap }}; then {{ just }} _brew_unlink; brew upgrade --greedy; {{ just }} _brew_relink; else brew upgrade --greedy; fi
 
+# Show information about Homebrew formula added in the last week
+[macos]
+[group("brew")]
+new-formula:
+  #!/usr/bin/env -S zsh -e
+  git -C /opt/homebrew/Library/Taps/homebrew/homebrew-core/Formula log --since="$( gdate --date 'last week' +'%Y-%m-%d' )" --name-status --diff-filter=A . |
+    awk '($1 == "A") { print $2 }' |
+    xargs -I % basename % .rb |
+    sort |
+    xargs brew info
+
 _brew_unlink:
   brew unlink {{ brew_overlap }}
 
