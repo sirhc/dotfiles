@@ -65,7 +65,9 @@ new-formula:
     awk '($1 == "A") { print $2 }' |
     xargs -I % basename % .rb |
     sort |
-    xargs brew info
+    xargs brew info --json |
+    jq '.[] | { name, desc, homepage }' |
+    mlr --j2p cat
 
 _brew_unlink:
   brew unlink {{ brew_overlap }}
