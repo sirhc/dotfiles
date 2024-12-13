@@ -49,6 +49,8 @@ _repos isFork="false" owner=file_name(invocation_directory()):
     }
   '
 
+brew_dir := "/opt/homebrew/Library/Taps/homebrew/homebrew-core"
+
 # Upgrade Homebrew packages
 [macos]
 [group("brew")]
@@ -56,20 +58,15 @@ brew:
   brew update
   if ! brew outdated {{ brew_overlap }}; then {{ just }} _brew_unlink; brew upgrade --greedy; {{ just }} _brew_relink; else brew upgrade --greedy; fi
 
+  # Show information about Homebrew formula added in the last week
+  jq --argjson a "$( {{ just }} _brew_new_formula_date )" --argjson b "$( {{ just }} _brew_new_formula_info )" -n '$a + $b | group_by(.name) | map(add)' \
+    | mlr --j2p sort -r date -n name
+
 _brew_unlink:
   brew unlink {{ brew_overlap }}
 
 _brew_relink: _brew_unlink
   brew link --overwrite {{ brew_overlap }}
-
-brew_dir := "/opt/homebrew/Library/Taps/homebrew/homebrew-core"
-
-# Show information about Homebrew formula added in the last week
-[macos]
-[group("brew")]
-brew-new-formula:
-  jq --argjson a "$( {{ just }} _brew_new_formula_date )" --argjson b "$( {{ just }} _brew_new_formula_info )" -n '$a + $b | group_by(.name) | map(add)' \
-    | mlr --j2p sort -r date -n name
 
 _brew_new_formula:
   git -C {{ brew_dir }} log --since="$( gdate --date 'last week' +'%Y-%m-%d')" --name-status --diff-filter=A Formula | awk '($1 == "A") { print $2 }' | sort
