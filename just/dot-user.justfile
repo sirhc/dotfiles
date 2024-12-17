@@ -58,9 +58,8 @@ brew:
   brew update
   if ! brew outdated {{ brew_overlap }}; then {{ just }} _brew_unlink; brew upgrade --greedy; {{ just }} _brew_relink; else brew upgrade --greedy; fi
 
-  # Show information about Homebrew formula added in the last week
-  jq --argjson a "$( {{ just }} _brew_new_formula_date )" --argjson b "$( {{ just }} _brew_new_formula_info )" -n '$a + $b | group_by(.name) | map(add)' \
-    | mlr --j2p sort -r date -n name
+  # Show information about Homebrew formula added in the last week.
+  {{ just }} _brew_new_formula
 
 _brew_unlink:
   brew unlink {{ brew_overlap }}
@@ -69,12 +68,25 @@ _brew_relink: _brew_unlink
   brew link --overwrite {{ brew_overlap }}
 
 _brew_new_formula:
-  git -C {{ brew_dir }} log --since="$( gdate --date 'last week' +'%Y-%m-%d')" --name-status --diff-filter=A Formula | awk '($1 == "A") { print $2 }' | sort
+  jq --argjson a "$( {{ just }} _brew_recent_formula_date )" --argjson b "$( {{ just }} _brew_recent_formula_info )" -n '$a + $b | group_by(.name) | map(add)' \
+    | mlr --j2p sort -r date -n name
 
-_brew_new_formula_date:
-  {{ just }} _brew_new_formula \
-    | xargs -I @ git -C {{ brew_dir }} log -n 1 --format='{ "name": "@", "date": "%cs" }' @ \
-    | jq -s '. | map( .name |= sub("^.*/"; "") | .name |= sub(".rb$"; "") )'
+_brew_recent_formula:
+  #!/usr/bin/env -S zsh -e
+  git -C {{ brew_dir }} log --since="$( gdate --date 'last week' +'%Y-%m-%d')" --name-status --diff-filter=A Formula |
+    awk '
+      ( $1 == "Date:" ) { sub(/^Date: */, ""); date = $0 }
+      ( $1 == "A" )     { print $2, date }
+    ' |
+    sed -e 's,^.*/,,' -e 's/\.rb / /' -e 's/ .[0-9]*$//'
 
-_brew_new_formula_info:
-  {{ just }} _brew_new_formula | xargs -I @ basename @ .rb | xargs brew info --json | jq '. | map( { name, desc, homepage } )'
+_brew_recent_formula_date:
+  #!/usr/bin/env -S zsh -e
+  {{ just }} _brew_recent_formula |
+    while read -r formula date; do
+      printf '{ "name": "%s", "date": "%s" }\n' $formula $( gdate --date=$date +%Y-%m-%d )
+    done |
+    jq -s .
+
+_brew_recent_formula_info:
+  {{ just }} _brew_recent_formula | cut -d ' ' -f 1 | xargs brew info --json | jq '. | map( { name, desc, homepage } )'
