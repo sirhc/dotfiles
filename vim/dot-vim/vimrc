@@ -122,6 +122,11 @@ vnoremap ~ y:call setreg('', twiddlecase#TwiddleCase(@"), getregtype(''))<CR>gv"
 
 cnoremap sudow w !sudo tee % >/dev/null
 
+" Insert a UUID at the current position.
+inoremap <C-U>     <C-R>=trim(system('uuidgen \| tr "[:upper:]" "[:lower:]"'))<CR>
+nmap     <Leader>u i<C-U><Esc>
+nmap     <Leader>U a<C-U><Esc>
+
 " Handy abbreviations.
 iabbrev fiancee fiancée
 iabbrev naiive  naïve
