@@ -87,9 +87,10 @@ autoload -Uz up-line-or-beginning-search
 
 # Command Specific Configuration {{{
 
-(( $+commands[mcfly] )) && eval "$( mcfly init zsh )"     # https://github.com/cantino/mcfly
+(( $+commands[direnv] ))  && eval "$( direnv hook zsh )"  # https://direnv.net/
+(( $+commands[mcfly] ))   && eval "$( mcfly init zsh )"   # https://github.com/cantino/mcfly
 (( $+commands[thefuck] )) && eval "$( thefuck --alias )"  # https://github.com/nvbn/thefuck
-(( $+commands[zoxide] )) && eval "$( zoxide init zsh )"   # https://github.com/ajeetdsouza/zoxide
+(( $+commands[zoxide] ))  && eval "$( zoxide init zsh )"  # https://github.com/ajeetdsouza/zoxide
 
 if (( $+commands[dnf] )); then
   alias dnfgl='dnf grouplist'          # list package groups
