@@ -8,7 +8,7 @@ just  :=  "just --justfile " + justfile() + " --working-directory " + invocation
 njobs := num_cpus()
 
 # These packages have overlapping links.
-brew_overlap := "moreutils parallel terraform tfenv"
+brew_overlap := "moreutils parallel tfenv"
 
 _all:
   {{ just }} --list
