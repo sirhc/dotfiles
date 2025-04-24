@@ -43,6 +43,9 @@ git_mergedefaultbranch    = git merge "$( git default-branch )"
 git_update =
   git pull "$@" | sed -e '/^Already up to date.$/d'
 
+git_latestrelease =
+  { gh api 'repos/{owner}/{repo}/releases/latest' 2> /dev/null || true; } | jq -r '.tag_name // empty'
+
 include = cat ~/.mrconfig.d/*.conf 2>/dev/null || :
 
 [ALIAS]
