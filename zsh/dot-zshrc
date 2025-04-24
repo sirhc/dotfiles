@@ -603,6 +603,10 @@ function weather {
   curl -fsSL "http://wttr.in/${*// /+}"
 }
 
+function year {
+  command cal "$( command date +%Y )"
+}
+
 # Silly command based on the Infocom wait/z instruction. This has since been replaced by the [z
 # plugin](https://github.com/rupa/z.git).
 # function z {
