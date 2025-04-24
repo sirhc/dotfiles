@@ -22,6 +22,10 @@ branches:
 [group("myrepos")]
 clone: && register
   {{ just }} _repos | {{ just }} _clone
+
+# Clone all forked repositories from a GitHub user or organization
+[group("myrepos")]
+clone-forks: && register
   {{ just }} _repos true | {{ just }} _clone
 
 # Register all repositories in the current directory
