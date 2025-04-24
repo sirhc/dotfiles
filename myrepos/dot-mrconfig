@@ -1,27 +1,23 @@
 [DEFAULT]
 
 lib =
+  # Provide for `mr git ...`
   git() {
     command git --no-pager "$@"
   }
-  #
+  # Provide for `mr gh ...`
   gh() {
     env GH_PAGER= gh "$@"
   }
 
-edit =
-  if [[ $# -gt 0 ]]; then
-    vim "$@"
-  else
-    vim .
-  fi
+edit = if [[ "$#" -gt 0 ]]; then vim "$@" else vim . fi
 
-# TODO: Figure out how to tell Tilix to open a tab.
+# TODO: Figure out how to tell Tilix to open a tab for Linux.
 tab =
   if [[ "$( uname -s )" = Darwin ]]; then
     osascript -e 'tell application "iTerm2" to tell current window' \
-              -e '    create tab with default profile' \
-              -e '    tell current session to write text "builtin cd '"'$MR_REPO'"'; '"$@"'"' \
+              -e '  create tab with default profile' \
+              -e '  tell current session to write text "builtin cd '"'$MR_REPO'"'; '"$@"'"' \
               -e 'end tell'
     exit
   fi
