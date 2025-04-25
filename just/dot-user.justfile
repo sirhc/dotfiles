@@ -58,12 +58,9 @@ brew_dir := "/opt/homebrew/Library/Taps/homebrew/homebrew-core"
 # Upgrade Homebrew packages
 [macos]
 [group("brew")]
-brew:
+brew: && _brew_new_formula
   brew update
   if ! brew outdated {{ brew_overlap }}; then {{ just }} _brew_unlink; brew upgrade --greedy; {{ just }} _brew_relink; else brew upgrade --greedy; fi
-
-  # Show information about Homebrew formula added in the last week.
-  {{ just }} _brew_new_formula
 
 _brew_unlink:
   brew unlink {{ brew_overlap }}
@@ -78,6 +75,7 @@ _brew_new_formula:
 _brew_recent_formula:
   #!/usr/bin/env -S zsh -e
   git -C {{ brew_dir }} log --since="$( gdate --date 'last week' +'%Y-%m-%d')" --name-status --diff-filter=A Formula |
+    grep -E '^(Date:|A\t)' |
     awk '
       ( $1 == "Date:" ) { sub(/^Date: */, ""); date = $0 }
       ( $1 == "A" )     { print $2, date }
