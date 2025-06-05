@@ -20,13 +20,13 @@ branches:
 
 # Clone all repositories from a GitHub user or organization
 [group("myrepos")]
-clone: && register
-  {{ just }} _repos | {{ just }} _clone
+clone owner=file_name(invocation_directory()): && register
+  {{ just }} _repos {{ owner }} | {{ just }} _clone
 
 # Clone all forked repositories from a GitHub user or organization
 [group("myrepos")]
-clone-forks: && register
-  {{ just }} _repos true | {{ just }} _clone
+clone-forks owner=file_name(invocation_directory()): && register
+  {{ just }} _repos {{ owner }} true | {{ just }} _clone
 
 # Register all repositories in the current directory
 [group("myrepos")]
@@ -40,7 +40,7 @@ _branches:
 _clone:
   parallel '[[ -d "$( basename {} )" ]] || gh repo clone {}'
 
-_repos isFork="false" owner=file_name(invocation_directory()):
+_repos owner isFork="false":
   #!/usr/bin/env -S zsh -e
   gh api graphql --paginate -q '.data.repositoryOwner.repositories.nodes[] | .nameWithOwner' -F owner='{{ owner }}' -F isFork='{{ isFork }}' -f query='
     query($owner: String! $isFork: Boolean! $endCursor: String) {
