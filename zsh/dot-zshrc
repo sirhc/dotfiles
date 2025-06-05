@@ -33,7 +33,7 @@ export ANSIBLE_COW_SELECTION='random'
 export BC_ENV_ARGS="-lq $HOME/.bcrc"
 export CLICOLOR=1  # colorize ls(1) on Darwin
 export EDITOR='vim'
-export EZA_CONFIG_DIR="$HOME/${XDG_CONFIG_HOME:-.config}/eza"
+export EZA_CONFIG_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/eza"
 export FZF_DEFAULT_COMMAND='fd --hidden --strip-cwd-prefix --exclude .git'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 # export FZF_CTRL_T_OPTS='--preview "bat -n --color always --line-range :500 {}"'
@@ -53,6 +53,7 @@ export PERLDOC_PAGER='bat -l man -p'
 export RSYNC_RSH='ssh'
 export TZ='US/Pacific'
 export UNZIP='-qq'
+export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
 
 path=(
   ~/bin
