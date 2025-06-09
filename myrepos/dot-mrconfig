@@ -35,8 +35,14 @@ git_tags   = git tag "$@"
 
 git_checkoutdefaultbranch = git switch "$( git default-branch )"
 git_defaultbranch         = git default-branch
-git_localbranches         = git branch -vv
 git_mergedefaultbranch    = git merge "$( git default-branch )"
+
+# Print the branch information only if there is more than one local branch (assumes a single branch is the default).
+git_localbranches =
+  branches="$( git branch -vv )"
+  if [[ $( wc -l <<< "$branches" ) -gt 1 ]]; then
+    echo "$branches"
+  fi
 
 # Override the default `mr update` command for Git to suppress the "Already up to date" message. This will let it play
 # nice with `mr -m`.
