@@ -44,6 +44,10 @@ git_localbranches =
     echo "$branches"
   fi
 
+# Print any branches that are tracking branches no longer present on the remote.
+git_missingbranches =
+  git branch -vv | grep ': gone\]' || true
+
 # Override the default `mr update` command for Git to suppress the "Already up to date" message. This will let it play
 # nice with `mr -m`.
 git_update =
