@@ -27,8 +27,8 @@ clone-forks owner=file_name(invocation_directory()): && register
 # Register all repositories in the current directory
 [group("myrepos")]
 register:
-  touch .mrconfig
-  printf '%s\n' */.git(D/:h) | parallel 'rg -F -q "[{}]" .mrconfig || print {}' | xargs -I % mr register % 2> /dev/null || :
+  test -f .mrconfig
+  printf '%s\n' */.git(D/:h) | parallel 'rg -F -q "[{}]" .mrconfig || print {}' | xargs -I % -t mr register % 2> /dev/null || :
 
 _branches:
   mr -j{{ njobs }} run command -- zsh -c 'git rev-parse --abbrev-ref HEAD origin/HEAD' | sed -e 's,mr run: .*/,,' -e 's,^origin/,,' -e '/^$/d' | paste -d , - - -
