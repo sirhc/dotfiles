@@ -49,6 +49,11 @@ _repos owner isFork="false":
     }
   '
 
+update:
+  cd && mr --minimal --jobs 8 update
+  if [[ {{ os() }} = macos ]]; then {{ just }} brew; fi
+  if [[ {{ os() }} = linux ]]; then print TODO: Add dnf target; fi
+
 brew_dir := "/opt/homebrew/Library/Taps/homebrew/homebrew-core"
 
 # Upgrade Homebrew packages
