@@ -54,12 +54,13 @@ update:
   if [[ {{ os() }} = macos ]]; then {{ just }} brew; fi
   if [[ {{ os() }} = linux ]]; then print TODO: Add dnf target; fi
 
-brew_dir := "/opt/homebrew/Library/Taps/homebrew/homebrew-core"
+brew_dir     := "/opt/homebrew/Library/Taps/homebrew/homebrew-core"
+brew_overlap := "moreutils parallel"  # these packages have overlapping links
 
 # Upgrade Homebrew packages
 [macos]
 [group("brew")]
-brew: && _brew_new_formula
+brew:
   brew update
   if ! brew outdated {{ brew_overlap }}; then {{ just }} _brew_unlink; brew upgrade --greedy; {{ just }} _brew_relink; else brew upgrade --greedy; fi
 
