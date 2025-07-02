@@ -91,6 +91,9 @@
 [interactive]
   diffFilter = delta --color-only --features=interactive
 
+[log]
+  date = local
+
 [merge]
   conflictStyle = zdiff3
   keepBackup = false
