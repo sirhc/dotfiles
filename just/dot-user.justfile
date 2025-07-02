@@ -51,8 +51,13 @@ _repos owner isFork="false":
 
 update:
   cd && mr --minimal --jobs 8 update
+  if [[ {{ os() }} = linux ]]; then {{ just }} dnf; fi
   if [[ {{ os() }} = macos ]]; then {{ just }} brew; fi
-  if [[ {{ os() }} = linux ]]; then print TODO: Add dnf target; fi
+
+[linux]
+[group("dnf")]
+dnf:
+  sudo dnf upgrade --refresh --exclude=firefox
 
 brew_dir     := "/opt/homebrew/Library/Taps/homebrew/homebrew-core"
 brew_overlap := "moreutils parallel"  # these packages have overlapping links
