@@ -7,11 +7,7 @@ set quiet
 just  :=  "just --justfile " + justfile() + " --working-directory " + invocation_directory()
 njobs := num_cpus()
 
-# These packages have overlapping links.
-brew_overlap := "moreutils parallel tfenv"
-
-_all:
-  {{ just }} --list
+_default:
 
 # Show repositories currently checked out on non-default branches
 [group("myrepos")]
