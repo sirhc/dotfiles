@@ -4,6 +4,8 @@ set shell := ["zsh", "-cu"]
 set dotenv-load
 set quiet
 
+alias up := update
+
 just  :=  "just --justfile " + justfile() + " --working-directory " + invocation_directory()
 njobs := num_cpus()
 
