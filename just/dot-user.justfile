@@ -52,7 +52,7 @@ _repos owner isFork="false":
   '
 
 update:
-  rich --print '[blue]==>[/blue] [bold]Updating repositories...[/bold]'
+  print $'\x1b[34m==>\x1b[0m \x1b[1mUpdating repositories...\x1b[0m'
   cd && mr --minimal --jobs 8 update
   if [[ {{ os() }} = linux ]]; then {{ just }} dnf; fi
   if [[ {{ os() }} = macos ]]; then {{ just }} brew; fi
@@ -60,7 +60,7 @@ update:
 [linux]
 [group("dnf")]
 dnf:
-  rich --print '[blue]==>[/blue] [bold]Updating packages...[/bold]'
+  print $'\x1b[34m==>\x1b[0m \x1b[1mUpdating packages...\x1b[0m'
   sudo dnf upgrade --refresh --exclude=firefox
 
 brew_dir     := "/opt/homebrew/Library/Taps/homebrew/homebrew-core"
