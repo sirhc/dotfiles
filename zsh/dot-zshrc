@@ -281,6 +281,7 @@ alias now='date +%H:%M:%S'
 
 alias t='task'
 alias to='taskopen'
+alias tt='taskwarrior-tui'
 
 alias wi='vim -c :VimwikiDiaryIndex -c :VimwikiDiaryGenerateLinks -c :VimwikiMakeDiaryNote'
 alias ww='vim -c :VimwikiIndex'
