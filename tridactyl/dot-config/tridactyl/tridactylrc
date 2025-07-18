@@ -17,3 +17,6 @@ autocmd DocStart feedly.com/i         mode ignore
 autocmd DocStart mail.google.com/mail mode ignore
 autocmd DocStart todoist.com/app      mode ignore
 autocmd DocStart read.amazon.com      mode ignore
+
+" For some reason, Glean doesn't trigger a switch to insert mode for its text entry box.
+autocmd DocStart glean.com mode ignore
