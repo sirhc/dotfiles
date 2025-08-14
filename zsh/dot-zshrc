@@ -134,11 +134,6 @@ fi
 
 if (( $+commands[navi] )); then  # https://github.com/denisidoro/navi
   eval "$( navi widget zsh )"
-
-  # Remove navi's keybinding, so the fzf-git plugin can use it. The fzf-git plugin doesn't use ^g^g, and every other
-  # letter is taken by something, so I'm trying it for now.
-  bindkey -r '^g'
-  bindkey '^g^g' _navi_widget
 fi
 
 if (( $+commands[terraform] )); then
@@ -177,7 +172,10 @@ for __file in ~/.zshrc.d/lib/*.zsh(#qN) ~/.zshrc.d/plugins/*/*.plugin.zsh(#qN); 
 done
 unset __file
 
-# Need to rebind ^r, because the vim mode plugin binds it after mcfly was loaded.
+# One or more of the sourced files (e.g., the vim mode plugin) messes with the bindkey maps, so all binds needs to
+# happen after this point.
+
+bindkey '^g' _navi_widget
 bindkey '^r' mcfly-history-widget
 
 # zsh-syntax-highlighting.zsh:31: invalid alias '=' encountered while printing aliases
@@ -196,10 +194,10 @@ zle -N down-line-or-beginning-search
 bindkey '^[[A' up-line-or-beginning-search    # up arrow
 bindkey '^[[B' down-line-or-beginning-search  # down arrow
 
-bindkey -M vicmd 'k'  up-line-or-beginning-search
 bindkey -M vicmd 'j'  down-line-or-beginning-search
-bindkey -M viins '^K' up-line-or-beginning-search
+bindkey -M vicmd 'k'  up-line-or-beginning-search
 bindkey -M viins '^J' down-line-or-beginning-search
+bindkey -M viins '^K' up-line-or-beginning-search
 
 bindkey ' '  magic-space
 bindkey '^ ' autosuggest-accept
