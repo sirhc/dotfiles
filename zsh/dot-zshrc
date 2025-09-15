@@ -278,6 +278,8 @@ alias xsubcpp='cpp -I`perl -MConfig -le '"'"'print "$Config{archlib}/CORE"'"'"'`
 alias today='date +%Y-%m-%d'
 alias now='date +%H:%M:%S'
 
+alias ff='firefox'
+
 alias t='task'
 alias to='taskopen'
 alias tt='taskwarrior-tui'
