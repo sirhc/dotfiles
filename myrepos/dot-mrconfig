@@ -36,6 +36,7 @@ git_tags   = git tag "$@"
 git_checkoutdefaultbranch = git switch "$( git default-branch )"
 git_defaultbranch         = git default-branch
 git_mergedefaultbranch    = git merge "$( git default-branch )"
+git_nondefaultbranch      = git branch | awk '( $1 == "*" ) { print $2 }' | { grep -v "$( git default-branch )" || true; }
 
 # Print the branch information only if there is more than one local branch (assumes a single branch is the default).
 git_localbranches =
