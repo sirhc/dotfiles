@@ -127,6 +127,10 @@ cnoremap sudow w !sudo tee % >/dev/null
 " nmap     <Leader>u i<C-U><Esc>
 " nmap     <Leader>U a<C-U><Esc>
 
+" https://github.com/DanBradbury/copilot-chat.vim
+nnoremap <Leader>CC :CopilotChatOpen<CR>
+vmap <Leader>a <Plug>CopilotChatAddSelection
+
 " Handy abbreviations.
 iabbrev fiancee fiancée
 iabbrev naiive  naïve
