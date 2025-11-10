@@ -46,12 +46,6 @@ set wildignorecase
 set wildmode=list:longest,full
 set wildoptions=pum
 
-if has('unnamedplus')
-  set clipboard=unnamedplus
-else
-  set clipboard=unnamed,unnamedplus
-endif
-
 set nojoinspaces
 set nolist
 set noshowmode  " Hide the default mode text (e.g. -- INSERT -- below the statusline)
