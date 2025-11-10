@@ -3,7 +3,7 @@
 *~
 .netrwbook
 .netrwhist
-copilot_chat/.*_token
+copilot-chat/.*_token
 local/
 pack/
 spell/
