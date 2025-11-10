@@ -5,17 +5,15 @@ set autoindent
 set autoread
 set autowriteall
 set backspace=indent,eol,start
+set breakindent
 set cursorline
 set directory=~/.vim/swapfiles//,~/tmp//,.
 set display=lastline
 set expandtab
-set foldmethod=marker
 set formatoptions+=n
-set history=50
 set hlsearch
 set ignorecase
 set incsearch
-set laststatus=2
 set laststatus=2   " Always display the statusline in all windows
 set linebreak
 set listchars=eol:$,tab:..,trail:.,extends:>,precedes:<
@@ -35,16 +33,19 @@ set smarttab
 set smoothscroll
 set softtabstop=2
 set spell
+set splitbelow
+set splitright
 set tabstop=2
-set textwidth=120
-set timeout timeoutlen=500 ttimeoutlen=500   " keycodes and maps timeout in 1/2 sec
+set tagcase=followscs
+set timeout timeoutlen=400 ttimeoutlen=400   " keycodes and maps timeout in ~1/3 sec
 set title
 set undodir=~/.vim/undofiles//,~/tmp//,.
 set undofile
-set viminfo='20,<50,s10,h
 set wildignorecase
+set wildmenu
 set wildmode=list:longest,full
 set wildoptions=pum
+set wrapmargin=10
 
 set nojoinspaces
 set nolist
