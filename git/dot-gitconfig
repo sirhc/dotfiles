@@ -29,12 +29,13 @@
   tip = log --decorate=full -n 1 --stat
   unstage = restore --staged
   who = shortlog --numbered --summary --email --
+  gone-branches = ! git for-each-ref refs/heads/ --format='%(refname:short) %(upstream:track,nobracket)' | awk '($2 == \"gone\") { print $1 }'
 
   # Delete branches whose remote tracking branches have been deleted.
-  gone = ! "git for-each-ref --format='%(refname:short) %(upstream:track,nobracket)' refs/heads/ | awk '($2 == \"gone\") { print $1 }' | xargs -r git branch -d"
+  gone = ! git gone-branches | xargs -r git branch -d
 
   # No really, even the unmerged ones.
-  begone = ! "git for-each-ref --format='%(refname:short) %(upstream:track,nobracket)' refs/heads/ | awk '($2 == \"gone\") { print $1 }' | xargs -r git branch -D"
+  begone = ! git gone-branches | xargs -r git branch -D
 
 [branch]
   sort = -committerdate
