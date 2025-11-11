@@ -1,4 +1,4 @@
-# vim: ft=zsh nospell
+# vim: filetype=zsh foldmethod=marker nospell
 
 typeset -aU path manpath fpath
 
