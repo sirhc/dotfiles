@@ -8,4 +8,5 @@ local/
 pack/
 spell/
 tags
+view/
 vimrc.local

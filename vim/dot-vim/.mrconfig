@@ -17,6 +17,9 @@ checkout = git clone 'https://github.com/vim-airline/vim-airline.git' 'airline'
 [pack/plugins/start/ale]
 checkout = git clone 'https://github.com/dense-analysis/ale.git' 'ale'
 
+[pack/plugins/start/ansiesc]
+checkout = git clone 'https://github.com/vim-scripts/AnsiEsc.vim.git' 'ansiesc'
+
 [pack/plugins/start/bufexplorer]
 checkout = git clone 'https://github.com/jlanzarotta/bufexplorer.git' 'bufexplorer'
 
@@ -67,6 +70,15 @@ checkout = git clone 'https://github.com/tpope/vim-surround.git' 'surround'
 
 [pack/plugins/start/tabular]
 checkout = git clone 'https://github.com/godlygeek/tabular.git' 'tabular'
+
+[pack/plugins/start/tagbar]
+checkout = git clone 'https://github.com/preservim/tagbar.git' 'tagbar'
+
+[pack/plugins/start/taskwarrior]
+checkout = git clone 'https://github.com/blindFS/vim-taskwarrior.git' 'taskwarrior'
+
+[pack/plugins/start/taskwiki]
+checkout = git clone 'https://github.com/tbabej/taskwiki.git' 'taskwiki'
 
 [pack/plugins/start/unimpaired]
 checkout = git clone 'https://github.com/tpope/vim-unimpaired.git' 'unimpaired'
