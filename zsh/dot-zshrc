@@ -41,6 +41,7 @@ export FZF_ALT_C_COMMAND='fd --type d --hidden --strip-cwd-prefix --exclude .git
 # export FZF_ALT_C_OPTS='--preview "eza --tree --color always {} | head -200"'
 export GRANTED_ALIAS_CONFIGURED='true'
 export GREP='egrep'
+export INTELLI_SEARCH_HOTKEY='^r'
 export LESS='--LONG-PROMPT --RAW-CONTROL-CHARS --chop-long-lines --ignore-case --jump-target=10 --shift=4 --mouse --quit-if-one-screen'
 export LESS_LINES='-1'
 export MAN_POSIXLY_CORRECT=1
@@ -91,12 +92,13 @@ autoload -Uz bracketed-paste-magic
 autoload -Uz down-line-or-beginning-search
 autoload -Uz up-line-or-beginning-search
 
-# Command Specific Configuration {{{
+# Load library files and plugins.
+for __file in ~/.zshrc.d/lib/*.zsh(#qN) ~/.zshrc.d/plugins/*/*.plugin.zsh(#qN); do
+  source $__file
+done
+unset __file
 
-(( $+commands[direnv] ))  && eval "$( direnv hook zsh )"  # https://direnv.net/
-(( $+commands[mcfly] ))   && eval "$( mcfly init zsh )"   # https://github.com/cantino/mcfly
-(( $+commands[thefuck] )) && eval "$( thefuck --alias )"  # https://github.com/nvbn/thefuck
-(( $+commands[zoxide] ))  && eval "$( zoxide init zsh )"  # https://github.com/ajeetdsouza/zoxide
+# Command Specific Configuration {{{
 
 if (( $+commands[dnf] )); then
   alias dnfgl='dnf grouplist'          # list package groups
@@ -137,10 +139,6 @@ if (( $+commands[fzf] )); then  # https://github.com/junegunn/fzf
   }
 fi
 
-if (( $+commands[navi] )); then  # https://github.com/denisidoro/navi
-  eval "$( navi widget zsh )"
-fi
-
 if (( $+commands[terraform] )); then
   autoload -U +X bashcompinit && bashcompinit
   complete -o nospace -C terraform terraform
@@ -158,6 +156,14 @@ if (( $+commands[wd.sh] )); then
   }
 fi
 
+(( $+commands[direnv] ))  && eval "$( direnv hook zsh )"  # https://direnv.net/
+(( $+commands[mcfly] ))   && eval "$( mcfly init zsh )"   # https://github.com/cantino/mcfly
+(( $+commands[navi] ))    && eval "$( navi widget zsh )"  # https://github.com/denisidoro/navi
+(( $+commands[thefuck] )) && eval "$( thefuck --alias )"  # https://github.com/nvbn/thefuck
+(( $+commands[zoxide] ))  && eval "$( zoxide init zsh )"  # https://github.com/ajeetdsouza/zoxide
+
+# (( $+commands[intelli-shell] ))  && eval "$( intelli-shell init zsh )"  # https://lasantosr.github.io/intelli-shell/index.html
+
 # Lazy load the *env commands. I don't use them much, so save the shell startup time. At the moment, I don't even use
 # them, so revisit this if I need to.
 
@@ -170,18 +176,6 @@ fi
 # fi
 
 # }}}
-
-# Load library files and plugins.
-for __file in ~/.zshrc.d/lib/*.zsh(#qN) ~/.zshrc.d/plugins/*/*.plugin.zsh(#qN); do
-  source $__file
-done
-unset __file
-
-# One or more of the sourced files (e.g., the vim mode plugin) messes with the bindkey maps, so all binds needs to
-# happen after this point.
-
-bindkey '^g' _navi_widget
-bindkey '^r' mcfly-history-widget
 
 # zsh-syntax-highlighting.zsh:31: invalid alias '=' encountered while printing aliases
 aliases[=]='noglob ='
