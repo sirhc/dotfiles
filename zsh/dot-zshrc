@@ -55,6 +55,11 @@ export TZ='US/Pacific'
 export UNZIP='-qq'
 export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
 
+export PERL_LOCAL_LIB_ROOT="$HOME/.local"
+export PERL_MB_OPT="--install_base '$PERL_LOCAL_LIB_ROOT'"
+export PERL_MM_OPT="INSTALL_BASE='$PERL_LOCAL_LIB_ROOT'"
+export PERL5LIB="$PERL_LOCAL_LIB_ROOT/lib/perl5"
+
 path=(
   ~/bin
   ~/bin/${OSTYPE/[0-9]*/}-${CPUTYPE}(/N)  # e.g., linux-gnu-x86_64, darwin-arm64
