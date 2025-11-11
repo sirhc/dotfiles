@@ -63,7 +63,6 @@ dnf:
   print $'\x1b[34m==>\x1b[0m \x1b[1mUpdating packages...\x1b[0m'
   sudo dnf upgrade --refresh --exclude=firefox
 
-brew_dir     := "/opt/homebrew/Library/Taps/homebrew/homebrew-core"
 brew_overlap := "moreutils parallel"  # these packages have overlapping links
 
 # Upgrade Homebrew packages
@@ -78,28 +77,3 @@ _brew_unlink:
 
 _brew_relink: _brew_unlink
   brew link --overwrite {{ brew_overlap }}
-
-_brew_new_formula:
-  jq --argjson a "$( {{ just }} _brew_recent_formula_date )" --argjson b "$( {{ just }} _brew_recent_formula_info )" -n '$a + $b | group_by(.name) | map(add)' \
-    | mlr --j2p sort -r date -n name
-
-_brew_recent_formula:
-  #!/usr/bin/env -S zsh -e
-  git -C {{ brew_dir }} log --since="$( gdate --date 'last week' +'%Y-%m-%d')" --name-status --diff-filter=A Formula |
-    grep -E '^(Date:|A\t)' |
-    awk '
-      ( $1 == "Date:" ) { sub(/^Date: */, ""); date = $0 }
-      ( $1 == "A" )     { print $2, date }
-    ' |
-    sed -e 's,^.*/,,' -e 's/\.rb / /' -e 's/ .[0-9]*$//'
-
-_brew_recent_formula_date:
-  #!/usr/bin/env -S zsh -e
-  {{ just }} _brew_recent_formula |
-    while read -r formula date; do
-      printf '{ "name": "%s", "date": "%s" }\n' $formula $( gdate --date=$date +%Y-%m-%d )
-    done |
-    jq -s .
-
-_brew_recent_formula_info:
-  {{ just }} _brew_recent_formula | cut -d ' ' -f 1 | xargs brew info --json | jq '. | map( { name, desc, homepage } )'
