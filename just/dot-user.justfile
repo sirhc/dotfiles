@@ -72,6 +72,18 @@ brew:
   brew update
   if ! brew outdated {{ brew_overlap }}; then {{ just }} _brew_unlink; brew upgrade --greedy; {{ just }} _brew_relink; else brew upgrade --greedy; fi
 
+[macos]
+[group("brew")]
+[no-exit-message]
+update-certs:
+  fd --glob cacert.pem /opt/homebrew/Cellar --exec {{ just }} _update_cert
+
+[no-exit-message]
+_update_cert file:
+  openssl storeutl -certs -text -noout '{{ file }}' | grep Issuer: | grep -q CN=LookoutSSE_ForwardProxy_tealium
+  print "Updating {{ file }}"
+  security find-certificate -c LookoutSSE_ForwardProxy_tealium -p /Library/Keychains/System.keychain >> '{{ file }}'
+
 _brew_unlink:
   brew unlink {{ brew_overlap }}
 
