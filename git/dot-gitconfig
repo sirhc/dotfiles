@@ -37,6 +37,9 @@
   # No really, even the unmerged ones.
   begone = ! git gone-branches | xargs -r git branch -D
 
+  request-copilot-review = ! gh api --method POST "/repos/{owner}/{repo}/pulls/$( gh pr view --json number --jq .number )/requested_reviewers" -f 'reviewers[]=copilot-pull-request-reviewer[bot]'
+  squash-pull-request = ! gh pr view --json body --jq .body | gh pr merge --body-file - --delete-branch --squash --subject \"$( gh pr view --json title --jq .title )\"
+
 [branch]
   sort = -committerdate
 
