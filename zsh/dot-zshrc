@@ -287,7 +287,7 @@ alias wi='vim -c :VimwikiDiaryIndex -c :VimwikiDiaryGenerateLinks -c :VimwikiMak
 alias ww='vim -c :VimwikiIndex'
 
 (( $+commands[assume] ))    && alias assume='source assume'  # https://docs.commonfate.io/granted-cli/shell-alias/
-(( $+commands[eza] ))       && alias ls='eza'
+(( $+commands[eza] ))       && alias ls='eza --git'
 (( $+commands[moar] ))      && alias more='moar'
 (( $+commands[kubecolor] )) && alias kubectl='kubecolor'
 (( $+commands[vimx] ))      && alias vim='vimx'
