@@ -38,6 +38,19 @@ git_defaultbranch         = git default-branch
 git_mergedefaultbranch    = git merge "$( git default-branch )"
 git_nondefaultbranch      = git branch | awk '( $1 == "*" ) { print $2 }' | { grep -v "$( git default-branch )" || true; }
 
+git_stalebranches =
+  gh api repos/{owner}/{repo}/branches --paginate --jq '.[].name' |
+    xargs -I % -P 8 gh api repos/{owner}/{repo}/branches/% --jq '
+      {
+        Branch:  .name,
+        Commit:  .commit.sha[0:7],
+        Date:    .commit.commit.author.date,
+        Message: ( .commit.commit.message | split("\n") | .[0] ),
+        Author:  .commit.commit.author.name
+      }
+    ' |
+    mlr --j2p sort -f 'Date' then cut -f 'Branch,Commit,Date,Author,Message' -o
+
 # Print the branch information only if there is more than one local branch (assumes a single branch is the default).
 git_localbranches =
   branches="$( git branch -vv )"
