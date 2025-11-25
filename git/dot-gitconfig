@@ -1,5 +1,6 @@
 [advice]
   detachedHead = false
+  forceDeleteBranch = false
 
 [alias]
   # Abbreviations
