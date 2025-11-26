@@ -65,6 +65,7 @@ git_missingbranches =
 # Override the default `mr update` command for Git to suppress the "Already up to date" message. This will let it play
 # nice with `mr -m`.
 git_update =
+  set -o pipefail
   git pull "$@" | sed -e '/^Already up to date.$/d'
 
 git_latestrelease =
