@@ -654,5 +654,7 @@ function lgrep {
 source ~/.zshrc.local 2> /dev/null || true
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-source ~/.p10k.zsh 2> /dev/null || true
-source ~/.zshrc.d/powerlevel10k/powerlevel10k.zsh-theme 2> /dev/null || true
+# source ~/.p10k.zsh 2> /dev/null || true
+# source ~/.zshrc.d/powerlevel10k/powerlevel10k.zsh-theme 2> /dev/null || true
+
+(( $+commands[oh-my-posh] )) && eval "$( oh-my-posh init zsh )"  # https://ohmyposh.dev/docs/
