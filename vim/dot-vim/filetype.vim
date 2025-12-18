@@ -20,8 +20,5 @@ augroup filetypedetect
     au BufNewFile,BufRead Jenkinsfile* setf groovy
     au BufNewFile,BufRead known_hosts  setf known_hosts
 
-    au BufNewFile,BufRead *.container  setf systemd
-    au BufNewFile,BufRead *.network    setf systemd
-    au BufNewFile,BufRead *.volume     setf systemd
-    au BufNewFile,BufRead *.kube       setf systemd
+    au BufNewFile,BufRead *.container,*.network,*.volume,*.kube setf systemd
 augroup END
