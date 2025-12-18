@@ -20,5 +20,7 @@ augroup filetypedetect
     au BufNewFile,BufRead Jenkinsfile* setf groovy
     au BufNewFile,BufRead known_hosts  setf known_hosts
 
+    au BufNewFile,BufRead git-create-pull-request.* setf gitconfig
+
     au BufNewFile,BufRead *.container,*.network,*.volume,*.kube setf systemd
 augroup END
