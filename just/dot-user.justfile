@@ -30,13 +30,13 @@ clone-forks owner=file_name(invocation_directory()): && register
 [group("myrepos")]
 register:
   test -f .mrconfig
-  printf '%s\n' */.git(D/:h) | parallel 'rg -F -q "[{}]" .mrconfig || print {}' | xargs -I % -t mr register % 2> /dev/null || :
+  printf '%s\n' */.git(D/:h) | xargs -I % -P 0 zsh -c 'rg -F -q "[%]" .mrconfig || print %' | xargs -I % -t mr register % 2> /dev/null || :
 
 _branches:
   mr -j{{ njobs }} run command -- zsh -c 'git rev-parse --abbrev-ref HEAD origin/HEAD' | sed -e 's,mr run: .*/,,' -e 's,^origin/,,' -e '/^$/d' | paste -d , - - -
 
 _clone:
-  parallel '[[ -d "$( basename {} )" ]] || gh repo clone {}'
+  xargs -I % -P 0 zsh -c '[[ -d ../% ]] || print %' | xargs -L 1 -P 0 -t gh repo clone
 
 _repos owner isFork="false":
   #!/usr/bin/env -S zsh -e
