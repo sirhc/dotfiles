@@ -10,6 +10,12 @@ lib =
     env GH_PAGER= gh "$@"
   }
 
+# Skip if the repository is a fork, as indicated by an upstream URL.
+# skip = git -C "$MR_REPO" config get --local remote.upstream.url >& /dev/null
+
+# Skip if the repository has been archived on GitHub.
+# skip = [[ "$( git -C "$MR_REPO" config get --local remote.origin.gh-archived )" == true ]]
+
 edit = if [[ "$#" -gt 0 ]]; then vim "$@" else vim . fi
 
 # TODO: Figure out how to tell Tilix to open a tab for Linux.
@@ -38,6 +44,16 @@ git_defaultbranch         = git default-branch
 git_mergedefaultbranch    = git merge "$( git default-branch )"
 git_nondefaultbranch      = git branch | awk '( $1 == "*" ) { print $2 }' | { grep -v "$( git default-branch )" || true; }
 
+git_setarchivedflag =
+  git config set --local remote.origin.gh-archived "$( gh repo view --json isArchived --template '{{ .isArchived }}' )"
+  git config get --local remote.origin.gh-archived
+
+# Stash any uncommitted changes, switch to the default branch, and pull the latest changes.
+git_baseline =
+  git stash push --all --quiet --message 'mr: Stashed uncommitted changes before baseline'
+  git switch --quiet "$( git symbolic-ref refs/remotes/origin/HEAD | sed -e 's,^refs/remotes/origin/,,' )"
+  git pull --quiet
+
 git_stalebranches =
   gh api repos/{owner}/{repo}/branches --paginate --jq '.[].name' |
     xargs -I % -P 8 gh api repos/{owner}/{repo}/branches/% --jq '
@@ -60,13 +76,11 @@ git_localbranches =
 
 # Print any branches that are tracking branches no longer present on the remote.
 git_missingbranches =
-  git branch -vv | grep ': gone\]' || true
+  git branch -vv | grep -F ': gone]' || true
 
-# Override the default `mr update` command for Git to suppress the "Already up to date" message. This will let it play
-# nice with `mr -m`.
+# Override the default `mr update` command for Git to suppress the "Already up to date" message. This will let it play nice with `mr -m`.
 git_update =
-  set -o pipefail
-  git pull "$@" | sed -e '/^Already up to date.$/d'
+  { git pull "$@" || exit 1; } | sed -e '/^Already up to date.$/d'
 
 git_latestrelease =
   { gh api 'repos/{owner}/{repo}/releases/latest' 2> /dev/null || true; } | jq -r '.tag_name // empty'
