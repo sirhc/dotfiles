@@ -90,6 +90,10 @@
   prune = true
   pruneTags = true
 
+[gitget]
+  root = ~/src
+  host = github.com
+
 [gpg]
   format = ssh
 
