@@ -18,10 +18,9 @@ augroup filetypedetect
     au BufNewFile,BufRead *.zsh-theme  setf zsh
     au BufNewFile,BufRead .mrconfig*   setf toml
     au BufNewFile,BufRead Jenkinsfile* setf groovy
-    au BufNewFile,BufRead known_hosts  setf known_hosts
+    au BufNewFile,BufRead PR_EDITMSG   setf gitcommit
     au BufNewFile,BufRead create*.yml  setf yaml.jira
-
-    au BufNewFile,BufRead git-create-pull-request.* setf gitconfig
+    au BufNewFile,BufRead known_hosts  setf known_hosts
 
     au BufNewFile,BufRead *.container,*.network,*.volume,*.kube setf systemd
 augroup END
