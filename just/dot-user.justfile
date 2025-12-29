@@ -19,11 +19,13 @@ branches:
 # Clone all repositories from a GitHub user or organization
 [group("myrepos")]
 clone owner=file_name(invocation_directory()): && register
+  print -P '%F{blue}==>%f %BCloning repositories...%b'
   {{ just }} _repos {{ owner }} | {{ just }} _clone
 
 # Clone all forked repositories from a GitHub user or organization
 [group("myrepos")]
 clone-forks owner=file_name(invocation_directory()): && register
+  print -P '%F{blue}==>%f %BCloning forked repositories...%b'
   {{ just }} _repos {{ owner }} true | {{ just }} _clone
 
 # Register all repositories in the current directory
@@ -52,7 +54,7 @@ _repos owner isFork="false":
   '
 
 update:
-  print $'\x1b[34m==>\x1b[0m \x1b[1mUpdating repositories...\x1b[0m'
+  print -P '%F{blue}==>%f %BUpdating repositories...%b'
   cd && mr --minimal --jobs 8 update
   if [[ {{ os() }} = linux ]]; then {{ just }} dnf; fi
   if [[ {{ os() }} = macos ]]; then {{ just }} brew; fi
@@ -60,7 +62,7 @@ update:
 [linux]
 [group("dnf")]
 dnf:
-  print $'\x1b[34m==>\x1b[0m \x1b[1mUpdating packages...\x1b[0m'
+  print -P '%F{blue}==>%f %BUpdating packages...%b'
   sudo dnf upgrade --refresh --exclude=firefox
 
 brew_overlap := "moreutils parallel"  # these packages have overlapping links
