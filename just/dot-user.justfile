@@ -53,9 +53,13 @@ _repos owner isFork="false":
     }
   '
 
-update:
+update: update-repos update-packages
+
+update-repos:
   print -P '%F{blue}==>%f %BUpdating repositories...%b'
-  cd && mr --minimal --jobs 8 update
+  mr --minimal --jobs 16 update && mr --minimal --jobs 16 gc
+
+update-packages:
   if [[ {{ os() }} = linux ]]; then {{ just }} dnf; fi
   if [[ {{ os() }} = macos ]]; then {{ just }} brew; fi
 
