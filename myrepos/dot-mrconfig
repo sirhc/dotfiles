@@ -78,10 +78,6 @@ git_localbranches =
 git_missingbranches =
   git branch -vv | grep -F ': gone]' || true
 
-# Override the default `mr update` command for Git to suppress the "Already up to date" message. This will let it play nice with `mr -m`.
-git_update =
-  { git pull "$@" || exit 1; } | sed -e '/^Already up to date.$/d'
-
 git_latestrelease =
   { gh api 'repos/{owner}/{repo}/releases/latest' 2> /dev/null || true; } | jq -r '.tag_name // empty'
 
