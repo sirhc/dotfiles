@@ -31,7 +31,6 @@ update-functions:
   mkdir -p {{ functions_dir }}
   {{ curl }} {{ github }}/AlexaraWu/zsh-completions/master/src/_7z                -o {{ functions_dir }}/_7z
   {{ curl }} {{ github }}/sirhc/awsvpn-cli/main/completion.zsh                    -o {{ functions_dir }}/_awsvpn_cli
-  {{ curl }} {{ github }}/cheat/cheat/master/scripts/cheat.zsh                    -o {{ functions_dir }}/_cheat
   {{ curl }} {{ github }}/exercism/cli/main/shell/exercism_completion.zsh         -o {{ functions_dir }}/_exercism
   {{ curl }} {{ github }}/sirhc/myrepos.plugin.zsh/main/_myrepos                  -o {{ functions_dir }}/_myrepos
   {{ curl }} {{ github }}/jkavan/terragrunt-oh-my-zsh-plugin/master/_terragrunt   -o {{ functions_dir }}/_terragrunt
