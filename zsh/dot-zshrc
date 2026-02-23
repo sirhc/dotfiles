@@ -74,6 +74,7 @@ path=(
 
 fpath=(
   ~/.zshrc.d/functions
+  ~/.zshrc.d/plugins/zsh-completions/src
   ~/.local/share/zsh/site-functions
   /opt/homebrew/share/zsh/site-functions(/N)
   $fpath

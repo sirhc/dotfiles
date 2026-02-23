@@ -3,5 +3,6 @@
 zsh/dot-zshrc.d/powerlevel10k/
 
 zsh/dot-zshrc.d/plugins/zsh-autosuggestions/
+zsh/dot-zshrc.d/plugins/zsh-completions/
 zsh/dot-zshrc.d/plugins/zsh-syntax-highlighting/
 zsh/dot-zshrc.d/plugins/zsh-vim-mode/

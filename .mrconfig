@@ -5,6 +5,9 @@ checkout = git clone 'https://github.com/romkatv/powerlevel10k.git' 'powerlevel1
 [zsh/dot-zshrc.d/plugins/zsh-autosuggestions]
 checkout = git clone 'https://github.com/zsh-users/zsh-autosuggestions.git' 'zsh-autosuggestions'
 
+[zsh/dot-zshrc.d/plugins/zsh-completions]
+checkout = git clone 'https://github.com/zsh-users/zsh-completions.git' 'zsh-completions'
+
 [zsh/dot-zshrc.d/plugins/zsh-syntax-highlighting]
 checkout = git clone 'https://github.com/zsh-users/zsh-syntax-highlighting.git' 'zsh-syntax-highlighting'
 
