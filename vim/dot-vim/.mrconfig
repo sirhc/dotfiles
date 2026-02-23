@@ -71,8 +71,8 @@ checkout = git clone 'https://github.com/tpope/vim-surround.git' 'surround'
 [pack/plugins/start/tabular]
 checkout = git clone 'https://github.com/godlygeek/tabular.git' 'tabular'
 
-[pack/plugins/start/tagbar]
-checkout = git clone 'https://github.com/preservim/tagbar.git' 'tagbar'
+# [pack/plugins/start/tagbar]
+# checkout = git clone 'https://github.com/preservim/tagbar.git' 'tagbar'
 
 [pack/plugins/start/taskwarrior]
 checkout = git clone 'https://github.com/blindFS/vim-taskwarrior.git' 'taskwarrior'
