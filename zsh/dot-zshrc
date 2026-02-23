@@ -101,7 +101,13 @@ unset __file
 
 # Command Specific Configuration {{{
 
-if (( $+commands[dnf] )); then
+if (( $+commands[bat] )); then  # {{{
+  alias bat.json='bat --language json'
+  alias bat.yaml='bat --language yaml'
+fi
+# }}}
+
+if (( $+commands[dnf] )); then  # {{{
   alias dnfgl='dnf grouplist'          # list package groups
   alias dnfl='dnf list'                # list packages
   alias dnfli='dnf list installed'     # list installed packages
@@ -116,6 +122,7 @@ if (( $+commands[dnf] )); then
   alias dnfr='sudo dnf remove'         # remove package
   alias dnfu='sudo dnf upgrade'        # upgrade package
 fi
+# }}}
 
 if (( $+commands[fzf] )); then  # {{{
   # https://github.com/junegunn/fzf
@@ -154,22 +161,25 @@ if (( $+commands[just] )); then  # {{{
 fi
 # }}}
 
-if (( $+commands[terraform] )); then
+if (( $+commands[terraform] )); then  # {{{
   autoload -U +X bashcompinit && bashcompinit
   complete -o nospace -C terraform terraform
 
   alias tf='terraform'
 fi
+# }}}
 
-if (( $+commands[terragrunt] )); then
+if (( $+commands[terragrunt] )); then  # {{{
   alias tg='terragrunt'
 fi
+# }}}
 
-if (( $+commands[wd.sh] )); then
+if (( $+commands[wd.sh] )); then  # {{{
   wd() {
     source "$( command -v wd.sh )"
   }
 fi
+# }}}
 
 (( $+commands[direnv] ))  && eval "$( direnv hook zsh )"  # https://direnv.net/
 (( $+commands[mcfly] ))   && eval "$( mcfly init zsh )"   # https://github.com/cantino/mcfly
