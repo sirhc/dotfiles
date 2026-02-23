@@ -117,7 +117,9 @@ if (( $+commands[dnf] )); then
   alias dnfu='sudo dnf upgrade'        # upgrade package
 fi
 
-if (( $+commands[fzf] )); then  # https://github.com/junegunn/fzf
+if (( $+commands[fzf] )); then  # {{{
+  # https://github.com/junegunn/fzf
+
   eval "$( fzf --zsh )"
 
   _fzf_compgen_path() {
@@ -139,6 +141,18 @@ if (( $+commands[fzf] )); then  # https://github.com/junegunn/fzf
     esac
   }
 fi
+# }}}
+
+if (( $+commands[hledger] )); then  # {{{
+  alias hl='hledger'
+fi
+# }}}
+
+if (( $+commands[just] )); then  # {{{
+  alias j='just'
+  alias jl='just --list'
+fi
+# }}}
 
 if (( $+commands[terraform] )); then
   autoload -U +X bashcompinit && bashcompinit
