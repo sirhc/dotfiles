@@ -684,7 +684,6 @@ source ~/.zshrc.d/powerlevel10k/powerlevel10k.zsh-theme 2> /dev/null || true
 
 # Load library files and plugins.
 for __file in ~/.zshrc.d/lib/*.zsh(#qN) ~/.zshrc.d/plugins/*/*.plugin.zsh(#qN); do
-  print $__file
   source $__file
 done
 unset __file
