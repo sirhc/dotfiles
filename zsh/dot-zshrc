@@ -449,6 +449,10 @@ function hr {
   printf '%*s\n' "$( tput cols )" '' | tr ' ' -
 }
 
+function p2t {
+  pdftotext -layout -nopgbrk -q "$1" - | less
+}
+
 # http://blogs.perl.org/users/aristotle/2015/12/locallib-ez.html
 function perl-lib {
   eval "$( perl -M'local::lib @ARGV' - "$@" 0<&- )"
