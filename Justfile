@@ -39,7 +39,7 @@ update-functions:
 update-plugins:
   mkdir -p {{ plugins_dir }}/{aws,fzf-completion,fzf-git,git-extras,git,screen}
   {{ curl }} {{ github }}/ohmyzsh/ohmyzsh/master/plugins/aws/aws.plugin.zsh       -o {{ plugins_dir }}/aws/aws.plugin.zsh
-  {{ curl }} {{ github }}/junegunn/fzf/master/shell/completion.zsh                -o {{ plugins_dir }}/fzf-completion/fzf-completion.plugin.zsh
+  # {{ curl }} {{ github }}/junegunn/fzf/master/shell/completion.zsh                -o {{ plugins_dir }}/fzf-completion/fzf-completion.plugin.zsh
   {{ curl }} {{ github }}/junegunn/fzf-git.sh/refs/heads/main/fzf-git.sh          -o {{ plugins_dir }}/fzf-git/fzf-git.plugin.zsh
   {{ curl }} {{ github }}/tj/git-extras/master/etc/git-extras-completion.zsh      -o {{ plugins_dir }}/git-extras/git-extras.plugin.zsh
   {{ curl }} {{ github }}/ohmyzsh/ohmyzsh/master/plugins/git/git.plugin.zsh       -o {{ plugins_dir }}/git/git.plugin.zsh

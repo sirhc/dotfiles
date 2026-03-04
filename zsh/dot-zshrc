@@ -93,12 +93,6 @@ autoload -Uz bracketed-paste-magic
 autoload -Uz down-line-or-beginning-search
 autoload -Uz up-line-or-beginning-search
 
-# Load library files and plugins.
-for __file in ~/.zshrc.d/lib/*.zsh(#qN) ~/.zshrc.d/plugins/*/*.plugin.zsh(#qN); do
-  source $__file
-done
-unset __file
-
 # Command Specific Configuration {{{
 
 if (( $+commands[bat] )); then  # {{{
@@ -203,11 +197,11 @@ fi
 # }}}
 
 # zsh-syntax-highlighting.zsh:31: invalid alias '=' encountered while printing aliases
-aliases[=]='noglob ='
+#aliases[=]='noglob ='
 
 zstyle ':completion:*' accept-exact-dirs true
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z-_}={A-Za-z_-}' 'r:|=*' 'l:|=* r:|=*'
-zstyle ':completion:*' menu select
+zstyle ':completion:*' menu no
 
 set zle_bracketed_paste
 
@@ -687,3 +681,10 @@ source ~/.p10k.zsh 2> /dev/null || true
 source ~/.zshrc.d/powerlevel10k/powerlevel10k.zsh-theme 2> /dev/null || true
 
 # (( $+commands[oh-my-posh] )) && eval "$( oh-my-posh init zsh )"  # https://ohmyposh.dev/docs/
+
+# Load library files and plugins.
+for __file in ~/.zshrc.d/lib/*.zsh(#qN) ~/.zshrc.d/plugins/*/*.plugin.zsh(#qN); do
+  print $__file
+  source $__file
+done
+unset __file

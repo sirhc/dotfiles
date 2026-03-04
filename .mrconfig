@@ -2,14 +2,17 @@
 [zsh/dot-zshrc.d/powerlevel10k]
 checkout = git clone 'https://github.com/romkatv/powerlevel10k.git' 'powerlevel10k'
 
-[zsh/dot-zshrc.d/plugins/zsh-autosuggestions]
-checkout = git clone 'https://github.com/zsh-users/zsh-autosuggestions.git' 'zsh-autosuggestions'
+[zsh/dot-zshrc.d/plugins/01-zsh-completions]
+checkout = git clone 'https://github.com/zsh-users/zsh-completions.git' '01-zsh-completions'
 
-[zsh/dot-zshrc.d/plugins/zsh-completions]
-checkout = git clone 'https://github.com/zsh-users/zsh-completions.git' 'zsh-completions'
+[zsh/dot-zshrc.d/plugins/02-zsh-vim-mode]
+checkout = git clone 'https://github.com/softmoth/zsh-vim-mode.git' '02-zsh-vim-mode'
 
-[zsh/dot-zshrc.d/plugins/zsh-syntax-highlighting]
-checkout = git clone 'https://github.com/zsh-users/zsh-syntax-highlighting.git' 'zsh-syntax-highlighting'
+[zsh/dot-zshrc.d/plugins/03-fzf-tab]
+checkout = git clone 'https://github.com/Aloxaf/fzf-tab.git' '03-fzf-tab'
 
-[zsh/dot-zshrc.d/plugins/zsh-vim-mode]
-checkout = git clone 'https://github.com/softmoth/zsh-vim-mode.git' 'zsh-vim-mode'
+[zsh/dot-zshrc.d/plugins/04-zsh-autosuggestions]
+checkout = git clone 'https://github.com/zsh-users/zsh-autosuggestions.git' '04-zsh-autosuggestions'
+
+[zsh/dot-zshrc.d/plugins/05-zsh-syntax-highlighting]
+checkout = git clone 'https://github.com/zsh-users/zsh-syntax-highlighting.git' '05-zsh-syntax-highlighting'
