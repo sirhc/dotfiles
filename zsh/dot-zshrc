@@ -196,72 +196,6 @@ fi
 
 # }}}
 
-# zsh-syntax-highlighting.zsh:31: invalid alias '=' encountered while printing aliases
-#aliases[=]='noglob ='
-
-zstyle ':completion:*' accept-exact-dirs true
-zstyle ':completion:*' matcher-list 'm:{a-zA-Z-_}={A-Za-z_-}' 'r:|=*' 'l:|=* r:|=*'
-zstyle ':completion:*' menu no
-
-set zle_bracketed_paste
-
-zle -N bracketed-paste bracketed-paste-magic
-zle -N up-line-or-beginning-search
-zle -N down-line-or-beginning-search
-
-bindkey '^[[A' up-line-or-beginning-search    # up arrow
-bindkey '^[[B' down-line-or-beginning-search  # down arrow
-
-bindkey -M vicmd 'j'  down-line-or-beginning-search
-bindkey -M vicmd 'k'  up-line-or-beginning-search
-bindkey -M viins '^J' down-line-or-beginning-search
-bindkey -M viins '^K' up-line-or-beginning-search
-
-bindkey ' '  magic-space
-bindkey '^ ' autosuggest-accept
-bindkey '^h' _complete_help
-
-# _set_terminal_title <window-title> [tab-title]
-_set_terminal_title() {
-  : ${1=%n@%M:%~}  # user@host:path
-  : ${2=%n@%M:%~}  # user@host:path
-
-  if [[ $TERM_PROGRAM == iTerm.app ]]; then
-    print -Pn "\e]2;${1:q}\a"  # set window name
-    print -Pn "\e]1;${2:q}\a"  # set tab name
-    return
-  fi
-
-  case "$TERM" in
-    xterm*)
-      print -Pn "\e]2;${1:q}\a"  # set window name (this is the only one that works in gnome-terminal)
-      print -Pn "\e]1;${2:q}\a"  # set tab name
-      ;;
-    screen*|tmux*)
-      print -Pn "\ek${1:q}\e\\"  # set screen hardstatus
-      ;;
-  esac
-}
-
-_set_terminal_title_cmd() {
-  _set_terminal_title "%100>...>${2:gs/%/%%}%<< (%~)"
-}
-
-add-zsh-hook precmd  _set_terminal_title
-add-zsh-hook preexec _set_terminal_title_cmd
-
-# https://github.com/ohmyzsh/ohmyzsh/blob/master/lib/completion.zsh
-# expand-or-complete-with-dots() {
-#   local dots='%F{red}…%f'
-#   printf '\e[?7l%s\e[?7h' "${(%)dots}"
-#   zle expand-or-complete
-#   zle redisplay
-# }
-# zle -N expand-or-complete-with-dots
-# bindkey -M emacs '^I' expand-or-complete-with-dots
-# bindkey -M viins '^I' expand-or-complete-with-dots
-# bindkey -M vicmd '^I' expand-or-complete-with-dots
-
 # Aliases {{{
 
 alias .j='just --justfile ~/.user.justfile --working-directory .'
@@ -673,9 +607,6 @@ function lgrep {
 # If ~/.zsh_history has reached 80% of SAVEHIST, copy it to a snapshot. Let zsh take care of pruning the history.
 (( $( grep -c . ~/.zsh_history ) > (SAVEHIST * 0.8) )) && cp ~/.zsh_history ~/.zsh_history.$( date +'%Y-%m-%dT%H:%M:%S' )
 
-# Finally, any host-specific configuration that doesn't belong in my version controlled file.
-source ~/.zshrc.local 2> /dev/null || true
-
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 source ~/.p10k.zsh 2> /dev/null || true
 source ~/.zshrc.d/powerlevel10k/powerlevel10k.zsh-theme 2> /dev/null || true
@@ -687,3 +618,70 @@ for __file in ~/.zshrc.d/lib/*.zsh(#qN) ~/.zshrc.d/plugins/*/*.plugin.zsh(#qN); 
   source $__file
 done
 unset __file
+
+# Settings following the loading of plugins, so they can override plugin defaults.
+zstyle ':completion:*' accept-exact-dirs true
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z-_}={A-Za-z_-}' 'r:|=*' 'l:|=* r:|=*'
+zstyle ':completion:*' menu no
+
+set zle_bracketed_paste
+
+zle -N bracketed-paste bracketed-paste-magic
+zle -N up-line-or-beginning-search
+zle -N down-line-or-beginning-search
+
+bindkey '^[[A' up-line-or-beginning-search    # up arrow
+bindkey '^[[B' down-line-or-beginning-search  # down arrow
+
+bindkey -M vicmd 'j'  down-line-or-beginning-search
+bindkey -M vicmd 'k'  up-line-or-beginning-search
+bindkey -M viins '^J' down-line-or-beginning-search
+bindkey -M viins '^K' up-line-or-beginning-search
+
+bindkey ' '  magic-space
+bindkey '^ ' autosuggest-accept
+bindkey '^h' _complete_help
+
+# _set_terminal_title <window-title> [tab-title]
+_set_terminal_title() {
+  : ${1=%n@%M:%~}  # user@host:path
+  : ${2=%n@%M:%~}  # user@host:path
+
+  if [[ $TERM_PROGRAM == iTerm.app ]]; then
+    print -Pn "\e]2;${1:q}\a"  # set window name
+    print -Pn "\e]1;${2:q}\a"  # set tab name
+    return
+  fi
+
+  case "$TERM" in
+    xterm*)
+      print -Pn "\e]2;${1:q}\a"  # set window name (this is the only one that works in gnome-terminal)
+      print -Pn "\e]1;${2:q}\a"  # set tab name
+      ;;
+    screen*|tmux*)
+      print -Pn "\ek${1:q}\e\\"  # set screen hardstatus
+      ;;
+  esac
+}
+
+_set_terminal_title_cmd() {
+  _set_terminal_title "%100>...>${2:gs/%/%%}%<< (%~)"
+}
+
+add-zsh-hook precmd  _set_terminal_title
+add-zsh-hook preexec _set_terminal_title_cmd
+
+# https://github.com/ohmyzsh/ohmyzsh/blob/master/lib/completion.zsh
+# expand-or-complete-with-dots() {
+#   local dots='%F{red}…%f'
+#   printf '\e[?7l%s\e[?7h' "${(%)dots}"
+#   zle expand-or-complete
+#   zle redisplay
+# }
+# zle -N expand-or-complete-with-dots
+# bindkey -M emacs '^I' expand-or-complete-with-dots
+# bindkey -M viins '^I' expand-or-complete-with-dots
+# bindkey -M vicmd '^I' expand-or-complete-with-dots
+
+# Finally, any host-specific configuration that doesn't belong in my version controlled file.
+source ~/.zshrc.local 2> /dev/null || true
