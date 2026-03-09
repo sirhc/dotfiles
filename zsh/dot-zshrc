@@ -175,12 +175,6 @@ if (( $+commands[wd.sh] )); then  # {{{
 fi
 # }}}
 
-(( $+commands[direnv] ))  && eval "$( direnv hook zsh )"  # https://direnv.net/
-(( $+commands[mcfly] ))   && eval "$( mcfly init zsh )"   # https://github.com/cantino/mcfly
-(( $+commands[navi] ))    && eval "$( navi widget zsh )"  # https://github.com/denisidoro/navi
-(( $+commands[thefuck] )) && eval "$( thefuck --alias )"  # https://github.com/nvbn/thefuck
-(( $+commands[zoxide] ))  && eval "$( zoxide init zsh )"  # https://github.com/ajeetdsouza/zoxide
-
 # (( $+commands[intelli-shell] ))  && eval "$( intelli-shell init zsh )"  # https://lasantosr.github.io/intelli-shell/index.html
 
 # Lazy load the *env commands. I don't use them much, so save the shell startup time. At the moment, I don't even use
@@ -618,6 +612,12 @@ for __file in ~/.zshrc.d/lib/*.zsh(#qN) ~/.zshrc.d/plugins/*/*.plugin.zsh(#qN); 
   source $__file
 done
 unset __file
+
+(( $+commands[direnv] ))  && eval "$( direnv hook zsh )"  # https://direnv.net/
+(( $+commands[mcfly] ))   && eval "$( mcfly init zsh )"   # https://github.com/cantino/mcfly
+(( $+commands[navi] ))    && eval "$( navi widget zsh )"  # https://github.com/denisidoro/navi
+(( $+commands[thefuck] )) && eval "$( thefuck --alias )"  # https://github.com/nvbn/thefuck
+(( $+commands[zoxide] ))  && eval "$( zoxide init zsh )"  # https://github.com/ajeetdsouza/zoxide
 
 # Settings following the loading of plugins, so they can override plugin defaults.
 zstyle ':completion:*' accept-exact-dirs true
