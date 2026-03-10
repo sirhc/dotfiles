@@ -201,7 +201,6 @@ alias endash='print -- "–"'
 alias headers='curl -D - -o /dev/null'
 alias irssi='screen -DRS irc command irssi'
 alias la='ls -la'
-alias lh='eza --long --icons --hyperlink --group --header'
 alias ll='ls -l'
 alias maze='perl -e "print qw(╱ ╲)[rand 2] while 1"'
 alias shrug='print -- "¯\\\\_(ツ)_/¯"'
@@ -233,8 +232,13 @@ alias tt='taskwarrior-tui'
 alias wi='vim -c :VimwikiDiaryIndex -c :VimwikiDiaryGenerateLinks -c :VimwikiMakeDiaryNote'
 alias ww='vim -c :VimwikiIndex'
 
+if (( $+commands[eza] )); then
+  alias lh='eza --long --icons --hyperlink --git --git-repos --group --header'
+  alias ll='eza --long --icons --git --git-repos --group'
+  alias ls='eza --git --icons'
+fi
+
 (( $+commands[assume] ))    && alias assume='source assume'  # https://docs.commonfate.io/granted-cli/shell-alias/
-(( $+commands[eza] ))       && alias ls='eza --git'
 (( $+commands[moar] ))      && alias more='moar'
 (( $+commands[kubecolor] )) && alias kubectl='kubecolor'
 (( $+commands[vimx] ))      && alias vim='vimx'
