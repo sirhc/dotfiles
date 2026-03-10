@@ -234,7 +234,7 @@ alias ww='vim -c :VimwikiIndex'
 
 if (( $+commands[eza] )); then
   alias lh='eza --long --icons --hyperlink --git --git-repos --group --header'
-  alias ll='eza --long --icons --git --git-repos --group'
+  alias ll='eza --long --icons --git --group'
   alias ls='eza --git --icons'
 fi
 
