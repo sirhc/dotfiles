@@ -50,6 +50,9 @@ checkout = git clone 'https://github.com/ledger/vim-ledger.git' 'ledger'
 [pack/plugins/start/nerdcommenter]
 checkout = git clone 'https://github.com/preservim/nerdcommenter.git' 'nerdcommenter'
 
+[pack/plugins/start/nerdfont]
+checkout = git clone 'https://github.com/lambdalisue/vim-nerdfont.git' 'nerdfont'
+
 [pack/plugins/start/rainbow_csv]
 checkout = git clone 'https://github.com/mechatroner/rainbow_csv.git' 'rainbow_csv'
 
