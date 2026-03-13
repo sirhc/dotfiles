@@ -1,6 +1,9 @@
-data.location=~/.local/share/task
-hooks.location=~/.config/task/hooks
+data.location  = ~/.local/share/task
+hooks.location = ~/.config/task/hooks
 
-news.version=3.4.2
+news.version = 3.4.2
 
 include solarized-dark-256.theme
+
+alias.rm  = delete
+alias.tui = execute "task-tui"
