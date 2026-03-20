@@ -67,12 +67,8 @@ git_stalebranches =
     ' |
     mlr --j2p sort -f 'Date' then cut -f 'Branch,Commit,Date,Author,Message' -o
 
-# Print the branch information only if there is more than one local branch (assumes a single branch is the default).
-git_localbranches =
-  branches="$( git branch -vv )"
-  if [[ $( wc -l <<< "$branches" ) -gt 1 ]]; then
-    echo "$branches"
-  fi
+# Print local branches. Excludes current branch and presumed default.
+git_localbranches = git branch -vv | awk '$1 != "*" && $1 != "main" && $1 != "master"'
 
 # Print any branches that are tracking branches no longer present on the remote.
 git_missingbranches =
