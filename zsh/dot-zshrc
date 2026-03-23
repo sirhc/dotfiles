@@ -517,7 +517,15 @@ function vimless {
 }
 
 function weather {
-  curl -fsSL "http://wttr.in/${*// /+}"
+  if [[ $# -eq 0 ]]; then
+    curl -fsSL https://wttr.in/92078?u
+  else
+    curl -fsSL "https://wttr.in/${*// /+}"
+  fi
+}
+
+function moon {
+  curl -fsSL https://wttr.in/moon
 }
 
 function year {
