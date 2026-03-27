@@ -88,7 +88,7 @@ nnoremap <silent> <Up>      :bprev<CR>
 nnoremap <silent> <Down>    :bnext<CR>
 nnoremap <silent> <Left>    :cprev<CR>
 nnoremap <silent> <Right>   :cnext<CR>
-nnoremap <silent> <Space>   <PageDown>
+" nnoremap <silent> <Space>   <PageDown>
 
 " Quick window navigation using Ctrl+<Arrow>.
 nnoremap <silent> <C-Up>    :wincmd k<CR>
@@ -123,8 +123,34 @@ cnoremap sudow w !sudo tee % >/dev/null
 " nmap     <Leader>U a<C-U><Esc>
 
 " https://github.com/DanBradbury/copilot-chat.vim
-nnoremap <Leader>CC :CopilotChatOpen<CR>
-vmap <Leader>a <Plug>CopilotChatAddSelection
+" nnoremap <Leader>CC :CopilotChatOpen<CR>
+" vmap <Leader>a <Plug>CopilotChatAddSelection
+
+nnoremap <Space> :
+
+if has('linux')
+  nnoremap <Leader>y "+y
+  nnoremap <Leader>Y "+Y
+  nnoremap <Leader>p "+p
+  nnoremap <Leader>P "+P
+
+  vnoremap <Leader>y "+y
+  vnoremap <Leader>Y "+Y
+  vnoremap <Leader>p "+p
+  vnoremap <Leader>P "+P
+endif
+
+if has('mac')
+  nnoremap <Leader>y "*y
+  nnoremap <Leader>Y "*Y
+  nnoremap <Leader>p "*p
+  nnoremap <Leader>P "*P
+
+  vnoremap <Leader>y "*y
+  vnoremap <Leader>Y "*Y
+  vnoremap <Leader>p "*p
+  vnoremap <Leader>P "*P
+endif
 
 " Handy abbreviations.
 iabbrev fiancee fiancée
@@ -166,7 +192,7 @@ augroup ReadFile
 
   if executable('pdftotext')
     autocmd BufReadPre  *.pdf setlocal ro
-    autocmd BufReadPost *.pdf silent execute '%!pdftotext -layout -nopgbrk' shellescape(expand('%')) '-'
+    autocmd BufReadPost *.pdf silent execute '%!pdftotext -layout -nopgbrk -q' shellescape(expand('%')) '-'
   endif
 
   if executable('rpm')
