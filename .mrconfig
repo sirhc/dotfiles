@@ -14,5 +14,5 @@ checkout = git clone 'https://github.com/Aloxaf/fzf-tab.git' '03-fzf-tab'
 [zsh/dot-zshrc.d/plugins/04-zsh-autosuggestions]
 checkout = git clone 'https://github.com/zsh-users/zsh-autosuggestions.git' '04-zsh-autosuggestions'
 
-[zsh/dot-zshrc.d/plugins/05-fast-syntax-highlighting]
-checkout = git clone 'https://github.com/zdharma-continuum/fast-syntax-highlighting.git' '05-fast-syntax-highlighting'
+# [zsh/dot-zshrc.d/plugins/05-fast-syntax-highlighting]
+# checkout = git clone 'https://github.com/zdharma-continuum/fast-syntax-highlighting.git' '05-fast-syntax-highlighting'

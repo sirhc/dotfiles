@@ -716,5 +716,9 @@ add-zsh-hook preexec _set_terminal_title_cmd
 # bindkey -M viins '^I' expand-or-complete-with-dots
 # bindkey -M vicmd '^I' expand-or-complete-with-dots
 
+if (( $+commands[zsh-patina] )); then
+  eval "$( zsh-patina activate )"
+fi
+
 # Finally, any host-specific configuration that doesn't belong in my version controlled file.
 source ~/.zshrc.local 2> /dev/null || true
