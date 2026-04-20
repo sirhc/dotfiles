@@ -233,9 +233,9 @@ alias wi='vim -c :VimwikiDiaryIndex -c :VimwikiDiaryGenerateLinks -c :VimwikiMak
 alias ww='vim -c :VimwikiIndex'
 
 if (( $+commands[eza] )); then
-  alias lh='eza --long --icons --hyperlink --git --git-repos --group --header'
-  alias ll='eza --long --icons --git --group'
-  alias ls='eza --git --icons'
+  alias lh='eza --long --icons=auto --hyperlink --git --git-repos --group --header'
+  alias ll='eza --long --icons=auto --git --group'
+  alias ls='eza --git --icons=auto'
 fi
 
 (( $+commands[assume] ))    && alias assume='source assume'  # https://docs.commonfate.io/granted-cli/shell-alias/
