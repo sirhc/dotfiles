@@ -281,7 +281,7 @@ packadd hlyank
 packadd nohlsearch
 
 let g:hlyank_duration = 500
-let g:hlyank_invisual = v:true
+let g:hlput_enable    = v:true
 
 " Load a local configuration, if it exists. This allows for custom
 " configuration per-host (e.g., for VimWiki).
