@@ -191,8 +191,8 @@ augroup ReadFile
   endif
 
   if executable('pdftotext')
-    autocmd BufReadPre  *.pdf setlocal ro
-    autocmd BufReadPost *.pdf silent execute '%!pdftotext -layout -nopgbrk -q' shellescape(expand('%')) '-'
+    autocmd BufReadPre  *.pdf,*.PDF setlocal ro
+    autocmd BufReadPost *.pdf,*.PDF silent execute '%!pdftotext -layout -nopgbrk -q' shellescape(expand('%')) '-'
   endif
 
   if executable('rpm')
