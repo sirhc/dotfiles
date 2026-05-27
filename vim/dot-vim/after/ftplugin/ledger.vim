@@ -4,69 +4,99 @@ setlocal tabstop=4
 
 let g:ledger_extra_options = '--strict ordereddates payees uniqueleafnames'
 
+" ==============================================================================
+" Function:    LedgerEvaluateExpression
+" Description: Evaluates an inline math expression on the current line,
+"              replacing it with the calculated total.
+"
+" Usage:       1. Set the split amount to an algebraic expression. For example:
+"                 * expenses:foo  46.14 * 1.0775  ; apply a 7.75% sales tax
+"                 * expenses:bar  1.14 + (15.50 / 2)
+"              2. Place the cursor anywhere on that line.
+"              3. Trigger the macro (default: <Leader>e).
+"
+" Behavior:    - Strips thousands-separator commas during the calculation phase.
+"              - Outputs the result rounded to two decimal places (e.g., 1077.50).
+"              - Preserves account names, spacing, and comments.
+"              - Reports errors if the line fails to parse or if the
+"                expression evaluation encounters an error (like division by
+"                zero).
+" ==============================================================================
+
 function! LedgerEvaluateExpression()
 python3 << EOF
 import vim
 import re
 
-buf = vim.current.buffer
-row, col = vim.current.window.cursor
-line = buf[row - 1]
+def evaluate_expression():
+  row = vim.current.window.cursor[0]  # note, cursor position is 1-indexed
+  pattern = re.compile(r'^(.*?)(\d[\d\s,.()*/+-]+?)(\s+;.*)?$')
+  match = pattern.match(vim.current.buffer[row - 1])
 
-# Match: 1: prefix, 2: math expression, 3: suffix/comment.
-# The expression matches digits, commas, dots, operators (+, -, *, /), and parentheses; no white space allowed in the expression.
-pattern = re.compile(r"^(.*?)(\d[\d,.()/*+-]+)(.*)$")
-match = pattern.match(line)
-print(match.group(2))
+  if not match:
+    print(f'Error: Failed to parse line: "{vim.current.buffer[row - 1]}".')
+    return
 
-if match:
-  prefix = match.group(1)
-  expr = match.group(2).replace(',', '')  # remove commas for evaluation
-  suffix = match.group(3)
-      
   try:
-    # Evaluate the math string and round to 2 decimals.
-    result = round(float(eval(expr)), 2)
-            
-    # Reconstruct the line.
-    buf[row - 1] = f"{prefix}{result:,.2f}{suffix}"
+    vim.current.buffer[row - 1] = f'{match.group(1)}{round(float(eval(match.group(2).replace(',', ''))), 2):.2f}{match.group(3) if match.group(3) else ''}'
   except Exception as e:
-    print(e)
+    print(f'Error: "{match.group(2)}": {e}')
+
+evaluate_expression()
 EOF
 endfunction
+
+" ==============================================================================
+" Function:    LedgerMergeNextLine
+" Description: Merges the amount from the line directly below into the current
+"              line, summing their values and deleting the second line.
+"
+" Usage:       1. Place the cursor on the primary split (e.g., an expense).
+"              2. Trigger the macro (default: <Leader>m).
+"              3. The split below will have its amount added to the current
+"                 split, and the split below will be deleted.
+"
+" Behavior:    - Preserves the spacing, layout, and comments of the split.
+"              - Discards the account and comments of the merged split.
+"              - Aborts safely without changes if:
+"                * There is no split below the cursor.
+"                * Either split has an invalid amount.
+" ==============================================================================
 
 function! LedgerMergeNextLine()
 python3 << EOF
 import vim
 import re
 
-# Get the current buffer and cursor position (1-indexed).
-buf = vim.current.buffer
-row, col = vim.current.window.cursor
+def merge_lines():
+  row = vim.current.window.cursor[0]  # note, cursor position is 1-indexed
 
-# Ensure there is a line below to merge.
-if row < len(buf):
-  line1 = buf[row - 1]
-  line2 = buf[row]
+  if row == len(vim.current.buffer):
+    print('Error: No line below to merge.')
+    return
 
-  # Pattern captures: 1: account/spacing, 2: sign/amount, 3: trailing comment.
-  pattern = re.compile(r"^(.*?)(\-?\d+\.\d+)(.*)$")
-  m1 = pattern.match(line1)
-  m2 = pattern.match(line2)
+  if not re.match(r'^\s{2,}\w', vim.current.buffer[row]):
+    print('Error: No split below to merge.')
+    return
 
-  if m1 and m2:
-    # Extract and sum the amounts
-    amt1 = float(m1.group(2))
-    amt2 = float(m2.group(2))
-    total = round(amt1 + amt2, 2)
+  pattern = re.compile(r'^(.*?)(-?\d+\.\d+)(.*)$')  # capture (1) account/spacing/sign, (2) amount, (3) any trailing comment
+  split1 = pattern.match(vim.current.buffer[row - 1])
+  split2 = pattern.match(vim.current.buffer[row])
 
-    # Reconstruct line 1 using its original text and comment.
-    # The dollar sign is preserved inside group 1 if it preceded the digits.
-    new_line = f"{m1.group(1)}{total:.2f}{m1.group(3)}"
+  if not split1:
+    print(f'Error: Failed to parse line: "{vim.current.buffer[row - 1]}".')
+    return
 
-    # Update the buffer: replace line 1, delete line 2.
-    buf[row - 1] = new_line
-    del buf[row]
+  if not split2:
+    print(f'Error: Failed to parse line: "{vim.current.buffer[row]}".')
+    return
+
+  vim.current.buffer[row - 1] = f"{split1.group(1)}{round(float(split1.group(2)) + float(split2.group(2)), 2):.2f}{split1.group(3)}"
+  del vim.current.buffer[row]  # removed merged split
+
+merge_lines()
+EOF
+endfunction
 EOF
 endfunction
 
