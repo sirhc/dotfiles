@@ -1,3 +1,4 @@
+setlocal scrolloff=10
 setlocal shiftwidth=4
 setlocal tabstop=4
 
