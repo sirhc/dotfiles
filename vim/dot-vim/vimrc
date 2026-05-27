@@ -272,6 +272,7 @@ let g:taskwiki_disable_concealcursor = 1
 
 let g:copilot_filetypes = {
   \ 'gitcommit': v:true,
+  \ 'ledger': v:false,
   \ 'markdown': v:true,
   \ 'vimwiki': v:false,
   \ 'yaml': v:true,
