@@ -97,11 +97,90 @@ def merge_lines():
 merge_lines()
 EOF
 endfunction
+
+" ==============================================================================
+" Function:    LedgerDistributeProportional
+" Description: Distributes a target value (e.g., sales tax or a discount)
+"              proportionally across a set of splits based on their relative
+"              weights.
+"
+" Usage:       1. Visually select a range of lines in a ledger transaction.
+"              2. The LAST line of the selection is treated as the target amount.
+"              3. The preceding lines are treated as the base splits.
+"              4. Trigger the macro (default: <Leader>d).
+"
+" Behavior:    - Distributes the target amount proportionally.
+"              - Automatically handles rounding remainders by assigning the
+"                leftover pennies to the split with the largest absolute value.
+"              - Deletes the original target split upon successful distribution.
+"              - Aborts safely with an error message if:
+"                * Fewer than two lines are selected.
+"                * Any selected line fails to parse.
+"                * The sum of the base splits equals zero.
+" ==============================================================================
+
+function! LedgerDistributeProportional() range
+python3 << EOF
+import vim
+import re
+
+def run_distribution():
+  start_line = int(vim.eval("a:firstline"))
+  end_line = int(vim.eval("a:lastline"))
+
+  if end_line - start_line < 1:
+    print("Error: You must select at least two lines.")
+    return
+
+  pattern = re.compile(r"^(.*?)(\-?\d[\d,]*(?:\.\d+)?)(.*)$")
+  splits = []
+
+  for i in range(start_line - 1, end_line):
+    m = pattern.match(vim.current.buffer[i])
+    if not m:
+      print(f'Error: Failed to parse line: "{vim.current.buffer[i]}".')
+      return
+
+    prefix, amount, suffix = m.groups()
+    splits.append({'prefix': prefix, 'amount': float(amount.replace(',', '')), 'suffix': suffix})
+
+  target = splits[-1]   # the last split, to be distributed
+  splits = splits[:-1]  # the splits to receive the distribution
+
+  total = sum(split['amount'] for split in splits)
+  if total == 0:
+    # This can happen if I do something dumb like,
+    #   expenses:foo   $100.00
+    #   expenses:bar  $-100.00
+    #   expenses:baz    $50.00
+    print('Error: Sum of splits cannot be zero.')
+    return
+
+  allocated_total = 0
+  for split in splits:
+    split['addition'] = round(target['amount'] * (split['amount'] / total), 2)
+    allocated_total += split['addition']
+
+  remainder = round(target['amount'] - allocated_total, 2)
+  if remainder != 0:
+    largest_split = max(splits, key=lambda x: abs(x['amount']))
+    largest_split['addition'] = round(largest_split['addition'] + remainder, 2)
+
+  for i, split in enumerate(splits):
+    vim.current.buffer[start_line - 1 + i] = f"{split['prefix']}{(split['amount'] + split['addition']):,.2f}{split['suffix']}"
+
+  # Remove the target line, which is now fully distributed.
+  del vim.current.buffer[end_line - 1]
+
+run_distribution()
 EOF
 endfunction
 
+inoremap <silent> <buffer> <Tab> <C-r>=ledger#autocomplete_and_align()<CR>
+vnoremap <silent> <buffer> <Tab> :LedgerAlign<CR>
+
 nnoremap <silent> <buffer> <Leader>s :call ledger#transaction_state_toggle(line('.'), ' *?!')<CR>
+
 nnoremap <silent> <buffer> <Leader>e :call LedgerEvaluateExpression()<CR>
 nnoremap <silent> <buffer> <Leader>m :call LedgerMergeNextLine()<CR>
-
-" inoremap <silent> <buffer> <Tab> <C-r>=ledger#autocomplete_and_align()<CR>
+vnoremap <silent> <buffer> <Leader>d :call LedgerDistributeProportional()<CR>
