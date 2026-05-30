@@ -2,7 +2,18 @@ setlocal scrolloff=10
 setlocal shiftwidth=4
 setlocal tabstop=4
 
+let g:ledger_bin = 'hledger'
+let g:ledger_is_hledger = v:true
 let g:ledger_extra_options = '--strict ordereddates payees uniqueleafnames'
+let g:ledger_fuzzy_account_completion = 1
+let g:ledger_detailed_first = 1
+let g:ledger_accounts_spell = 1
+let g:ledger_default_commodity = '$'
+let g:ledger_commodity_before = 1
+let g:ledger_commodity_sep = ''
+let g:ledger_commodity_spell = 1
+let g:ledger_fold_blanks = 1
+let g:ledger_date_format = '%Y-%m-%d'
 
 " ==============================================================================
 " Function:    LedgerEvaluateExpression
