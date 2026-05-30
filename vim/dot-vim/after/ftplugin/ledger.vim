@@ -16,6 +16,45 @@ let g:ledger_fold_blanks = 1
 let g:ledger_date_format = '%Y-%m-%d'
 
 " ==============================================================================
+" Function:    LedgerYankTransaction
+" Description: Overrides the standard 'Y' (yank line) behavior inside ledger
+"              files to yank the entire multi-line transaction block at the
+"              cursor.
+"
+" Usage:       Place the cursor anywhere inside a transaction (on the date line,
+"              an expense split, or a comment) and press 'Y'.
+"
+" Behavior:    - Locates the transaction header by looking backward for an
+"                unindented line starting with a digit (i.e., a date).
+"              - Identifies the end of the transaction by looking forward to
+"                the next header block.
+"              - Trims trailing empty buffer lines.
+" ==============================================================================
+
+function! LedgerYankTransaction()
+	let l:start = search('^\d', 'bcnW')
+  if l:start == 0
+    echo 'No transaction.'
+    return
+  endif
+
+  let l:end = search('^\d', 'nW')
+  if l:end == 0
+    " Hit the end of the file without finding another transaction header.
+    let l:end = line('$')
+  else
+    let l:end = l:end - 1
+  endif
+
+  " Trim trailing blank lines within the block boundary.
+  while getline(l:end) =~ '^\s*$'
+    let l:end -= 1
+  endwhile
+
+  execute l:start . ',' . l:end . 'yank'
+endfunction
+
+" ==============================================================================
 " Function:    LedgerEvaluateExpression
 " Description: Evaluates an inline math expression on the current line,
 "              replacing it with the calculated total.
@@ -186,6 +225,8 @@ def run_distribution():
 run_distribution()
 EOF
 endfunction
+
+nnoremap <silent> <buffer> Y :call LedgerYankTransaction()<CR>
 
 inoremap <silent> <buffer> <Tab> <C-r>=ledger#autocomplete_and_align()<CR>
 vnoremap <silent> <buffer> <Tab> :LedgerAlign<CR>
