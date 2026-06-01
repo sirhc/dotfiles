@@ -88,7 +88,7 @@ nnoremap <silent> <Up>      :bprev<CR>
 nnoremap <silent> <Down>    :bnext<CR>
 nnoremap <silent> <Left>    :cprev<CR>
 nnoremap <silent> <Right>   :cnext<CR>
-" nnoremap <silent> <Space>   <PageDown>
+nnoremap <silent> <Space>   <PageDown>
 
 " Quick window navigation using Ctrl+<Arrow>.
 nnoremap <silent> <C-Up>    :wincmd k<CR>
@@ -125,8 +125,6 @@ cnoremap sudow w !sudo tee % >/dev/null
 " https://github.com/DanBradbury/copilot-chat.vim
 " nnoremap <Leader>CC :CopilotChatOpen<CR>
 " vmap <Leader>a <Plug>CopilotChatAddSelection
-
-nnoremap <Space> :
 
 if has('linux')
   nnoremap <Leader>y "+y
