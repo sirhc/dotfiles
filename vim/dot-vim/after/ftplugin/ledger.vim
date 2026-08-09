@@ -88,7 +88,7 @@ def evaluate_expression():
     return
 
   try:
-    vim.current.buffer[row - 1] = f'{match.group(1)}{round(float(eval(match.group(2).replace(',', ''))), 2):.2f}{match.group(3) if match.group(3) else ''}'
+    vim.current.buffer[row - 1] = f'{match.group(1)}{round(float(eval(match.group(2).replace(',', ''))), 2):,.2f}{match.group(3) if match.group(3) else ''}'
   except Exception as e:
     print(f'Error: "{match.group(2)}": {e}')
 
