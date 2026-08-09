@@ -129,7 +129,7 @@ def merge_lines():
     print('Error: No split below to merge.')
     return
 
-  pattern = re.compile(r'^(.*?)(-?\d+\.\d+)(.*)$')  # capture (1) account/spacing/sign, (2) amount, (3) any trailing comment
+  pattern = re.compile(r'^(.*?)(-?\d[\d,]*\.\d+)(.*)$')  # capture (1) account/spacing/sign, (2) amount, (3) any trailing comment
   split1 = pattern.match(vim.current.buffer[row - 1])
   split2 = pattern.match(vim.current.buffer[row])
 
@@ -141,7 +141,7 @@ def merge_lines():
     print(f'Error: Failed to parse line: "{vim.current.buffer[row]}".')
     return
 
-  vim.current.buffer[row - 1] = f"{split1.group(1)}{round(float(split1.group(2)) + float(split2.group(2)), 2):.2f}{split1.group(3)}"
+  vim.current.buffer[row - 1] = f"{split1.group(1)}{round(float(split1.group(2).replace(',', '')) + float(split2.group(2).replace(',', '')), 2):,.2f}{split1.group(3)}"
   del vim.current.buffer[row]  # removed merged split
 
 merge_lines()
