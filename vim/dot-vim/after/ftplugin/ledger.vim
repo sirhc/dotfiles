@@ -80,7 +80,7 @@ import re
 
 def evaluate_expression():
   row = vim.current.window.cursor[0]  # note, cursor position is 1-indexed
-  pattern = re.compile(r'^(.*?)(\d[\d\s,.()*/+-]+?)(\s+;.*)?$')
+  pattern = re.compile(r'^(.*?)(-?\d[\d\s,.()*/+-]+?)(\s+;.*)?$')
   match = pattern.match(vim.current.buffer[row - 1])
 
   if not match:
