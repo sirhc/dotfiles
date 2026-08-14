@@ -1,0 +1,7 @@
+# vim: ft=config
+
+theme = Builtin Tango Dark
+# theme = Solarized Dark Higher Contrast
+# theme = Zenbones Dark
+
+mouse-hide-while-typing = true
