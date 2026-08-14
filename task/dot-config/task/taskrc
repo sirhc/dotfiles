@@ -7,3 +7,5 @@ include solarized-dark-256.theme
 
 alias.rm  = delete
 alias.tui = execute "task-tui"
+
+sync.local.server_dir = ~/Documents/Taskwarrior
