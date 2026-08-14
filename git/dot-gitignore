@@ -1,7 +1,10 @@
 *.swp
+.aider.*
 .nobackup
 .pipeline-name
 .prr.toml
 .tmp/
 doc/tags
 tmp/
+
+**/.claude/settings.local.json
