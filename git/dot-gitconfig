@@ -52,6 +52,7 @@
 [core]
   editor = vim -i NONE
   excludesFile = ~/.gitignore
+  hooksPath = ~/.githooks
   pager = delta
 
 [delta]
@@ -99,6 +100,9 @@
 
 [log]
   date = local
+
+[mailmap]
+  file = ~/.mailmap
 
 [merge]
   conflictStyle = zdiff3
