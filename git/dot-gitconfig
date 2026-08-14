@@ -34,10 +34,10 @@
 
   # Delete branches whose remote tracking branches have been deleted.
   gone = ! git gone-branches | xargs -r git branch -d
-
   # No really, even the unmerged ones.
   begone = ! git gone-branches | xargs -r git branch -D
 
+  # set-email = ! grep -oE '[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}' ~/.mailmap | sort -u | fzf | xargs echo git config set user.email
 
 [branch]
   sort = -committerdate
@@ -140,7 +140,7 @@
 
 [user]
   name = Chris Grau
-  email = 113591+sirhc@users.noreply.github.com
+  useConfigOnly = true
 
 # This needs to be last, to override anything above.
 [include]
