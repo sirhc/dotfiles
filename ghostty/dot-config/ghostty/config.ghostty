@@ -5,3 +5,5 @@ theme = Builtin Tango Dark
 # theme = Zenbones Dark
 
 mouse-hide-while-typing = true
+
+shell-integration-features = ssh-env
