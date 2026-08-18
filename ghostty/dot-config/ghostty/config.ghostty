@@ -1,9 +1,5 @@
 # vim: ft=config
 
-theme = Builtin Tango Dark
-# theme = Solarized Dark Higher Contrast
-# theme = Zenbones Dark
-
+config-file = ?config.local.ghostty
 mouse-hide-while-typing = true
-
 shell-integration-features = ssh-env
