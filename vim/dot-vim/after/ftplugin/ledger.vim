@@ -226,6 +226,67 @@ run_distribution()
 EOF
 endfunction
 
+function! LedgerLocListByAccount(account) abort
+  let l:json = system(g:ledger_bin .. ' print --output-format=json --file=- ' .. shellescape('acct:^' . a:account . '$'), getline(1, '$'))
+  let l:txns = json_decode(l:json)
+
+  if empty(l:txns)
+    echohl WarningMsg | echo 'No transactions found for account ' .. a:account .. '.' | echohl None
+    return
+  endif
+
+  let l:loclist = []
+  let l:bufnr = bufnr('%')
+
+  for l:txn in l:txns
+    let l:tstatus = ' '
+    if l:txn.tstatus == 'Cleared'
+      let l:tstatus = '*'
+    elseif l:txn.tstatus == 'Pending'
+      let l:tstatus = '!'
+    endif
+
+    let l:amount = '$0.00'
+    for l:posting in l:txn.tpostings
+      if l:posting.paccount ==# a:account
+        let l:amount = printf('%s%.2f', l:posting.pamount[0].acommodity, l:posting.pamount[0].aquantity.floatingPoint)
+        break
+      endif
+    endfor
+
+    call add(l:loclist, {
+      \ 'bufnr': l:bufnr,
+      \ 'lnum':  l:txn.tsourcepos[0].sourceLine,
+      \ 'text':  printf('%s %s %10s %s', l:txn.tdate, l:tstatus, l:amount, l:txn.tdescription),
+      \ })
+  endfor
+
+  call setloclist(0, reverse(l:loclist), 'r')
+  call setloclist(0, [], 'a', {'title': a:account})
+  lopen
+endfunction
+
+function! LedgerAccountComplete(ArgLead, CmdLine, CursorPos) abort
+  let l:accounts = systemlist(g:ledger_bin .. ' accounts --file=-', getline(1, '$'))
+  if v:shell_error != 0 || empty(l:accounts)
+    return []
+  endif
+
+  " Filter accounts based on what's been typed so far (case-insensitive substring/prefix match).
+  return filter(l:accounts, 'v:val =~? "^" . escape(a:ArgLead, "\\")')
+endfunction
+
+function! LedgerFzfAccounts() abort
+  call fzf#run(fzf#wrap('ledger-accounts', {
+    \ 'source':  systemlist(g:ledger_bin .. ' --file=- accounts', getline(1, '$')),
+    \ 'sink':    function('LedgerLocListByAccount'),
+    \ 'options': ['--prompt', 'Account> ', '+m']
+    \ }))
+endfunction
+
+command! -buffer -nargs=1 -complete=customlist,LedgerAccountComplete LedgerLoc call LedgerLocListByAccount(<q-args>)
+nnoremap <buffer> <leader>ff :call LedgerFzfAccounts()<CR>
+
 nnoremap <silent> <buffer> Y :call LedgerYankTransaction()<CR>
 
 inoremap <silent> <buffer> <Tab> <C-r>=ledger#autocomplete_and_align()<CR>
