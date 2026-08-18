@@ -288,6 +288,8 @@ command! -buffer -nargs=1 -complete=customlist,LedgerAccountComplete LedgerLoc c
 nnoremap <buffer> <leader>ff :call LedgerFzfAccounts()<CR>
 
 nnoremap <silent> <buffer> Y :call LedgerYankTransaction()<CR>
+nmap <silent> <buffer> + <C-a>
+nmap <silent> <buffer> - <C-x>
 
 inoremap <silent> <buffer> <Tab> <C-r>=ledger#autocomplete_and_align()<CR>
 vnoremap <silent> <buffer> <Tab> :LedgerAlign<CR>
