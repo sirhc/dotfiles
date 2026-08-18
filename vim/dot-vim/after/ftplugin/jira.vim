@@ -1,3 +1,5 @@
+setlocal omnifunc=JiraComplete
+
 let s:jira_email_users = '~/.local/share/jira/users.txt'
 let s:jira_email_cache = []
 
@@ -27,5 +29,3 @@ function! JiraComplete(findstart, base)
     return filter(results, 'v:val =~ "^" . a:base')
   endif
 endfunction
-
-setlocal omnifunc=JiraComplete

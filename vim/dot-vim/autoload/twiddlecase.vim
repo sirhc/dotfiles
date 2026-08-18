@@ -5,13 +5,15 @@
 " until you get the case you want.
 
 function! twiddlecase#TwiddleCase(str)
-    if a:str ==# toupper(a:str)
-        let l:result = tolower(a:str)
-    elseif a:str ==# tolower(a:str)
-        let l:result = substitute(a:str,'\(\<\w\+\>\)', '\u\1', 'g')
-    else
-        let l:result = toupper(a:str)
-    endif
+  if a:str ==# toupper(a:str)
+    let l:result = tolower(a:str)
+  elseif a:str ==# tolower(a:str)
+    let l:result = substitute(a:str,'\(\<\w\+\>\)', '\u\1', 'g')
+  else
+    let l:result = toupper(a:str)
+  endif
 
-    return l:result
+  return l:result
 endfunction
+
+vnoremap ~ y:call setreg('', twiddlecase#TwiddleCase(@"), getregtype(''))<CR>gv""Pgv

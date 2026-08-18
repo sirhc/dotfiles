@@ -112,19 +112,12 @@ nnoremap <Leader>g :buffers<CR>:buffer<Space>
 nnoremap <silent> <Leader>gb :call fzf#vim#buffers()<CR>
 nnoremap <silent> <Leader>gf :if empty(FugitiveGitDir()) <Bar> call fzf#vim#files(getcwd()) <Bar> else <Bar> call fzf#vim#gitfiles('') <Bar> endif <CR>
 
-" http://vim.wikia.com/wiki/Switching_case_of_characters
-vnoremap ~ y:call setreg('', twiddlecase#TwiddleCase(@"), getregtype(''))<CR>gv""Pgv
-
 cnoremap sudow w !sudo tee % >/dev/null
 
 " Insert a UUID at the current position.
 " inoremap <C-U>     <C-R>=trim(system('uuidgen \| tr "[:upper:]" "[:lower:]"'))<CR>
 " nmap     <Leader>u i<C-U><Esc>
 " nmap     <Leader>U a<C-U><Esc>
-
-" https://github.com/DanBradbury/copilot-chat.vim
-" nnoremap <Leader>CC :CopilotChatOpen<CR>
-" vmap <Leader>a <Plug>CopilotChatAddSelection
 
 if has('linux')
   nnoremap <Leader>y "+y
@@ -218,8 +211,6 @@ let g:netrw_banner       = 1    " show the netrw banner
 let g:netrw_liststyle    = 3    " tree style listing
 let g:netrw_sizestyle    = 'H'  " human-readable (1024 base)
 let g:netrw_winsize      = 20   " 20% window size
-
-" https://github.com/vim-airline/vim-airline
 
 if !exists('g:airline_symbols')
   let g:airline_symbols = {}

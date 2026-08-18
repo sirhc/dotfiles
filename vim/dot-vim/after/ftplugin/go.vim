@@ -1,4 +1,3 @@
-setlocal equalprg=gofmt
 setlocal formatprg=gofmt
 setlocal keywordprg=godoc
 

@@ -1,8 +1,10 @@
 [DEFAULT]
 
 lastUpdated =
-  echo "  Last updated : $( git log -1 --format='%ar' )"
-  echo "  Last commit  : $( git log -1 --format='%cN %s' )"
+  echo "  Last updated: $( git log -1 --format='%ar' )"
+  echo "  Last commit:  $( git log -1 --format='%cN %s' )"
+
+include = cat .mrconfig.local 2>/dev/null || :
 
 # Color Schemes
 

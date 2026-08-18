@@ -1,4 +1,4 @@
-setlocal equalprg=Rtidy
+setlocal formatprg=Rtidy
 setlocal iskeyword+=:
 setlocal keywordprg=Rhelp
 
