@@ -146,6 +146,8 @@ fi
 
 if (( $+commands[hledger] )); then  # {{{
   alias hl='hledger'
+  alias hla='hledger add'
+  alias hlc='hledger check'
 fi
 # }}}
 
