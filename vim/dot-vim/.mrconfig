@@ -43,6 +43,9 @@ checkout = git clone 'https://github.com/junegunn/fzf.vim.git' 'fzf'
 [pack/plugins/start/ledger]
 checkout = git clone 'https://github.com/ledger/vim-ledger.git' 'ledger'
 
+[pack/plugins/start/markdown]
+checkout = git clone 'https://github.com/preservim/vim-markdown.git' 'markdown'
+
 [pack/plugins/start/nerdcommenter]
 checkout = git clone 'https://github.com/preservim/nerdcommenter.git' 'nerdcommenter'
 
