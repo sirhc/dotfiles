@@ -203,23 +203,21 @@ augroup QuickFix
   autocmd QuickFixCmdPost    l* lwindow
 augroup END
 
-let g:netrw_altfile      = 1    " CTRL-^ won't return to netrw
-let g:netrw_altv         = 1    " right splitting
-let g:netrw_banner       = 1    " show the netrw banner
-" let g:netrw_browse_split = 4    " act like "P"
-" let g:netrw_list_hide    = netrw_gitignore#Hide() .. ',^\..*'
-let g:netrw_liststyle    = 3    " tree style listing
-let g:netrw_sizestyle    = 'H'  " human-readable (1024 base)
-let g:netrw_winsize      = 20   " 20% window size
+let g:netrw_altfile   = 1    " CTRL-^ won't return to netrw
+let g:netrw_altv      = 1    " right splitting
+let g:netrw_banner    = 1    " show the netrw banner
+let g:netrw_liststyle = 3    " tree style listing
+let g:netrw_sizestyle = 'H'  " human-readable (1024 base)
+let g:netrw_winsize   = 20   " 20% window size
 
 if !exists('g:airline_symbols')
   let g:airline_symbols = {}
 endif
 
-let g:airline_powerline_fonts                 = 1
+" vint: next-line -ProhibitUnnecessaryDoubleQuote
 let g:airline#extensions#tabline#enabled      = 1
 let g:airline#extensions#tabline#show_buffers = 0
-" vint: next-line -ProhibitUnnecessaryDoubleQuote
+let g:airline_powerline_fonts                 = 1
 let g:airline_symbols.space                   = "\ua0"
 let g:airline_theme                           = 'codedark'
 
@@ -258,14 +256,6 @@ let g:taskwiki_data_location = '~/.local/share/task/'
 let g:taskwiki_dont_preserve_folds = 1
 let g:taskwiki_dont_fold = 1
 let g:taskwiki_disable_concealcursor = 1
-
-let g:copilot_filetypes = {
-  \ 'gitcommit': v:true,
-  \ 'ledger': v:false,
-  \ 'markdown': v:true,
-  \ 'vimwiki': v:false,
-  \ 'yaml': v:true,
-  \ }
 
 packadd hlyank
 packadd nohlsearch
