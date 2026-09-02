@@ -8,6 +8,13 @@ set ignore-case = smart-case
 set mailmap = true
 set editor-line-number = true
 
+# Color overrides for Tango Soft Dark: default cursor/title-bar use warm
+# off-white text with too little contrast against green/blue backgrounds.
+color cursor            color0  color2  bold
+color cursor-blur       color7  color8
+color title-focus       color0  color4  bold
+color title-blur        color0  color4
+
 bind main R !?git revert %(commit)
 bind diff R !?git revert %(commit)
 

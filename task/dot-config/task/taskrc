@@ -1,9 +1,9 @@
+# vim: ft=config
+
 data.location  = ~/.local/share/task
 hooks.location = ~/.config/task/hooks
 
 news.version = 3.5.0
-
-include solarized-dark-256.theme
 
 alias.rm  = delete
 alias.tui = execute "task-tui"
