@@ -4,101 +4,127 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Overview
 
-Personal dotfiles managed with [GNU Stow](https://www.gnu.org/software/stow/). Each top-level directory (e.g., `zsh`, `git`, `bat`) is a stow package. Running `stow` symlinks the package contents into `$HOME`, with the `dot-` prefix convention mapping to a leading dot (e.g., `dot-zshrc` → `~/.zshrc`).
+Chris's personal dotfiles, managed with [chezmoi](https://www.chezmoi.io/). This
+repository *is* the chezmoi source directory (`~/.local/share/chezmoi`), so
+editing a file here edits the chezmoi source state directly; `chezmoi apply`
+deploys it to `$HOME`.
 
-## Common Commands
+> The repo was migrated from GNU Stow to chezmoi in commit `bc2e056`. If you find
+> lingering references to Stow, `just`, or per-tool "packages" anywhere, they're
+> stale — flag them.
+
+## Naming convention
+
+chezmoi's source-state attributes drive the target path:
+
+- `dot_zshrc` → `~/.zshrc`
+- `dot_config/bat/config` → `~/.config/bat/config`
+- `dot_vim/after/ftplugin/ledger.vim` → `~/.vim/after/ftplugin/ledger.vim`
+
+There are currently **no** templates, `run_` scripts, `private_`, or `encrypted_`
+files — every source file is a plain copy. Keep it that way unless there's a real
+reason not to.
+
+## Common commands
 
 ```sh
-just stow        # Stow all packages to $HOME
-just unstow      # Remove all stowed symlinks
-
-just update-all          # Update libs, functions, and plugins from upstream
-just update-libs         # Fetch Zsh library files (e.g., ohmyzsh git.zsh)
-just update-functions    # Fetch completion functions from upstream repos
-just update-plugins      # Fetch plugin files from upstream repos
-
-mr checkout      # Clone repos listed in .mrconfig (gitmanaged plugins, powerlevel10k, etc.)
-mr update        # Update all managed repos
+chezmoi diff              # preview what `apply` would change
+chezmoi apply             # deploy source state to $HOME (also clones/updates externals)
+chezmoi apply ~/.zshrc    # deploy a single file
+chezmoi update            # git pull in this repo, then apply
+chezmoi add ~/.foo        # pull an existing dotfile into the source state
+chezmoi cd               # open a shell in this directory
+chezmoi managed          # list every path chezmoi controls
 ```
 
 ## Architecture
 
-### Stow Layout
+### Externals (`.chezmoiexternal.toml`)
 
-Each package mirrors the target directory structure relative to `$HOME`. The `dot-` prefix is stripped and replaced with `.` by Stow's `--dotfiles` flag:
+All third-party content is declared here and materialized by `chezmoi apply` —
+nothing vendored is committed. Two kinds:
 
-- `zsh/dot-zshrc` → `~/.zshrc`
-- `zsh/dot-zshrc.d/` → `~/.zshrc.d/`
-- `zsh/dot-config/zsh-patina/` → `~/.config/zsh-patina/`
+- `type = "git-repo"` — full clones. Vim 8 native packages under
+  `~/.vim/pack/<group>/start/*` (plugins, syntax, colors, themes) and the Zsh
+  plugins `~/.zshrc.d/plugins/{01-zsh-completions,02-zsh-vim-mode,03-fzf-tab,04-zsh-autosuggestions}`
+  plus `~/.zshrc.d/powerlevel10k`.
+- `type = "file"` — single files pulled from upstream: Zsh completion functions
+  (`~/.zshrc.d/functions/_*`), the ohmyzsh `git.zsh` lib, and single-file Zsh
+  plugins (`aws`, `fzf-git`, `git`, `git-extras`, `screen`).
 
-### Zsh Configuration (`zsh/`)
+To add/remove a plugin or completion, edit `.chezmoiexternal.toml` and run
+`chezmoi apply`. There is no longer a Makefile or `just update-*` target.
 
-The main `dot-zshrc` is a monolithic file containing env vars, path setup, aliases, and functions. It sources files from `~/.zshrc.d/` at startup:
+### `.chezmoiignore`
 
-- `lib/*.zsh` — library files (currently `git.zsh` from ohmyzsh)
-- `plugins/*/*.plugin.zsh` — plugins, loaded in alphabetical order by directory name
-- `functions/` — completion functions (fpath), not sourced directly
+Keeps repo-only files (`CLAUDE.md`, `LICENSE`, `**/README.md`, `tmp/**`) in the
+repo but out of `$HOME`.
 
-Plugin loading order is controlled by directory name prefixes: `01-zsh-completions`, `02-zsh-vim-mode`, `03-fzf-tab`, `04-zsh-autosuggestions` are cloned via `.mrconfig` and gitignored. The remaining plugins (`aws`, `fzf-git`, `git`, `git-extras`, `screen`) are single files fetched by `just update-plugins`.
+### Zsh (`dot_zshrc`, `dot_zshrc.d/`)
 
-### Managed vs. Committed Content
+`dot_zshrc` is a single large file: env vars, `path`/`fpath` setup, aliases, and
+functions. Near the end (~line 627) it loops over
+`~/.zshrc.d/lib/*.zsh` then `~/.zshrc.d/plugins/*/*.plugin.zsh` and sources each.
+Plugin load order is alphabetical by directory, hence the `01-`–`04-` prefixes on
+the cloned plugins. `~/.zshrc.d/functions/` is on `fpath` for completions, not
+sourced. `~/.zshrc.local` (gitignored, per-host) is sourced last.
 
-- **Committed directly**: custom completions in `functions/`, config files for other tools
-- **Fetched by `just update-*`**: single-file plugins and completion functions from upstream (committed after fetching)
-- **Cloned via `mr`**: full plugin repos in `zsh/dot-zshrc.d/plugins/01-*` through `04-*` and `powerlevel10k/` — these are gitignored
+Committed directly: the custom completion functions in `dot_zshrc.d/functions/`.
+Everything else under `dot_zshrc.d/` arrives via externals.
 
-### Other Packages
+### `dot_mrconfig` → `~/.mrconfig`
 
-- `git/` — `dot-gitconfig` with aliases, delta pager config, and signing settings
-- `bat/`, `eza/`, `p10k/`, `tig/`, `tmux/`, `task/` — tool-specific configs
-- `bc/` — `.bcrc` for interactive bc sessions
-- `just/` — user-level justfile (`dot-user.justfile`, aliased as `.j`)
-- `vim/` — `dot-vim/` → `~/.vim`, personal Vim runtime configuration (see below)
+This is **not** plugin management (that moved to chezmoi externals). It's a
+[myrepos](https://myrepos.branchable.com/) config of custom `mr` subcommands for
+day-to-day git/`gh` work across many repos (`mr baseline`, `mr stalebranches`,
+`mr localbranches`, default-branch helpers, etc.). It `include`s
+`~/.mrconfig.d/*.conf` for the actual repo list.
 
-## Vim (`vim/dot-vim/`)
+### Git (`dot_gitconfig`, `dot_gitconfig.d/`)
 
-Personal Vim runtime configuration. Contains the vimrc, filetype detection, ftplugin overrides, custom syntax files, and one autoload utility. Plugin binaries are **not** tracked — they live under `vim/dot-vim/pack/`, which is gitignored and managed separately via [myrepos](https://myrepos.branchable.com/).
+`dot_gitconfig` has aliases, delta/pager config, and signing settings, and
+includes `dot_gitconfig.d/catppuccin.gitconfig` (delta Catppuccin Mocha theme).
 
-### Plugin management
+### Other packages
 
-Plugins are declared in `vim/dot-vim/.mrconfig` and installed/updated with:
+`dot_config/` holds configs for bat, eza, ghostty, taskwarrior, tridactyl, and
+zsh-patina. Standalone: `dot_bcrc`, `dot_tigrc`, `dot_tmux.conf`, `dot_p10k.zsh`,
+`dot_jqp.yaml`, `dot_mdlrc`, `dot_perltidyrc`, `dot_perlcriticrc`, `dot_gemrc`.
 
-```
-mr update        # install or pull all plugins
-```
+## Vim (`dot_vim/`)
 
-After adding or updating plugins, regenerate helptags with `make helptags`. Use `make last-updated` to audit stale plugins and `make check-config` to verify `.mrconfig` entries match what's checked out under `pack/`.
+Personal Vim runtime config: vimrc, filetype detection, ftplugin overrides,
+custom syntax files, one autoload utility. Plugins are Vim 8 native packages
+under `~/.vim/pack/`, populated by `.chezmoiexternal.toml` — not tracked here.
 
 ### Structure
 
 | Path | Purpose |
 |------|---------|
-| `vimrc` | Main configuration — settings, key maps, plugin config |
-| `vimrc.local` | Host-specific overrides (gitignored; loaded at end of vimrc) |
-| `filetype.vim` | Custom filetype detection rules |
-| `after/ftplugin/` | Per-filetype settings and functions, loaded after plugins |
-| `autoload/twiddlecase.vim` | Case-cycling helper used by the `~` visual mapping |
-| `syntax/` | Custom syntax files for navi (`.cheat`), prr (`.prr`), and risor (`.risor`) |
-| `pack/` | Vim 8 native packages, gitignored, managed by myrepos |
+| `dot_vim/vimrc` | Main config — settings, key maps, plugin config (kept near each plugin's section) |
+| `dot_vim/filetype.vim` | Custom filetype detection |
+| `dot_vim/after/ftplugin/` | Per-filetype settings/functions, loaded after plugins |
+| `dot_vim/autoload/twiddlecase.vim` | Case-cycling helper for the `~` visual mapping |
+| `dot_vim/syntax/` | Custom syntax for navi (`.cheat`), prr (`.prr`), risor (`.risor`) |
+| `~/.vim/vimrc.local` | Gitignored per-host overrides, sourced at end of vimrc |
 
-### Key conventions
+### Conventions
 
 - **Leader** is `,`
-- **Indentation** defaults to 2 spaces (some ftplugins override, e.g. ledger uses 4)
-- Plugin config lives in `vimrc` near the plugin's section, not in separate files
-- ftplugin files under `after/ftplugin/` are the right place for buffer-local mappings, settings, and functions for a given filetype
-- `vimrc.local` is for per-host tweaks (e.g. adjusting VimWiki diary frequency); it is gitignored
+- Indentation defaults to 2 spaces; some ftplugins override (ledger uses 4)
+- Buffer-local mappings/settings/functions for a filetype go in
+  `dot_vim/after/ftplugin/<ft>.vim`
 
 ### Ledger ftplugin
 
-`after/ftplugin/ledger.vim` contains three Python3-backed functions with buffer-local mappings (require Vim compiled with `+python3`):
+`dot_vim/after/ftplugin/ledger.vim` has Python3-backed helpers (need Vim with
+`+python3`) with buffer-local mappings:
 
 | Mapping | Function | What it does |
 |---------|----------|-------------|
-| `<Leader>e` | `LedgerEvaluateExpression` | Evaluates inline math on the current split line |
-| `<Leader>m` | `LedgerMergeNextLine` | Sums the line below into the current split and deletes it |
-| `<Leader>d` (visual) | `LedgerDistributeProportional` | Proportionally distributes the last selected line's amount across the preceding splits |
+| `<Leader>e` | `LedgerEvaluateExpression` | Evaluate inline math on the current split line |
+| `<Leader>m` | `LedgerMergeNextLine` | Sum the line below into the current split, delete it |
+| `<Leader>d` (visual) | `LedgerDistributeProportional` | Proportionally distribute the last selected line's amount across the preceding splits |
 
-### Copilot
-
-Copilot is enabled by default but explicitly disabled for `ledger` and `vimwiki` filetypes. In VimWiki buffers, `<C-J>` accepts Copilot suggestions (since VimWiki claims `<Tab>` for table navigation).
+It also has account-navigation helpers (`LedgerLocListByAccount`,
+`LedgerFzfAccounts`, `LedgerWatchAccount`).

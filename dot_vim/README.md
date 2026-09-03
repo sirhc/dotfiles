@@ -8,12 +8,17 @@ beneficial to give myself a way of making major changes without the clutter of
 commenting out blocks of code or leaving around files with names like
 `vimrc.test42`.
 
-This directory is self-contained and should work without any changes. Obviously,
-this is my highly opinionated configuration and I don't recommend anyone use it
-as-is.
+It once lived in its own `~/.vim` repository; that history was imported into my
+[dotfiles](https://github.com/sirhc/dotfiles) repo, where it now lives as the
+`dot_vim/` source directory managed by [chezmoi](https://www.chezmoi.io/).
+Running `chezmoi apply` deploys it to `~/.vim`.
+
+This configuration is self-contained and should work without any changes.
+Obviously, it's highly opinionated and I don't recommend anyone use it as-is.
 
 ## Plugins
 
 With the advent of Vim 8 and its native package system, I switched over from
-[Pathogen](https://github.com/tpope/vim-pathogen). For obvious reasons, I don't
-include the plugins I use in this repository.
+[Pathogen](https://github.com/tpope/vim-pathogen). The plugins themselves aren't
+committed here — they're declared as git-repo externals in the dotfiles repo's
+`.chezmoiexternal.toml` and cloned into `~/.vim/pack/` by `chezmoi apply`.

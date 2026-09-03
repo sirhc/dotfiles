@@ -1,28 +1,47 @@
 # Chris's Dot Files
 
-This repository is organized to be used with [GNU Stow](https://www.gnu.org/software/stow/).
+Managed with [chezmoi](https://www.chezmoi.io/). This repository is the chezmoi
+source directory.
 
 ```
-❯ git clone https://github.com/sirhc/dotfiles.git ~/.dotfiles
-❯ cd ~/.dotfiles
-❯ stow -v --dotfiles zsh  # for example; or bc, tig, …
+❯ chezmoi init --apply sirhc
 ```
 
-## Zsh Functions and Plugins
+or, if the repo is already cloned to `~/.local/share/chezmoi`:
 
-There are three classes of [functions](zsh/dot-zshrc.d/functions) and [plugins](zsh/dot-zshrc.d/plugins) I maintain in
-my zsh profile.
+```
+❯ chezmoi diff     # preview changes
+❯ chezmoi apply    # deploy to $HOME
+❯ chezmoi update   # pull latest, then apply
+```
 
-1. Stuff I've written myself.
-2. Individual files copied from elsewhere (e.g., Oh My Zsh).
-3. Full clones of plugins published elsewhere.
+Source files use chezmoi's naming convention: `dot_zshrc` → `~/.zshrc`,
+`dot_config/bat/config` → `~/.config/bat/config`, and so on.
 
-The first class is maintained directly in this repository; the second class is maintained by the `update-functions` and
-`update-plugins` targets in the [Makefile](Makefile); finally, the third class is maintained in an
-[`.mrconfig`](.mrconfig) file.
+## Third-party content
 
-## Completion Functions
+Nothing vendored is committed. All of it is declared in
+[`.chezmoiexternal.toml`](.chezmoiexternal.toml) and materialized by
+`chezmoi apply`:
 
-The completion functions I keep in this repository are those I find in other repositories and just want to copy. For
-packages that include their own completion functions, I use those. Other packages can generate their own completion
-functions, so these can be installed on the system rather than kept here.
+- **git-repo externals** — full clones: Vim 8 native packages under
+  `~/.vim/pack/`, the numbered Zsh plugins under `~/.zshrc.d/plugins/`, and
+  powerlevel10k.
+- **file externals** — single files pulled from upstream: Zsh completion
+  functions (`~/.zshrc.d/functions/_*`), the ohmyzsh `git.zsh` library, and the
+  single-file Zsh plugins (`aws`, `fzf-git`, `git`, `git-extras`, `screen`).
+
+To add or remove a plugin or completion, edit `.chezmoiexternal.toml` and run
+`chezmoi apply`.
+
+## Committed directly
+
+- My own Zsh completion functions in `dot_zshrc.d/functions/`
+- The Zsh config itself (`dot_zshrc`), Vim runtime config (`dot_vim/`), and
+  per-tool configs under `dot_config/` and the repo root
+
+## Repo-only files
+
+`CLAUDE.md`, `LICENSE`, and every `README.md` are listed in
+[`.chezmoiignore`](.chezmoiignore) so they stay in the repo but are never
+deployed to `$HOME`.
