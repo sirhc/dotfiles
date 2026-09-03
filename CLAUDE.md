@@ -53,3 +53,52 @@ Plugin loading order is controlled by directory name prefixes: `01-zsh-completio
 - `bat/`, `eza/`, `p10k/`, `tig/`, `tmux/`, `task/` — tool-specific configs
 - `bc/` — `.bcrc` for interactive bc sessions
 - `just/` — user-level justfile (`dot-user.justfile`, aliased as `.j`)
+- `vim/` — `dot-vim/` → `~/.vim`, personal Vim runtime configuration (see below)
+
+## Vim (`vim/dot-vim/`)
+
+Personal Vim runtime configuration. Contains the vimrc, filetype detection, ftplugin overrides, custom syntax files, and one autoload utility. Plugin binaries are **not** tracked — they live under `vim/dot-vim/pack/`, which is gitignored and managed separately via [myrepos](https://myrepos.branchable.com/).
+
+### Plugin management
+
+Plugins are declared in `vim/dot-vim/.mrconfig` and installed/updated with:
+
+```
+mr update        # install or pull all plugins
+```
+
+After adding or updating plugins, regenerate helptags with `make helptags`. Use `make last-updated` to audit stale plugins and `make check-config` to verify `.mrconfig` entries match what's checked out under `pack/`.
+
+### Structure
+
+| Path | Purpose |
+|------|---------|
+| `vimrc` | Main configuration — settings, key maps, plugin config |
+| `vimrc.local` | Host-specific overrides (gitignored; loaded at end of vimrc) |
+| `filetype.vim` | Custom filetype detection rules |
+| `after/ftplugin/` | Per-filetype settings and functions, loaded after plugins |
+| `autoload/twiddlecase.vim` | Case-cycling helper used by the `~` visual mapping |
+| `syntax/` | Custom syntax files for navi (`.cheat`), prr (`.prr`), and risor (`.risor`) |
+| `pack/` | Vim 8 native packages, gitignored, managed by myrepos |
+
+### Key conventions
+
+- **Leader** is `,`
+- **Indentation** defaults to 2 spaces (some ftplugins override, e.g. ledger uses 4)
+- Plugin config lives in `vimrc` near the plugin's section, not in separate files
+- ftplugin files under `after/ftplugin/` are the right place for buffer-local mappings, settings, and functions for a given filetype
+- `vimrc.local` is for per-host tweaks (e.g. adjusting VimWiki diary frequency); it is gitignored
+
+### Ledger ftplugin
+
+`after/ftplugin/ledger.vim` contains three Python3-backed functions with buffer-local mappings (require Vim compiled with `+python3`):
+
+| Mapping | Function | What it does |
+|---------|----------|-------------|
+| `<Leader>e` | `LedgerEvaluateExpression` | Evaluates inline math on the current split line |
+| `<Leader>m` | `LedgerMergeNextLine` | Sums the line below into the current split and deletes it |
+| `<Leader>d` (visual) | `LedgerDistributeProportional` | Proportionally distributes the last selected line's amount across the preceding splits |
+
+### Copilot
+
+Copilot is enabled by default but explicitly disabled for `ledger` and `vimwiki` filetypes. In VimWiki buffers, `<C-J>` accepts Copilot suggestions (since VimWiki claims `<Tab>` for table navigation).
