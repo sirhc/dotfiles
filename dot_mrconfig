@@ -84,11 +84,3 @@ cd = checkoutdefaultbranch
 db = defaultbranch
 lb = localbranches
 md = mergedefaultbranch
-
-[.dotfiles]
-checkout = git clone 'https://github.com/sirhc/dotfiles.git' '.dotfiles'
-chain    = true
-
-[.vim]
-checkout = git clone 'https://github.com/sirhc/vim-profile.git' '.vim'
-chain    = true
