@@ -295,7 +295,7 @@ nmap <silent> <buffer> - <C-x>
 inoremap <silent> <buffer> <Tab> <C-r>=ledger#autocomplete_and_align()<CR>
 vnoremap <silent> <buffer> <Tab> :LedgerAlign<CR>
 
-nnoremap <silent> <buffer> <C-s> :call ledger#transaction_state_toggle(line('.'), ' *?!')<CR>
+nnoremap <silent> <buffer> <C-s> :call ledger#transaction_state_toggle(line('.'), ' !*')<CR>
 
 vnoremap <silent> <buffer> <Leader>s :sort<CR>
 nnoremap <silent> <buffer> <Leader>e :call LedgerEvaluateExpression()<CR>
