@@ -1,6 +1,5 @@
 # vim: ft=config
 
-config-file = ?config.local.ghostty
 mouse-hide-while-typing = true
 shell-integration-features = ssh-env
-theme = Tango Soft Dark
+theme = Catppuccin Mocha

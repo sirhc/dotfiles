@@ -1,0 +1,21 @@
+# vim: ft=config
+#
+# See tigrc(5).
+
+set editor-line-number   = true
+set ignore-case          = smart-case
+set ignore-space         = some
+set line-graphics        = auto
+set mailmap              = true
+set truncation-delimiter = utf-8
+
+color cursor      color0 color13 bold
+color cursor-blur color7 color8
+color title-focus color0 color4  bold
+color title-blur  color0 color4
+
+bind main R !?git revert %(commit)
+bind diff R !?git revert %(commit)
+
+# https://stackoverflow.com/a/25975171
+bind diff 7 !git diff %(commit)^ %(commit)

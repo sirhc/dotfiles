@@ -10,14 +10,6 @@ lib_dir       := zsh_dir / 'lib'
 
 _default:
 
-# Stow all of the directories to $HOME
-stow:
-  stow --target="$HOME" --verbose=1 --stow --dotfiles *(/)
-
-# Un-stow all of the directories to $HOME
-unstow:
-  stow --target="$HOME" --verbose=1 --delete --dotfiles *(/)
-
 # Update libs, functions, and plugins
 update-all: update-libs update-functions update-plugins
 

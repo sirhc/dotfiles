@@ -55,8 +55,11 @@
   hooksPath = ~/.githooks
   pager = delta
 
+[include]
+  path = .gitconfig.d/catppuccin.gitconfig
+
 [delta]
-  features = arctic-fox
+  features = catppuccin-mocha
   navigate = true # use n and N to move between diff sections
   paging = always
   side-by-side = true
