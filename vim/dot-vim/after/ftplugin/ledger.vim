@@ -286,7 +286,43 @@ function! LedgerFzfAccounts() abort
 endfunction
 
 command! -buffer -nargs=1 -complete=customlist,LedgerAccountComplete LedgerLoc call LedgerLocListByAccount(<q-args>)
-nnoremap <buffer> <leader>ff :call LedgerFzfAccounts()<CR>
+nnoremap <silent> <buffer> <leader>ff :call LedgerFzfAccounts()<CR>
+
+function! LedgerLocListAccount() abort
+  let l:account = matchstr(getline('.'), '^\s\+\zs\S\+\%(\s\S\+\)*\ze') " e.g., '    Expenses:Account Name    $45.00' -> 'Expenses:Account Name'
+
+  if empty(l:account)
+    echohl WarningMsg | echo 'No account found on current line' | echohl None
+    return
+  endif
+
+  call LedgerLocListByAccount(l:account)
+endfunction
+
+nnoremap <silent> <buffer> <Leader>l :call LedgerLocListAccount()<CR>
+
+function! LedgerWatchAccount() abort
+  let l:account = matchstr(getline('.'), '^\s\+\zs\S\+\%(\s\S\+\)*\ze') " e.g., '    Expenses:Account Name    $45.00' -> 'Expenses:Account Name'
+
+  if empty(l:account)
+    echohl WarningMsg | echo 'No account found on current line' | echohl None
+    return
+  endif
+
+  " Start a server instance if one isn't already running. This is used so the
+  " E command in hledger-ui will jump back to the existing Vim buffer.
+  if has('clientserver') && empty(v:servername) && exists('*remote_startserver')
+    silent! call remote_startserver('LEDGER')
+    let l:editor = 'EDITOR="vim --servername ' .. v:servername .. ' --remote"'
+  else
+    let l:editor = ''
+  endif
+
+  " Launch hledger-ui in a vertical terminal split, closing when finished.
+  execute 'vert ter ++close env ' .. l:editor .. ' hledger ui --theme dark --watch -f "' .. expand('%:p') .. '" --register ' .. '^"' .. l:account .. '"$' .. ' --begin "10 days ago"'
+endfunction
+
+nnoremap <silent> <buffer> <Leader>w :call LedgerWatchAccount()<CR>
 
 nnoremap <silent> <buffer> Y :call LedgerYankTransaction()<CR>
 nmap <silent> <buffer> + <C-a>
