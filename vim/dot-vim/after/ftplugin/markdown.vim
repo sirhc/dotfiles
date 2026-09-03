@@ -1,0 +1,11 @@
+setlocal cinwords=
+setlocal complete+=k
+setlocal conceallevel=2
+setlocal expandtab
+setlocal formatoptions+=con
+setlocal keywordprg=dict
+setlocal shiftwidth=4
+setlocal softtabstop=4
+setlocal tabstop=4
+setlocal textwidth=80
+setlocal foldlevel=6

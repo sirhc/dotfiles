@@ -1,0 +1,11 @@
+%*
+*.swp
+*~
+.netrwbook
+.netrwhist
+local/
+pack/
+spell/
+tags
+view/
+vimrc.local

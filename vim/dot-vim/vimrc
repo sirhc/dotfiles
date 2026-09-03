@@ -1,0 +1,276 @@
+scriptencoding utf-8
+
+set autochdir
+set autoindent
+set autoread
+set autowriteall
+set backspace=indent,eol,start
+set breakindent
+set cursorline
+set directory=~/.vim/swapfiles//,~/tmp//,.
+set display=lastline
+set expandtab
+set formatoptions+=n
+set hlsearch
+set ignorecase
+set incsearch
+set laststatus=2   " Always display the statusline in all windows
+set linebreak
+set listchars=eol:$,tab:..,trail:.,extends:>,precedes:<
+set more
+set number
+set pastetoggle=<F2>
+set report=0
+set runtimepath+=~/.local/vim/vimfiles
+set scrolloff=5
+set shiftround
+set shiftwidth=2
+set showtabline=2  " Always display the tabline, even if there is only one tab
+set sidescrolloff=10
+set smartcase
+set smartindent
+set smarttab
+set smoothscroll
+set softtabstop=2
+set spell
+set splitbelow
+set splitright
+set tabstop=2
+set tagcase=followscs
+set timeout timeoutlen=400 ttimeoutlen=400   " keycodes and maps timeout in ~1/3 sec
+set title
+set undodir=~/.vim/undofiles//,~/tmp//,.
+set undofile
+set wildignorecase
+set wildmenu
+set wildmode=list:longest,full
+set wildoptions=pum
+set wrapmargin=10
+
+set nojoinspaces
+set nolist
+set noshowmode  " Hide the default mode text (e.g. -- INSERT -- below the statusline)
+set nostartofline
+
+set t_Co=256
+set t_ut=
+
+let g:mapleader = ','
+
+" Emulate Vim's modeline support using `git config`. For example,
+"
+" > git config --add vim.modeline 'tabstop=4 expandtab'
+
+let s:git_modeline = system('git config --get vim.modeline')
+if strlen(s:git_modeline)
+  execute 'set ' . s:git_modeline
+endif
+
+let g:codedark_italics     = 1
+let g:codedark_modern      = 1
+let g:codedark_transparent = 1
+silent! colorscheme codedark  " https://vimcolorschemes.com/tomasiser/vim-code-dark
+
+filetype plugin indent on
+syntax on
+
+nnoremap <silent> <F3>      :set invnumber<CR>
+nnoremap <silent> <F4>      :set invspell<CR>
+nnoremap <silent> <F5>      :update<CR> :call RunScript()<CR>
+nnoremap <silent> <F6>      :update<CR> :make<CR>
+nnoremap <silent> <F9>      :if exists("g:syntax_on") <Bar> syntax off <Bar> else <Bar> syntax enable <Bar> endif <CR>
+inoremap <silent> <F10>     <C-O>za
+nnoremap <silent> <F10>     za
+onoremap <silent> <F10>     <C-C>za
+vnoremap <silent> <F10>     zf
+nnoremap <silent> <BS>      :nohlsearch<CR>
+nnoremap <silent> <Up>      :bprev<CR>
+nnoremap <silent> <Down>    :bnext<CR>
+nnoremap <silent> <Left>    :cprev<CR>
+nnoremap <silent> <Right>   :cnext<CR>
+nnoremap <silent> <Space>   <PageDown>
+
+" Quick window navigation using Ctrl+<Arrow>.
+nnoremap <silent> <C-Up>    :wincmd k<CR>
+nnoremap <silent> <C-Down>  :wincmd j<CR>
+nnoremap <silent> <C-Left>  :wincmd h<CR>
+nnoremap <silent> <C-Right> :wincmd l<CR>
+
+nnoremap <silent> <Leader>aj :ALENextWrap<CR>
+nnoremap <silent> <Leader>ak :ALEPreviousWrap<CR>
+
+" Always navigate through wrapped lines.
+nnoremap j gj
+nnoremap k gk
+
+" Duplicate the selection directly below.
+vnoremap <Leader>dd y'>p
+
+" List buffers and prompt to switch with a number (g = go to).
+nnoremap <Leader>g :buffers<CR>:buffer<Space>
+
+nnoremap <silent> <Leader>gb :call fzf#vim#buffers()<CR>
+nnoremap <silent> <Leader>gf :if empty(FugitiveGitDir()) <Bar> call fzf#vim#files(getcwd()) <Bar> else <Bar> call fzf#vim#gitfiles('') <Bar> endif <CR>
+
+cnoremap sudow w !sudo tee % >/dev/null
+
+" Insert a UUID at the current position.
+" inoremap <C-U>     <C-R>=trim(system('uuidgen \| tr "[:upper:]" "[:lower:]"'))<CR>
+" nmap     <Leader>u i<C-U><Esc>
+" nmap     <Leader>U a<C-U><Esc>
+
+if has('linux')
+  nnoremap <Leader>y "+y
+  nnoremap <Leader>Y "+Y
+  nnoremap <Leader>p "+p
+  nnoremap <Leader>P "+P
+
+  vnoremap <Leader>y "+y
+  vnoremap <Leader>Y "+Y
+  vnoremap <Leader>p "+p
+  vnoremap <Leader>P "+P
+endif
+
+if has('mac')
+  nnoremap <Leader>y "*y
+  nnoremap <Leader>Y "*Y
+  nnoremap <Leader>p "*p
+  nnoremap <Leader>P "*P
+
+  vnoremap <Leader>y "*y
+  vnoremap <Leader>Y "*Y
+  vnoremap <Leader>p "*p
+  vnoremap <Leader>P "*P
+endif
+
+" Handy abbreviations.
+iabbrev fiancee fiancée
+iabbrev naiive  naïve
+iabbrev nee     née
+iabbrev passee  passé
+iabbrev resumee résumé
+iabbrev touchee touché
+
+" Common typos.
+iabbrev absense   absence
+iabbrev acheive   achieve
+iabbrev acheived  achieved
+iabbrev teh       the
+iabbrev dont'     don't
+iabbrev existance existence
+iabbrev paramter  parameter
+
+if has('perl')
+  " freenode #perl 2011-01-05 07:34:56 < grondilu> add "perl *say = \&VIM::Msg" in your .vimrc and you'll spare 5 chars each time you'll want to see the ouput of a :perl command :)
+  perl *say = \&VIM::Msg
+endif
+
+augroup ReadFile
+  autocmd!
+
+  " When editing an existing file, always jump to the last cursor position.
+  au BufReadPost *
+    \ if line("'\"") > 0 && line("'\"") <= line("$") |
+    \     exe "normal! g'\"" |
+    \ endif
+
+  " Tricks to view various non-text file types.
+
+  if executable('gpg')
+    autocmd BufReadPre  *.gpg setlocal ro
+    autocmd BufReadPost *.gpg silent execute '%!gpg --decrypt' shellescape(expand('%')) '-'
+  endif
+
+  if executable('pdftotext')
+    autocmd BufReadPre  *.pdf,*.PDF setlocal ro
+    autocmd BufReadPost *.pdf,*.PDF silent execute '%!pdftotext -layout -nopgbrk -q' shellescape(expand('%')) '-'
+  endif
+
+  if executable('rpm')
+    autocmd BufReadPre  *.rpm setlocal ro
+    autocmd BufReadPost *.rpm silent execute '%!rpm -qilp' shellescape(expand('%'))
+  endif
+
+  if executable('unrtf')
+    autocmd BufReadPre  *.rtf setlocal ro
+    autocmd BufReadPost *.rtf silent execute '%!unrtf -t text' shellescape(expand('%'))
+  endif
+augroup END
+
+augroup QuickFix
+  autocmd!
+  autocmd QuickFixCmdPost [^l]* cwindow
+  autocmd QuickFixCmdPost    l* lwindow
+augroup END
+
+let g:netrw_altfile   = 1    " CTRL-^ returns to netrw
+let g:netrw_altv      = 1    " right splitting
+let g:netrw_banner    = 1    " show the netrw banner
+let g:netrw_liststyle = 3    " tree style listing
+let g:netrw_preview   = 1    " vertical splitting
+let g:netrw_sizestyle = 'H'  " human-readable (1024 base)
+let g:netrw_winsize   = 30   " 30% window size
+
+if !exists('g:airline_symbols')
+  let g:airline_symbols = {}
+endif
+
+" vint: next-line -ProhibitUnnecessaryDoubleQuote
+let g:airline#extensions#tabline#enabled      = 1
+let g:airline#extensions#tabline#show_buffers = 0
+let g:airline_powerline_fonts                 = 1
+let g:airline_symbols.space                   = "\ua0"
+let g:airline_theme                           = 'codedark'
+
+if executable('rg')
+  set grepprg=rg\ --vimgrep\ --no-heading\ --smart-case
+  set grepformat+=%f:%l:%c:%m
+
+  let g:ctrlp_user_command = 'rg %s --files --hidden --color=never --glob ""'
+endif
+
+if executable('fd')
+  let g:ctrlp_user_command = 'fd --color=never --glob --type file "" %s'
+endif
+
+if !empty(glob('/opt/homebrew/opt/fzf'))
+  set runtimepath+=/opt/homebrew/opt/fzf
+endif
+
+let wiki_1 = {}
+let wiki_1.path = '~/vimwiki/'
+let wiki_1.maxhi = 1
+let wiki_1.automatic_nested_syntaxes = 1
+let wiki_1.diary_frequency = 'weekly'
+let wiki_1.list_margin = 0
+let wiki_1.auto_tags = 1
+
+let g:vimwiki_list = [wiki_1]
+
+let g:vimwiki_hl_headers = 1
+let g:vimwiki_hl_cb_checked = 2
+let g:vimwiki_global_ext = 0
+let g:vimwiki_auto_chdir = 1
+
+let g:taskwiki_taskrc_location = '~/.config/task/taskrc'
+let g:taskwiki_data_location = '~/.local/share/task/'
+let g:taskwiki_dont_preserve_folds = 1
+let g:taskwiki_dont_fold = 1
+let g:taskwiki_disable_concealcursor = 1
+" https://github.com/preservim/vim-markdown
+let g:vim_markdown_fenced_languages          = ['bash=sh', 'json']
+let g:vim_markdown_follow_anchor             = 1
+let g:vim_markdown_frontmatter               = 1
+let g:vim_markdown_strikethrough             = 1
+let g:vim_markdown_new_list_item_indent      = 2
+let g:vim_markdown_no_extensions_in_markdown = 1
+
+packadd hlyank
+packadd nohlsearch
+
+let g:hlyank_duration = 500
+let g:hlput_enable    = v:true
+
+" Load a local configuration, if it exists. This allows for custom
+" configuration per-host (e.g., for VimWiki).
+runtime vimrc.local
