@@ -1,3 +1,6 @@
+[".irssi/catppuccin-mocha.theme"]
+  type = "file"
+  url  = "https://raw.githubusercontent.com/bitspace/catppuccin-irssi/main/themes/catppuccin-mocha.theme"
 [".vim/pack/colors/start/catppuccin"]
   type = "git-repo"
   url  = "https://github.com/catppuccin/vim.git"

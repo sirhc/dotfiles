@@ -50,7 +50,8 @@ nothing vendored is committed. Two kinds:
   plus `~/.zshrc.d/powerlevel10k`.
 - `type = "file"` — single files pulled from upstream: Zsh completion functions
   (`~/.zshrc.d/functions/_*`), the ohmyzsh `git.zsh` lib, and single-file Zsh
-  plugins (`aws`, `fzf-git`, `git`, `git-extras`, `screen`).
+  plugins (`aws`, `fzf-git`, `git`, `git-extras`, `screen`), and the irssi
+  Catppuccin Mocha theme (`~/.irssi/catppuccin-mocha.theme`).
 
 To add/remove a plugin or completion, edit `.chezmoiexternal.toml` and run
 `chezmoi apply`. There is no longer a Makefile or `just update-*` target.
@@ -90,8 +91,11 @@ includes `dot_gitconfig.d/catppuccin.gitconfig` (delta Catppuccin Mocha theme).
 `dot_config/` holds configs for bat, eza, ghostty, taskwarrior, tridactyl, and
 zsh-patina. Standalone: `dot_bcrc`, `dot_tigrc`, `dot_tmux.conf`, `dot_p10k.zsh`,
 `dot_jqp.yaml`, `dot_mdlrc`, `dot_perltidyrc`, `dot_perlcriticrc`, `dot_gemrc`.
-`dot_irssi/catppuccin-mocha.theme` is a Catppuccin Mocha theme for irssi
-(truecolor `%Z` codes); activate it in irssi with `/set theme catppuccin-mocha`.
+
+irssi's Catppuccin Mocha theme (`~/.irssi/catppuccin-mocha.theme`) is not
+tracked here — it's a `type = "file"` external in `.chezmoiexternal.toml` pulled
+from `bitspace/catppuccin-irssi`. Activate it in irssi with
+`/set theme catppuccin-mocha`.
 
 ## Vim (`dot_vim/`)
 
