@@ -1,0 +1,42 @@
+[".zshrc.d/functions/_exercism"]
+  type = "file"
+  url  = "https://raw.githubusercontent.com/exercism/cli/main/shell/exercism_completion.zsh"
+[".zshrc.d/functions/_myrepos"]
+  type = "file"
+  url  = "https://raw.githubusercontent.com/sirhc/myrepos.plugin.zsh/main/_myrepos"
+[".zshrc.d/functions/_terragrunt"]
+  type = "file"
+  url  = "https://raw.githubusercontent.com/jkavan/terragrunt-oh-my-zsh-plugin/master/_terragrunt"
+[".zshrc.d/lib/git.zsh"]
+  type = "file"
+  url  = "https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/lib/git.zsh"
+[".zshrc.d/plugins/01-zsh-completions"]
+  type = "git-repo"
+  url  = "https://github.com/zsh-users/zsh-completions.git"
+[".zshrc.d/plugins/02-zsh-vim-mode"]
+  type = "git-repo"
+  url  = "https://github.com/softmoth/zsh-vim-mode.git"
+[".zshrc.d/plugins/03-fzf-tab"]
+  type = "git-repo"
+  url  = "https://github.com/Aloxaf/fzf-tab.git"
+[".zshrc.d/plugins/04-zsh-autosuggestions"]
+  type = "git-repo"
+  url  = "https://github.com/zsh-users/zsh-autosuggestions.git"
+[".zshrc.d/plugins/aws/aws.plugin.zsh"]
+  type = "file"
+  url  = "https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/plugins/aws/aws.plugin.zsh"
+[".zshrc.d/plugins/fzf-git/fzf-git.plugin.zsh"]
+  type = "file"
+  url  = "https://raw.githubusercontent.com/junegunn/fzf-git.sh/refs/heads/main/fzf-git.sh"
+[".zshrc.d/plugins/git/git.plugin.zsh"]
+  type = "file"
+  url  = "https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/plugins/git/git.plugin.zsh"
+[".zshrc.d/plugins/git-extras/git-extras.plugin.zsh"]
+  type = "file"
+  url  = "https://raw.githubusercontent.com/tj/git-extras/master/etc/git-extras-completion.zsh"
+[".zshrc.d/plugins/screen/screen.plugin.zsh"]
+  type = "file"
+  url  = "https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/plugins/screen/screen.plugin.zsh"
+[".zshrc.d/powerlevel10k"]
+  type = "git-repo"
+  url  = "https://github.com/romkatv/powerlevel10k.git"
