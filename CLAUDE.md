@@ -90,6 +90,8 @@ includes `dot_gitconfig.d/catppuccin.gitconfig` (delta Catppuccin Mocha theme).
 `dot_config/` holds configs for bat, eza, ghostty, taskwarrior, tridactyl, and
 zsh-patina. Standalone: `dot_bcrc`, `dot_tigrc`, `dot_tmux.conf`, `dot_p10k.zsh`,
 `dot_jqp.yaml`, `dot_mdlrc`, `dot_perltidyrc`, `dot_perlcriticrc`, `dot_gemrc`.
+`dot_irssi/catppuccin-mocha.theme` is a Catppuccin Mocha theme for irssi
+(truecolor `%Z` codes); activate it in irssi with `/set theme catppuccin-mocha`.
 
 ## Vim (`dot_vim/`)
 
