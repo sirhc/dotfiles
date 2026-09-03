@@ -69,7 +69,7 @@ endif
 let g:codedark_italics     = 1
 let g:codedark_modern      = 1
 let g:codedark_transparent = 1
-silent! colorscheme codedark  " https://vimcolorschemes.com/tomasiser/vim-code-dark
+silent! colorscheme catppuccin_mocha
 
 filetype plugin indent on
 syntax on
@@ -220,7 +220,6 @@ let g:airline#extensions#tabline#enabled      = 1
 let g:airline#extensions#tabline#show_buffers = 0
 let g:airline_powerline_fonts                 = 1
 let g:airline_symbols.space                   = "\ua0"
-let g:airline_theme                           = 'codedark'
 
 if executable('rg')
   set grepprg=rg\ --vimgrep\ --no-heading\ --smart-case
