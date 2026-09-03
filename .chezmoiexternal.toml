@@ -1,3 +1,123 @@
+[".vim/pack/colors/start/catppuccin"]
+  type = "git-repo"
+  url  = "https://github.com/catppuccin/vim.git"
+[".vim/pack/plugins/start/airline"]
+  type = "git-repo"
+  url  = "https://github.com/vim-airline/vim-airline.git"
+[".vim/pack/plugins/start/ale"]
+  type = "git-repo"
+  url  = "https://github.com/dense-analysis/ale.git"
+[".vim/pack/plugins/start/ansiesc"]
+  type = "git-repo"
+  url  = "https://github.com/vim-scripts/AnsiEsc.vim.git"
+[".vim/pack/plugins/start/bufexplorer"]
+  type = "git-repo"
+  url  = "https://github.com/jlanzarotta/bufexplorer.git"
+[".vim/pack/plugins/start/calendar"]
+  type = "git-repo"
+  url  = "https://github.com/mattn/calendar-vim.git"
+[".vim/pack/plugins/start/commentary"]
+  type = "git-repo"
+  url  = "https://github.com/tpope/vim-commentary.git"
+[".vim/pack/plugins/start/ctrlp"]
+  type = "git-repo"
+  url  = "https://github.com/kien/ctrlp.vim.git"
+[".vim/pack/plugins/start/fugitive"]
+  type = "git-repo"
+  url  = "https://github.com/tpope/vim-fugitive.git"
+[".vim/pack/plugins/start/fzf"]
+  type = "git-repo"
+  url  = "https://github.com/junegunn/fzf.vim.git"
+[".vim/pack/plugins/start/ledger"]
+  type = "git-repo"
+  url  = "https://github.com/ledger/vim-ledger.git"
+[".vim/pack/plugins/start/markdown"]
+  type = "git-repo"
+  url  = "https://github.com/preservim/vim-markdown.git"
+[".vim/pack/plugins/start/nerdcommenter"]
+  type = "git-repo"
+  url  = "https://github.com/preservim/nerdcommenter.git"
+[".vim/pack/plugins/start/nerdfont"]
+  type = "git-repo"
+  url  = "https://github.com/lambdalisue/vim-nerdfont.git"
+[".vim/pack/plugins/start/rainbow_csv"]
+  type = "git-repo"
+  url  = "https://github.com/mechatroner/rainbow_csv.git"
+[".vim/pack/plugins/start/rainbow_levels"]
+  type = "git-repo"
+  url  = "https://github.com/thiagoalessio/rainbow_levels.vim.git"
+[".vim/pack/plugins/start/repeat"]
+  type = "git-repo"
+  url  = "https://github.com/tpope/vim-repeat.git"
+[".vim/pack/plugins/start/rhubarb"]
+  type = "git-repo"
+  url  = "https://github.com/tpope/vim-rhubarb.git"
+[".vim/pack/plugins/start/runscript"]
+  type = "git-repo"
+  url  = "https://github.com/sirhc/vim-runscript.git"
+[".vim/pack/plugins/start/speeddating"]
+  type = "git-repo"
+  url  = "https://github.com/tpope/vim-speeddating.git"
+[".vim/pack/plugins/start/surround"]
+  type = "git-repo"
+  url  = "https://github.com/tpope/vim-surround.git"
+[".vim/pack/plugins/start/tabular"]
+  type = "git-repo"
+  url  = "https://github.com/godlygeek/tabular.git"
+[".vim/pack/plugins/start/taskwarrior"]
+  type = "git-repo"
+  url  = "https://github.com/blindFS/vim-taskwarrior.git"
+[".vim/pack/plugins/start/taskwiki"]
+  type = "git-repo"
+  url  = "https://github.com/tbabej/taskwiki.git"
+[".vim/pack/plugins/start/unimpaired"]
+  type = "git-repo"
+  url  = "https://github.com/tpope/vim-unimpaired.git"
+[".vim/pack/plugins/start/vimwiki"]
+  type = "git-repo"
+  url  = "https://github.com/vimwiki/vimwiki.git"
+[".vim/pack/plugins/start/zoxide"]
+  type = "git-repo"
+  url  = "https://github.com/nanotee/zoxide.vim.git"
+[".vim/pack/syntax/start/applescript"]
+  type = "git-repo"
+  url  = "https://github.com/vim-scripts/applescript.vim"
+[".vim/pack/syntax/start/ansible"]
+  type = "git-repo"
+  url  = "https://github.com/pearofducks/ansible-vim.git"
+[".vim/pack/syntax/start/cfn"]
+  type = "git-repo"
+  url  = "https://github.com/speshak/vim-cfn.git"
+[".vim/pack/syntax/start/go"]
+  type = "git-repo"
+  url  = "https://github.com/fatih/vim-go.git"
+[".vim/pack/syntax/start/jq"]
+  type = "git-repo"
+  url  = "https://github.com/bfrg/vim-jq.git"
+[".vim/pack/syntax/start/just"]
+  type = "git-repo"
+  url  = "https://github.com/NoahTheDuke/vim-just.git"
+[".vim/pack/syntax/start/packer"]
+  type = "git-repo"
+  url  = "https://github.com/hashivim/vim-packer.git"
+[".vim/pack/syntax/start/perl"]
+  type = "git-repo"
+  url  = "https://github.com/vim-perl/vim-perl.git"
+[".vim/pack/syntax/start/plantuml"]
+  type = "git-repo"
+  url  = "https://github.com/aklt/plantuml-syntax.git"
+[".vim/pack/syntax/start/terraform"]
+  type = "git-repo"
+  url  = "https://github.com/hashivim/vim-terraform.git"
+[".vim/pack/syntax/start/toml"]
+  type = "git-repo"
+  url  = "https://github.com/cespare/vim-toml.git"
+[".vim/pack/syntax/start/tridactyl"]
+  type = "git-repo"
+  url  = "https://github.com/tridactyl/vim-tridactyl.git"
+[".vim/pack/themes/start/airline"]
+  type = "git-repo"
+  url  = "https://github.com/vim-airline/vim-airline-themes.git"
 [".zshrc.d/functions/_exercism"]
   type = "file"
   url  = "https://raw.githubusercontent.com/exercism/cli/main/shell/exercism_completion.zsh"
