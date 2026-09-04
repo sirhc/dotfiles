@@ -1,0 +1,29 @@
+regexp=Chris Grau
+colours=yellow
+-
+regexp=(<nil>|<unassigned>)
+colours=red
+-
+regexp=(Canceled|Closed|Completed|Resolved)
+colours=bright_black
+-
+regexp=\b(Backlog|Blocked|New|Pending|Ready For Release)\b
+colours=blue
+-
+regexp=WAITING FOR SUPPORT
+replace=Waiting for Support
+colours=red
+-
+regexp=Waiting for customer
+replace=Waiting for Customer
+colours=blue
+-
+regexp=Work in progress
+replace=Work in Progress
+colours=yellow
+-
+regexp=\b(Development in Progress|In Development|Staging Deployment In Progress|In Progress)\b
+colours=yellow
+-
+regexp=Stage Verification In Progress
+colours=red
