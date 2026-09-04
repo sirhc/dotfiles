@@ -4,8 +4,11 @@ data.location  = ~/.local/share/task
 hooks.location = ~/.config/task/hooks
 
 news.version = 3.5.0
+weekstart    = monday
 
 alias.rm  = delete
 alias.tui = execute "task-tui"
 
 sync.local.server_dir = ~/Documents/Taskwarrior
+
+include themes/catppuccin.theme
