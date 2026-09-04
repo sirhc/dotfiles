@@ -57,6 +57,7 @@
 
 [include]
   path = .gitconfig.d/catppuccin.gitconfig
+  path = .gitconfig.d/local.gitconfig
 
 [delta]
   features = catppuccin-mocha
