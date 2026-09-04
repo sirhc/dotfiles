@@ -236,26 +236,10 @@ if !empty(glob('/opt/homebrew/opt/fzf'))
   set runtimepath+=/opt/homebrew/opt/fzf
 endif
 
-let wiki_1 = {}
-let wiki_1.path = '~/vimwiki/'
-let wiki_1.maxhi = 1
-let wiki_1.automatic_nested_syntaxes = 1
-let wiki_1.diary_frequency = 'weekly'
-let wiki_1.list_margin = 0
-let wiki_1.auto_tags = 1
+if executable('vim-open')
+  let g:Openprg = 'vim-open'
+endif
 
-let g:vimwiki_list = [wiki_1]
-
-let g:vimwiki_hl_headers = 1
-let g:vimwiki_hl_cb_checked = 2
-let g:vimwiki_global_ext = 0
-let g:vimwiki_auto_chdir = 1
-
-let g:taskwiki_taskrc_location = '~/.config/task/taskrc'
-let g:taskwiki_data_location = '~/.local/share/task/'
-let g:taskwiki_dont_preserve_folds = 1
-let g:taskwiki_dont_fold = 1
-let g:taskwiki_disable_concealcursor = 1
 " https://github.com/preservim/vim-markdown
 let g:vim_markdown_fenced_languages          = ['bash=sh', 'json']
 let g:vim_markdown_follow_anchor             = 1
@@ -271,5 +255,5 @@ let g:hlyank_duration = 500
 let g:hlput_enable    = v:true
 
 " Load a local configuration, if it exists. This allows for custom
-" configuration per-host (e.g., for VimWiki).
+" per-host configuration (e.g., g:Openprg).
 runtime vimrc.local
