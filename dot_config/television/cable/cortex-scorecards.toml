@@ -1,0 +1,43 @@
+[metadata]
+name = "cortex-scorecards"
+description = "List Cortex scorecards"
+requirements = ["cortex", "jq", "mdcat"]
+
+[source]
+command = """
+  cortex scorecards list | jq -r '.scorecards[] | [.tag, .name] | @tsv'
+"""
+display = '{split:\t:1}'
+
+[preview]
+command = [
+  '''
+    (
+      scorecard="$( cortex scorecards get --scorecard-tag {split:\t:0} )"
+      <<< $scorecard jq -r '.scorecard.description // empty'
+      <<< $scorecard jq -r '.scorecard.rules[] | "## \(.title)\n\(.description // empty)\n```\n\(.expression)\n```\n"'
+    ) | mdcat --ansi --no-pager
+  ''',
+  '''
+    cortex scorecards scores --scorecard-tag {split:\t:0} |
+      jq -r '.serviceScores[] | [ (.score.summary | [ .score, .totalPossibleScore, .percentage * 100 | round ] ), .service.name ] | flatten | @tsv' |
+      sort -nr |
+      while read -r score total percentage name; do
+        printf '%5s %6s %s\n' "$score/$total" "($percentage%)" $name
+      done
+  ''',
+]
+
+[ui.preview_panel]
+header = '{split:\t:1..}'
+
+[keybindings]
+enter = "actions:open"
+
+[actions.open]
+description = "Open selected scorecard in a browser window"
+command = '''
+  echo "Looking up the id for the '{split:\t:1}' scorecard..."
+  open https://app.getcortexapp.com/admin/scorecards/$( cortex scorecards scores --scorecard-tag {split:\t:0} | jq -r .scorecardId )
+'''
+mode = "execute"

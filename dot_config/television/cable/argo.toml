@@ -1,0 +1,26 @@
+[metadata]
+name = "argo"
+description = "A channel to browse Argo CD instances"
+requirements = ["fd", "yq"]
+
+[source]
+# ~/.cache/jenkinsenv/kubernetes-environments-pem/us-west-2/environments/cgrau.yaml -> https://argocd-us-west-2.pem.tlium.com/applications?namespace=dev-cgrau
+command = '''
+  fd --glob --full-path --type file '**/environments/*.yaml' ~/.cache/jenkinsenv/kubernetes-environments-* |
+    while read -r file; do
+      printf 'https://argocd-%s.%s.tlium.com/applications?namespace=%s%s\n' \
+        "$( <<< $file sed -e 's,^.*/kubernetes-environments-[^/]*/,,' -e 's,/.*,,' )" \
+        "$( <<< $file sed -e 's,^.*/kubernetes-environments-,,' -e 's,/.*,,' )" \
+        "$( yq .environment.prefix $file:h:h/values.yaml )" \
+        "$( <<< $file sed -e 's,^.*/,,' -e 's,.yaml,,' )"
+    done |
+    sed -e 's/\?namespace=prod$//'
+'''
+
+[keybindings]
+enter = "actions:open"
+
+[actions.open]
+description = "Open in browser"
+command = "open {}"
+mode = "execute"

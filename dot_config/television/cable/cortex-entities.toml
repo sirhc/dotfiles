@@ -1,0 +1,47 @@
+[metadata]
+name = "cortex-entities"
+description = "Browse Cortex entities"
+requirements = ["cortex", "jq", "mlr", "mdcat"]
+
+[source]
+display = '{split:\t:2}'
+
+[[source.command]]
+name = "All Entities"
+run = """
+  cortex catalog list | jq -r '.entities | sort_by(.name)[] | [.id, .tag, .name] | @tsv'
+"""
+
+[[source.command]]
+name = "My Entities"
+run = """
+  cortex catalog list -o chris.grau@tealium.com | jq -r '.entities | sort_by(.name)[] | [.id, .tag, .name] | @tsv'
+"""
+
+[preview]
+command = '''
+  (
+    details="$( cortex catalog details -t {split:\t:1} )"
+    printf '%s\n\n%s\n\n' "$( <<< "$details" jq -r '.description // empty' )" "$( <<< "$details" jq -r '.git.repositoryUrl // empty' )"
+    printf 'Groups: [%s], Last Updated: %s\n' "$( <<< "$details" jq -r '.groups | join(", ")' )" "$( <<< "$details" jq -r '.lastUpdated' | xargs gdate -d )"
+    print '## Ownership'
+    <<< "$details" jq -r '.ownersV2 | (.teams[] | [.name, .description]), (.individuals[] | [.email, .description]) |@csv' | mlr --c2m --hi label Owner,Description
+    print '## Links'
+    <<< "$details" jq -r '.links[] | "- \(.name): \(.url)"'
+    print '## Custom Data'
+    <<< "$details" jq -r '.metadata[] | [.key, (.value | @json)] | @csv' | mlr --c2m --hi label Key,Value
+  ) | mdcat --ansi
+'''
+
+[ui.preview_panel]
+header = '{split:\t:2} ({split:\t:1})'
+
+[keybindings]
+enter = "actions:open"
+
+[actions.open]
+description = "Open selected entity in a browser window"
+command = '''
+  open https://app.getcortexapp.com/admin/service/{split:\t:0}
+'''
+mode = "execute"

@@ -1,0 +1,27 @@
+[metadata]
+name = "release-themes"
+description = "A channel to browse Release Themes pages"
+requirements = ["https", "jq", "gdate"]
+
+[source]
+command = """
+  https tealium.atlassian.net/wiki/api/v2/pages/3355967671/children limit==250 |
+    jq -r '.results[] | [ .id, .title ] | @tsv' |
+    grep 'Release Themes' |
+    while read -r id date _; do
+      print "$id $date Release Themes for $( gdate -d $date +'%a %e %b %Y' )"
+    done |
+    sort -r -k 2
+"""
+display = "{split: :2..}"
+
+[preview]
+command = "https tealium.atlassian.net/wiki/api/v2/pages/{0} body-format==view | jq -r .body.view.value | w3m -T text/html -dump"
+
+[keybindings]
+enter = "actions:open"
+
+[actions.open]
+description = "Open the page in a browser"
+command = "open https://tealium.atlassian.net/wiki/spaces/ENGSD/pages/{0}"
+mode = "execute"

@@ -1,0 +1,41 @@
+[metadata]
+name = "jenkins"
+description = "A channel to browse Jenkins instances"
+requirements = ["fd", "perl", "yq", "assume"]
+
+[source]
+# ~/.cache/jenkinsenv/kubernetes-environments-pem/us-west-2/environments/cgrau.yaml
+#   -> https://jenkins-cgrau.pem.tlium.com/ cgrau us-west-2 ~/.cache/jenkinsenv/kubernetes-environments-pem/us-west-2/values.yaml
+command = """
+  fd --glob --full-path --type file '**/environments/*.yaml' ~/.cache/jenkinsenv/kubernetes-environments-* |
+    perl -nlE '
+      ($account, $region, $environment) = m{/kubernetes-environments-([a-z-]+)/([^/]+)/environments/([0-9a-z-]+).yaml};
+      s{/environments/[0-9a-z]+.yaml}{/values.yaml};
+      say qq(https://jenkins-$environment.$account.tlium.com/ $environment $region $_);
+    '
+"""
+display = "{0}  region: {2}"
+
+[keybindings]
+enter = "actions:open"
+ctrl-e = "actions:export"
+
+[actions.open]
+description = "Open selected Jenkins URL in a browser window"
+command = "open {0}"
+mode = "execute"
+
+[actions.export]
+description = "Export selected Jenkins environment variables"
+command = """
+  export JENKINS_URL={0}
+  export JENKINS_USER_ID=admin
+  export JENKINS_API_TOKEN="$(
+    env FORCE_NO_ALIAS=true assume $( perl -00 -nE "say /profile ([A-Za-z-]*)/ if /= *$(yq .aws.accountID {3})/" ~/.aws/config ) --exec -- \
+      aws ssm get-parameter \
+        --name /$( yq .environment.type {3} )/$( yq .environment.prefix {3} ){1}/jenkins/admin-token --with-decryption --region {2} --query Parameter.Value --output text
+  )"
+  echo "JENKINS_URL set to {0}"
+  $SHELL
+"""
+mode = "execute"

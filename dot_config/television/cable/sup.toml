@@ -1,0 +1,30 @@
+[metadata]
+name = "sup"
+description = "Browse work items in the SUP and DOA queues"
+requirements = ["jira", "mdcat"]
+
+[source]
+[[source.command]]
+name = "SUP Queue"
+run = "jira list -n sup"
+
+[[source.command]]
+name = "DOA Queue"
+run = "jira list -n sup-doa"
+
+[preview]
+command = [
+  'jira view -t television-preview {split:\::0} | mdcat --ansi',
+  'jira history {split:\::0}',
+]
+
+[ui.preview_panel]
+header = '{split:\::0}'
+
+[keybindings]
+enter = "actions:open"
+
+[actions.open]
+description = "Open the work item in a browser"
+command = 'jira browse {split:\::0}'
+mode = "fork"

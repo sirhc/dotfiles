@@ -1,0 +1,27 @@
+[metadata]
+name = "vpn"
+description = "Connect to an AWS Client VPN"
+requirements = ["aws-vpn-client", "jq"]
+
+[source]
+command = [
+  { name = "Profiles", run = "aws-vpn-client list-profiles | jq -r '.[][\"profile-name\"]' | sort" },
+  { name = "Connections", run ="aws-vpn-client list-connections | jq -r '.[][\"profile-name\"]' | sort" },
+]
+
+[preview]
+command = "aws-vpn-client get-config --profile-name={0}"
+
+[keybindings]
+ctrl-c = "actions:connect"
+ctrl-d = "actions:disconnect"
+
+[actions.connect]
+description = "Connect to VPN"
+command = "aws-vpn-client connect --profile-name={0}"
+mode = "execute"
+
+[actions.disconnect]
+description = "Disconnect to VPN"
+command = "aws-vpn-client disconnect --profile-name={0}"
+mode = "execute"

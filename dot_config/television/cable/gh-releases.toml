@@ -1,0 +1,31 @@
+[metadata]
+name = "gh-releases"
+description = "List and manage GitHub releases"
+requirements = ["gh"]
+
+[source]
+command = """
+  gh release list \
+    --json tagName,publishedAt,isPrerelease,isLatest \
+    --template '{{range .}}{{.tagName}} {{timefmt "2006-01-02 03:04:05" .publishedAt}}{{if .isPrerelease}} Pre-release{{end}}{{if .isLatest}} Latest{{end}}{{"\\n"}}{{ end }}' |
+  sort -Vr |
+  column -t
+"""
+
+[preview]
+command = "gh release view {0}"
+header = "{0}"
+
+[keybindings]
+enter = "actions:open"
+ctrl-l = ["actions:latest", "reload_source"]
+
+[actions.open]
+description = "Open the release in a browser window"
+command = "gh release view {0} --web"
+mode = "execute"
+
+[actions.latest]
+description = "Set the release as latest"
+command = "gh release edit {0} --latest"
+mode = "fork"

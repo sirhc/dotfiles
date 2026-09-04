@@ -1,0 +1,34 @@
+[metadata]
+name = "cortex-teams"
+description = "Browse Cortex teams"
+requirements = ["cortex", "jq", "mlr", "mdcat"]
+
+[source]
+command = """
+  cortex teams list | jq -r '.teams | sort_by(.metadata.name)[] | [.id, .teamTag, .metadata.name] | @tsv'
+"""
+display = '{split:\t:2}'
+
+[preview]
+command = '''
+  (
+    cortex teams get -t {split:\t:1} | jq -r '.metadata.description // empty'
+    print '## Members'
+    cortex teams get -t {split:\t:1} | jq -r '.cortexTeam.members | sort_by(.name)[] | [.name, ([.roles[].name] | join(", "))] | @csv' | mlr --c2m --hi label 'Name,Roles'
+    print '## Entities'
+    cortex catalog list -o {split:\t:1} | jq -r '.entities | sort_by(.name)[] | [.name, .tag] | @csv' | mlr --c2m --hi label 'Name,Tag'
+  ) | mdcat --ansi
+'''
+
+[ui.preview_panel]
+header = '{split:\t:2} ({split:\t:1})'
+
+[keybindings]
+enter = "actions:open"
+
+[actions.open]
+description = "Open selected team in a browser window"
+command = '''
+  open https://app.getcortexapp.com/admin/teams/{split:\t:0}/overview
+'''
+mode = "execute"
