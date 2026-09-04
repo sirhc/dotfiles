@@ -272,8 +272,9 @@ if (( $+commands[eza] )); then
 fi
 
 (( $+commands[assume] ))    && alias assume='source assume'  # https://docs.commonfate.io/granted-cli/shell-alias/
-(( $+commands[moar] ))      && alias more='moar'
+(( $+commands[icalBuddy] )) && alias upcoming='icalBuddy -iep title,datetime -f -nc -n -ic $USER eventsToday'
 (( $+commands[kubecolor] )) && alias kubectl='kubecolor'
+(( $+commands[moar] ))      && alias more='moar'
 (( $+commands[vimx] ))      && alias vim='vimx'
 (( $+commands[zoxide] ))    && alias cd='z'
 
