@@ -186,6 +186,7 @@ if (( $+commands[set-terraform-env] )); then  # {{{
 
     env | grep '^TF_VAR_' | sort
   }
+fi
 # }}}
 
 if (( $+commands[terraform] )); then  # {{{
