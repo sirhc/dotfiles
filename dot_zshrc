@@ -153,10 +153,39 @@ if (( $+commands[hledger] )); then  # {{{
 fi
 # }}}
 
+if (( $+commands[jenkinsenv] )); then  # {{{
+  # https://github.com/chrisgrautealium/jenkins-cli-wrapper
+  eval "$( jenkinsenv --init - )"
+
+  alias jj='jenkinsenv --open'
+  alias jn='jenkinsenv --unset'
+  alias ju='jenkinsenv --update'
+fi
+#}}}
+
 if (( $+commands[just] )); then  # {{{
   alias j='just'
   alias jl='just --list'
 fi
+# }}}
+
+if (( $+commands[set-terraform-env] )); then  # {{{
+  tfvars() {
+    if [[ ${1:-} = '-s' ]]; then
+      eval "$( set-terraform-env )"
+      return
+    fi
+
+    if [[ ${1:-} = '-u' ]]; then
+      while read -r varname; do
+        unset "$varname"
+      done < <( env | grep '^TF_VAR_' | cut -d= -f1 )
+
+      return
+    fi
+
+    env | grep '^TF_VAR_' | sort
+  }
 # }}}
 
 if (( $+commands[terraform] )); then  # {{{
