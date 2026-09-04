@@ -144,8 +144,3 @@
 [user]
   name = Chris Grau
   useConfigOnly = true
-
-# This needs to be last, to override anything above.
-[include]
-  path = ~/.gitconfig.delta
-  path = ~/.gitconfig.local
