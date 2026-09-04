@@ -1,0 +1,33 @@
+[alias]
+  # cob = ! "f() { git checkout -b \"$1\" \"$( git latest-release)\"; }; f" # check out new branch based off latest release
+  # col = ! git checkout $( git latest-release )                            # check out latest release
+
+  # latest-release = ! gh tealium latest-release
+  # latest-sha = ! "git rev-list -n 1 $( git latest-release )"
+
+  # local-branches = ! git branch --format '%(refname:short) %(upstream:short)' | grep -Ev '^(main|master) ' | sed -e 's,^heads/,,
+  # orphan-branches = ! git branch --format '%(refname:short) %(upstream:short)' | awk '{if (!$2) print $1;}'
+
+  code-repository = ! git config --get remote.origin.url | awk -F'/' '{ print $NF }' | sed 's/.git$//'
+  issue = ! git current-branch | grep -Eio '[a-z]+[_-][0-9]+' | tr '[a-z]_' '[A-Z]-'
+
+  delete-rc-tags = ! git tag | grep '^RC\\.' | xargs git tag -d
+
+  get-pipeline-branch = pipeline --get
+  open-pipeline = pipeline --web
+  rebuild-pipeline = pipeline --rebuild
+  run-pipeline = pipeline --build
+  set-pipeline-branch = pipeline --set
+  show-pipeline = pipeline --info
+  update-pipeline = pipeline --update
+
+[filter "lfs"]
+  required = true
+  clean = git-lfs clean -- %f
+  smudge = git-lfs smudge -- %f
+  process = git-lfs filter-process
+
+[user]
+  name = Chris Grau
+  email = 99276511+chrisgrautealium@users.noreply.github.com
+  signingKey = ~/.ssh/id_ed25519.pub

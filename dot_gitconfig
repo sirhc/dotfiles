@@ -57,7 +57,12 @@
 
 [include]
   path = .gitconfig.d/catppuccin.gitconfig
-  path = .gitconfig.d/local.gitconfig
+
+[includeIf "hasconfig:remote.*.url:https://github.com/sirhc/**"]
+  path = .gitconfig.d/sirhc.gitconfig
+
+[includeIf "hasconfig:remote.*.url:https://github.com/Tealium/**"]
+  path = .gitconfig.d/tealium.gitconfig
 
 [delta]
   features = catppuccin-mocha

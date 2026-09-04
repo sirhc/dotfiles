@@ -1,0 +1,7 @@
+[user]
+  name = Chris Grau
+  email = 113591+sirhc@users.noreply.github.com
+  signingkey = ~/.ssh/id_ed25519_github_sirhc
+
+[url "https://sirhc@github.com/sirhc/"]
+  insteadOf = https://github.com/sirhc/
