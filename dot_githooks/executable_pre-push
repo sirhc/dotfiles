@@ -1,0 +1,17 @@
+#!/usr/bin/env zsh
+#
+# We have default branch protection enabled, but just in case I have elevated
+# permissions or am working in a repository that doesn't have it enabled.
+
+set -eu -o pipefail
+
+if [[ $2 != https://github.com/Tealium/* ]]; then
+  exit 0
+fi
+
+if [[ origin/$( git rev-parse --abbrev-ref HEAD ) == $( git rev-parse --abbrev-ref origin/HEAD ) ]]; then
+  print 'Rejecting attempt to push to default branch.' 1>&2
+  exit 1
+fi
+
+exit 0

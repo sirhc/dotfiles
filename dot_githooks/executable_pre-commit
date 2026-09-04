@@ -1,0 +1,18 @@
+#!/usr/bin/env zsh
+
+set -eu -o pipefail
+
+if (( ! $+commands[tfenv] )); then
+  exit 0
+fi
+
+if [[ "$( tfenv version-name )" = 0.* ]]; then
+  # We have one repository that uses an ancient version of Terraform. It is
+  # the only repo that uses this version, so just accept it and check
+  # everything.
+  terraform fmt -diff=true -check=true
+  exit
+fi
+
+# Only check staged files, because recent versions of Terraform allow it.
+git diff --cached --name-only | awk '/\.tf(vars)?$/' | xargs -r terraform fmt -diff -check
