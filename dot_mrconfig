@@ -77,6 +77,58 @@ git_missingbranches =
 git_latestrelease =
   { gh api 'repos/{owner}/{repo}/releases/latest' 2> /dev/null || true; } | jq -r '.tag_name // empty'
 
+git_jenkins =
+  case "$1" in
+    help | '')  echo 'usage: mr jenkins { get-branch | set-branch | info | open | build | rebuild | update }' ;;
+    get-branch) shift; git pipeline --get "$@"       ;;
+    set-branch) shift; git pipeline --set "$@"       ;;
+    info)       shift; git pipeline --info "$@"      ;;
+    open)       shift; git pipeline --web "$@"       ;;
+    build)      shift; git pipeline --build "$@"     ;;
+    rebuild)    shift; git pipeline --rebuild "$@"   ;;
+    update)     shift; git pipeline --update "$@"    ;;
+    *)          error "jenkins: unknown command: $1" ;;
+  esac
+
+git_prodtag  = git tag | grep '^PROD\.' | sort -rV | head -n 1 | cut -f1
+git_prodtags = git tag | grep '^PROD\.' | sort -rV
+
+git_rctags =
+  case "$1" in
+    help)
+      echo 'usage: mr rctags { list | date | log | delete }'
+      ;;
+    list | '')
+      git tag | grep '^RC\.' | sort -r
+      ;;
+    date | '')
+      for tag in $( git tag | grep '^RC\.' | sort -r ); do
+        printf '%s -> %s\n' \
+          "$tag" \
+          "$( <<<"$tag" sed -E -e 's/^RC.//' -e 's/(....)(..)(..)(..)(..)(..)/\1-\2-\3T\4:\5:\6/' | xargs -I . dateconv . --from-zone UTC --zone US/Pacific | xargs -I . gdate -d . )"
+      done
+      ;;
+    log)
+      for tag in $( git tag | grep '^RC\.' | sort -r ); do
+        printf '%s %s\n' \
+          "$tag" \
+          "$( git log -1 --color=always --oneline --decorate=short "$tag" )"
+      done
+      ;;
+    delete)
+      git tag | grep -E '^RC\.\d+$' |
+        while read -r tag; do
+          git tag -d $tag
+          # if [[ -n $REMOTE ]]; then
+          #   git push --delete --no-verify origin $tag
+          # fi
+        done
+      ;;
+    *)
+      error "unknown command: rctags $1"
+      ;;
+  esac
+
 include = cat ~/.mrconfig.d/*.conf 2>/dev/null || :
 
 [ALIAS]
