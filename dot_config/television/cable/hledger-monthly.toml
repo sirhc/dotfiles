@@ -1,0 +1,11 @@
+[metadata]
+name = "hledger-monthly"
+description = "Monthly expense comparisons"
+
+[source]
+command = '''
+  hledger balancesheet --monthly -O txt | head -n 1 | tr -s ' ' '\n' | grep -E '^[0-9]{4}'
+'''
+
+[preview]
+command = "hledger balance expenses --period '{}' --tree --empty"

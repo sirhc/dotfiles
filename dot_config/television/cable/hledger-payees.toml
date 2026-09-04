@@ -1,0 +1,9 @@
+[metadata]
+name = "hledger-payees"
+description = "Browse payees with historical transactions"
+
+[source]
+command = "hledger payees"
+
+[preview]
+command = "hledger register payee:'^{}$'"

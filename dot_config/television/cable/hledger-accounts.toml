@@ -1,0 +1,29 @@
+[metadata]
+name = "hledger-accounts"
+description = "Browse hledger accounts with register previews"
+
+[source]
+[[source.command]]
+name = "Balance Accounts"
+run  = "hledger accounts '^Assets:' '^Liabilities:'"
+
+[[source.command]]
+name = "Income Accounts"
+run  = "hledger accounts '^Revenues:' '^Expenses:'"
+
+[preview]
+command = [
+  """echo "All transactions since $( date -d '10 days ago' +%F )"; echo; echo '{}' | xargs hledger aregister --heading=n --begin '10 days ago'""",
+  """echo "Cleared transactions since $( date -d '10 days ago' +%F )"; echo; echo '{}' | xargs hledger aregister --heading=n --begin '10 days ago' --cleared""",
+  """echo "Pending transactions since $( date -d '10 days ago' +%F )"; echo; echo '{}' | xargs hledger aregister --heading=n --begin '10 days ago' --pending""",
+  """echo "Unmarked transactions since $( date -d '10 days ago' +%F )"; echo; echo '{}' | xargs hledger aregister --heading=n --begin '10 days ago' --unmarked""",
+]
+header = "{}"
+
+[keybindings]
+enter = "actions:ui"
+
+[actions.ui]
+description = "Run hledger-ui"
+command = "hledger-ui --theme dark --register {}"
+mode = "execute"
