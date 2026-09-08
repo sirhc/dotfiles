@@ -9,10 +9,10 @@ set line-graphics        = auto
 set mailmap              = true
 set truncation-delimiter = utf-8
 
-color cursor      color0 color13 bold
-color cursor-blur color7 color8
-color title-focus color0 color4  bold
-color title-blur  color0 color4
+color title-focus white default bold
+color title-blur  white default dim
+color cursor      green black   bold
+color cursor-blur green black   dim
 
 bind main R !?git revert %(commit)
 bind diff R !?git revert %(commit)
