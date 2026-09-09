@@ -61,6 +61,9 @@
 [includeIf "hasconfig:remote.*.url:https://github.com/sirhc/**"]
   path = .gitconfig.d/sirhc.gitconfig
 
+[includeIf "hasconfig:remote.*.url:https://github.com/chrisgrautealium/**"]
+  path = .gitconfig.d/tealium.gitconfig
+
 [includeIf "hasconfig:remote.*.url:https://github.com/Tealium/**"]
   path = .gitconfig.d/tealium.gitconfig
 
