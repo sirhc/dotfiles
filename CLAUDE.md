@@ -50,8 +50,10 @@ nothing vendored is committed. Two kinds:
   plus `~/.zshrc.d/powerlevel10k`.
 - `type = "file"` — single files pulled from upstream: Zsh completion functions
   (`~/.zshrc.d/functions/_*`), the ohmyzsh `git.zsh` lib, and single-file Zsh
-  plugins (`aws`, `fzf-git`, `git`, `git-extras`, `screen`), and the irssi
-  Catppuccin Mocha theme (`~/.irssi/catppuccin-mocha.theme`).
+  plugins (`aws`, `fzf-git`, `git`, `git-extras`, `screen`), the irssi
+  Catppuccin Mocha theme (`~/.irssi/catppuccin-mocha.theme`), and the
+  Catppuccin Mocha Powerlevel10k theme (`~/.p10k.zsh`, from
+  `tolkonepiu/catppuccin-powerlevel10k-themes`).
 
 To add/remove a plugin or completion, edit `.chezmoiexternal.toml` and run
 `chezmoi apply`. There is no longer a Makefile or `just update-*` target.
@@ -89,8 +91,14 @@ includes `dot_gitconfig.d/catppuccin.gitconfig` (delta Catppuccin Mocha theme).
 ### Other packages
 
 `dot_config/` holds configs for bat, eza, ghostty, taskwarrior, tridactyl, and
-zsh-patina. Standalone: `dot_bcrc`, `dot_tigrc`, `dot_tmux.conf`, `dot_p10k.zsh`,
+zsh-patina. Standalone: `dot_bcrc`, `dot_tigrc`, `dot_tmux.conf`,
 `dot_jqp.yaml`, `dot_mdlrc`, `dot_perltidyrc`, `dot_perlcriticrc`, `dot_gemrc`.
+
+`~/.p10k.zsh` itself is a chezmoi external (see above) — don't edit it
+directly, changes will be overwritten on the next `chezmoi update`. Prompt
+customizations (custom segments, transient/instant prompt settings, element
+ordering) live in `dot_p10k-local.zsh`, sourced from `dot_zshrc` right after
+`~/.p10k.zsh`.
 
 irssi's Catppuccin Mocha theme (`~/.irssi/catppuccin-mocha.theme`) is not
 tracked here — it's a `type = "file"` external in `.chezmoiexternal.toml` pulled

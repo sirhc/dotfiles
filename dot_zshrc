@@ -648,8 +648,11 @@ function lgrep {
 # If ~/.zsh_history has reached 80% of SAVEHIST, copy it to a snapshot. Let zsh take care of pruning the history.
 (( $( grep -c . ~/.zsh_history ) > (SAVEHIST * 0.8) )) && cp ~/.zsh_history ~/.zsh_history.$( date +'%Y-%m-%dT%H:%M:%S' )
 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+# ~/.p10k.zsh is a chezmoi external (see .chezmoiexternal.toml); customizations
+# live in ~/.p10k-local.zsh so `chezmoi update` can refresh the theme without
+# clobbering them.
 source ~/.p10k.zsh 2> /dev/null || true
+source ~/.p10k-local.zsh 2> /dev/null || true
 source ~/.zshrc.d/powerlevel10k/powerlevel10k.zsh-theme 2> /dev/null || true
 
 # (( $+commands[oh-my-posh] )) && eval "$( oh-my-posh init zsh )"  # https://ohmyposh.dev/docs/

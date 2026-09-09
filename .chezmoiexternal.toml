@@ -6,6 +6,9 @@
   type = "file"
   url  = "https://raw.githubusercontent.com/bitspace/catppuccin-irssi/main/themes/catppuccin-mocha.theme"
 {{ end }}
+[".p10k.zsh"]
+  type = "file"
+  url  = "https://raw.githubusercontent.com/tolkonepiu/catppuccin-powerlevel10k-themes/main/themes/.p10k-classic-catppuccin-mocha.zsh"
 [".vim/pack/colors/start/catppuccin"]
   type = "git-repo"
   url  = "https://github.com/catppuccin/vim.git"
