@@ -129,6 +129,9 @@
 [".vim/pack/themes/start/airline"]
   type = "git-repo"
   url  = "https://github.com/vim-airline/vim-airline-themes.git"
+[".zshrc.d/functions/_claude"]
+  type = "file"
+  url  = "https://raw.githubusercontent.com/wbingli/zsh-claudecode-completion/refs/heads/main/_claude"
 [".zshrc.d/functions/_exercism"]
   type = "file"
   url  = "https://raw.githubusercontent.com/exercism/cli/main/shell/exercism_completion.zsh"
