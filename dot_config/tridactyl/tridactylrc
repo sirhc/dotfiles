@@ -17,3 +17,4 @@ autocmd DocStart feedly.com/i         mode ignore
 autocmd DocStart mail.google.com/mail mode ignore
 autocmd DocStart todoist.com/app      mode ignore
 autocmd DocStart read.amazon.com      mode ignore
+autocmd DocStart www.washingtonpost.com/games/ mode ignore
