@@ -18,7 +18,8 @@ magenta=$'\e[0;35m'
 
 # Shorten home directory to ~
 home="$HOME"
-short_cwd="${cwd/#$home/\~}"
+tilde='~'
+short_cwd="${cwd/#$home/$tilde}"
 
 # Git branch (skip optional locks)
 git_branch=""
