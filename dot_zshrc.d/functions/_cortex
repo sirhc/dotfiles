@@ -1,0 +1,4 @@
+#compdef cortex
+
+# Typer/Click dynamic completion; asks `cortex` for completions on each <Tab>.
+eval $(env _TYPER_COMPLETE_ARGS="${words[1,$CURRENT]}" _CORTEX_COMPLETE=complete_zsh cortex)
