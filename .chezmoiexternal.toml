@@ -1,3 +1,6 @@
+[".claude/skills/bro/SKILL.md"]
+  type = "file"
+  url  = "https://raw.githubusercontent.com/luchasarie/bro-skill/refs/heads/main/SKILL.md"
 [".config/task/themes/catppuccin.theme"]
   type = "file"
   url  = "https://raw.githubusercontent.com/davidbgonz/dotfiles/refs/heads/main/home/taskwarrior/.task/themes/catppuccin.theme"
