@@ -339,3 +339,50 @@ nnoremap <silent> <buffer> <Leader>m :call LedgerMergeNextLine()<CR>
 vnoremap <silent> <buffer> <Leader>d :call LedgerDistributeProportional()<CR>
 
 inoremap <silent> <buffer> <C-d> <C-r>=strftime('%F')<CR>
+
+" ==============================================================================
+" Function:    LedgerJumpToToday
+" Description: Moves the cursor to the last line of today's transactions, or,
+"              if there are none yet, to the end of the most recent transaction
+"              before today (i.e., where today's would be appended).
+"
+" Usage:       Trigger the macro (default: <Leader>t) from anywhere in the
+"              buffer. Then `o` starts a new line in the right spot.
+"
+" Behavior:    - Assumes transactions are in date order (hledger's
+"                `ordereddates` check enforces this).
+"              - Scans backward for the last transaction header dated on or
+"                before today, then moves past its postings and comments.
+"              - If every transaction is in the future, jumps to the line
+"                before the first one.
+"              - Adds the old position to the jumplist, so `''` jumps back.
+" ==============================================================================
+
+function! LedgerJumpToToday() abort
+  let l:today = strftime('%Y-%m-%d')
+  let l:target = 0
+
+  for l:lnum in range(line('$'), 1, -1)
+    let l:date = matchstr(getline(l:lnum), '^\d\{4}[-/.]\d\{2}[-/.]\d\{2}')
+    if !empty(l:date) && substitute(l:date, '[/.]', '-', 'g') <=# l:today
+      let l:target = l:lnum
+      break
+    endif
+  endfor
+
+  if l:target == 0
+    " Nothing on or before today: land just above the first transaction.
+    let l:target = max([search('^\d', 'nw') - 1, 1])
+  else
+    " Walk past the postings and indented comments of that transaction.
+    while l:target < line('$') && getline(l:target + 1) =~ '^\s\+\S'
+      let l:target += 1
+    endwhile
+  endif
+
+  normal! m'
+  call cursor(l:target, 1)
+  normal! zvzz
+endfunction
+
+nnoremap <silent> <buffer> <Leader>t :call LedgerJumpToToday()<CR>
