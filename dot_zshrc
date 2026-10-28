@@ -663,11 +663,11 @@ for __file in ~/.zshrc.d/lib/*.zsh(#qN) ~/.zshrc.d/plugins/*/*.plugin.zsh(#qN); 
 done
 unset __file
 
-(( $+commands[direnv] ))  && eval "$( direnv hook zsh )"  # https://direnv.net/
-(( $+commands[mcfly] ))   && eval "$( mcfly init zsh )"   # https://github.com/cantino/mcfly
-(( $+commands[navi] ))    && eval "$( navi widget zsh )"  # https://github.com/denisidoro/navi
-(( $+commands[thefuck] )) && eval "$( thefuck --alias )"  # https://github.com/nvbn/thefuck
-(( $+commands[zoxide] ))  && eval "$( zoxide init zsh )"  # https://github.com/ajeetdsouza/zoxide
+(( $+commands[direnv] ))     && eval "$( direnv hook zsh )"
+(( $+commands[mcfly] ))      && eval "$( mcfly init zsh )"
+(( $+commands[navi] ))       && eval "$( navi widget zsh )"
+(( $+commands[thefuck] ))    && eval "$( thefuck --alias )"
+(( $+commands[zsh-patina] )) && eval "$( zsh-patina activate )"
 
 # Settings following the loading of plugins, so they can override plugin defaults.
 zstyle ':completion:*' accept-exact-dirs true
@@ -754,9 +754,8 @@ add-zsh-hook preexec _set_terminal_title_cmd
 # bindkey -M viins '^I' expand-or-complete-with-dots
 # bindkey -M vicmd '^I' expand-or-complete-with-dots
 
-if (( $+commands[zsh-patina] )); then
-  eval "$( zsh-patina activate )"
-fi
-
 # Finally, any host-specific configuration that doesn't belong in my version controlled file.
 source ~/.zshrc.local 2> /dev/null || true
+
+# zoxide prints a warning if it's not last
+(( $+commands[zoxide] ))  && eval "$( zoxide init zsh )"
