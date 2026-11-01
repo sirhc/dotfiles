@@ -667,6 +667,7 @@ unset __file
 (( $+commands[mcfly] ))      && eval "$( mcfly init zsh )"
 (( $+commands[navi] ))       && eval "$( navi widget zsh )"
 (( $+commands[thefuck] ))    && eval "$( thefuck --alias )"
+(( $+commands[zoxide] ))     && eval "$( zoxide init zsh )"
 (( $+commands[zsh-patina] )) && eval "$( zsh-patina activate )"
 
 # Settings following the loading of plugins, so they can override plugin defaults.
@@ -757,5 +758,5 @@ add-zsh-hook preexec _set_terminal_title_cmd
 # Finally, any host-specific configuration that doesn't belong in my version controlled file.
 source ~/.zshrc.local 2> /dev/null || true
 
-# zoxide prints a warning if it's not last
-(( $+commands[zoxide] ))  && eval "$( zoxide init zsh )"
+# Aliases are for my fingers, not for agents. Claude Code snapshots this shell's aliases into the shell it runs commands in, so drop them all there.
+[[ -n $CLAUDECODE ]] && unalias -m '*'
